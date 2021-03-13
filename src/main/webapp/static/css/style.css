@@ -1,0 +1,51 @@
+input{
+    margin: 7px;
+}
+
+.main {
+    position: relative;
+    display: inline-block;
+    padding-left: 20%;
+    margin: 10px;
+    padding-top: 40px;
+    background: bisque;
+    width: 56%;
+}
+.header {
+    width: 100%;
+    background: greenyellow;
+    display: block;
+    text-align: center;
+    font-size: 32px;
+    font-family: cursive;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.menu {
+    float: left;
+    width: 20%;
+    display: inline-block;
+    background: grey;
+    height: 90%;
+    padding-left: 15px;
+    padding-top: 10px;
+}
+
+a {
+    font-size: 18px;
+    color: azure;
+}
+.footer{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px;
+    background-color: yellowgreen;
+}
+
+.error{
+    font-size: 32px;
+    color: red;
+    font-weight: bold;
+}
