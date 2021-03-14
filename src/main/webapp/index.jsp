@@ -5,9 +5,11 @@
   Time: 2:38 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500&display=swap" rel="stylesheet">
     <link href="static/css/style.css" rel="stylesheet"/>
     <title>Title</title>
 </head>
@@ -17,16 +19,16 @@
     <jsp:include page="WEB-INF/view/fragments/header.jsp"/>
     <jsp:include page="WEB-INF/view/fragments/menu.jsp"/>
     <div class="main">
-        <h2>Login in the system</h2>
+        <h2>Login in the system</h2><br/>
         <form action="${pageContext.request.contextPath}/controller" method="post">
             <input type="hidden" name="commandName" value="login"/>
-            <label>Username</label>
-            <input type="text" name="username"/>
+            <label>Username:</label>
+            <input type="text" name="username" placeholder="username"/>
             <br/>
-            <label>Password</label>
+            <label>Password:</label>
             <input type="password" name="password"/>
             <br/>
-            <input type="submit" value="submit"/>
+            <input class="submitBtn" type="submit" value="submit"/>
         </form>
     </div>
     <jsp:include page="WEB-INF/view/fragments/footer.jsp"/>

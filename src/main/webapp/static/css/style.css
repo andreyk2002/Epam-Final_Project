@@ -1,16 +1,16 @@
-input{
+input {
     margin: 7px;
 }
 
 .main {
-    position: relative;
+    background: cyan;
+    width: 60%;
     display: inline-block;
-    padding-left: 20%;
-    margin: 10px;
-    padding-top: 40px;
-    background: bisque;
-    width: 56%;
+    align-items: center;
+    padding: 2% 2% 2% 38%;
 }
+
+
 .header {
     width: 100%;
     background: greenyellow;
@@ -21,30 +21,77 @@ input{
     padding-top: 10px;
     padding-bottom: 10px;
 }
-.menu {
+
+#menu {
+    overflow-x: hidden;
     float: left;
-    width: 20%;
-    display: inline-block;
+    position: fixed;
+    width: 30%;
+    display: flex;
     background: grey;
-    height: 90%;
-    padding-left: 15px;
-    padding-top: 10px;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    transition: 1s;
+    transform: translateX(-100%);
+}
+
+.menu_active {
+    margin-left: 30%;
+}
+
+
+nav.menu-list {
+    justify-content: space-around;
+    display: flex;
+    align-items: center;
+    height: 50%;
+    flex-direction: column;
 }
 
 a {
-    font-size: 18px;
+    font-size: 28px;
     color: azure;
+    text-decoration: none;
+    font-weight: 500;
 }
-.footer{
+
+a#menuBtn {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: black;
+    top: 35px;
+}
+
+h2 {
+    font-family: 'Roboto Mono', monospace;
+}
+
+body {
+    margin: 0;
+    background-color: #e8f5e9;
+}
+
+.submitBtn {
+    background: black;
+    border-radius: 5px;
+    color: wheat;
+    padding: 5px;
+    padding-inline: 10px;
+}
+
+.footer {
+    padding: 10px;
     position: absolute;
     bottom: 0;
     width: 100%;
     white-space: nowrap;
     line-height: 60px;
-    background-color: yellowgreen;
+    background-color: greenyellow;
 }
 
-.error{
+.error {
     font-size: 32px;
     color: red;
     font-weight: bold;
