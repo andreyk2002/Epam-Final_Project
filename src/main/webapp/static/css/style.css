@@ -1,5 +1,9 @@
+
 body {
     text-align: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #e8f5e9;
 }
 
 input {
@@ -39,7 +43,7 @@ input {
     transform: translateX(-100%);
 }
 
-.menu_active {
+#menu.menu_active {
     margin-left: 30%;
 }
 
@@ -61,22 +65,21 @@ nav.menu-list {
 
 a#menuBtn {
     position: absolute;
-    width: 30px;
-    height: 30px;
+    width: 65px;
+    height: 65px;
     background: black;
-    top: 35px;
+    top: 0;
     left: 0;
+}
+
+a#menuBtn.menu_active {
+    position: fixed;
 }
 
 h2 {
     font-family: 'Roboto Mono', monospace;
 }
 
-body {
-    height: 100vh;
-    margin: 0;
-    background-color: #e8f5e9;
-}
 
 .submitBtn {
     background: black;
@@ -143,7 +146,7 @@ body {
 }
 
 .message {
-    margin-bottom: 30px;
+    margin-bottom: 57vh;
     font-weight: bolder;
     color: #b3b3b3;
     font-size: 20px;
@@ -153,8 +156,6 @@ body {
     color: #4CAF50;
     text-decoration: none;
 }
-
-@import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
 .login-page {
     width: 360px;

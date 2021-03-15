@@ -25,9 +25,11 @@
         event.preventDefault();
         if (!menuOpened) {
             menu.classList.add(ACTIVE_TAG)
+            menuBtn.classList.add(ACTIVE_TAG)
             menuOpened = true;
         } else {
             menu.classList.remove(ACTIVE_TAG)
+            menuBtn.classList.remove(ACTIVE_TAG)
             menuOpened = false;
         }
     })
