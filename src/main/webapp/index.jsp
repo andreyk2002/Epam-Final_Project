@@ -5,7 +5,7 @@
   Time: 2:38 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <html>
 <head>
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -18,19 +18,19 @@
 <div class="container">
     <jsp:include page="WEB-INF/view/fragments/header.jsp"/>
     <jsp:include page="WEB-INF/view/fragments/menu.jsp"/>
-    <div class="main">
-        <h2>Login in the system</h2><br/>
-        <form action="${pageContext.request.contextPath}/controller" method="post">
-            <input type="hidden" name="commandName" value="login"/>
-            <label>Username:</label>
-            <input type="text" name="username" placeholder="username"/>
-            <br/>
-            <label>Password:</label>
-            <input type="password" name="password"/>
-            <br/>
-            <input class="submitBtn" type="submit" value="submit"/>
-        </form>
+    <div class="login-page">
+        <div class="form">
+            <form class="register-form" action="${pageContext.request.contextPath}/controller" method="post">
+                <input type="hidden" name="commandName" value="login"/>
+                <input type="text" name="username" placeholder="username"/>
+                <input type="password" name="password" placeholder="password"/>
+                <button type="submit">login</button>
+            </form>
+        </div>
     </div>
+    <p class="message">Don't have an account? You can register
+        <a href="${pageContext.request.contextPath}/register">here</a>
+    </p>
     <jsp:include page="WEB-INF/view/fragments/footer.jsp"/>
 </div>
 </body>

@@ -11,9 +11,9 @@
 <div id="menu">
 
     <nav class="menu-list">
-        <a href="#">Main</a>
-        <a href="#">Logout</a>
-        <a href="#">Info</a>
+        <a class="menu-link" href="${pageContext.request.contextPath}/controller">Main</a>
+        <a class="menu-link" href="${pageContext.request.contextPath}/register">Register</a>
+        <a class="menu-link" href="">Login</a>
     </nav>
 </div>
 <script>

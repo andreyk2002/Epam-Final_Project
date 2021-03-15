@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class Controller extends HttpServlet {
+    private static final String PAGE = "index.jsp";
+
     private static final Logger LOGGER = LogManager.getLogger(Controller.class);
 
     private final CommandFactory factory = new CommandFactory();
@@ -23,11 +25,7 @@ public class Controller extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        try {
-            process(req, resp);
-        } catch (CommandNotExistException e) {
-            LOGGER.error(e.getMessage(), e);
-        }
+        req.getRequestDispatcher(PAGE).forward(req, resp);
     }
 
     @Override

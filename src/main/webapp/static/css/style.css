@@ -1,19 +1,22 @@
+body {
+    text-align: center;
+}
+
 input {
     margin: 7px;
 }
 
 .main {
-    background: cyan;
-    width: 60%;
+    width: 98%;
     display: inline-block;
     align-items: center;
-    padding: 2% 2% 2% 38%;
+    padding: 2%;
 }
 
 
 .header {
     width: 100%;
-    background: greenyellow;
+    background: #4CAF50;
     display: block;
     text-align: center;
     font-size: 32px;
@@ -49,7 +52,7 @@ nav.menu-list {
     flex-direction: column;
 }
 
-a {
+.menu-link {
     font-size: 28px;
     color: azure;
     text-decoration: none;
@@ -62,6 +65,7 @@ a#menuBtn {
     height: 30px;
     background: black;
     top: 35px;
+    left: 0;
 }
 
 h2 {
@@ -69,6 +73,7 @@ h2 {
 }
 
 body {
+    height: 100vh;
     margin: 0;
     background-color: #e8f5e9;
 }
@@ -83,12 +88,12 @@ body {
 
 .footer {
     padding: 10px;
-    position: absolute;
+    position: relative;
     bottom: 0;
     width: 100%;
     white-space: nowrap;
     line-height: 60px;
-    background-color: greenyellow;
+    background: #4CAF50;
 }
 
 .error {
@@ -96,3 +101,109 @@ body {
     color: red;
     font-weight: bold;
 }
+
+.container {
+    text-align: center;
+}
+
+.col {
+    height: 400px;
+    width: 100%;
+    margin-left: 1%;
+    margin-bottom: 10px;
+}
+
+.card {
+    height: 100%;
+    width: 30%;
+    display: inline-block;
+    margin-right: 20px;
+    background-color: black;
+}
+
+.img {
+    background: #4CAF50;
+    width: 90%;
+    height: 75%;
+    margin-left: 5%;
+    margin-bottom: 2%;
+}
+
+.other {
+    font-family: 'Karla', sans-serif;
+    width: 90%;
+    background: #4CAF50;
+    height: 20%;
+    margin-left: 5%;
+}
+
+.film-link {
+    font-size: 16px;
+    color: gold;
+}
+
+.message {
+    margin-bottom: 30px;
+    font-weight: bolder;
+    color: #b3b3b3;
+    font-size: 20px;
+}
+
+.message a {
+    color: #4CAF50;
+    text-decoration: none;
+}
+
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+.login-page {
+    width: 360px;
+    padding: 8% 0 0;
+    margin: auto;
+}
+
+.form {
+    background: #FEC606;
+    position: relative;
+    z-index: 1;
+    max-width: 360px;
+    margin: auto;
+    padding: 45px;
+    text-align: center;
+}
+
+.form input {
+    font-family: "Roboto", sans-serif;
+    outline: 0;
+    background: #f2f2f2;
+    width: 100%;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+.form button {
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    outline: 0;
+    background: #4CAF50;
+    width: 100%;
+    border: 0;
+    padding: 15px;
+    color: #FFFFFF;
+    font-size: 14px;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.form button:hover, .form button:active, .form button:focus {
+    background: black;
+}
+
+
+
+
+

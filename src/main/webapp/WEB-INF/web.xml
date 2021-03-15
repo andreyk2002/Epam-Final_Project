@@ -2,13 +2,21 @@
          xmlns="http://xmlns.jcp.org/xml/ns/javaee"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          id="WebApp_ID" version="3.1">
-  <display-name>Archetype Created Web Application</display-name>
-  <servlet>
-    <servlet-name>main</servlet-name>
-    <servlet-class>com.epam.web.Controller</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>main</servlet-name>
-    <url-pattern>/controller</url-pattern>
-  </servlet-mapping>
+    <display-name>Archetype Created Web Application</display-name>
+    <servlet>
+        <servlet-name>main</servlet-name>
+        <servlet-class>com.epam.web.Controller</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>main</servlet-name>
+        <url-pattern>/controller</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>register</servlet-name>
+        <servlet-class>com.epam.web.RegistrationController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>register</servlet-name>
+        <url-pattern>/register</url-pattern>
+    </servlet-mapping>
 </web-app>
