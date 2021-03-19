@@ -50,3 +50,6 @@ Thumbs.db
 
 /Epam-Final_Project.iml
 /target/
+/src/main/webapp/static/fonts/
+/src/main/webapp/static/img/
+/src/main/resources/
