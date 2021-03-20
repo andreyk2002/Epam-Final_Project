@@ -1,3 +1,8 @@
+<%@page language="java" contentType="text/html; charset=utf-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="en_US" scope="session"/>
+<fmt:setBundle basename="resource.pagecontent" var="rb"/>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,11 +17,16 @@
 <main>
     <section class="intro">
         <div class="wrapper">
-            <h1 class="into-title">Perfect place for film lovers</h1>
+            <h1 class="into-title"><fmt:message key="main.title" bundle="${rb}"/></h1>
             <p class="into-subtitle">
                 Share your film experience and emotions with other users,
                 leave helpful reviews and earn rating points to become true film expert!
             </p>
+            <c:if test="${errorMessage != null}">
+                <div class="error">
+                        ${errorMessage}
+                </div>
+            </c:if>
             <form class="login-form" action="${pageContext.request.contextPath}/controller" method="post">
                 <fieldset class="login-form-wrap">
                     <p class="form-info">
@@ -34,7 +44,7 @@
         <div class="benefits-wrapper">
             <h2 class="benefit-title"> Why your should try our site?</h2>
             <div class="benefits-cards">
-                <div class="card">
+                <div class="benefit-card">
                     <div class="img-card">
                         <img src="static/img/bootstrap-icons-1.4.0/film.svg"/>
                     </div>
@@ -44,9 +54,8 @@
                     <p class="benefits-info">
                         Site where you cant find a lot of films and see users impressions and opinions on them
                     </p>
-                    <a class="benefit-reg" href="${pageContext.request.contextPath}/controller?commandName=registerPage">Register now!</a>
                 </div>
-                <div class="card">
+                <div class="benefit-card">
                     <div class="img-card">
                         <img src="static/img/bootstrap-icons-1.4.0/star-fill.svg" alt=""/>
                     </div>
@@ -57,9 +66,8 @@
                         Interesting rating system not only for films,
                         but also for file reviewers
                     </p>
-                    <a class="benefit-reg" href="${pageContext.request.contextPath}/register">Register now!</a>
                 </div>
-                <div class="card">
+                <div class="benefit-card">
                     <div class="img-card">
                         <img class="card-img" src="static/img/bootstrap-icons-1.4.0/chat.svg"/>
                     </div>
@@ -69,7 +77,6 @@
                     <p class="benefits-info">
                         Share your emotions and experience in reviews
                     </p>
-                    <a class="benefit-reg" href="${pageContext.request.contextPath}/register">Register now!</a>
                 </div>
             </div>
         </div>

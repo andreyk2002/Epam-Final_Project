@@ -21,8 +21,6 @@
                         <a href="${pageContext.request.contextPath}/controller?commandName=mainPage" class="logo-link">Main</a>
                     </li>
                     <li class="header-item">
-                        <a href="${pageContext.request.contextPath}/controller?commandName=registerPage" class="logo-link">Register</a>
-                    <li class="header-item">
                         <a href="${pageContext.request.contextPath}/controller?commandName=personalPage" class="logo-link">Personal page</a>
                     </li>
                     <li class="header-item">

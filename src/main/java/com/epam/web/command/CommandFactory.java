@@ -1,10 +1,12 @@
 package com.epam.web.command;
 
+import com.epam.web.dao.ListBasedMovieDao;
+import com.epam.web.dao.UserDao;
+import com.epam.web.service.MovieService;
 import com.epam.web.service.UserService;
 
 public class CommandFactory {
 
-    private static final String REGISTER_PAGE = "/WEB-INF/view/register.jsp";
     private static final String MAIN_PAGE = "/WEB-INF/view/main.jsp";
     private static final String USER_MANAGE_PAGE = "/WEB-INF/view/userManage.jsp";
     private static final String PERSONAL_PAGE = "/WEB-INF/view/personal.jsp";
@@ -14,15 +16,16 @@ public class CommandFactory {
     public Command create(String commandName) throws CommandNotExistException {
         switch (commandName){
             case "login":
-                return new LoginCommand(new UserService());
+                MovieService movieService = new MovieService(new ListBasedMovieDao());
+                UserDao userDao = new UserDao();
+                UserService service = new UserService(userDao);
+                return new LoginCommand(service, movieService);
             case "loginPage":
                 return new ShowPageCommand(LOGIN_PAGE);
             case "logout":
                 return new LogoutCommand();
             case "mainPage":
                 return new ShowPageCommand(MAIN_PAGE);
-            case "registerPage":
-                return new ShowPageCommand(REGISTER_PAGE);
             case "personalPage":
                 return new ShowPageCommand(PERSONAL_PAGE);
             case "userManagePage":

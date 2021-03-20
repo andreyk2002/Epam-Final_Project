@@ -7,9 +7,13 @@ import com.epam.web.entity.Movie;
 import java.util.List;
 
 public class MovieService {
-    private static MovieDao dao = new ListBasedMovieDao();
+    private MovieDao dao = new ListBasedMovieDao();
 
-    public static List<Movie> getAllMovies() {
+    public MovieService(MovieDao dao) {
+        this.dao = dao;
+    }
+
+    public List<Movie> getAllMovies() {
         return dao.getAllMovies();
     }
 }

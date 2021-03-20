@@ -3,6 +3,7 @@ package com.epam.web.command;
 import com.epam.web.entity.Movie;
 import com.epam.web.entity.User;
 import com.epam.web.service.MovieService;
+import com.epam.web.service.ServiceException;
 import com.epam.web.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,13 +16,15 @@ import java.util.Optional;
 public class LoginCommand implements Command {
 
     private final UserService userService;
+    private final MovieService movieService;
 
-    public LoginCommand(UserService userService) {
+    public LoginCommand(UserService userService, MovieService movieService) {
         this.userService = userService;
+        this.movieService = movieService;
     }
 
     @Override
-    public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {
+    public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
@@ -30,11 +33,12 @@ public class LoginCommand implements Command {
             User user = optionalUser.get();
             HttpSession session = request.getSession();
             session.setAttribute("name", user.getName());
-            List<Movie> movieList = MovieService.getAllMovies();
+            List<Movie> movieList = movieService.getAllMovies();
             session.setAttribute("movies", movieList);
-        } else {
-            request.setAttribute("errorMessage", "Wrong input");
+            return CommandResult.redirect(request.getContextPath() + "/controller?commandName=mainPage");
         }
-        return CommandResult.redirect(request.getContextPath() + "/controller?commandName=mainPage");
+        HttpSession session = request.getSession();
+        session.setAttribute("errorMessage", "Wrong input for user" + username);
+        return CommandResult.redirect(request.getContextPath() + "/controller?commandName=loginPage");
     }
 }

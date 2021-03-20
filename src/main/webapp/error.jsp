@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: User
@@ -11,6 +12,10 @@
     <title>Title</title>
 </head>
 <body>
-
+<c:if test="${errorMessage!=null}">
+    <div class="error">
+        <h1>${errorMessage}</h1>
+    </div>
+</c:if>
 </body>
 </html>

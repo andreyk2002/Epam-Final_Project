@@ -128,13 +128,15 @@ header {
     display: none;
 }
 
-.burger-line {
-    display: block;
-    width: 100%;
-    background-color: white;
-    height: 2px;
-    position: absolute;
-    left: 0;
+.greeting {
+    font-size: 30px;
+    color: white;
+}
+
+.error {
+    font-size: 25px;
+    color: red;
+    font-weight: 900;
 }
 
 .menu-list-img {
@@ -189,6 +191,7 @@ header {
 
 
 .login-form-input, .login-form-input::placeholder {
+    margin-bottom: 25px;
     margin-right: 60px;
     width: 300px;
     padding-left: 40px;
@@ -243,7 +246,7 @@ header {
     grid-column-gap: 55px;
 }
 
-.card {
+.benefit-card {
     margin-bottom: 120px;
     grid-column: span 1;
     padding: 60px 0;
@@ -332,6 +335,7 @@ img.type-image {
 
 
 .card {
+    margin-bottom: 10px;
     width: 80%;
     padding: 1%;
     background-color: black;
@@ -352,13 +356,13 @@ img.type-image {
     position: relative;
 }
 
-.film-link{
+.film-link {
     text-decoration: none;
     font-size: 26px;
     color: white;
 }
 
-.film-rating{
+.film-rating {
     font-size: 20px;
     font-style: italic;
     color: green;
@@ -370,17 +374,17 @@ img.type-image {
     height: 100%;
 }
 
-.film-details{
+.film-details {
     margin-top: 60%;
 }
 
-.rate-link{
+.rate-link {
     text-decoration: none;
     font-size: 20px;
     color: white;
 }
 
-.view-film-button{
+.view-film-button {
     padding: 7px 15px;
     background-color: #3838f6;
     color: white;
@@ -388,7 +392,8 @@ img.type-image {
     right: 0;
     bottom: 0;
 }
-.view-film-button:hover, .view-film-button:focus, .view-film-button:active{
+
+.view-film-button:hover, .view-film-button:focus, .view-film-button:active {
     background-color: #1f1fa7;
 }
 
@@ -401,6 +406,17 @@ footer {
 .footer-info {
     font-size: 19px;
     color: white;
+}
+
+.error {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 20px;
+    color: red;
+    font-weight: 400;
+    background-color: white;
+    width: 50%;
+    padding: 10px;
 }
 
 @media (max-width: 1087px) {
@@ -452,9 +468,6 @@ footer {
         line-height: 48px;
     }
 
-    /*.benefit-title {*/
-    /*    transform: translateY(0);*/
-    /*}*/
     .header-nav-close {
         width: 50px;
         height: 50px;
@@ -481,10 +494,6 @@ footer {
         transform: translateY(-50%) rotate(-45deg);
     }
 
-    .login-form-input {
-        margin-bottom: 25px;
-    }
-
     .benefits-cards {
         padding: 0 15px;
         grid-column-gap: 33px;
@@ -494,7 +503,7 @@ footer {
 
 
 @media (max-width: 760px) {
-    .card{
+    .card {
         width: 98%;
     }
 
@@ -505,24 +514,33 @@ footer {
 
 @media (max-width: 620px) {
 
-    .card{
+    .into-subtitle{
+        margin-bottom: 40px;
+    }
+
+    .error{
+        margin-bottom: 20px;
+        width: 100%;
+    }
+
+    .card {
         display: block;
     }
 
-    .card-img{
+    .card-img {
         height: 75%;
     }
 
-    .film-link{
+    .film-link {
         font-size: 23px;
     }
 
-    .film-details{
-        margin:0;
+    .film-details {
+        margin: 0;
         overflow: hidden;
     }
 
-    .view-film-button{
+    .view-film-button {
         bottom: 7px;
     }
 

@@ -27,26 +27,4 @@ public class CommandResult {
         return new CommandResult(true, page);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof CommandResult)) {
-            return false;
-        }
-        CommandResult result = (CommandResult) o;
-
-        if (isRedirect != result.isRedirect){
-            return false;
-        }
-        return Objects.equals(page, result.page);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = (isRedirect ? 1 : 0);
-        result = 31 * result + (page != null ? page.hashCode() : 0);
-        return result;
-    }
 }
