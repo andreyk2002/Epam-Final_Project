@@ -1,8 +1,8 @@
 <%@page language="java" contentType="text/html; charset=utf-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<fmt:setLocale value="en_US" scope="session"/>
-<fmt:setBundle basename="resource.pagecontent" var="rb"/>
+<fmt:setLocale value="ru_RU"/>
+<fmt:setBundle basename="local" var="loc"/>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,11 +13,12 @@
     <link href="static/css/main.css" rel="stylesheet"/>
 </head>
 <body>
+
     <jsp:include page="WEB-INF/view/fragments/header.jsp"/>
 <main>
     <section class="intro">
         <div class="wrapper">
-            <h1 class="into-title"><fmt:message key="main.title" bundle="${rb}"/></h1>
+            <h1 class="into-title"><fmt:message bundle="${loc}" key="local.header"/></h1>
             <p class="into-subtitle">
                 Share your film experience and emotions with other users,
                 leave helpful reviews and earn rating points to become true film expert!

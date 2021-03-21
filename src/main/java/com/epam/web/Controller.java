@@ -38,6 +38,7 @@ public class Controller extends HttpServlet {
     }
 
     private void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getSession(true).setAttribute("local", request.getParameter("local"));
         String commandType = request.getParameter("commandName");
         Command command;
         String page;
