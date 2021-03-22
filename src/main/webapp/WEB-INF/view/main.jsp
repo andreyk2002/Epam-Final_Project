@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
-<fmt:setBundle basename="local" />
+<fmt:setBundle basename="local"/>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -23,20 +23,19 @@
 <div class="container">
     <div class="wrapper-wide">
         <c:forEach items="${sessionScope.movies}" var="movie">
-            <div class="card">
-                <div class="card-img">
-                    <img class="movie-image" src="${movie.imageSrc}" alt="movieImage"/>
-                </div>
-                <div class="card-other">
-                    <a class="film-link">${movie.name} : ${movie.genre}</a>
-                    <br>
-                    <span class="film-rating">rating ${movie.rating}</span><br>
-                    <div class="film-details">
-                        <a class="rate-link" href="delete-this">Rate</a>
-                        <button class="view-film-button" type="submit">view film</button>
+            <a class="film-view-link" href="${pageContext.request.contextPath}/controller?commandName=filmPage&id=${movie.id}">
+                <div class="card">
+                    <div class="card-img">
+                        <img class="movie-image" src="${movie.imageSrc}" alt="movieImage"/>
+                    </div>
+                    <div class="card-other">
+                        <h2 class="film-link">${movie.name} : ${movie.genre}</h2>
+                        <br/>
+                        <br/>
+                        <span class="film-rating">rating ${movie.rating}</span><br>
                     </div>
                 </div>
-            </div>
+            </a>
         </c:forEach>
     </div>
     <jsp:include page="fragments/footer.jsp"/>

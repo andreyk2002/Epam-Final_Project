@@ -356,10 +356,29 @@ img.type-image {
     position: relative;
 }
 
+.container {
+    margin-top: 30px;
+}
+
 .film-link {
     text-decoration: none;
     font-size: 26px;
     color: white;
+}
+
+.film-view-link {
+    text-decoration: none;
+}
+
+.film-view-link:hover, .film-view-link:active, .film-view-link:focus {
+    background-color: #1f1fa7;
+    color: #1f1fa7;
+}
+
+.card:hover{
+    transition: 0.3s ease;
+    opacity: 0.8;
+    background-color: grey;
 }
 
 .film-rating {
@@ -514,11 +533,11 @@ footer {
 
 @media (max-width: 620px) {
 
-    .into-subtitle{
+    .into-subtitle {
         margin-bottom: 40px;
     }
 
-    .error{
+    .error {
         margin-bottom: 20px;
         width: 100%;
     }

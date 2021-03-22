@@ -32,6 +32,10 @@ public class Movie {
         return imageSrc;
     }
 
+    public long getId() {
+        return 0;
+    }
+
     @Override
     public boolean equals(Object o) {
 
@@ -67,4 +71,5 @@ public class Movie {
         result = 31 * result + (imageSrc != null ? imageSrc.hashCode() : 0);
         return result;
     }
+
 }
