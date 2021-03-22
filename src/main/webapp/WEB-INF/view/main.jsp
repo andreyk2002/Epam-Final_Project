@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
+<fmt:setBundle basename="local" />
 <html>
 <head>
     <meta charset="UTF-8">
@@ -12,9 +14,9 @@
 <jsp:include page="fragments/header.jsp"/>
 <section class="intro">
     <div class="wrapper">
-        <h1 class="into-title">Available films</h1>
+        <h1 class="into-title"><fmt:message key="local.avaible_films"/></h1>
         <c:if test="${name != null}">
-            <h2 class="greeting">Hello, ${name}</h2>
+            <h2 class="greeting"><fmt:message key="local.hello"/>, ${name}</h2>
         </c:if>
     </div>
 </section>

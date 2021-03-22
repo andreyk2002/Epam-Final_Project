@@ -1,30 +1,31 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: User
-  Date: 3/13/2021
-  Time: 3:49 PM
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<fmt:setBundle basename="local" />
 <header>
     <div class="wrapper">
         <div class="head-wrapper">
             <div class="logo">
                 <a href="/" class="logo-link">
                     <img class="logo-img" src="static/img/16-logo.jpg" alt="film rating"/>
-                    Top films
+                      Top films
                 </a>
             </div>
             <nav class="header-nav">
                 <ul class="header-list">
                     <li class="header-item">
-                        <a href="${pageContext.request.contextPath}/controller?commandName=mainPage" class="logo-link">Main</a>
+                        <a href="${pageContext.request.contextPath}/controller?commandName=mainPage" class="logo-link">
+                            <fmt:message key="local.main"/>
+                        </a>
                     </li>
                     <li class="header-item">
-                        <a href="${pageContext.request.contextPath}/controller?commandName=personalPage" class="logo-link">Personal page</a>
+                        <a href="${pageContext.request.contextPath}/controller?commandName=personalPage" class="logo-link">
+                            <fmt:message key="local.personal"/>
+                        </a>
                     </li>
                     <li class="header-item">
-                        <a href="${pageContext.request.contextPath}/controller?commandName=logout" class="logo-link">Login/Logout</a>
+                        <a href="${pageContext.request.contextPath}/controller?commandName=logout" class="logo-link">
+                            <fmt:message key="local.logout"/>
+                        </a>
                     </li>
                 </ul>
                 <div id="cross" class="header-nav-close">

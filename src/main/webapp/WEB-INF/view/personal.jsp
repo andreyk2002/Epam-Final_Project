@@ -11,6 +11,10 @@
 
 </head>
 <body>
-
+    <section class="personal-data">
+        <div class="wrapper-wide">
+            <h1>Some personal data will be displayed here</h1>
+        </div>
+    </section>
 </body>
 </html>
