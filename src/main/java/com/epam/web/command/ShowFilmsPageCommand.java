@@ -21,8 +21,10 @@ public class ShowFilmsPageCommand implements Command {
         String page = request.getParameter("pageNumber");
         int pageNumber = Integer.parseInt(page);
         List<Movie> movies = movieService.getNextMovies(pageNumber);
+        int totalPages = movieService.getPagesCount();
         HttpSession session = request.getSession();
         session.setAttribute("movies", movies);
+        session.setAttribute("pagesCount", totalPages);
         return CommandResult.redirect(request.getContextPath() + "/controller?commandName=mainPage&pageNumber=" + pageNumber);
     }
 }

@@ -23,7 +23,8 @@
 <div class="container">
     <div class="wrapper-wide">
         <c:forEach items="${sessionScope.movies}" var="movie">
-            <a class="film-view-link" href="${pageContext.request.contextPath}/controller?commandName=filmPage&id=${movie.id}">
+            <a class="film-view-link"
+               href="${pageContext.request.contextPath}/controller?commandName=filmPage&id=${movie.id}">
                 <div class="card">
                     <div class="card-img">
                         <img class="movie-image" src="${movie.imageSrc}" alt="movieImage"/>
@@ -37,8 +38,13 @@
                 </div>
             </a>
         </c:forEach>
+        <div class="pages">
+            <c:forEach var="i" begin="0" end="${sessionScope.pagesCount}">
+            <a class="film-link"
+               href="${pageContext.request.contextPath}/controller?commandName=showFilmsPage&pageNumber=${i}">${i}</a>
+            </c:forEach>
+        </div>
     </div>
-    <a href="${pageContext.request.contextPath}/controller?commandName=showFilmsPage&pageNumber=1">1</a>
     <jsp:include page="fragments/footer.jsp"/>
 </div>
 </body>

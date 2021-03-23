@@ -8,4 +8,6 @@ public interface MovieDao {
     List<Movie>getNextMovies(int count, int start);
 
     List<Movie>getAllMovies();
+
+    int getPagesCount(int filmsPerPage);
 }

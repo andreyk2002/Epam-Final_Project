@@ -8,7 +8,7 @@ import java.util.List;
 public class ListBasedMovieDao implements MovieDao {
 
 
-    private static final  List<Movie>movies = Arrays.asList(
+    private static final List<Movie> movies = Arrays.asList(
             new Movie("Inception", "Science fiction", 5.0, "static/img/movies/inception.jfif"),
             new Movie("Interstellar", "Science fiction", 4.8, "static/img/movies/interstellar.jfif"),
             new Movie("Terminator", "Science fiction/Action film", 5.0, "static/img/movies/terminator.jfif"),
@@ -30,5 +30,11 @@ public class ListBasedMovieDao implements MovieDao {
     @Override
     public List<Movie> getAllMovies() {
         return movies;
+    }
+
+    @Override
+    public int getPagesCount(int filmsPerPage) {
+        int size = movies.size();
+        return (int) Math.ceil(1. * size / filmsPerPage) - 1;
     }
 }

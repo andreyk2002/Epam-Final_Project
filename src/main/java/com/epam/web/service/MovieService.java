@@ -21,4 +21,8 @@ public class MovieService {
     public List<Movie> getAllMovies() {
         return dao.getAllMovies();
     }
+
+    public int getPagesCount() {
+        return dao.getPagesCount(FILMS_PER_PAGE);
+    }
 }

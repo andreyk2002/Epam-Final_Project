@@ -17,11 +17,9 @@ public class LoginCommand implements Command {
 
     private final static int FIRST_PAGE = 0;
     private final UserService userService;
-    private final MovieService movieService;
 
-    public LoginCommand(UserService userService, MovieService movieService) {
-        this.userService = userService;
-        this.movieService = movieService;
+    public LoginCommand(UserService userService) {
+        this.userService = userService;;
     }
 
     @Override
@@ -34,9 +32,7 @@ public class LoginCommand implements Command {
             User user = optionalUser.get();
             HttpSession session = request.getSession();
             session.setAttribute("name", user.getName());
-            List<Movie>movies = movieService.getNextMovies(FIRST_PAGE);
-            session.setAttribute("movies", movies);
-            return CommandResult.redirect(request.getContextPath() + "/controller?commandName=mainPage&pageNumber=" + FIRST_PAGE);
+            return CommandResult.redirect(request.getContextPath() + "/controller?commandName=showFilmsPage&pageNumber=" + FIRST_PAGE);
         }
         HttpSession session = request.getSession();
         session.setAttribute("errorMessage", "Wrong input for user" + username);

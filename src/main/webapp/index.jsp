@@ -14,7 +14,6 @@
 </head>
 <body>
 
-<jsp:include page="WEB-INF/view/fragments/header.jsp"/>
 <main>
     <section class="intro">
         <div class="wrapper">

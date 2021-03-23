@@ -17,10 +17,9 @@ public class CommandFactory {
     public Command create(String commandName) throws CommandNotExistException {
         switch (commandName) {
             case "login":
-                MovieService movieService = getMovieService();
                 UserDao userDao = new UserDao();
                 UserService service = new UserService(userDao);
-                return new LoginCommand(service, movieService);
+                return new LoginCommand(service);
             case "loginPage":
                 return new ShowPageCommand(LOGIN_PAGE);
             case "logout":
@@ -34,14 +33,12 @@ public class CommandFactory {
             case "filmManagePage":
                 return new ShowPageCommand(FILM_MANAGE_PAGE);
             case "showFilmsPage":
-                return new ShowFilmsPageCommand(getMovieService());
+                MovieDao dao = new ListBasedMovieDao();
+                MovieService movieService = new MovieService(dao);
+                return new ShowFilmsPageCommand(movieService);
             default:
                 throw new CommandNotExistException("Unknown type = " + commandName);
         }
     }
 
-    private MovieService getMovieService() {
-        MovieDao dao = new ListBasedMovieDao();
-        return new MovieService(dao);
-    }
 }

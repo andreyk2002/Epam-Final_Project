@@ -423,6 +423,15 @@ img.type-image {
     background-color: #1f1fa7;
 }
 
+.pages{
+    background-color: black;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-around;
+}
+
 footer {
     background-color: black;
     padding-bottom: 60px;
