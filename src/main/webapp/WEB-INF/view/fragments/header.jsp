@@ -1,24 +1,44 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<fmt:setBundle basename="local" />
+<fmt:setBundle basename="local"/>
 <header>
     <div class="wrapper">
         <div class="head-wrapper">
             <div class="logo">
                 <a href="/" class="logo-link">
                     <img class="logo-img" src="static/img/16-logo.jpg" alt="film rating"/>
-                      Top films
+                    Top films
                 </a>
             </div>
             <nav class="header-nav">
                 <ul class="header-list">
+                    <li class="header-item">
+                        <label class="lang-label">language
+                            <form action="${pageContext.request.contextPath}/local" method="post">
+                                <input type="hidden" name="local" value="ru_RU">
+                                <input type="hidden" name="commandName" value="changeLang">
+                                <input type="submit" value="RU">
+                            </form>
+                            <form action="${pageContext.request.contextPath}/local" method="post">
+                                <input type="hidden" name="local" value="be_BY">
+                                <input type="hidden" name="commandName" value="changeLang">
+                                <input type="submit" value="BY">
+                            </form>
+                            <form action="${pageContext.request.contextPath}/local" method="post">
+                                <input type="hidden" name="local" value="en_US">
+                                <input type="hidden" name="commandName" value="changeLang">
+                                <input type="submit" value="EN">
+                            </form>
+                        </label>
+                    </li>
                     <li class="header-item">
                         <a href="${pageContext.request.contextPath}/controller?commandName=mainPage" class="logo-link">
                             <fmt:message key="local.main"/>
                         </a>
                     </li>
                     <li class="header-item">
-                        <a href="${pageContext.request.contextPath}/controller?commandName=personalPage" class="logo-link">
+                        <a href="${pageContext.request.contextPath}/controller?commandName=personalPage"
+                           class="logo-link">
                             <fmt:message key="local.personal"/>
                         </a>
                     </li>

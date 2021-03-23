@@ -5,5 +5,7 @@ import java.util.List;
 
 public interface MovieDao {
 
+    List<Movie>getNextMovies(int count, int start);
+
     List<Movie>getAllMovies();
 }

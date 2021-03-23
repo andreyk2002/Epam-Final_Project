@@ -1,6 +1,7 @@
 <%@page language="java" contentType="text/html; charset=utf-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="${sessionScope.local}"/>
 <fmt:setBundle basename="local"/>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,6 +25,7 @@
             <form class="login-form" action="${pageContext.request.contextPath}/controller" method="post">
                 <fieldset class="login-form-wrap">
                     <p class="form-info">
+                        <input type="hidden" name="pageNumber" value="0">
                         <input type="hidden" name="commandName" value="login"/>
                         <input class="login-form-input" type="text" name="username" placeholder="<fmt:message key="local.username"/>"/>
                         <input class="login-form-input" type="password" name="<fmt:message key="local.password"/>"

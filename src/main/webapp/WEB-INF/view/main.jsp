@@ -38,6 +38,7 @@
             </a>
         </c:forEach>
     </div>
+    <a href="${pageContext.request.contextPath}/controller?commandName=showFilmsPage&pageNumber=1">1</a>
     <jsp:include page="fragments/footer.jsp"/>
 </div>
 </body>

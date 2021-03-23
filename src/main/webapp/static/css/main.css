@@ -214,6 +214,13 @@ header {
     background-color: #1f1fa7;
 }
 
+
+.lang-label{
+    color: white;
+    font-size: 18px;
+}
+/*End of header styles*/
+
 .benefits {
     margin-bottom: 131px;
 }

@@ -1,6 +1,7 @@
 package com.epam.web.command;
 
 import com.epam.web.dao.ListBasedMovieDao;
+import com.epam.web.dao.MovieDao;
 import com.epam.web.dao.UserDao;
 import com.epam.web.service.MovieService;
 import com.epam.web.service.UserService;
@@ -14,9 +15,9 @@ public class CommandFactory {
     private static final String LOGIN_PAGE = "/index.jsp";
 
     public Command create(String commandName) throws CommandNotExistException {
-        switch (commandName){
+        switch (commandName) {
             case "login":
-                MovieService movieService = new MovieService(new ListBasedMovieDao());
+                MovieService movieService = getMovieService();
                 UserDao userDao = new UserDao();
                 UserService service = new UserService(userDao);
                 return new LoginCommand(service, movieService);
@@ -32,8 +33,15 @@ public class CommandFactory {
                 return new ShowPageCommand(USER_MANAGE_PAGE);
             case "filmManagePage":
                 return new ShowPageCommand(FILM_MANAGE_PAGE);
+            case "showFilmsPage":
+                return new ShowFilmsPageCommand(getMovieService());
             default:
                 throw new CommandNotExistException("Unknown type = " + commandName);
         }
+    }
+
+    private MovieService getMovieService() {
+        MovieDao dao = new ListBasedMovieDao();
+        return new MovieService(dao);
     }
 }

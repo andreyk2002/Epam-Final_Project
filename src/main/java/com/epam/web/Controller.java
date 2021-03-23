@@ -13,11 +13,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 public class Controller extends HttpServlet {
-    private static final String PAGE = "index.jsp";
-
     private static final Logger LOGGER = LogManager.getLogger(Controller.class);
     private static final String ERROR_PAGE = "/error.jsp";
 
@@ -38,10 +37,13 @@ public class Controller extends HttpServlet {
     }
 
     private void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getSession(true).setAttribute("local", request.getParameter("local"));
+        HttpSession session = request.getSession(true);
+        String local = request.getParameter("local");
+        session.setAttribute("local", local);
         String commandType = request.getParameter("commandName");
         Command command;
         String page;
+
         boolean isRedirect = false;
         try {
             command = factory.create(commandType);
@@ -52,15 +54,16 @@ public class Controller extends HttpServlet {
             request.setAttribute("errorMessage", e.getMessage());
             LOGGER.error(e.getMessage(), e);
             page = ERROR_PAGE;
-        } if(!isRedirect){
+        }
+        if (!isRedirect) {
             forward(request, response, page);
         } else {
-            redirect(request, response, page);
+            redirect(response, page);
         }
     }
 
-    private void redirect(HttpServletRequest request, HttpServletResponse response, String page) throws IOException {
-        response.sendRedirect(page);
+    private void redirect(HttpServletResponse response, String command) throws IOException {
+        response.sendRedirect(command);
     }
 
     private void forward(HttpServletRequest request, HttpServletResponse response, String page) throws ServletException, IOException {
