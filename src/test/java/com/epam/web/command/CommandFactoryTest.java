@@ -1,5 +1,6 @@
 package com.epam.web.command;
 
+import com.epam.web.dao.DaoException;
 import com.epam.web.service.UserService;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -18,7 +19,7 @@ public class CommandFactoryTest {
 
 
     @Test
-    public void testCreateShouldReturnLoginCommandWhenLogin() throws CommandNotExistException {
+    public void testCreateShouldReturnLoginCommandWhenLogin() throws CommandNotExistException, DaoException {
         Command result = factory.create(LOGIN_COMMAND);
         Assert.assertEquals(result.getClass(), LoginCommand.class);
     }
@@ -26,7 +27,7 @@ public class CommandFactoryTest {
 
 
     @Test(expectedExceptions = CommandNotExistException.class)
-    public void testCreateShouldThrowExceptionWhenCommandNameIsWrong() throws CommandNotExistException {
+    public void testCreateShouldThrowExceptionWhenCommandNameIsWrong() throws CommandNotExistException, DaoException {
         Command result = factory.create("wrong_input");
     }
 

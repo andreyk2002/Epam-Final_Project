@@ -16,6 +16,8 @@ public class ShowFilmsPageCommand implements Command {
         this.movieService = movieService;
     }
 
+
+    //TODO:extact page to constructor
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
         String page = request.getParameter("pageNumber");
