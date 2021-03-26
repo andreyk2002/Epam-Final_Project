@@ -8,10 +8,10 @@ public interface Dao <T extends Identifiable>{
 
     List<T>getAll() throws DaoException;
 
-    Optional<T> getById(long id) throws WrongQueryException, DaoException;
+    Optional<T> getById(long id) throws Exception;
 
     void add(T item) throws DaoException;
 
-    void removeById(long id) throws DaoException;
+    void removeById(long id) throws DaoException, Exception;
 
 }

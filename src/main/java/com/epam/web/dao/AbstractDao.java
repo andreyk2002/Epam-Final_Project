@@ -1,6 +1,7 @@
 package com.epam.web.dao;
 
 import com.epam.web.entity.Identifiable;
+import com.epam.web.mapper.MapperFactory;
 import com.epam.web.mapper.RowMapper;
 
 import java.sql.Connection;
@@ -65,8 +66,32 @@ public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {
     @Override
     public List<T> getAll() throws DaoException {
         String table = getTableName();
-        RowMapper<T> mapper = (RowMapper<T>) RowMapper.create(table);
+        RowMapper<T> mapper = (RowMapper<T>) MapperFactory.create(table);
         return executeQuery("SELECT * FROM " + table, mapper);
+    }
+
+    @Override
+    public Optional<T> getById(long id) throws DaoException, WrongQueryException {
+        String table = getTableName();
+        RowMapper<T> mapper = (RowMapper<T>) MapperFactory.create(table);
+        return executeForSingleResult("SELECT * FROM " + table, mapper, id);
+    }
+
+    @Override
+    public void removeById(long id) throws Exception {
+        String table = getTableName();
+        updateQuery("DELETE * FROM WHERE ID = " + table, id);
+    }
+
+    protected int getRecordsCount() throws DaoException {
+        String table = getTableName();
+        String query = "SELECT COUNT(*) AS COUNT FROM " + table;
+        try (PreparedStatement statement = createStatement(query);
+             ResultSet resultSet = statement.executeQuery()) {
+            return resultSet.next() ? resultSet.getInt("COUNT") : 0;
+        } catch (SQLException e) {
+            throw new DaoException(e.getMessage(), e);
+        }
     }
 
     protected abstract String getTableName();

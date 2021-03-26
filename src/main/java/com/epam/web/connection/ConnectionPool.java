@@ -1,7 +1,10 @@
 package com.epam.web.connection;
 
 import com.epam.web.dao.DaoException;
+import com.mysql.cj.jdbc.Driver;
 
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.ArrayDeque;
 import java.util.Queue;
 import java.util.concurrent.atomic.AtomicReference;
@@ -10,8 +13,8 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class ConnectionPool {
 
-    private Queue<ProxyConnection> availableConnections;
-    private Queue<ProxyConnection> connectionsInUse;
+    private final Queue<ProxyConnection> availableConnections;
+    private final Queue<ProxyConnection> connectionsInUse;
 
     private final static AtomicReference<ConnectionPool> INSTANCE = new AtomicReference<>();
     private final static Lock LOCK = new ReentrantLock();
@@ -24,9 +27,13 @@ public class ConnectionPool {
                 LOCK.lock();
                 localInstance = INSTANCE.get();
                 if (localInstance == null) {
+                    DriverManager.registerDriver(new Driver());
                     ConnectionPool pool = new ConnectionPool();
                     INSTANCE.set(pool);
                 }
+                //TODO: throw
+            } catch (SQLException e) {
+                e.printStackTrace();
             } finally {
                 LOCK.unlock();
             }
@@ -35,6 +42,7 @@ public class ConnectionPool {
     }
 
     private ConnectionPool() {
+
         availableConnections = new ArrayDeque<>();
         connectionsInUse = new ArrayDeque<>();
     }

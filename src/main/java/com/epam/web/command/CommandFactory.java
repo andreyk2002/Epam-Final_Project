@@ -16,8 +16,7 @@ public class CommandFactory {
     public Command create(String commandName) throws CommandNotExistException, DaoException {
         switch (commandName) {
             case "login":
-                DaoHelperFactory factory = new DaoHelperFactory();
-                DaoHelper helper = factory.create();
+                DaoHelper helper = getDaoHelper();
                 UserDao userDao = helper.createUserDao();
                 UserService service = new UserService(userDao);
                 return new LoginCommand(service);
@@ -33,13 +32,19 @@ public class CommandFactory {
                 return new ShowPageCommand(USER_MANAGE_PAGE);
             case "filmManagePage":
                 return new ShowPageCommand(FILM_MANAGE_PAGE);
-//            case "showFilmsPage":
-//                MovieDao dao = new ListBasedMovieDao();
-//                MovieService movieService = new MovieService(dao);
-//                return new ShowFilmsPageCommand(movieService);
+            case "showFilmsPage":
+                DaoHelper daoHelper = getDaoHelper();
+                MovieDao dao = daoHelper.createMovieDao();
+                MovieService movieService = new MovieService(dao);
+                return new ShowFilmsPageCommand(movieService);
             default:
                 throw new CommandNotExistException("Unknown type = " + commandName);
         }
+    }
+
+    private DaoHelper getDaoHelper() throws DaoException {
+        DaoHelperFactory factory = new DaoHelperFactory();
+        return factory.create();
     }
 
 }

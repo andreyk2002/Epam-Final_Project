@@ -6,11 +6,8 @@ import java.util.List;
 
 public interface MovieDao {
 
+    List<Movie> getMoviesForPage(int pageNumber) throws DaoException;
 
-    List<Movie> getNextMovies(int filmsPerPage, int pageNumber);
-
-    int getPagesCount(int filmsPerPage);
-
-    List<Movie> getAllMovies();
+    int getPagesCount() throws DaoException;
 
 }

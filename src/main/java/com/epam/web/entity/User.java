@@ -3,7 +3,7 @@ package com.epam.web.entity;
 import java.util.Objects;
 
 public class User implements Identifiable {
-    private static final String USER_TABLE = "Users";
+    public static final String TABLE_NAME = "Users";
     private final String name;
     private final long id;
     private final double rating;
@@ -14,10 +14,6 @@ public class User implements Identifiable {
         this.id = id;
         this.rating = rating;
         this.role = role;
-    }
-
-    public static String getTable() {
-        return USER_TABLE;
     }
 
     public String getLogin() {

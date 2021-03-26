@@ -1,75 +1,75 @@
 package com.epam.web.entity;
 
-import java.util.Objects;
+public class Movie implements Identifiable {
 
-public class Movie {
+    public static final  String TABLE_NAME = "Films";
 
+    private final long id;
     private final String name;
-    private final String genre;
-    private final double rating;
-    private final String imageSrc;
+    private final String imagePath;
+    private final String description;
 
-    public Movie(String name, String genre, double rating, String imageSrc) {
-        this.name = name;
-        this.genre = genre;
-        this.rating = rating;
-        this.imageSrc = imageSrc;
+    public Movie(Builder builder) {
+        this.id = builder.id;
+        this.name = builder.name;
+        this.imagePath = builder.imagePath;
+        this.description = builder.description;
+    }
+
+    @Override
+    public long getId() {
+        return id;
     }
 
     public String getName() {
         return name;
     }
 
-    public String getGenre() {
-        return genre;
+    public String getImagePath() {
+        return imagePath;
     }
 
-    public double getRating() {
-        return rating;
+    public String getDescription() {
+        return description;
     }
 
-    public String getImageSrc() {
-        return imageSrc;
-    }
+    public static class Builder {
 
-    public long getId() {
-        return 0;
-    }
+        private long id;
+        private String name;
+        private String imagePath;
+        private String description;
+        private static final Builder INSTANCE = new Builder();
 
-    @Override
-    public boolean equals(Object o) {
-
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof Movie)) {
-            return false;
+        public static Builder getInstance() {
+            return INSTANCE;
         }
 
-        Movie movie = (Movie) o;
+        private Builder() {
+        }
 
-        if (Double.compare(movie.rating, rating) != 0){
-            return false;
+        public Builder withId(long id) {
+            this.id = id;
+            return this;
         }
-        if (!Objects.equals(name, movie.name)){
-            return false;
+
+        public Builder withName(String name) {
+            this.name = name;
+            return this;
         }
-        if (!Objects.equals(genre, movie.genre)){
-            return false;
+
+        public Builder withDescription(String description) {
+            this.description = description;
+            return this;
         }
-        return Objects.equals(imageSrc, movie.imageSrc);
+
+        public Builder withImagePath(String imagePath) {
+            this.imagePath = imagePath;
+            return this;
+        }
+
+        public Movie build() {
+            return new Movie(this);
+        }
     }
-
-    @Override
-    public int hashCode() {
-        int result;
-        long temp;
-        result = name != null ? name.hashCode() : 0;
-        result = 31 * result + (genre != null ? genre.hashCode() : 0);
-        temp = Double.doubleToLongBits(rating);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
-        result = 31 * result + (imageSrc != null ? imageSrc.hashCode() : 0);
-        return result;
-    }
-
 }

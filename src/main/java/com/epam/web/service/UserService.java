@@ -1,9 +1,6 @@
 package com.epam.web.service;
 
-import com.epam.web.dao.DaoException;
 import com.epam.web.dao.UserDao;
-import com.epam.web.dao.WUserDao;
-import com.epam.web.dao.WrongQueryException;
 import com.epam.web.entity.User;
 
 import java.util.Optional;
