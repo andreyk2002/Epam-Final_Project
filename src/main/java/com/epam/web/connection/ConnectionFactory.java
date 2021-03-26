@@ -9,9 +9,11 @@ import java.sql.SQLException;
 
 public class ConnectionFactory {
 
+    private static final String DB_URL = "jdbc:mysql://127.0.0.1:3306/epamdb";
+
     public static ProxyConnection create() throws DaoException {
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/epamdb?user=root", "root", "djpk03685v2");
+            Connection connection = DriverManager.getConnection(DB_URL,"root", "djpk03685v2");
             return new ProxyConnection(connection);
         } catch (SQLException e) {
             throw new DaoException(e.getMessage(), e);

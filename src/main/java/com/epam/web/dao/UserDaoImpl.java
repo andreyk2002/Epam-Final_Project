@@ -10,7 +10,6 @@ import java.util.Optional;
 
 public class UserDaoImpl extends AbstractDao<User> implements UserDao {
 
-    //TODO:Login not name
     private static final String FIND_BY_LOGIN_AND_PASSWORD = "SELECT * FROM Users WHERE login = ? AND password = MD5(?)";
     private static final String ADD_USER = "INSERT INTO Users(Login, Role, Rating, Password) VALUES(?, ?, ?, MD5(?))";
 
