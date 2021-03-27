@@ -1,5 +1,6 @@
 package com.epam.web.connection;
 
+import com.epam.web.command.CommandFactory;
 import com.epam.web.dao.DaoException;
 import com.mysql.cj.jdbc.Driver;
 
@@ -14,13 +15,15 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class ConnectionPool {
 
-    private Semaphore connectionSemaphore;
+    private static final int CONNECTIONS_ALLOWED = 10;
+
+    private final Semaphore connectionSemaphore = new Semaphore(CONNECTIONS_ALLOWED);
     private final Queue<ProxyConnection> availableConnections;
     private final Queue<ProxyConnection> connectionsInUse;
 
     private final static AtomicReference<ConnectionPool> INSTANCE = new AtomicReference<>();
     private final static Lock LOCK = new ReentrantLock();
-//    private final static Lock CONNECTIONS_LOCK = new ReentrantLock();
+
 
     public static ConnectionPool getInstance() {
         ConnectionPool localInstance = INSTANCE.get();
@@ -32,10 +35,10 @@ public class ConnectionPool {
                     DriverManager.registerDriver(new Driver());
                     ConnectionPool pool = new ConnectionPool();
                     INSTANCE.set(pool);
+                    addConnections();
                 }
-                //TODO: throw
-            } catch (SQLException e) {
-                e.printStackTrace();
+            } catch (SQLException | DaoException e) {
+                throw new RuntimeException(e.getMessage(), e);
             } finally {
                 LOCK.unlock();
             }
@@ -43,18 +46,24 @@ public class ConnectionPool {
         return INSTANCE.get();
     }
 
-    private ConnectionPool() {
-        ConnectionPoolFactory factory = new ConnectionPoolFactory();
-        factory.create();
-
-       try {
-           init();
-
-       }
+    private static void addConnections() throws DaoException {
+        ConnectionPool pool = INSTANCE.get();
+        for (int i = 0; i < CONNECTIONS_ALLOWED; i++) {
+            ProxyConnection connection = ConnectionFactory.create();
+            pool.availableConnections.add(connection);
+        }
     }
 
-    private void init() {
-
+    private ConnectionPool() throws DaoException {
+        availableConnections = new ArrayDeque<>();
+        connectionsInUse = new ArrayDeque<>();
+//        ConnectionPoolFactory factory = new ConnectionPoolFactory();
+//        factory.create();
+//
+//        try {
+//            init();
+//
+//        }
     }
 
     public void returnConnection(ProxyConnection connection) {
@@ -62,6 +71,7 @@ public class ConnectionPool {
             LOCK.lock();
             if (connectionsInUse.contains(connection)) {
                 availableConnections.offer(connection);
+                connectionsInUse.remove(connection);
             }
         } finally {
             LOCK.unlock();
@@ -69,16 +79,19 @@ public class ConnectionPool {
     }
 
     public ProxyConnection getConnection() throws DaoException {
-        LOCK.lock();
+
         try {
             connectionSemaphore.acquire();
+            LOCK.lock();
+
             ProxyConnection connection = availableConnections.poll();
             connectionsInUse.add(connection);
-            return ConnectionFactory.create();
+
+            return connection;
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e.getMessage(), e);
         } finally {
-            LOCK.unlock();;
+            LOCK.unlock();
         }
     }
 }

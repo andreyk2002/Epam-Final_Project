@@ -1,7 +1,6 @@
 package com.epam.web.dao;
 
 import com.epam.web.entity.Identifiable;
-import com.epam.web.mapper.MapperFactory;
 import com.epam.web.mapper.RowMapper;
 
 import java.sql.Connection;
@@ -49,7 +48,7 @@ public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {
     }
 
     protected Optional<T> executeForSingleResult(String query, Object... params) throws DaoException, WrongQueryException {
-        List<T> items = executeQuery(query, mapper, params);
+        List<T> items = executeQuery(query, params);
         if (items.size() == 1) {
             T item = items.get(0);
             return Optional.of(item);
@@ -92,6 +91,4 @@ public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {
             throw new DaoException(e.getMessage(), e);
         }
     }
-    
-
 }

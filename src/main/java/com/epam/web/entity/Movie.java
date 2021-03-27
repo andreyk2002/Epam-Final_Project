@@ -2,8 +2,6 @@ package com.epam.web.entity;
 
 public class Movie implements Identifiable {
 
-    public static final  String TABLE_NAME = "Films";
-
     private final long id;
     private final String name;
     private final String imagePath;

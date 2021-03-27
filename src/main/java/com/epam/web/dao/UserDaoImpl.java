@@ -22,12 +22,11 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
     @Override
     public Optional<User> getUserByLoginAndPassword
             (String login, String password) throws DaoException, WrongQueryException {
-
         return executeForSingleResult(LOGIN_QUERY, login, password);
     }
 
     @Override
-    //TODO : create unmapper classe
+    //TODO : create unmapper class
     public void add(User item) throws DaoException {
 
         double rating = item.getRating();
