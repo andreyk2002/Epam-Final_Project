@@ -16,9 +16,8 @@ public class CommandFactory {
     public Command create(String commandName) throws CommandNotExistException, DaoException {
         switch (commandName) {
             case "login":
-                DaoHelper helper = getDaoHelper();
-                UserDao userDao = helper.createUserDao();
-                UserService service = new UserService(userDao);
+                DaoHelperFactory factory = new DaoHelperFactory();
+                UserService service = new UserService(factory);
                 return new LoginCommand(service);
             case "loginPage":
                 return new ShowPageCommand(LOGIN_PAGE);

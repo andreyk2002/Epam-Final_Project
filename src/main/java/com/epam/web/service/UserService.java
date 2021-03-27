@@ -1,22 +1,27 @@
 package com.epam.web.service;
 
+import com.epam.web.dao.DaoHelper;
 import com.epam.web.dao.UserDao;
+import com.epam.web.dao.factory.DaoHelperFactory;
 import com.epam.web.entity.User;
 
 import java.util.Optional;
 
 public class UserService {
 
-    private final UserDao dao;
+    private DaoHelperFactory daoHelperFactory;
 
-    public UserService(UserDao dao){
-        this.dao = dao;
+    public UserService(DaoHelperFactory daoHelperFactory) {
+        this.daoHelperFactory = daoHelperFactory;
     }
 
-
     public Optional<User> login(String username, String password) throws ServiceException {
-        try{
-            return dao.getUserByLoginAndPassword(username, password);
+        try(DaoHelper helper = daoHelperFactory.create()){
+            helper.startTransaction();
+            UserDao dao = helper.createUserDao();
+            Optional<User> user = dao.getUserByLoginAndPassword(username, password);
+            helper.endTransaction();
+            return user;
         } catch (Exception e) {
             throw new ServiceException(e.getMessage(), e);
         }

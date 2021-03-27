@@ -8,9 +8,11 @@ import java.util.concurrent.Executor;
 public class ProxyConnection implements Connection {
 
     private final Connection connection;
+    private ConnectionPool pool;
 
-    public ProxyConnection(Connection connection) {
+    public ProxyConnection(Connection connection, ConnectionPool pool) {
         this.connection = connection;
+        this.pool = pool;
     }
 
     @Override
@@ -46,6 +48,7 @@ public class ProxyConnection implements Connection {
     @Override
     public void close() throws SQLException {
         connection.close();
+//        pool.returnConnection(this);
     }
 
     @Override

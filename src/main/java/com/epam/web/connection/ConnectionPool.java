@@ -7,12 +7,14 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayDeque;
 import java.util.Queue;
+import java.util.concurrent.Semaphore;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class ConnectionPool {
 
+    private Semaphore connectionSemaphore;
     private final Queue<ProxyConnection> availableConnections;
     private final Queue<ProxyConnection> connectionsInUse;
 
@@ -42,15 +44,23 @@ public class ConnectionPool {
     }
 
     private ConnectionPool() {
+        ConnectionPoolFactory factory = new ConnectionPoolFactory();
+        factory.create();
 
-        availableConnections = new ArrayDeque<>();
-        connectionsInUse = new ArrayDeque<>();
+       try {
+           init();
+
+       }
     }
 
-    public void returnConnection(ProxyConnection connection){
-        try{
+    private void init() {
+
+    }
+
+    public void returnConnection(ProxyConnection connection) {
+        try {
             LOCK.lock();
-            if(connectionsInUse.contains(connection)){
+            if (connectionsInUse.contains(connection)) {
                 availableConnections.offer(connection);
             }
         } finally {
@@ -59,7 +69,11 @@ public class ConnectionPool {
     }
 
     public ProxyConnection getConnection() throws DaoException {
-        return ConnectionFactory.create();
+        try {
+            connectionSemaphore.acquire();
+            return ConnectionFactory.create();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
-
 }

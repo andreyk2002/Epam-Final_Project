@@ -14,9 +14,12 @@ import java.util.Optional;
 
 public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {
 
+    private RowMapper<T> mapper;
     private final Connection connection;
 
-    public AbstractDao(Connection connection) {
+
+    public AbstractDao(RowMapper<T> mapper, Connection connection) {
+        this.mapper = mapper;
         this.connection = connection;
     }
 

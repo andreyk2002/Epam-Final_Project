@@ -33,7 +33,9 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
     }
 
     @Override
+    //TODO : create unmapper classe
     public void add(User item) throws DaoException {
+
         double rating = item.getRating();
         Role role = item.getRole();
         String login = item.getLogin();
