@@ -1,7 +1,6 @@
 package com.epam.web.dao;
 
 import com.epam.web.entity.Identifiable;
-import com.epam.web.mapper.MapperFactory;
 import com.epam.web.mapper.RowMapper;
 
 import java.sql.Connection;
@@ -14,11 +13,13 @@ import java.util.Optional;
 
 public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {
 
-    private RowMapper<T> mapper;
+    private final String tableName;
+    private final RowMapper<T> mapper;
     private final Connection connection;
 
 
-    public AbstractDao(RowMapper<T> mapper, Connection connection) {
+    public AbstractDao(Connection connection, RowMapper<T> mapper,  String tableName) {
+        this.tableName = tableName;
         this.mapper = mapper;
         this.connection = connection;
     }
@@ -32,7 +33,7 @@ public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {
         }
     }
 
-    protected List<T> executeQuery(String query, RowMapper<T> mapper, Object... params) throws DaoException {
+    protected List<T> executeQuery(String query, Object... params) throws DaoException {
         try (PreparedStatement statement = createStatement(query, params);
              ResultSet resultSet = statement.executeQuery()) {
             List<T> entities = new ArrayList<>();
@@ -46,8 +47,8 @@ public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {
         }
     }
 
-    protected Optional<T> executeForSingleResult(String query, RowMapper<T> mapper, Object... params) throws DaoException, WrongQueryException {
-        List<T> items = executeQuery(query, mapper, params);
+    protected Optional<T> executeForSingleResult(String query, Object... params) throws DaoException, WrongQueryException {
+        List<T> items = executeQuery(query, params);
         if (items.size() == 1) {
             T item = items.get(0);
             return Optional.of(item);
@@ -68,27 +69,21 @@ public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {
 
     @Override
     public List<T> getAll() throws DaoException {
-        String table = getTableName();
-        RowMapper<T> mapper = (RowMapper<T>) MapperFactory.create(table);
-        return executeQuery("SELECT * FROM " + table, mapper);
+        return executeQuery("SELECT * FROM " + tableName, mapper);
     }
 
     @Override
     public Optional<T> getById(long id) throws DaoException, WrongQueryException {
-        String table = getTableName();
-        RowMapper<T> mapper = (RowMapper<T>) MapperFactory.create(table);
-        return executeForSingleResult("SELECT * FROM " + table, mapper, id);
+        return executeForSingleResult("SELECT * FROM " + tableName, id);
     }
 
     @Override
     public void removeById(long id) throws Exception {
-        String table = getTableName();
-        updateQuery("DELETE * FROM WHERE ID = " + table, id);
+        updateQuery("DELETE * FROM WHERE ID = " + tableName, id);
     }
 
     protected int getRecordsCount() throws DaoException {
-        String table = getTableName();
-        String query = "SELECT COUNT(*) AS COUNT FROM " + table;
+        String query = "SELECT COUNT(*) AS COUNT FROM " + tableName;
         try (PreparedStatement statement = createStatement(query);
              ResultSet resultSet = statement.executeQuery()) {
             return resultSet.next() ? resultSet.getInt("COUNT") : 0;
@@ -96,7 +91,4 @@ public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {
             throw new DaoException(e.getMessage(), e);
         }
     }
-
-    protected abstract String getTableName();
-
 }
