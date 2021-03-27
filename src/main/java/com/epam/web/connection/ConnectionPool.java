@@ -69,11 +69,16 @@ public class ConnectionPool {
     }
 
     public ProxyConnection getConnection() throws DaoException {
+        LOCK.lock();
         try {
             connectionSemaphore.acquire();
+            ProxyConnection connection = availableConnections.poll();
+            connectionsInUse.add(connection);
             return ConnectionFactory.create();
         } catch (InterruptedException e) {
             e.printStackTrace();
+        } finally {
+            LOCK.unlock();;
         }
     }
 }
