@@ -47,13 +47,13 @@ public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {
         }
     }
 
-    protected Optional<T> executeForSingleResult(String query, Object... params) throws DaoException, WrongQueryException {
+    protected Optional<T> executeForSingleResult(String query, Object... params) throws DaoException {
         List<T> items = executeQuery(query, params);
         if (items.size() == 1) {
             T item = items.get(0);
             return Optional.of(item);
         } else if (items.size() > 0) {
-            throw new WrongQueryException("More than one record was found");
+            throw new DaoException("More than one record was found");
         } else {
             return Optional.empty();
         }
@@ -73,7 +73,7 @@ public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {
     }
 
     @Override
-    public Optional<T> getById(long id) throws DaoException, WrongQueryException {
+    public Optional<T> getById(long id) throws DaoException {
         return executeForSingleResult("SELECT * FROM " + tableName, id);
     }
 

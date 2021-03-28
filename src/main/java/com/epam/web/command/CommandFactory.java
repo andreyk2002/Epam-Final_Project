@@ -1,8 +1,8 @@
 package com.epam.web.command;
 
-import com.epam.web.dao.*;
 import com.epam.web.dao.factory.DaoHelperFactory;
 import com.epam.web.service.MovieService;
+import com.epam.web.service.ServiceException;
 import com.epam.web.service.UserService;
 
 public class CommandFactory {
@@ -13,8 +13,10 @@ public class CommandFactory {
     private static final String FILM_MANAGE_PAGE = "/WEB-INF/view/filmManage.jsp";
     private static final String LOGIN_PAGE = "/index.jsp";
 
-    public Command create(String commandName) throws CommandNotExistException, DaoException {
+    public Command create(String commandName) throws CommandNotExistException, ServiceException {
         switch (commandName) {
+            case "changeLanguage":
+                return new ChangeLanguageCommand();
             case "login":
                 DaoHelperFactory factory = new DaoHelperFactory();
                 UserService service = new UserService(factory);
@@ -32,18 +34,13 @@ public class CommandFactory {
             case "filmManagePage":
                 return new ShowPageCommand(FILM_MANAGE_PAGE);
             case "showFilmsPage":
-                DaoHelper daoHelper = getDaoHelper();
-                MovieDao dao = daoHelper.createMovieDao();
-                MovieService movieService = new MovieService(dao);
+                DaoHelperFactory helperFactory = new DaoHelperFactory();
+                MovieService movieService = new MovieService(helperFactory);
                 return new ShowFilmsPageCommand(movieService);
             default:
                 throw new CommandNotExistException("Unknown type = " + commandName);
         }
     }
 
-    private DaoHelper getDaoHelper() throws DaoException {
-        DaoHelperFactory factory = new DaoHelperFactory();
-        return factory.create();
-    }
 
 }

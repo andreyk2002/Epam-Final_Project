@@ -1,5 +1,5 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <fmt:setBundle basename="local"/>
 <header>
     <div class="wrapper">
@@ -14,20 +14,28 @@
                 <ul class="header-list">
                     <li class="header-item">
                         <label class="lang-label">language
-                            <form action="${pageContext.request.contextPath}/local" method="post">
-                                <input type="hidden" name="local" value="ru_RU">
-                                <input type="hidden" name="commandName" value="changeLang">
-                                <input type="submit" value="RU">
+                            <form action="${pageContext.request.contextPath}/controller" method="post">
+                                <input type="submit" value="ru"/>
+                                <input type="hidden" name="local" value="ru_RU"/>
+                                <input type="hidden" name="commandName" value="changeLanguage"/>
+                                <input type="hidden" name="currentPage" value="${param.get("commandName")}"/>
+                                <input type="hidden" name="pageNumber" value="${param.get("pageNumber")}"/>
                             </form>
-                            <form action="${pageContext.request.contextPath}/local" method="post">
-                                <input type="hidden" name="local" value="be_BY">
-                                <input type="hidden" name="commandName" value="changeLang">
-                                <input type="submit" value="BY">
+
+                            <form action="${pageContext.request.contextPath}/controller" method="post">
+                                <input type="submit" value="by"/>
+                                <input type="hidden" name="local" value="be_BY"/>
+                                <input type="hidden" name="commandName" value="changeLanguage"/>
+                                <input type="hidden" name="currentPage" value="${param.get("commandName")}"/>
+                                <input type="hidden" name="pageNumber" value="${param.get("pageNumber")}"/>
                             </form>
-                            <form action="${pageContext.request.contextPath}/local" method="post">
-                                <input type="hidden" name="local" value="en_US">
-                                <input type="hidden" name="commandName" value="changeLang">
-                                <input type="submit" value="EN">
+
+                            <form action="${pageContext.request.contextPath}/controller" method="post">
+                                <input type="submit" value="en"/>
+                                <input type="hidden" name="local" value="en_US"/>
+                                <input type="hidden" name="commandName" value="changeLanguage"/>
+                                <input type="hidden" name="currentPage" value="${param.get("commandName")}"/>
+                                <input type="hidden" name="pageNumber" value="${param.get("pageNumber")}"/>
                             </form>
                         </label>
                     </li>
@@ -57,7 +65,7 @@
             </nav>
             <div class="header-burger">
                 <a>
-                    <img id="open-menu" class="menu-list-img" src="static/img/bootstrap-icons-1.4.0/list.svg"/>
+                    <img id="open-menu" class="menu-list-img" src="static/img/bootstrap-icons-1.4.0/list.svg" alt=""/>
                 </a>
             </div>
         </div>

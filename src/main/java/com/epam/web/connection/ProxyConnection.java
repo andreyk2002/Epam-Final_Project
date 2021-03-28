@@ -46,12 +46,12 @@ public class ProxyConnection implements Connection {
     }
 
     @Override
-    public void close() throws SQLException {
+    public void close() {
         pool.returnConnection(this);
     }
 
     @Override
-    public void commit()throws SQLException{
+    public void commit() throws SQLException {
         connection.commit();
     }
 
@@ -61,7 +61,7 @@ public class ProxyConnection implements Connection {
     }
 
     @Override
-    public boolean isClosed() throws SQLException   {
+    public boolean isClosed() throws SQLException {
         return connection.isClosed();
     }
 
@@ -172,12 +172,12 @@ public class ProxyConnection implements Connection {
 
     @Override
     public PreparedStatement prepareStatement(String sql, int resultSetType, int resultSetConcurrency, int resultSetHoldability) throws SQLException {
-        return connection.prepareStatement(sql,resultSetType,resultSetConcurrency, resultSetHoldability);
+        return connection.prepareStatement(sql, resultSetType, resultSetConcurrency, resultSetHoldability);
     }
 
     @Override
     public CallableStatement prepareCall(String sql, int resultSetType, int resultSetConcurrency, int resultSetHoldability) throws SQLException {
-        return connection.prepareCall(sql,resultSetType,resultSetConcurrency, resultSetHoldability);
+        return connection.prepareCall(sql, resultSetType, resultSetConcurrency, resultSetHoldability);
     }
 
     @Override

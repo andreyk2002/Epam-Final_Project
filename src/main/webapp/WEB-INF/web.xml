@@ -11,12 +11,4 @@
         <servlet-name>main</servlet-name>
         <url-pattern>/controller</url-pattern>
     </servlet-mapping>
-    <servlet>
-        <servlet-name>local</servlet-name>
-        <servlet-class>com.epam.web.LanguageController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>local</servlet-name>
-        <url-pattern>/local</url-pattern>
-    </servlet-mapping>
 </web-app>

@@ -16,7 +16,7 @@ public class LoginCommand implements Command {
     private final UserService userService;
 
     public LoginCommand(UserService userService) {
-        this.userService = userService;;
+        this.userService = userService;
     }
 
     @Override
@@ -33,7 +33,7 @@ public class LoginCommand implements Command {
         }
         HttpSession session = request.getSession();
         //TODO: error message should be internalized
-        session.setAttribute("errorMessage", "Wrong input for user" + username);
+        session.setAttribute("errorMessage", "Wrong input for user " + username);
         return CommandResult.redirect(request.getContextPath() + "/controller?commandName=loginPage");
     }
 }

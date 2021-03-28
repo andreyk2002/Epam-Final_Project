@@ -24,24 +24,32 @@
             <form class="login-form" action="${pageContext.request.contextPath}/controller" method="post">
                 <fieldset class="login-form-wrap">
                     <p class="form-info">
-                        <input type="hidden" name="pageNumber" value="0">
+                        <input type="hidden" name="pageNumber" value="0"/>
                         <input type="hidden" name="commandName" value="login"/>
-                        <input class="login-form-input" type="text" name="username" placeholder="<fmt:message key="local.username"/>"/>
+                        <input class="login-form-input" type="text" name="username"
+                               placeholder="<fmt:message key="local.username"/>"/>
                         <input class="login-form-input" type="password" name="<fmt:message key="local.password"/>"
                                placeholder="password"/>
                         <button class="login-submit" type="submit"><fmt:message key="local.login"/></button>
                     </p>
+                    <c:if test="${errorMessage!=null}">
+                        <div class="error">
+                            <h1>${errorMessage}</h1>
+                        </div>
+                    </c:if>
                 </fieldset>
             </form>
         </div>
     </section>
     <section class="benefits">
         <div class="benefits-wrapper">
-            <h2 class="benefit-title"><fmt:message key="local.try_site"/></h2>
+            <h2 class="benefit-title">
+                <fmt:message key="local.try_site"/>
+            </h2>
             <div class="benefits-cards">
                 <div class="benefit-card">
                     <div class="img-card">
-                        <img src="static/img/bootstrap-icons-1.4.0/film.svg"/>
+                        <img src="static/img/bootstrap-icons-1.4.0/film.svg" alt="film"/>
                     </div>
                     <h3 class="benefits-card-title">
                         <fmt:message key="local.benefit_first_header"/>
@@ -63,7 +71,7 @@
                 </div>
                 <div class="benefit-card">
                     <div class="img-card">
-                        <img class="card-img" src="static/img/bootstrap-icons-1.4.0/chat.svg"/>
+                        <img class="card-img" src="static/img/bootstrap-icons-1.4.0/chat.svg" alt="chat"/>
                     </div>
                     <h3 class="benefits-card-title">
                         <fmt:message key="local.benefit_third_header"/>

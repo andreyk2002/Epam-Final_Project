@@ -20,8 +20,7 @@ public class MovieDaoImpl extends AbstractDao<Movie> implements MovieDao {
     }
 
 
-    @Override
-    public void add(Movie item) throws DaoException {
+    public void save(Movie item) throws DaoException {
         throw new UnsupportedOperationException();
     }
 
@@ -34,6 +33,6 @@ public class MovieDaoImpl extends AbstractDao<Movie> implements MovieDao {
 
     @Override
     public int getPagesCount() throws DaoException {
-        return getRecordsCount();
+        return getRecordsCount() / MOVIES_PER_PAGE;
     }
 }

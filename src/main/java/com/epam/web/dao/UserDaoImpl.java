@@ -1,6 +1,5 @@
 package com.epam.web.dao;
 
-import com.epam.web.entity.Role;
 import com.epam.web.entity.User;
 import com.epam.web.mapper.UserRowMapper;
 
@@ -21,20 +20,8 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
 
     @Override
     public Optional<User> getUserByLoginAndPassword
-            (String login, String password) throws DaoException, WrongQueryException {
+            (String login, String password) throws DaoException {
         return executeForSingleResult(LOGIN_QUERY, login, password);
-    }
-
-    @Override
-    //TODO : create unmapper class
-    public void add(User item) throws DaoException {
-
-        double rating = item.getRating();
-        Role role = item.getRole();
-        String login = item.getLogin();
-        String password = item.getPassword();
-
-        updateQuery(ADD_USER, login, role, rating, password);
     }
 
 }

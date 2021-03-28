@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public class UserService {
 
-    private DaoHelperFactory daoHelperFactory;
+    private final DaoHelperFactory daoHelperFactory;
 
     public UserService(DaoHelperFactory daoHelperFactory) {
         this.daoHelperFactory = daoHelperFactory;
