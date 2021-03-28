@@ -10,6 +10,8 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 public class ShowFilmsPageCommand implements Command {
+
+    public static final String COMMAND_URL = "/controller?commandName=mainPage&pageNumber=";
     private final MovieService movieService;
 
     public ShowFilmsPageCommand(MovieService movieService) {
@@ -27,6 +29,6 @@ public class ShowFilmsPageCommand implements Command {
         HttpSession session = request.getSession();
         session.setAttribute("movies", movies);
         session.setAttribute("pagesCount", totalPages);
-        return CommandResult.redirect(request.getContextPath() + "/controller?commandName=mainPage&pageNumber=" + pageNumber);
+        return CommandResult.redirect(request.getContextPath() + COMMAND_URL + pageNumber);
     }
 }

@@ -12,7 +12,8 @@ import java.util.Optional;
 
 public class LoginCommand implements Command {
 
-    private final static int FIRST_PAGE = 0;
+    public static final String LOGIN_PAGE = "/controller?commandName=loginPage";
+    public static final String MAIN_PAGE = "/controller?commandName=showFilmsPage&pageNumber=0";
     private final UserService userService;
 
     public LoginCommand(UserService userService) {
@@ -29,11 +30,11 @@ public class LoginCommand implements Command {
             User user = optionalUser.get();
             HttpSession session = request.getSession();
             session.setAttribute("name", user.getLogin());
-            return CommandResult.redirect(request.getContextPath() + "/controller?commandName=showFilmsPage&pageNumber=" + FIRST_PAGE);
+            return CommandResult.redirect(request.getContextPath() + MAIN_PAGE);
         }
         HttpSession session = request.getSession();
         //TODO: error message should be internalized
         session.setAttribute("errorMessage", "Wrong input for user " + username);
-        return CommandResult.redirect(request.getContextPath() + "/controller?commandName=loginPage");
+        return CommandResult.redirect(request.getContextPath() + LOGIN_PAGE);
     }
 }

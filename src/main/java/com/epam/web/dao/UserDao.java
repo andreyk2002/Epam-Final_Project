@@ -7,5 +7,5 @@ import java.util.Optional;
 public interface UserDao {
 
     Optional<User> getUserByLoginAndPassword(String login, String password)
-            throws DaoException, WrongQueryException;
+            throws DaoException;
 }

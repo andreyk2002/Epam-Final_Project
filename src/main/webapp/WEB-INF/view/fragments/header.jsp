@@ -1,6 +1,7 @@
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 <fmt:setBundle basename="local"/>
+<fmt:setLocale value="ru_RU"/>
 <header>
     <div class="wrapper">
         <div class="head-wrapper">
