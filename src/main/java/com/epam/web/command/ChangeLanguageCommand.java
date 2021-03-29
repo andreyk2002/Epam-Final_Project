@@ -3,7 +3,6 @@ package com.epam.web.command;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.Optional;
 
 public class ChangeLanguageCommand implements Command {
 
@@ -13,15 +12,24 @@ public class ChangeLanguageCommand implements Command {
     public static final String PAGE_NUMBER = "pageNumber";
     public static final String COMMAND = "/controller?commandName=";
     public static final String PAGE = "&pageNumber=";
+    private static final String DEFAULT_PAGE = "loginPage";
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
         String local = request.getParameter(LOCAL);
         session.setAttribute(LOCAL, local);
-        String currentCommand = request.getParameter(CURRENT_PAGE);
-        Optional<String> pageNumber = Optional.ofNullable(request.getParameter(PAGE_NUMBER));
-        return pageNumber.map(s -> CommandResult.redirect(request.getContextPath() + COMMAND + currentCommand + PAGE + s))
-                .orElseGet(() -> CommandResult.redirect(request.getContextPath() + COMMAND + currentCommand));
+        String commandPath = request.getContextPath() + COMMAND;
+        String page = request.getParameter(CURRENT_PAGE);
+        if (!"".equals(page)) {
+            commandPath += page;
+        } else {
+            commandPath += DEFAULT_PAGE;
+        }
+        String pageNumber = request.getParameter(PAGE_NUMBER);
+        if (!"".equals(pageNumber)) {
+            commandPath += PAGE + pageNumber;
+        }
+        return CommandResult.redirect(commandPath);
     }
 }

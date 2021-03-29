@@ -36,9 +36,6 @@ public class Controller extends HttpServlet {
     }
 
     private void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        HttpSession session = request.getSession(true);
-//        String local = request.getParameter("local");
-//        session.setAttribute("local", local);
         String commandType = request.getParameter("commandName");
         Command command;
         String page;

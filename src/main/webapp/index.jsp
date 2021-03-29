@@ -28,8 +28,8 @@
                         <input type="hidden" name="commandName" value="login"/>
                         <input class="login-form-input" type="text" name="username"
                                placeholder="<fmt:message key="local.username"/>"/>
-                        <input class="login-form-input" type="password" name="<fmt:message key="local.password"/>"
-                               placeholder="password"/>
+                        <input class="login-form-input" type="password" name="password"
+                               placeholder="<fmt:message key="local.password"/>"/>
                         <button class="login-submit" type="submit"><fmt:message key="local.login"/></button>
                     </p>
                     <c:if test="${errorMessage!=null}">

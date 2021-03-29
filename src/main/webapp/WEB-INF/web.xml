@@ -11,4 +11,17 @@
         <servlet-name>main</servlet-name>
         <url-pattern>/controller</url-pattern>
     </servlet-mapping>
+    <filter>
+        <filter-name>loginfilter</filter-name>
+        <filter-class>com.epam.web.filter.CheckAccessFilter</filter-class>
+        <init-param>
+            <param-name>loginCommand</param-name>
+            <param-value>/index.jsp</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>loginfilter</filter-name>
+        <url-pattern>/WEB-INF/*</url-pattern>
+        <dispatcher>FORWARD</dispatcher>
+    </filter-mapping>
 </web-app>
