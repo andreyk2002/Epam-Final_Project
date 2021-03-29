@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
+<fmt:setLocale value="${sessionScope.local}"/>
 <fmt:setBundle basename="local"/>
-<fmt:setLocale value="ru_RU"/>
 <header>
     <div class="wrapper">
         <div class="head-wrapper">
@@ -14,32 +14,36 @@
             <nav class="header-nav">
                 <ul class="header-list">
                     <li class="header-item">
-                        <label class="lang-label">language
-                            <form action="${pageContext.request.contextPath}/controller" method="post">
-                                <input type="submit" value="ru"/>
+                        <div class="languages">
+                            <form class="change-lang" action="${pageContext.request.contextPath}/controller"
+                                  method="post">
+                                <input class="change-lang-btn" type="submit" value="ru"/>
                                 <input type="hidden" name="local" value="ru_RU"/>
                                 <input type="hidden" name="commandName" value="changeLanguage"/>
                                 <input type="hidden" name="currentPage" value="${param.get("commandName")}"/>
                                 <input type="hidden" name="pageNumber" value="${param.get("pageNumber")}"/>
                             </form>
 
-                            <form action="${pageContext.request.contextPath}/controller" method="post">
-                                <input type="submit" value="by"/>
+                            <form class="change-lang" action="${pageContext.request.contextPath}/controller"
+                                  method="post">
+                                <input class="change-lang-btn" type="submit" value="by"/>
                                 <input type="hidden" name="local" value="be_BY"/>
                                 <input type="hidden" name="commandName" value="changeLanguage"/>
                                 <input type="hidden" name="currentPage" value="${param.get("commandName")}"/>
                                 <input type="hidden" name="pageNumber" value="${param.get("pageNumber")}"/>
                             </form>
 
-                            <form action="${pageContext.request.contextPath}/controller" method="post">
-                                <input type="submit" value="en"/>
+                            <form class="change-lang" action="${pageContext.request.contextPath}/controller"
+                                  method="post">
+                                <input class="change-lang-btn" type="submit" value="en"/>
                                 <input type="hidden" name="local" value="en_US"/>
                                 <input type="hidden" name="commandName" value="changeLanguage"/>
                                 <input type="hidden" name="currentPage" value="${param.get("commandName")}"/>
                                 <input type="hidden" name="pageNumber" value="${param.get("pageNumber")}"/>
                             </form>
-                        </label>
+                        </div>
                     </li>
+
                     <li class="header-item">
                         <a href="${pageContext.request.contextPath}/controller?commandName=mainPage" class="logo-link">
                             <fmt:message key="local.main"/>
