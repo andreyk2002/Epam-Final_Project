@@ -25,16 +25,18 @@
     <div class="wrapper-wide">
         <c:forEach items="${sessionScope.movies}" var="movie">
             <a class="film-view-link"
-               href="${pageContext.request.contextPath}/controller?commandName=filmPage&id=${movie.id}">
+               href="${pageContext.request.contextPath}/controller?commandName=movie&id=${movie.id}">
                 <div class="card">
                     <div class="card-img">
                         <img class="movie-image" src="${movie.imagePath}" alt="movieImage"/>
                     </div>
                     <div class="card-other">
-                        <h2 class="film-link">${movie.name} : Test</h2>
+                        <h2 class="film-link">${movie.name}</h2>
+                        <br/>
+                        <h2 class="film-link">${movie.genre}</h2>
                         <br/>
                         <br/>
-                        <span class="film-rating">rating : -1</span><br>
+                        <span class="film-rating">rating : ${movie.rating}</span><br>
                     </div>
                 </div>
             </a>

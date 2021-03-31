@@ -128,16 +128,16 @@ header {
     display: none;
 }
 
-.languages{
+.languages {
     display: flex;
     justify-content: space-between;
 }
 
-.change-lang{
+.change-lang {
     width: 30%;
 }
 
-.change-lang-btn{
+.change-lang-btn {
     color: white;
     background-color: #1f1fa7;
 }
@@ -229,10 +229,11 @@ header {
 }
 
 
-.lang-label{
+.lang-label {
     color: white;
     font-size: 18px;
 }
+
 /*End of header styles*/
 
 .benefits {
@@ -396,7 +397,7 @@ img.type-image {
     color: #1f1fa7;
 }
 
-.card:hover{
+.card:hover {
     transition: 0.3s ease;
     opacity: 0.8;
     background-color: grey;
@@ -418,6 +419,58 @@ img.type-image {
     margin-top: 60%;
 }
 
+/*show film page styles*/
+
+.film-wrapper-wide {
+    background-color: black;
+    padding: 20px;
+    display: block;
+    max-width: 87%;
+    margin: 10px auto;
+}
+
+.film-description {
+    padding: 20px;
+    color: white;
+}
+
+.film-description-text {
+    font-size: 20px;
+}
+
+.film-rate {
+    color: white;
+    padding: 20px;
+}
+
+label {
+    font-size: 25px;
+}
+
+.mark {
+    margin-bottom: 20px;
+}
+
+textarea.review {
+    margin-bottom: 20px;
+}
+
+.user-review {
+    width: 90%;
+    background-color: grey;
+    margin: 15px;
+    padding: 10px;
+}
+
+.username {
+    font-weight: bolder;
+}
+
+
+
+/*end of show film page styles*/
+
+
 .rate-link {
     text-decoration: none;
     font-size: 20px;
@@ -437,7 +490,7 @@ img.type-image {
     background-color: #1f1fa7;
 }
 
-.pages{
+.pages {
     background-color: black;
     width: 100%;
     padding: 10px;

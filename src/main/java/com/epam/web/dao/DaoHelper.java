@@ -2,8 +2,6 @@ package com.epam.web.dao;
 
 import com.epam.web.connection.ConnectionPool;
 import com.epam.web.connection.ProxyConnection;
-import com.epam.web.mapper.MovieRowMapper;
-import com.epam.web.mapper.UserRowMapper;
 
 import java.sql.SQLException;
 
@@ -16,11 +14,11 @@ public class DaoHelper implements AutoCloseable {
     }
 
     public UserDao createUserDao() {
-        return new UserDaoImpl(connection);
+        return new UserDao(connection);
     }
 
     public MovieDao createMovieDao() {
-        return new MovieDaoImpl(connection);
+        return new MovieDao(connection);
     }
 
 

@@ -2,16 +2,20 @@ package com.epam.web.entity;
 
 public class Movie implements Identifiable {
 
-    private final long id;
+    private final Long id;
     private final String name;
     private final String imagePath;
     private final String description;
+    private final String genre;
+    private Double rating;
 
     public Movie(Builder builder) {
         this.id = builder.id;
         this.name = builder.name;
         this.imagePath = builder.imagePath;
         this.description = builder.description;
+        this.genre = builder.genre;
+        this.rating = builder.rating;
     }
 
     @Override
@@ -31,29 +35,26 @@ public class Movie implements Identifiable {
         return description;
     }
 
+    public String getGenre() {
+        return genre;
+    }
+
+    public Double getRating() {
+        return rating;
+    }
+
     public static class Builder {
+        private final long id;
+        private final String name;
+        private final String genre;
+        private Double rating = 0.;
+        private String imagePath = "";
+        private String description = "";
 
-        private long id;
-        private String name;
-        private String imagePath;
-        private String description;
-        private static final Builder INSTANCE = new Builder();
-
-        public static Builder getInstance() {
-            return INSTANCE;
-        }
-
-        private Builder() {
-        }
-
-        public Builder withId(long id) {
+        public Builder(long id, String name, String genre) {
             this.id = id;
-            return this;
-        }
-
-        public Builder withName(String name) {
             this.name = name;
-            return this;
+            this.genre = genre;
         }
 
         public Builder withDescription(String description) {
@@ -63,6 +64,11 @@ public class Movie implements Identifiable {
 
         public Builder withImagePath(String imagePath) {
             this.imagePath = imagePath;
+            return this;
+        }
+
+        public Builder withRating(Double rating){
+            this.rating = rating;
             return this;
         }
 

@@ -7,6 +7,7 @@ import com.epam.web.dao.factory.DaoHelperFactory;
 import com.epam.web.entity.Movie;
 
 import java.util.List;
+import java.util.Optional;
 
 public class MovieService {
 
@@ -34,5 +35,9 @@ public class MovieService {
         } catch (DaoException e) {
             throw new ServiceException(e.getMessage(), e);
         }
+    }
+
+    public Optional<Movie> getMovieById(Long id) throws DaoException {
+        return dao.getById(id);
     }
 }

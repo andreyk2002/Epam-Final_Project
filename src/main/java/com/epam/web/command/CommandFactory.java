@@ -7,11 +7,13 @@ import com.epam.web.service.UserService;
 
 public class CommandFactory {
 
+    private static final String SHOW_FILM_PAGE = "/WEB-INF/view/showFilm.jsp";
     private static final String MAIN_PAGE = "/WEB-INF/view/main.jsp";
     private static final String USER_MANAGE_PAGE = "/WEB-INF/view/userManage.jsp";
     private static final String PERSONAL_PAGE = "/WEB-INF/view/personal.jsp";
     private static final String FILM_MANAGE_PAGE = "/WEB-INF/view/filmManage.jsp";
     private static final String LOGIN_PAGE = "/index.jsp";
+
 
     public Command create(String commandName) throws CommandNotExistException, ServiceException {
         switch (commandName) {
@@ -33,13 +35,22 @@ public class CommandFactory {
                 return new ShowPageCommand(USER_MANAGE_PAGE);
             case "filmManagePage":
                 return new ShowPageCommand(FILM_MANAGE_PAGE);
+            case "showMoviePage":
+                return new ShowPageCommand(SHOW_FILM_PAGE);
+            case "movie":
+                MovieService movieService = getMovieService();
+                return new FilmShowCommand(movieService);
             case "showFilmsPage":
-                DaoHelperFactory helperFactory = new DaoHelperFactory();
-                MovieService movieService = new MovieService(helperFactory);
-                return new ShowFilmsPageCommand(movieService);
+                MovieService moviesService = getMovieService();
+                return new ShowFilmsPageCommand(moviesService);
             default:
                 throw new CommandNotExistException("Unknown type = " + commandName);
         }
+    }
+
+    private MovieService getMovieService() throws ServiceException {
+        DaoHelperFactory helperFactory = new DaoHelperFactory();
+        return new MovieService(helperFactory);
     }
 
 

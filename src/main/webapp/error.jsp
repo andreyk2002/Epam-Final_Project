@@ -5,6 +5,7 @@
     <title>Title</title>
 </head>
 <body>
+<input type="number" m>
 <c:if test="${errorMessage!=null}">
     <div class="error">
         <h1>${errorMessage}</h1>
