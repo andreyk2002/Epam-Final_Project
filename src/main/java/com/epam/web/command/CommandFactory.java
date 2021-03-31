@@ -37,12 +37,16 @@ public class CommandFactory {
                 return new ShowPageCommand(FILM_MANAGE_PAGE);
             case "showMoviePage":
                 return new ShowPageCommand(SHOW_FILM_PAGE);
-            case "movie":
-                MovieService movieService = getMovieService();
-                return new FilmShowCommand(movieService);
             case "showFilmsPage":
                 MovieService moviesService = getMovieService();
                 return new ShowFilmsPageCommand(moviesService);
+            case "movie":
+                MovieService movieService = getMovieService();
+                return new FilmShowCommand(movieService);
+            case "rateFilm":
+                DaoHelperFactory helperFactory = new DaoHelperFactory();
+                RatingService ratingService = new RatingService(helperFactory);
+                return new RateFilmCommand(ratingService);
             default:
                 throw new CommandNotExistException("Unknown type = " + commandName);
         }

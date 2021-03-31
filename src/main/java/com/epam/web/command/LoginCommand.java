@@ -30,11 +30,11 @@ public class LoginCommand implements Command {
             User user = optionalUser.get();
             HttpSession session = request.getSession();
             session.setAttribute("name", user.getLogin());
+            session.setAttribute("userId", user.getId());
             return CommandResult.redirect(request.getContextPath() + MAIN_PAGE);
         }
-        HttpSession session = request.getSession();
-        //TODO: error message should be internalized
-        session.setAttribute("errorMessage", "Wrong input for user " + username);
+
+        request.setAttribute("errorMessage", "local.usernameError");
         return CommandResult.redirect(request.getContextPath() + LOGIN_PAGE);
     }
 }

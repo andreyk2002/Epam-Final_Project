@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {
+public abstract class AbstractDao<T> implements Dao<T> {
 
     private final String tableName;
     private final RowMapper<T> mapper;
@@ -65,21 +65,6 @@ public abstract class AbstractDao<T extends Identifiable> implements Dao<T> {
             statement.setObject(i, params[i - 1]);
         }
         return statement;
-    }
-
-    @Override
-    public List<T> getAll() throws DaoException {
-        return executeQuery("SELECT * FROM " + tableName, mapper);
-    }
-
-    @Override
-    public Optional<T> getById(long id) throws DaoException {
-        return executeForSingleResult("SELECT * FROM " + tableName, id);
-    }
-
-    @Override
-    public void removeById(long id) throws Exception {
-        updateQuery("DELETE * FROM WHERE ID = " + tableName, id);
     }
 
     protected int getRecordsCount() throws DaoException {

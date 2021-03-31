@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
 public class FilmShowCommand implements Command {
-    public static final String SHOW_MOVIE = "/controller?commandName=showMoviePage";
+    private static final String SHOW_MOVIE = "/controller?commandName=showMoviePage";
 
     private final MovieService service;
 
@@ -27,7 +27,7 @@ public class FilmShowCommand implements Command {
         try {
             Optional<Movie> movieOptional = service.getMovieById(id);
             movieOptional.ifPresentOrElse(movie -> session.setAttribute("movie", movie),
-                    () -> session.setAttribute("errorMessage", "Movie not found"));
+                    () -> request.setAttribute("errorMessage", "Movie not found"));
         } catch (DaoException e) {
             throw new ServiceException(e.getMessage(), e);
         }

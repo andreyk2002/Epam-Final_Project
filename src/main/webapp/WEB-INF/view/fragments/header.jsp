@@ -46,7 +46,8 @@
                     </li>
 
                     <li class="header-item">
-                        <a href="${pageContext.request.contextPath}/controller?commandName=mainPage" class="logo-link">
+                        <a href="${pageContext.request.contextPath}/controller?commandName=showFilmsPage&pageNumber=0"
+                           class="logo-link">
                             <fmt:message key="local.main"/>
                         </a>
                     </li>

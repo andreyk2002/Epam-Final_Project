@@ -32,11 +32,11 @@
                                placeholder="<fmt:message key="local.password"/>"/>
                         <button class="login-submit" type="submit"><fmt:message key="local.login"/></button>
                     </p>
-                    <c:if test="${errorMessage!=null}">
-                        <div class="error">
-                            <h1>${errorMessage}</h1>
-                        </div>
-                    </c:if>
+<%--                    <c:if test="${param.get("errorMessage")">--%>
+<%--                        <div class="error">--%>
+<%--                            <h1>${param.get("errorMessage")}</h1>--%>
+<%--                        </div>--%>
+<%--                    </c:if>--%>
                 </fieldset>
             </form>
         </div>

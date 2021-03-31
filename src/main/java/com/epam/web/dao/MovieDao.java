@@ -17,6 +17,7 @@ public class MovieDao extends AbstractDao<Movie> {
     private static final String SELECT_MOVIES_IN_BOUNDS = "SELECT * FROM movies_view LIMIT ? OFFSET ?";
     private static final String SELECT_MOVIE = "SELECT * FROM movies_view WHERE filmID = ?";
     private static final String SELECT_ALL = "SELECT * FROM movies_view";
+    public static final String DELETE_QUERY = "DELETE FROM films WHERE ID = ?";
 
     public MovieDao(ProxyConnection connection) {
         super(connection, new MovieRowMapper(), TABLE_NAME);
@@ -35,6 +36,11 @@ public class MovieDao extends AbstractDao<Movie> {
     @Override
     public Optional<Movie> getById(long id) throws DaoException {
         return executeForSingleResult(SELECT_MOVIE, id);
+    }
+
+    @Override
+    public void removeById(long id) throws Exception {
+        updateQuery(DELETE_QUERY, id);
     }
 
     @Override

@@ -16,6 +16,11 @@
 <section class="intro" style="background: url(${movie.imagePath})">
     <div class="wrapper">
         <h1 class="into-title">${movie.name}</h1>
+        <c:if test="${errorMessage!=null}">
+            <div class="error">
+                <h1>${errorMessage}</h1>
+            </div>
+        </c:if>
     </div>
 </section>
 <section class="about-film">
@@ -31,7 +36,7 @@
                 <input type="hidden" name="userID" value="${user.id}">
                 <input type="hidden" name="filmID" value="${movie.id}">
                 <label>Rate film:</label>
-                <input class="mark" name="userMark" type="number" min="0" max="5">
+                <input class="mark" name="rating" type="number" min="0" max="5">
                 <button class="submit" type="submit">Rate</button>
             </form>
             <form class="film-review" action="${pageContext.request.contextPath}/controller">

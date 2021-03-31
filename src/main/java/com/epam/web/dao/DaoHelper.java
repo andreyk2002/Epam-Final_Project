@@ -17,6 +17,10 @@ public class DaoHelper implements AutoCloseable {
         return new UserDao(connection);
     }
 
+    public RatingDao createRatingDao() {
+        return new RatingDaoImp(connection);
+    }
+
     public MovieDao createMovieDao() {
         return new MovieDao(connection);
     }
@@ -43,5 +47,4 @@ public class DaoHelper implements AutoCloseable {
             throw new DaoException();
         }
     }
-
 }
