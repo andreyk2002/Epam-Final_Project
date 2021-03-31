@@ -12,7 +12,7 @@ import java.util.Optional;
 
 public class LoginCommand implements Command {
 
-    public static final String LOGIN_PAGE = "/controller?commandName=loginPage";
+    public static final String LOGIN_PAGE = "/controller?commandName=loginPage&errorMessage=";
     public static final String MAIN_PAGE = "/controller?commandName=showFilmsPage&pageNumber=0";
     private final UserService userService;
 
@@ -33,8 +33,8 @@ public class LoginCommand implements Command {
             session.setAttribute("userId", user.getId());
             return CommandResult.redirect(request.getContextPath() + MAIN_PAGE);
         }
+        String errorMessage = "local.loginError";
 
-        request.setAttribute("errorMessage", "local.usernameError");
-        return CommandResult.redirect(request.getContextPath() + LOGIN_PAGE);
+        return CommandResult.redirect(request.getContextPath() + LOGIN_PAGE + errorMessage);
     }
 }

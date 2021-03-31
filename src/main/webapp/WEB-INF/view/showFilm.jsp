@@ -16,9 +16,9 @@
 <section class="intro" style="background: url(${movie.imagePath})">
     <div class="wrapper">
         <h1 class="into-title">${movie.name}</h1>
-        <c:if test="${errorMessage!=null}">
+        <c:if test="${param.errorMessage!=null}">
             <div class="error">
-                <h1>${errorMessage}</h1>
+                <h1>${param.errorMessage}</h1>
             </div>
         </c:if>
     </div>

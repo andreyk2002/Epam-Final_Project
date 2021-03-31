@@ -1,4 +1,4 @@
-<%@page language="java" contentType="text/html; charset=utf-8" pageEncoding="UTF-8" %>
+<%@page contentType="text/html; charset=utf-8" pageEncoding="UTF-8" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <fmt:setLocale value="${sessionScope.local}"/>
@@ -32,11 +32,11 @@
                                placeholder="<fmt:message key="local.password"/>"/>
                         <button class="login-submit" type="submit"><fmt:message key="local.login"/></button>
                     </p>
-<%--                    <c:if test="${param.get("errorMessage")">--%>
-<%--                        <div class="error">--%>
-<%--                            <h1>${param.get("errorMessage")}</h1>--%>
-<%--                        </div>--%>
-<%--                    </c:if>--%>
+                    <c:if test="${param.errorMessage!=null}">
+                        <div class="error">
+                            <h1>${param.errorMessage}</h1>
+                        </div>
+                    </c:if>
                 </fieldset>
             </form>
         </div>
