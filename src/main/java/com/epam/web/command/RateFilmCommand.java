@@ -8,7 +8,7 @@ import javax.servlet.http.HttpSession;
 
 public class RateFilmCommand implements Command {
 
-    private static final String SHOW_MOVIE = "/controller?commandName=showMoviePage&id=";
+    private static final String SHOW_MOVIE = "/controller?commandName=movie&id=";
     private final RatingService service;
 
     public RateFilmCommand(RatingService ratingService) {

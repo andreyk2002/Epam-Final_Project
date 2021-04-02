@@ -31,21 +31,22 @@
             </p>
         </div>
         <div class="film-rate">
+            <h2 class="film-current-rating"><fmt:message key="local.currentRating"/> : ${sessionScope.movie.rating} </h2>
             <form action="${pageContext.request.contextPath}/controller">
                 <input type="hidden" name="commandName" value="rateFilm">
                 <input type="hidden" name="userID" value="${user.id}">
                 <input type="hidden" name="filmID" value="${movie.id}">
-                <label>Rate film:</label>
+                <label><fmt:message key="local.yourMark"/> </label>
                 <input class="mark" name="rating" type="number" min="0" max="5">
-                <button class="submit" type="submit">Rate</button>
+                <button class="rate-film-button" type="submit"><fmt:message key="local.rate"/></button>
             </form>
             <form class="film-review" action="${pageContext.request.contextPath}/controller">
                 <input type="hidden" name="commandName" value="reviewFilm">
                 <input type="hidden" name="userID" value="${user.id}">
                 <input type="hidden" name="filmID" value="${movie.id}">
-                <textarea name="review" class="review" rows="20" cols="40" placeholder="leave a review">
+                <textarea name="review" class="review" rows="20" placeholder="leave a review">
                 </textarea>
-                <button class="submit" type="submit">OK</button>
+                <button class="rate-film-button" type="submit">OK</button>
             </form>
         </div>
     </div>

@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class ReviewFilmCommand implements Command {
-    private static final String SHOW_MOVIE = "/controller?commandName=showMoviePage&id=";
+    private static final String SHOW_MOVIE = "/controller?commandName=movie&id=";
     private final ReviewService reviewService;
 
     public ReviewFilmCommand(ReviewService reviewService) {
@@ -25,6 +25,6 @@ public class ReviewFilmCommand implements Command {
 
         Long filmID = Long.parseLong(filmIdString);
         reviewService.rateFilm(filmID, userID, review);
-        return CommandResult.redirect(request.getContextPath() + SHOW_MOVIE);
+        return CommandResult.redirect(request.getContextPath() + SHOW_MOVIE + filmID);
     }
 }

@@ -32,19 +32,16 @@
                     </div>
                     <div class="card-other">
                         <h2 class="film-link">${movie.name}</h2>
-                        <br/>
                         <h2 class="film-link">${movie.genre}</h2>
-                        <br/>
-                        <br/>
-                        <span class="film-rating">rating : ${movie.rating}</span><br>
+                        <span class="film-rating"><fmt:message key="local.rating"/>: ${movie.rating}</span><br>
                     </div>
                 </div>
             </a>
         </c:forEach>
         <div class="pages">
             <c:forEach var="i" begin="0" end="${sessionScope.pagesCount}">
-            <a class="film-link"
-               href="${pageContext.request.contextPath}/controller?commandName=showFilmsPage&pageNumber=${i}">${i}</a>
+                <a class="film-link"
+                   href="${pageContext.request.contextPath}/controller?commandName=showFilmsPage&pageNumber=${i}">${i}</a>
             </c:forEach>
         </div>
     </div>

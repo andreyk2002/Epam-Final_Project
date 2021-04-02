@@ -315,6 +315,8 @@ img {
     color: #1f1fa7;
 }
 
+/*end of the benefits section*/
+
 .films-types {
     margin-bottom: 100px;
 }
@@ -376,6 +378,12 @@ img.type-image {
     padding: 10px;
     margin: 0 auto;
     position: relative;
+}
+
+/*film card styles*/
+
+h2.film-link {
+    margin-bottom: 25px;
 }
 
 .container {
@@ -452,6 +460,7 @@ label {
 }
 
 textarea.review {
+    width: 100%;
     margin-bottom: 20px;
 }
 
@@ -467,7 +476,6 @@ textarea.review {
 }
 
 
-
 /*end of show film page styles*/
 
 
@@ -477,16 +485,13 @@ textarea.review {
     color: white;
 }
 
-.view-film-button {
-    padding: 7px 15px;
+.rate-film-button {
     background-color: #3838f6;
     color: white;
-    position: absolute;
-    right: 0;
-    bottom: 0;
+    margin-left: 20px;
 }
 
-.view-film-button:hover, .view-film-button:focus, .view-film-button:active {
+.rate-film-button:hover, .rate-film-button:focus, .rate-film-button:active {
     background-color: #1f1fa7;
 }
 
@@ -497,6 +502,12 @@ textarea.review {
     margin-bottom: 20px;
     display: flex;
     justify-content: space-around;
+}
+
+.film-current-rating {
+    margin-bottom: 50px;
+    font-size: 30px;
+    color: green;
 }
 
 footer {
@@ -642,7 +653,7 @@ footer {
         overflow: hidden;
     }
 
-    .view-film-button {
+    .rate-film-button {
         bottom: 7px;
     }
 
@@ -667,7 +678,12 @@ footer {
 
     .login-submit {
         font-size: 16px;
-        padding: 0px 15px;
+        padding: 0 15px;
     }
+
+    h2.film-link {
+        margin-bottom: 0;
+    }
+
 
 }
