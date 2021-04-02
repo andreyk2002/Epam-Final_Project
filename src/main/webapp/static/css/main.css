@@ -510,6 +510,33 @@ textarea.review {
     color: green;
 }
 
+/*personal page styles*/
+
+.personal-wrapper {
+    padding: 20px;
+    text-align: center;
+    background-color: white;
+    max-width: 1260px;
+    margin: 0 auto;
+    box-shadow: 0 2px 20px black;
+    position: relative;
+    transform: translateY(-40vh);
+}
+
+.personal-title {
+    width: 100%;
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 42px;
+}
+
+.personal-info {
+    font-size: 22px;
+    margin-top: 30px;
+}
+
+
+/*end of personal page styles*/
 footer {
     background-color: black;
     padding-bottom: 60px;
