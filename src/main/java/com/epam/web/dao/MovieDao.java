@@ -9,18 +9,14 @@ import java.util.Optional;
 
 public class MovieDao extends AbstractDao<Movie> {
 
-    private static final String VIEW_NAME = "movies_view";
     private static final String TABLE_NAME = "films";
     private static final int MOVIES_PER_PAGE = 5;
-    private static final String ADD_MOVIE = "INSERT INTO Films(ID, Name, ImagePath, Description, GenreId)" +
+    private static final String ADD_MOVIE = "INSERT INTO films(ID, Name, ImagePath, Description, GenreId)" +
             " VALUES (?, ?, ?, ?, ?)";
-    private static final String SELECT_MOVIES_IN_BOUNDS = "SELECT * FROM movies_view LIMIT ? OFFSET ?";
-    private static final String SELECT_MOVIE = "SELECT * FROM movies_view WHERE filmID = ?";
-    private static final String SELECT_ALL = "SELECT * FROM movies_view";
-    public static final String DELETE_QUERY = "DELETE FROM films WHERE ID = ?";
+    private static final String SELECT_MOVIES_IN_BOUNDS = "SELECT * FROM films LIMIT ? OFFSET ?";
 
-    public MovieDao(ProxyConnection connection) {
-        super(connection, new MovieRowMapper(), TABLE_NAME);
+    public MovieDao(ProxyConnection connection, RatingDao ratingDao, ReviewDao reviewDao, GenreDao genreDao) {
+        super(connection, new MovieRowMapper(ratingDao, reviewDao, genreDao), TABLE_NAME);
     }
 
 
@@ -33,20 +29,6 @@ public class MovieDao extends AbstractDao<Movie> {
         return executeQuery(SELECT_MOVIES_IN_BOUNDS, MOVIES_PER_PAGE, offset);
     }
 
-    @Override
-    public Optional<Movie> getById(long id) throws DaoException {
-        return executeForSingleResult(SELECT_MOVIE, id);
-    }
-
-    @Override
-    public void removeById(long id) throws Exception {
-        updateQuery(DELETE_QUERY, id);
-    }
-
-    @Override
-    public List<Movie> getAll() throws DaoException {
-        return executeQuery(SELECT_ALL);
-    }
 
     public int getPagesCount() throws DaoException {
         return getRecordsCount() / MOVIES_PER_PAGE;

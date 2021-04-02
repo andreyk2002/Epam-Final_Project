@@ -1,18 +1,22 @@
-package com.epam.web.dao;
+package com.epam.web.dao.impl;
 
+import com.epam.web.dao.AbstractDao;
+import com.epam.web.dao.DaoException;
+import com.epam.web.dao.RatingDao;
 import com.epam.web.mapper.RatingMapper;
 
 import java.sql.Connection;
 import java.util.List;
 import java.util.Optional;
 
-public class RatingDaoImp extends AbstractDao<Double> implements RatingDao {
+public class RatingDaoImpl extends AbstractDao<Double> implements RatingDao {
     private static final String RATING_TABLE = "filmsratings";
     private static final String INSERT_QUERY = "INSERT INTO filmsratings(userID, filmID, Rating) VALUES (?, ?, ?)";
     public static final String FIND_RATING = "SELECT * FROM filmsratings WHERE userID = ? AND filmID = ?";
+    public static final String GET_AVG_RATING = "SELECT AVG(Rating) AS Rating FROM filmsratings WHERE filmID = ?";
 
 
-    public RatingDaoImp(Connection connection) {
+    public RatingDaoImpl(Connection connection) {
         super(connection, new RatingMapper(), RATING_TABLE);
     }
 
@@ -32,6 +36,12 @@ public class RatingDaoImp extends AbstractDao<Double> implements RatingDao {
         return rating.isPresent();
     }
 
+    @Override
+    public double getMovieRating(long filmId) throws DaoException {
+        Optional<Double> rating = executeForSingleResult(GET_AVG_RATING, filmId);
+        return rating.orElse(0.);
+    }
+
 
     @Override
     public List<Double> getAll() throws DaoException {
@@ -41,7 +51,7 @@ public class RatingDaoImp extends AbstractDao<Double> implements RatingDao {
 
 
     @Override
-    public Optional<Double> getById(long id) throws Exception {
+    public Optional<Double> getById(long id) throws DaoException {
         throw new UnsupportedOperationException("This is a table with complex primary key");
     }
 

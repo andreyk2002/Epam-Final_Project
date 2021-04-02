@@ -18,7 +18,7 @@
         <h1 class="into-title">${movie.name}</h1>
         <c:if test="${param.errorMessage!=null}">
             <div class="error">
-                <h1>${param.errorMessage}</h1>
+                <h1><fmt:message key="${param.errorMessage}"/></h1>
             </div>
         </c:if>
     </div>
@@ -52,13 +52,11 @@
 </section>
 <section class="film-reviews">
     <div class="film-wrapper-wide">
-        <c:forEach begin="0" end="5">
+        <c:forEach items="${sessionScope.movie.filmsReviews}" var="review">
             <div class="user-review">
-                <b class="username">username : </b>
+                <b class="username">${review.username}</b>
                 <p class="review-content">
-                    Wow! That was a really great experience.
-                    Of course it one of my most favourite
-                    movies. I can watch it infinite amount of times.
+                   ${review.review}
                 </p>
             </div>
         </c:forEach>

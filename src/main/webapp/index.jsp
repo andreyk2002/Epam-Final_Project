@@ -34,7 +34,7 @@
                     </p>
                     <c:if test="${param.errorMessage!=null}">
                         <div class="error">
-                            <h1>${param.errorMessage}</h1>
+                            <h1><fmt:message key="${param.errorMessage}"/></h1>
                         </div>
                     </c:if>
                 </fieldset>

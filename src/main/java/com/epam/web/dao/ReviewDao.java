@@ -1,4 +1,10 @@
 package com.epam.web.dao;
 
-public interface ReviewDao {
+import com.epam.web.entity.Review;
+import java.util.List;
+
+public interface ReviewDao extends Dao<Review>{
+    void rateFilm(Long filmID, Long userID, String review) throws DaoException;
+
+    List<Review> getFilmReviews(long id) throws DaoException;
 }

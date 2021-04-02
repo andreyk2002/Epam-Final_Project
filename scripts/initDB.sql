@@ -46,6 +46,21 @@ CREATE TABLE filmsratings
     CONSTRAINT filmsratings_chk_1 CHECK (((rating >= 0) and (rating <= 5.0)))
 ) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+CREATE TABLE reviews
+(
+    ID bigint PRIMARY KEY auto_increment,
+    UserID bigint NOT NULL,
+    FilmID bigint NOT NULL,
+    Review TEXT
+);
+
+alter table reviews
+    add constraint FK_FilmsFilmID
+        foreign key (FilmID) references films(ID);
+
+alter table reviews
+    add constraint FK_UserID
+        foreign key (UserID) references users(ID);
 
 
 Create VIEW film_view AS

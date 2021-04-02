@@ -2,6 +2,7 @@ package com.epam.web.command;
 
 import com.epam.web.dao.factory.DaoHelperFactory;
 import com.epam.web.service.MovieService;
+import com.epam.web.service.ReviewService;
 import com.epam.web.service.ServiceException;
 import com.epam.web.service.UserService;
 
@@ -16,6 +17,7 @@ public class CommandFactory {
 
 
     public Command create(String commandName) throws CommandNotExistException, ServiceException {
+        DaoHelperFactory helperFactory = new DaoHelperFactory();
         switch (commandName) {
             case "changeLanguage":
                 return new ChangeLanguageCommand();
@@ -38,24 +40,22 @@ public class CommandFactory {
             case "showMoviePage":
                 return new ShowPageCommand(SHOW_FILM_PAGE);
             case "showFilmsPage":
-                MovieService moviesService = getMovieService();
+                MovieService moviesService = new MovieService(helperFactory);
                 return new ShowFilmsPageCommand(moviesService);
             case "movie":
-                MovieService movieService = getMovieService();
+                MovieService movieService = new MovieService(helperFactory);
                 return new FilmShowCommand(movieService);
             case "rateFilm":
-                DaoHelperFactory helperFactory = new DaoHelperFactory();
                 RatingService ratingService = new RatingService(helperFactory);
                 return new RateFilmCommand(ratingService);
+            case "reviewFilm":
+                ReviewService reviewService = new ReviewService(helperFactory);
+                return new ReviewFilmCommand(reviewService);
             default:
                 throw new CommandNotExistException("Unknown type = " + commandName);
         }
     }
 
-    private MovieService getMovieService() throws ServiceException {
-        DaoHelperFactory helperFactory = new DaoHelperFactory();
-        return new MovieService(helperFactory);
-    }
 
 
 }

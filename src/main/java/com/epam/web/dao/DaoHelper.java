@@ -2,6 +2,10 @@ package com.epam.web.dao;
 
 import com.epam.web.connection.ConnectionPool;
 import com.epam.web.connection.ProxyConnection;
+import com.epam.web.dao.impl.GenreDaoImpl;
+import com.epam.web.dao.impl.RatingDaoImpl;
+import com.epam.web.dao.impl.ReviewDaoImpl;
+import com.epam.web.dao.impl.UserDaoImpl;
 
 import java.sql.SQLException;
 
@@ -13,21 +17,28 @@ public class DaoHelper implements AutoCloseable {
         this.connection = pool.getConnection();
     }
 
-    public UserDao createUserDao() {
-        return new UserDao(connection);
+    public GenreDao createGenreDao(){
+        return new GenreDaoImpl(connection);
+    }
+
+    public UserDaoImpl createUserDao() {
+        return new UserDaoImpl(connection);
     }
 
     public RatingDao createRatingDao() {
-        return new RatingDaoImp(connection);
+        return new RatingDaoImpl(connection);
     }
 
     public MovieDao createMovieDao() {
-        return new MovieDao(connection);
+        GenreDao genreDao = createGenreDao();
+        ReviewDao reviewDao = createReviewDao();
+        RatingDao ratingDao = createRatingDao();
+        return new MovieDao(connection, ratingDao, reviewDao, genreDao);
     }
 
 
     @Override
-    public void close() throws Exception {
+    public void close() {
         connection.close();
     }
 
@@ -46,5 +57,10 @@ public class DaoHelper implements AutoCloseable {
         } catch (SQLException e) {
             throw new DaoException();
         }
+    }
+
+    public ReviewDao createReviewDao() {
+        UserDao dao = createUserDao();
+        return new ReviewDaoImpl(connection, dao);
     }
 }

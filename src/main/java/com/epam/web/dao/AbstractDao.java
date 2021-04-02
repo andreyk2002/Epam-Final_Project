@@ -1,6 +1,5 @@
 package com.epam.web.dao;
 
-import com.epam.web.entity.Identifiable;
 import com.epam.web.mapper.RowMapper;
 
 import java.sql.Connection;
@@ -13,12 +12,13 @@ import java.util.Optional;
 
 public abstract class AbstractDao<T> implements Dao<T> {
 
+
     private final String tableName;
     private final RowMapper<T> mapper;
     private final Connection connection;
 
 
-    public AbstractDao(Connection connection, RowMapper<T> mapper,  String tableName) {
+    public AbstractDao(Connection connection, RowMapper<T> mapper, String tableName) {
         this.tableName = tableName;
         this.mapper = mapper;
         this.connection = connection;
@@ -75,5 +75,20 @@ public abstract class AbstractDao<T> implements Dao<T> {
         } catch (SQLException e) {
             throw new DaoException(e.getMessage(), e);
         }
+    }
+
+    @Override
+    public List<T> getAll() throws DaoException {
+        return executeQuery("SELECT * FROM " + tableName);
+    }
+
+    @Override
+    public Optional<T> getById(long id) throws DaoException {
+        return executeForSingleResult("SELECT * FROM " + tableName + " WHERE id=?", id);
+    }
+
+    @Override
+    public void removeById(long id) throws Exception {
+        updateQuery("DELETE FROM " + tableName + " WHERE id=?", id);
     }
 }
