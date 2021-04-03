@@ -15,8 +15,8 @@ public class MovieDao extends AbstractDao<Movie> {
             " VALUES (?, ?, ?, ?, ?)";
     private static final String SELECT_MOVIES_IN_BOUNDS = "SELECT * FROM films LIMIT ? OFFSET ?";
 
-    public MovieDao(ProxyConnection connection, RatingDao ratingDao, ReviewDao reviewDao, GenreDao genreDao) {
-        super(connection, new MovieRowMapper(ratingDao, reviewDao, genreDao), TABLE_NAME);
+    public MovieDao(ProxyConnection connection) {
+        super(connection, new MovieRowMapper(), TABLE_NAME);
     }
 
 

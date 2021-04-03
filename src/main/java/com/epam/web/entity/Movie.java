@@ -8,18 +8,14 @@ public class Movie implements Identifiable {
     private final String name;
     private final String imagePath;
     private final String description;
-    private final String genre;
-    private final Double rating;
-    private final List<Review>filmsReviews;
+    private final Long genreId;
 
     public Movie(Builder builder) {
         this.id = builder.id;
         this.name = builder.name;
-        this.rating = builder.rating;
-        this.genre = builder.genre;
         this.description = builder.description;
         this.imagePath = builder.imagePath;
-        this.filmsReviews = builder.reviews;
+        this.genreId = builder.genreId;
     }
 
     @Override
@@ -39,31 +35,21 @@ public class Movie implements Identifiable {
         return description;
     }
 
-    public String getGenre() {
-        return genre;
-    }
-
-    public Double getRating() {
-        return rating;
-    }
-
-    public List<Review> getFilmsReviews() {
-        return filmsReviews;
+    public Long getGenreId() {
+        return genreId;
     }
 
     public static class Builder {
         private final long id;
         private final String name;
-        private final String genre;
-        private Double rating = 0.;
+        public Long genreId;
         private String imagePath = "";
         private String description = "";
-        private List<Review>reviews = new ArrayList<>();
 
-        public Builder(long id, String name, String genre) {
+        public Builder(long id, String name, Long genreId) {
             this.id = id;
             this.name = name;
-            this.genre = genre;
+            this.genreId = genreId;
         }
 
         public Builder withDescription(String description) {
@@ -76,15 +62,6 @@ public class Movie implements Identifiable {
             return this;
         }
 
-        public Builder withRating(Double rating){
-            this.rating = rating;
-            return this;
-        }
-
-        public Builder withReviews(List<Review>filmsReviews){
-            this.reviews = filmsReviews;
-            return this;
-        }
 
         public Movie build() {
             return new Movie(this);

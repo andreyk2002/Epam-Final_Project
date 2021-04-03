@@ -1,6 +1,7 @@
 package com.epam.web.command;
 
 import com.epam.web.dao.DaoException;
+import com.epam.web.dto.MovieDTO;
 import com.epam.web.entity.Movie;
 import com.epam.web.service.MovieService;
 import com.epam.web.service.ServiceException;
@@ -25,7 +26,7 @@ public class FilmShowCommand implements Command {
         Long id = Long.parseLong(idString);
         HttpSession session = request.getSession();
         try {
-            Optional<Movie> movieOptional = service.getMovieById(id);
+            Optional<MovieDTO> movieOptional = service.getMovieById(id);
             movieOptional.ifPresentOrElse(movie -> session.setAttribute("movie", movie),
                     () -> request.setAttribute("errorMessage", "Movie not found"));
         } catch (DaoException e) {

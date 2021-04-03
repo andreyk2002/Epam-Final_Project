@@ -18,14 +18,9 @@ public class MovieRowMapper implements RowMapper<Movie> {
     private static final String IMAGE_PATH = "ImagePath";
     private static final String DESCRIPTION = "Description";
     private static final String GENRE_ID = "GenreID";
-    private final RatingDao ratingDao;
-    private final ReviewDao reviewDao;
-    private final GenreDao genreDao;
 
-    public MovieRowMapper(RatingDao ratingDao, ReviewDao reviewDao, GenreDao genreDao) {
-        this.ratingDao = ratingDao;
-        this.reviewDao = reviewDao;
-        this.genreDao = genreDao;
+
+    public MovieRowMapper() {
     }
 
     @Override
@@ -34,16 +29,10 @@ public class MovieRowMapper implements RowMapper<Movie> {
         String name = resultSet.getString(NAME);
         String imagePath = resultSet.getString(IMAGE_PATH);
         String description = resultSet.getString(DESCRIPTION);
-        double movieRating = ratingDao.getMovieRating(id);
         long genreId = resultSet.getLong(GENRE_ID);
-        Optional<String> genre = genreDao.getById(genreId);
-
-        List<Review> filmReviews = reviewDao.getFilmReviews(id);
-        Movie.Builder builder = new Movie.Builder(id, name, genre.get());
-        return builder.withRating(movieRating)
+        Movie.Builder builder = new Movie.Builder(id, name, genreId);
+        return builder.withImagePath(imagePath)
                 .withDescription(description)
-                .withImagePath(imagePath)
-                .withReviews(filmReviews)
                 .build();
     }
 }

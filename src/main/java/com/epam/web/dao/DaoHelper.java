@@ -30,10 +30,8 @@ public class DaoHelper implements AutoCloseable {
     }
 
     public MovieDao createMovieDao() {
-        GenreDao genreDao = createGenreDao();
-        ReviewDao reviewDao = createReviewDao();
-        RatingDao ratingDao = createRatingDao();
-        return new MovieDao(connection, ratingDao, reviewDao, genreDao);
+
+        return new MovieDao(connection);
     }
 
 
