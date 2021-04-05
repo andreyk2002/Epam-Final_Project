@@ -1,5 +1,3 @@
-DROP TABLE IF EXISTS films;
-DROP TABLE IF EXISTS genres;
 
 CREATE TABLE genres
 (
@@ -61,14 +59,4 @@ alter table reviews
 alter table reviews
     add constraint FK_UserID
         foreign key (UserID) references users(ID);
-
-
-Create VIEW film_view AS
-SELECT f.Name AS filmName, f.ImagePath, f.Description, g.Name AS genreNamefilm_view, avg(r.Rating) AS rating
-FROM films f
-         JOIN genres g
-              ON f.GenreID = g.ID
-         LEFT JOIN filmsratings r
-                   ON f.ID = r.FilmID
-GROUP BY f.Name
 
