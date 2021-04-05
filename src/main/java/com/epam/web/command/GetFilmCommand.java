@@ -2,8 +2,7 @@ package com.epam.web.command;
 
 import com.epam.web.dao.DaoException;
 import com.epam.web.dto.MovieDTO;
-import com.epam.web.entity.Movie;
-import com.epam.web.service.MovieService;
+import com.epam.web.service.FilmService;
 import com.epam.web.service.ServiceException;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,12 +10,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
-public class FilmShowCommand implements Command {
+public class GetFilmCommand implements Command {
     private static final String SHOW_MOVIE = "/controller?commandName=showMoviePage";
 
-    private final MovieService service;
+    private final FilmService service;
 
-    public FilmShowCommand(MovieService service) {
+    public GetFilmCommand(FilmService service) {
         this.service = service;
     }
 

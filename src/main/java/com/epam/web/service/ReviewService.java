@@ -6,6 +6,7 @@ import com.epam.web.dao.ReviewDao;
 import com.epam.web.dao.factory.DaoHelperFactory;
 
 public class ReviewService {
+
     private ReviewDao dao;
 
     public ReviewService(DaoHelperFactory helperFactory) {
@@ -16,9 +17,9 @@ public class ReviewService {
         }
     }
 
-    public void rateFilm(Long filmID, Long userID, String review) throws ServiceException {
+    public void reviewFilm(long filmID, long userID, String review) throws ServiceException {
         try {
-            dao.rateFilm(filmID, userID, review);
+            dao.reviewFilm(filmID, userID, review);
         } catch (DaoException e) {
             throw new ServiceException(e.getMessage(), e);
         }

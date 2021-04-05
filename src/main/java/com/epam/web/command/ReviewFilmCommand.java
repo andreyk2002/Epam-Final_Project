@@ -20,11 +20,11 @@ public class ReviewFilmCommand implements Command {
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
         String filmIdString = request.getParameter("filmID");
         HttpSession session = request.getSession();
-        Long userID = (Long) session.getAttribute("userId");
+        long userID = (long) session.getAttribute("userId");
         String review = request.getParameter("review");
 
-        Long filmID = Long.parseLong(filmIdString);
-        reviewService.rateFilm(filmID, userID, review);
+        long filmID = Long.parseLong(filmIdString);
+        reviewService.reviewFilm(filmID, userID, review);
         return CommandResult.redirect(request.getContextPath() + SHOW_MOVIE + filmID);
     }
 }

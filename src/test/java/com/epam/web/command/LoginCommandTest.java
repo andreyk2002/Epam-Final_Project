@@ -30,7 +30,8 @@ public class LoginCommandTest extends  CommandTest{
     private static final String USERNAME = "username";
     private static final String PASSWORD = "password";
     private static final CommandResult SUCCESS = CommandResult.redirect("/controller?commandName=showFilmsPage&pageNumber=0");
-    private static final CommandResult FAIL = CommandResult.redirect("/controller?commandName=loginPage");
+    private static final CommandResult FAIL = CommandResult
+            .redirect("/controller?commandName=loginPage&errorMessage=local.loginError");
     private LoginCommand command;
 
 

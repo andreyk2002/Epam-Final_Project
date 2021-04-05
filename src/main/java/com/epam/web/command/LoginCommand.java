@@ -14,6 +14,7 @@ public class LoginCommand implements Command {
 
     public static final String LOGIN_PAGE = "/controller?commandName=loginPage&errorMessage=";
     public static final String MAIN_PAGE = "/controller?commandName=showFilmsPage&pageNumber=0";
+    public static final String LOGIN_ERROR = "local.loginError";
     private final UserService userService;
 
     public LoginCommand(UserService userService) {
@@ -33,8 +34,6 @@ public class LoginCommand implements Command {
             session.setAttribute("userId", user.getId());
             return CommandResult.redirect(request.getContextPath() + MAIN_PAGE);
         }
-        String errorMessage = "local.loginError";
-
-        return CommandResult.redirect(request.getContextPath() + LOGIN_PAGE + errorMessage);
+        return CommandResult.redirect(request.getContextPath() + LOGIN_PAGE + LOGIN_ERROR);
     }
 }

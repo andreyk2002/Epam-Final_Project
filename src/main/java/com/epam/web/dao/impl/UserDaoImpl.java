@@ -14,11 +14,10 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
 
     private final static String TABLE_NAME = "Users";
     private static final String LOGIN_QUERY = "SELECT * FROM Users WHERE login = ? AND password = MD5(?)";
-    private static final String ADD_USER = "INSERT INTO Users(Login, Role, Rating, Password) VALUES(?, ?, ?, MD5(?))";
-    public static final String ALL_USERS_QUERY = "SELECT * FROM Users";
-    public static final String USER_ID_QUERY = "SELECT * FROM Users WHERE ID = ?";
-    public static final String DELETE_USER_QUERY = "DELETE * FROM Users WHERE ID = ";
 
+    //TODO:remove duplication
+    private static final String INCREMENT_RATING = "UPDATE Users SET Rating = Rating + 1 WHERE ID = ?";
+    private static final String DECREMENT_RATING = "UPDATE Users SET Rating = Rating - 1 WHERE ID = ?";
 
     public UserDaoImpl(Connection connection) {
         super(connection, new UserRowMapper(), TABLE_NAME);
@@ -30,18 +29,13 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
     }
 
     @Override
-    public List<User> getAll() throws DaoException {
-        return executeQuery(ALL_USERS_QUERY);
+    public void increaseRating(long userID) throws DaoException {
+        updateQuery(INCREMENT_RATING, userID);
     }
 
     @Override
-    public Optional<User> getById(long id) throws DaoException {
-        return executeForSingleResult(USER_ID_QUERY, id);
-    }
-
-    @Override
-    public void removeById(long id) throws Exception {
-        updateQuery(DELETE_USER_QUERY, id);
+    public void decreaseRating(long userID) throws DaoException {
+        updateQuery(DECREMENT_RATING, userID);
     }
 
 }

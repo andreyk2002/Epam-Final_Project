@@ -19,7 +19,7 @@ public class ConnectionFactory {
             Properties properties = new Properties();
             properties.put("user", user);
             properties.put("password", password);
-            Connection connection = DriverManager.getConnection(url,properties);
+            Connection connection = DriverManager.getConnection(url, properties);
             return new ProxyConnection(connection, pool);
         } catch (SQLException e) {
             throw new DaoException(e.getMessage(), e);

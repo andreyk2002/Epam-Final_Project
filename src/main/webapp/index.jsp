@@ -13,6 +13,7 @@
     <link href="static/css/main.css" rel="stylesheet"/>
 </head>
 <body>
+
 <jsp:include page="WEB-INF/view/fragments/header.jsp"/>
 <main>
     <section class="intro">

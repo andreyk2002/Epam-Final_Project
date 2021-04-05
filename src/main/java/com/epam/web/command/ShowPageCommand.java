@@ -13,7 +13,7 @@ public class ShowPageCommand implements Command {
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) {
         String errorMessage = request.getParameter("errorMessage");
-        if(errorMessage != null){
+        if (errorMessage != null) {
             request.setAttribute("errorMessage", errorMessage);
         }
         return CommandResult.forward(page);

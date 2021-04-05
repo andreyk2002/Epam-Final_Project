@@ -1,10 +1,8 @@
 package com.epam.web.dto;
 
-import com.epam.web.entity.Identifiable;
 import com.epam.web.entity.Movie;
 import com.epam.web.entity.Review;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MovieDTO {

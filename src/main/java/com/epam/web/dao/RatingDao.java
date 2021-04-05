@@ -1,6 +1,10 @@
 package com.epam.web.dao;
 
-public interface RatingDao extends Dao<Double> {
+import com.epam.web.entity.Rating;
+
+import java.util.Optional;
+
+public interface RatingDao extends Dao<Rating> {
 
 
     boolean addRating(long filmId, long userId, int rating) throws DaoException;
@@ -8,4 +12,6 @@ public interface RatingDao extends Dao<Double> {
     boolean hasRating(long filmId, long userId) throws DaoException;
 
     double getMovieRating(long filmId) throws DaoException;
+
+    Optional<Rating> getRatingForCheck(long filmId) throws DaoException;
 }

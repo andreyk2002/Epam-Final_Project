@@ -2,9 +2,9 @@ package com.epam.web.entity;
 
 import java.util.*;
 
-public class Movie implements Identifiable {
+public class Movie {
 
-    private final Long id;
+    private final long id;
     private final String name;
     private final String imagePath;
     private final String description;
@@ -18,7 +18,7 @@ public class Movie implements Identifiable {
         this.genreId = builder.genreId;
     }
 
-    @Override
+
     public long getId() {
         return id;
     }
@@ -35,18 +35,18 @@ public class Movie implements Identifiable {
         return description;
     }
 
-    public Long getGenreId() {
+    public long getGenreId() {
         return genreId;
     }
 
     public static class Builder {
         private final long id;
         private final String name;
-        public Long genreId;
+        public long genreId;
         private String imagePath = "";
         private String description = "";
 
-        public Builder(long id, String name, Long genreId) {
+        public Builder(long id, String name, long genreId) {
             this.id = id;
             this.name = name;
             this.genreId = genreId;

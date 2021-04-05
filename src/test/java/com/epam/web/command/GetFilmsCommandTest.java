@@ -1,6 +1,6 @@
 package com.epam.web.command;
 
-import com.epam.web.service.MovieService;
+import com.epam.web.service.FilmService;
 import com.epam.web.service.ServiceException;
 import org.mockito.Mockito;
 import org.testng.Assert;
@@ -11,16 +11,15 @@ import java.util.Collections;
 
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.when;
-import static org.testng.Assert.*;
 
-public class ShowFilmsPageCommandTest extends CommandTest{
+public class GetFilmsCommandTest extends CommandTest{
 
     private static final String FIRST_PAGE = "0";
     private static final CommandResult SUCCESS =
             CommandResult.redirect("/controller?commandName=mainPage&pageNumber=" + FIRST_PAGE);
     private static final String PAGE = "pageNumber";
-    private MovieService serviceMock;
-    private ShowFilmsPageCommand command;
+    private FilmService serviceMock;
+    private GetFilmsCommand command;
 
 
 
@@ -29,10 +28,10 @@ public class ShowFilmsPageCommandTest extends CommandTest{
         super.setUp();
         when(requestMock.getParameter(PAGE)).thenReturn(FIRST_PAGE);
 
-        serviceMock = Mockito.mock(MovieService.class);
+        serviceMock = Mockito.mock(FilmService.class);
         when(serviceMock.getPagesCount()).thenReturn(1);
         when(serviceMock.getNextMovies(anyInt())).thenReturn(Collections.emptyList());
-        command = new ShowFilmsPageCommand(serviceMock);
+        command = new GetFilmsCommand(serviceMock);
     }
 
     @Test

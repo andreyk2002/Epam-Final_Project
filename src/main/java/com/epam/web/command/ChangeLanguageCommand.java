@@ -6,7 +6,6 @@ import javax.servlet.http.HttpSession;
 
 public class ChangeLanguageCommand implements Command {
 
-
     public static final String LOCAL = "local";
     public static final String CURRENT_PAGE = "currentPage";
     public static final String PAGE_NUMBER = "pageNumber";

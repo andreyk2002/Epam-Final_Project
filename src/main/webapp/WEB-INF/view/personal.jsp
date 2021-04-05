@@ -21,11 +21,11 @@
 <section class="benefits">
     <div class="personal-wrapper">
         <h2 class="personal-title">
-            <fmt:message key="Username"/>
+            <fmt:message key="local.username"/>: ${sessionScope.user.login}
         </h2>
         <div>
-            <h3 class="personal-info">Rating: 50</h3>
-            <h3 class="personal-info">Role: admin</h3>
+            <h3 class="personal-info"><fmt:message key="local.rating"/>: ${sessionScope.user.rating}</h3>
+            <h3 class="personal-info"><fmt:message key="local.role"/>: ${sessionScope.user.role}</h3>
         </div>
     </div>
 </section>

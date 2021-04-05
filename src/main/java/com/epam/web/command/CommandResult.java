@@ -3,6 +3,7 @@ package com.epam.web.command;
 import java.util.Objects;
 
 public class CommandResult {
+
     private final boolean isRedirect;
     private final String page;
 

@@ -1,8 +1,7 @@
 package com.epam.web.command;
 
 import com.epam.web.dto.MovieDTO;
-import com.epam.web.entity.Movie;
-import com.epam.web.service.MovieService;
+import com.epam.web.service.FilmService;
 import com.epam.web.service.ServiceException;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,13 +9,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
-public class ShowFilmsPageCommand implements Command {
+public class GetFilmsCommand implements Command {
 
     public static final String COMMAND_URL = "/controller?commandName=mainPage&pageNumber=";
-    private final MovieService movieService;
+    private final FilmService filmService;
 
-    public ShowFilmsPageCommand(MovieService movieService) {
-        this.movieService = movieService;
+    public GetFilmsCommand(FilmService filmService) {
+        this.filmService = filmService;
     }
 
 
@@ -24,8 +23,8 @@ public class ShowFilmsPageCommand implements Command {
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
         String page = request.getParameter("pageNumber");
         int pageNumber = Integer.parseInt(page);
-        List<MovieDTO> movies = movieService.getNextMovies(pageNumber);
-        int totalPages = movieService.getPagesCount();
+        List<MovieDTO> movies = filmService.getNextMovies(pageNumber);
+        int totalPages = filmService.getPagesCount();
         HttpSession session = request.getSession();
         session.setAttribute("movies", movies);
         session.setAttribute("pagesCount", totalPages);

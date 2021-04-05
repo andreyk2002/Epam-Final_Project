@@ -2,26 +2,31 @@ package com.epam.web.service;
 
 import com.epam.web.dao.*;
 import com.epam.web.dao.factory.DaoHelperFactory;
+import com.epam.web.dao.impl.FilmDaoImpl;
 import com.epam.web.dto.MovieDTO;
 import com.epam.web.entity.Movie;
 import com.epam.web.entity.Review;
+import org.decimal4j.util.DoubleRounder;
 
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class MovieService {
+public class FilmService {
 
-    private final MovieDao movieDao;
+    public static final int ROUND_PRECISION = 2;
+    private final FilmDao filmDao;
     private final GenreDao genreDao;
     private final RatingDao ratingDao;
     private final ReviewDao reviewDao;
 
-    public MovieService(DaoHelperFactory factory) throws ServiceException {
+    public FilmService(DaoHelperFactory factory) throws ServiceException {
         try (DaoHelper helper = factory.create()) {
             this.genreDao = helper.createGenreDao();
             this.ratingDao = helper.createRatingDao();
-            this.movieDao = helper.createMovieDao();
+            this.filmDao = helper.createMovieDao();
             this.reviewDao = helper.createReviewDao();
         } catch (Exception e) {
             throw new ServiceException(e.getMessage(), e);
@@ -31,7 +36,7 @@ public class MovieService {
     public List<MovieDTO> getNextMovies(int pageNumb) throws ServiceException {
         try {
             List<MovieDTO> movieDTOs = new ArrayList<>();
-            List<Movie> moviesForPage = movieDao.getMoviesForPage(pageNumb);
+            List<Movie> moviesForPage = filmDao.getMoviesForPage(pageNumb);
             for(Movie movie : moviesForPage){
                 MovieDTO movieDTO = getMovieDTO(movie);
                 movieDTOs.add(movieDTO);
@@ -45,14 +50,14 @@ public class MovieService {
 
     public int getPagesCount() throws ServiceException {
         try {
-            return movieDao.getPagesCount();
+            return filmDao.getPagesCount();
         } catch (DaoException e) {
             throw new ServiceException(e.getMessage(), e);
         }
     }
 
     public Optional<MovieDTO> getMovieById(Long id) throws DaoException {
-        Optional<Movie> optionalMovie = movieDao.getById(id);
+        Optional<Movie> optionalMovie = filmDao.getById(id);
         if(optionalMovie.isPresent()){
             Movie movie = optionalMovie.get();
             MovieDTO movieDTO = getMovieDTO(movie);
@@ -62,15 +67,15 @@ public class MovieService {
     }
 
     private MovieDTO getMovieDTO(Movie movie) throws DaoException {
-        Long genreId = movie.getGenreId();
+        long genreId = movie.getGenreId();
         Optional<String> optionalGenre = genreDao.getById(genreId);
         String genre = optionalGenre.orElse("");
 
-        Long movieId = movie.getId();
+        long movieId = movie.getId();
         double movieRating = ratingDao.getMovieRating(movieId);
+        double ratingRounded = DoubleRounder.round(movieRating, ROUND_PRECISION);
 
         List<Review> filmReviews = reviewDao.getFilmReviews(movieId);
-        MovieDTO movieDTO = new MovieDTO(movie, genre, movieRating, filmReviews);
-        return movieDTO;
+        return new MovieDTO(movie, genre, ratingRounded, filmReviews);
     }
 }

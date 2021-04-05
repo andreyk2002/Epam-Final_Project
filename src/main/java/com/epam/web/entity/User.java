@@ -2,8 +2,8 @@ package com.epam.web.entity;
 
 import java.util.Objects;
 
-public class User implements Identifiable {
-    public static final String TABLE_NAME = "Users";
+public class User {
+
     private final String name;
     private final long id;
     private final double rating;
@@ -20,7 +20,7 @@ public class User implements Identifiable {
         return name;
     }
 
-    @Override
+
     public long getId() {
         return id;
     }
@@ -35,14 +35,24 @@ public class User implements Identifiable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof User)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof User)) {
+            return false;
+        }
 
         User user = (User) o;
 
-        if (id != user.id) return false;
-        if (Double.compare(user.rating, rating) != 0) return false;
-        if (!Objects.equals(name, user.name)) return false;
+        if (id != user.id) {
+            return false;
+        }
+        if (Double.compare(user.rating, rating) != 0){
+            return false;
+        }
+        if (!Objects.equals(name, user.name)) {
+            return false;
+        }
         return role == user.role;
     }
 
@@ -58,7 +68,4 @@ public class User implements Identifiable {
         return result;
     }
 
-    public String getPassword() {
-        return null;
-    }
 }

@@ -1,10 +1,7 @@
 package com.epam.web.command;
 
 import com.epam.web.dao.factory.DaoHelperFactory;
-import com.epam.web.service.MovieService;
-import com.epam.web.service.ReviewService;
-import com.epam.web.service.ServiceException;
-import com.epam.web.service.UserService;
+import com.epam.web.service.*;
 
 public class CommandFactory {
 
@@ -22,29 +19,31 @@ public class CommandFactory {
             case "changeLanguage":
                 return new ChangeLanguageCommand();
             case "login":
-                DaoHelperFactory factory = new DaoHelperFactory();
-                UserService service = new UserService(factory);
+                UserService service = new UserService(helperFactory);
                 return new LoginCommand(service);
-            case "loginPage":
-                return new ShowPageCommand(LOGIN_PAGE);
             case "logout":
                 return new LogoutCommand();
+            case "loginPage":
+                return new ShowPageCommand(LOGIN_PAGE);
             case "mainPage":
                 return new ShowPageCommand(MAIN_PAGE);
-            case "personalPage":
-                return new ShowPageCommand(PERSONAL_PAGE);
             case "userManagePage":
                 return new ShowPageCommand(USER_MANAGE_PAGE);
             case "filmManagePage":
                 return new ShowPageCommand(FILM_MANAGE_PAGE);
             case "showMoviePage":
                 return new ShowPageCommand(SHOW_FILM_PAGE);
+            case "showPersonalPage":
+                return new ShowPageCommand(PERSONAL_PAGE);
+            case "personalPage":
+                UserService userService = new UserService(helperFactory);
+                return new PersonalPageCommand(userService);
             case "showFilmsPage":
-                MovieService moviesService = new MovieService(helperFactory);
-                return new ShowFilmsPageCommand(moviesService);
+                FilmService filmsService = new FilmService(helperFactory);
+                return new GetFilmsCommand(filmsService);
             case "movie":
-                MovieService movieService = new MovieService(helperFactory);
-                return new FilmShowCommand(movieService);
+                FilmService filmService = new FilmService(helperFactory);
+                return new GetFilmCommand(filmService);
             case "rateFilm":
                 RatingService ratingService = new RatingService(helperFactory);
                 return new RateFilmCommand(ratingService);

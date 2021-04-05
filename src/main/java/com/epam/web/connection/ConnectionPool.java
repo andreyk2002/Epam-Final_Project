@@ -25,14 +25,6 @@ public class ConnectionPool {
     private final static Lock LOCK = new ReentrantLock();
 
 
-    private ConnectionPool() throws SQLException, DaoException {
-        connectionFactory = new ConnectionFactory();
-        connectionsInUse = new ArrayDeque<>();
-        availableConnections = new ArrayDeque<>();
-        DriverManager.registerDriver(new Driver());
-        addConnections();
-    }
-
     public static ConnectionPool getInstance() {
         ConnectionPool localInstance = INSTANCE.get();
         if (localInstance == null) {
@@ -52,6 +44,14 @@ public class ConnectionPool {
         return INSTANCE.get();
     }
 
+    private ConnectionPool() throws SQLException, DaoException {
+        connectionFactory = new ConnectionFactory();
+        connectionsInUse = new ArrayDeque<>();
+        availableConnections = new ArrayDeque<>();
+        DriverManager.registerDriver(new Driver());
+        addConnections();
+    }
+
     private void addConnections() throws DaoException {
         for (int i = 0; i < CONNECTIONS_ALLOWED; i++) {
             ProxyConnection connection = connectionFactory.create(this);
@@ -65,7 +65,6 @@ public class ConnectionPool {
             if (connectionsInUse.contains(connection)) {
                 availableConnections.offer(connection);
                 connectionsInUse.remove(connection);
-
                 connectionSemaphore.release();
             }
 

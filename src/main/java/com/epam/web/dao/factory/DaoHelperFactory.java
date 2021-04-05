@@ -10,5 +10,4 @@ public class DaoHelperFactory implements DaoFactory {
         return new DaoHelper(ConnectionPool.getInstance());
     }
 
-
 }

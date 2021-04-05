@@ -59,6 +59,16 @@ public abstract class AbstractDao<T> implements Dao<T> {
         }
     }
 
+    protected double executeAvg(String query, String columnName, Object... params) throws DaoException {
+        try (PreparedStatement statement = createStatement(query, params);
+             ResultSet resultSet = statement.executeQuery()) {
+            resultSet.next();
+            return resultSet.getDouble(columnName);
+        } catch (SQLException e) {
+            throw new DaoException(e.getMessage(), e);
+        }
+    }
+
     private PreparedStatement createStatement(String query, Object... params) throws SQLException {
         PreparedStatement statement = connection.prepareStatement(query);
         for (int i = 1; i <= params.length; i++) {
