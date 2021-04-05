@@ -1,5 +1,6 @@
 package com.epam.web.command;
 
+import com.epam.web.entity.User;
 import com.epam.web.service.ReviewService;
 import com.epam.web.service.ServiceException;
 
@@ -20,11 +21,11 @@ public class ReviewFilmCommand implements Command {
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
         String filmIdString = request.getParameter("filmID");
         HttpSession session = request.getSession();
-        long userID = (long) session.getAttribute("userId");
+        User user = (User) session.getAttribute("user");
+        long userId = user.getId();
         String review = request.getParameter("review");
-
         long filmID = Long.parseLong(filmIdString);
-        reviewService.reviewFilm(filmID, userID, review);
+        reviewService.reviewFilm(filmID, userId, review);
         return CommandResult.redirect(request.getContextPath() + SHOW_MOVIE + filmID);
     }
 }

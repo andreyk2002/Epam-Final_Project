@@ -3,9 +3,10 @@ package com.epam.web.dto;
 import com.epam.web.entity.Movie;
 import com.epam.web.entity.Review;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class MovieDTO {
+public class MovieDTO implements Serializable {
 
     private final Long id;
     private final String name;

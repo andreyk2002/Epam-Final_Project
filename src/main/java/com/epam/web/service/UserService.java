@@ -6,6 +6,7 @@ import com.epam.web.dao.UserDao;
 import com.epam.web.dao.factory.DaoHelperFactory;
 import com.epam.web.entity.User;
 
+import java.util.List;
 import java.util.Optional;
 
 public class UserService {
@@ -32,6 +33,14 @@ public class UserService {
     public Optional<User> getUserById(long userId) throws ServiceException {
         try {
             return userDao.getById(userId);
+        } catch (DaoException e) {
+            throw new ServiceException(e.getMessage(), e);
+        }
+    }
+
+    public List<User> getAllUsers() throws ServiceException {
+        try {
+            return userDao.getAll();
         } catch (DaoException e) {
             throw new ServiceException(e.getMessage(), e);
         }

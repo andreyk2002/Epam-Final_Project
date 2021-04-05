@@ -16,8 +16,8 @@
 <section class="intro">
     <div class="wrapper">
         <h1 class="into-title"><fmt:message key="local.avaible_films"/></h1>
-        <c:if test="${name != null}">
-            <h2 class="greeting"><fmt:message key="local.hello"/>, ${name}</h2>
+        <c:if test="${sessionScope.user.login != null}">
+            <h2 class="greeting"><fmt:message key="local.hello"/>, ${sessionScope.user.login}</h2>
         </c:if>
     </div>
 </section>

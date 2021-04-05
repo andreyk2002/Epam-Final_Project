@@ -30,8 +30,7 @@ public class LoginCommand implements Command {
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
             HttpSession session = request.getSession();
-            session.setAttribute("name", user.getLogin());
-            session.setAttribute("userId", user.getId());
+            session.setAttribute("user", user);
             return CommandResult.redirect(request.getContextPath() + MAIN_PAGE);
         }
         return CommandResult.redirect(request.getContextPath() + LOGIN_PAGE + LOGIN_ERROR);

@@ -7,10 +7,10 @@
     <div class="wrapper">
         <div class="head-wrapper">
             <div class="logo">
-                <a href="/" class="logo-link">
+                <span class="logo-link">
                     <img class="logo-img" src="static/img/16-logo.jpg" alt="film rating"/>
                     Top films
-                </a>
+                </span>
             </div>
             <nav class="header-nav">
                 <ul class="header-list">
@@ -57,6 +57,14 @@
                             <fmt:message key="local.personal"/>
                         </a>
                     </li>
+                    <c:if test="${sessionScope.user.role == 'ADMIN'}">
+                        <li class="header-item">
+                            <a href="${pageContext.request.contextPath}/controller?commandName=manageUsers"
+                               class="logo-link">
+                                <fmt:message key="local.manageUsers"/>
+                            </a>
+                        </li>
+                    </c:if>
                     <li class="header-item">
                         <a href="${pageContext.request.contextPath}/controller?commandName=logout" class="logo-link">
                             <fmt:message key="local.logout"/>

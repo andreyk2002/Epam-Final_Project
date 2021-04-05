@@ -1,5 +1,6 @@
 package com.epam.web.command;
 
+import com.epam.web.entity.User;
 import com.epam.web.service.RatingService;
 import com.epam.web.service.ServiceException;
 
@@ -26,9 +27,10 @@ public class RateFilmCommand implements Command {
         int rating = Integer.parseInt(ratingString);
 
         HttpSession session = request.getSession();
-        long userId = (long) session.getAttribute("userId");
+        User user = (User) session.getAttribute("user");
+        long userId = user.getId();
 
-        if(!service.rateFilm(filmId, userId, rating)){
+        if (!service.rateFilm(filmId, userId, rating)) {
             String redirectError = request.getContextPath() + BACK_TO_MOVIE + ALREADY_RATED;
             return CommandResult.redirect(redirectError);
         }

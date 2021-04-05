@@ -1,5 +1,7 @@
 package com.epam.web.filter;
 
+import com.epam.web.entity.User;
+
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,8 +22,8 @@ public class CheckAccessFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         HttpSession session = request.getSession();
-        String name = (String) session.getAttribute("name");
-        if (name == null) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
             RequestDispatcher requestDispatcher = request.getRequestDispatcher(loginCommand);
             requestDispatcher.forward(request, response);
         }

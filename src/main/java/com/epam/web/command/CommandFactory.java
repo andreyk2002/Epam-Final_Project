@@ -36,8 +36,7 @@ public class CommandFactory {
             case "showPersonalPage":
                 return new ShowPageCommand(PERSONAL_PAGE);
             case "personalPage":
-                UserService userService = new UserService(helperFactory);
-                return new PersonalPageCommand(userService);
+                return new PersonalPageCommand();
             case "showFilmsPage":
                 FilmService filmsService = new FilmService(helperFactory);
                 return new GetFilmsCommand(filmsService);
@@ -50,6 +49,9 @@ public class CommandFactory {
             case "reviewFilm":
                 ReviewService reviewService = new ReviewService(helperFactory);
                 return new ReviewFilmCommand(reviewService);
+            case "manageUsers":
+                UserService userService = new UserService(helperFactory);
+                return new ManageUsersCommand(userService);
             default:
                 throw new CommandNotExistException("Unknown type = " + commandName);
         }

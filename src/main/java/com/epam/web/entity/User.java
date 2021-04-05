@@ -4,20 +4,20 @@ import java.util.Objects;
 
 public class User {
 
-    private final String name;
+    private final String login;
     private final long id;
     private final double rating;
     private final Role role;
 
-    public User(long id, String name, double rating, Role role) {
-        this.name = name;
+    public User(long id, String login, double rating, Role role) {
+        this.login = login;
         this.id = id;
         this.rating = rating;
         this.role = role;
     }
 
     public String getLogin() {
-        return name;
+        return login;
     }
 
 
@@ -47,10 +47,10 @@ public class User {
         if (id != user.id) {
             return false;
         }
-        if (Double.compare(user.rating, rating) != 0){
+        if (Double.compare(user.rating, rating) != 0) {
             return false;
         }
-        if (!Objects.equals(name, user.name)) {
+        if (!Objects.equals(login, user.login)) {
             return false;
         }
         return role == user.role;
@@ -60,7 +60,7 @@ public class User {
     public int hashCode() {
         int result;
         long temp;
-        result = name != null ? name.hashCode() : 0;
+        result = login != null ? login.hashCode() : 0;
         result = 31 * result + (int) (id ^ (id >>> 32));
         temp = Double.doubleToLongBits(rating);
         result = 31 * result + (int) (temp ^ (temp >>> 32));

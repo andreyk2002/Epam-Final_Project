@@ -79,6 +79,7 @@ body {
 }
 
 header {
+    z-index: 100;
     position: fixed;
     top: 0;
     left: 0;
@@ -537,6 +538,38 @@ textarea.review {
 
 
 /*end of personal page styles*/
+
+
+/*start of user manage page styles*/
+
+.users-wrapper {
+    z-index: 0;
+    position: absolute;
+    height: 100vh;
+    background-color: black;
+    width: 100%;
+    margin: 0 auto;
+}
+
+table, th, td {
+    border: 3px solid silver;
+    border-collapse: collapse;
+}
+
+.users-table {
+    background-color: white;
+    width: 94%;
+    margin-top: 30vh;
+    margin-left: 3%;
+}
+
+.table-link {
+    text-decoration: none;
+    font-size: 20px;
+}
+
+/*end of user manage page styles*/
+
 footer {
     background-color: black;
     padding-bottom: 60px;
