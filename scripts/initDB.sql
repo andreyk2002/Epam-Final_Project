@@ -23,11 +23,12 @@ CREATE TABLE films
 
 CREATE TABLE users
 (
-    ID       bigint       NOT NULL AUTO_INCREMENT,
-    Login    varchar(50)  NOT NULL,
-    Password varchar(255) NOT NULL,
-    Role     enum('ADMIN','USER') NOT NULL,
-    Rating   int DEFAULT '50',
+    ID       bigint                NOT NULL AUTO_INCREMENT,
+    Login    varchar(50)           NOT NULL,
+    Password varchar(255)          NOT NULL,
+    Role     enum ('ADMIN','USER') NOT NULL,
+    Rating   int     DEFAULT '50',
+    Blocked  boolean DEFAULT false,
     PRIMARY KEY (ID)
 ) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
