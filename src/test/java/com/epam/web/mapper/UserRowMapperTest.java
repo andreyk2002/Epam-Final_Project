@@ -14,6 +14,8 @@ import static org.mockito.Mockito.when;
 public class UserRowMapperTest {
 
     private final UserRowMapper mapper = new UserRowMapper();
+
+    private static final String BLOCKED = "Blocked";
     private static final String ID = "ID";
     private static final String LOGIN = "login";
     private static final String ROLE = "role";
@@ -31,7 +33,8 @@ public class UserRowMapperTest {
         when(resultSet.getString(TEST_LOGIN)).thenReturn(TEST_LOGIN);
         when(resultSet.getString(ROLE)).thenReturn(TEST_ROLE);
         when(resultSet.getInt(RATING)).thenReturn(TEST_RATING);
-        User expected = new User(TEST_ID, TEST_LOGIN, TEST_RATING, Role.USER);
+        when(resultSet.getInt(BLOCKED)).thenReturn(TEST_RATING);
+        User expected = User.unblocked(TEST_ID, TEST_LOGIN, TEST_RATING, Role.USER);
 
         User actual = mapper.map(resultSet);
 

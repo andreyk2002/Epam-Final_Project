@@ -5,7 +5,6 @@ import com.epam.web.entity.User;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Locale;
 
 public class UserRowMapper implements RowMapper<User> {
 
@@ -13,6 +12,7 @@ public class UserRowMapper implements RowMapper<User> {
     private static final String LOGIN = "login";
     private static final String ROLE = "role";
     private static final String RATING = "rating";
+    public static final String IS_BLOCKED = "Blocked";
 
     @Override
     public User map(ResultSet resultSet) throws SQLException {
@@ -20,7 +20,8 @@ public class UserRowMapper implements RowMapper<User> {
         String login = resultSet.getString(LOGIN);
         String roleString = resultSet.getString(ROLE);
         Role userRole = Role.valueOf(roleString.toUpperCase());
+        boolean isBlocked = resultSet.getBoolean(IS_BLOCKED);
         int rating = resultSet.getInt(RATING);
-        return new User(id , login, rating, userRole);
+        return new User(id , login, rating, userRole, isBlocked);
     }
 }

@@ -53,4 +53,13 @@ public class UserService {
             throw new ServiceException(e.getMessage(), e);
         }
     }
+
+    public void changeStatus(long userId, boolean currentStatus) throws ServiceException {
+        boolean newStatus = !currentStatus;
+        try {
+            userDao.changeStatus(userId, newStatus);
+        } catch (DaoException e) {
+            throw new ServiceException(e.getMessage(), e);
+        }
+    }
 }

@@ -14,6 +14,7 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
     private final static String TABLE_NAME = "Users";
     private static final String LOGIN_QUERY = "SELECT * FROM Users WHERE login = ? AND password = MD5(?)";
     private static final String CHANGE_RATING = "UPDATE Users SET Rating = ? WHERE ID = ?";
+    private static final String CHANGE_STATUS = "UPDATE Users SET Blocked = ? WHERE ID = ?";
 
     public UserDaoImpl(Connection connection) {
         super(connection, new UserRowMapper(), TABLE_NAME);
@@ -27,6 +28,11 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
     @Override
     public void changeRating(long userId, double newRating) throws DaoException {
         updateQuery(CHANGE_RATING, newRating, userId);
+    }
+
+    @Override
+    public void changeStatus(long userId, boolean newStatus) throws DaoException {
+        updateQuery(CHANGE_STATUS, newStatus, userId);
     }
 
 }

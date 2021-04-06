@@ -28,12 +28,19 @@
         <c:forEach items="${users}" var="user">
             <tr>
                 <td>
-                    <c:if test="${user.role == 'ADMIN'}">
-                        <a class="table-link">lock</a>
-                    </c:if>
-                    <c:if test="${user.role != 'ADMIN'}">
-                        <a class="table-link">unlock</a>
-                    </c:if>
+                    <form action="${pageContext.request.contextPath}/controller">
+                        <input type="hidden" name="commandName"  value="changeUserStatus">
+                        <input type="hidden" name="userStatus" value="${user.blocked}">
+                        <input type="hidden" name="userId" value="${user.id}">
+                        <button type="submit">
+                            <c:if test="${user.blocked}">
+                                unblock
+                            </c:if>
+                            <c:if test="${!user.blocked}">
+                                block
+                            </c:if>
+                        </button>
+                    </form>
                 </td>
                 <td>${user.login}</td>
                 <td>
@@ -45,7 +52,7 @@
                     </form>
                 </td>
                 <td>${user.role}</td>
-                <td>no field here</td>
+                <td>${user.blocked}</td>
             </tr>
         </c:forEach>
         </tbody>

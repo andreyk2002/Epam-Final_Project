@@ -1,6 +1,7 @@
 package com.epam.web.command;
 
 import com.epam.web.dao.factory.DaoHelperFactory;
+import com.epam.web.entity.User;
 import com.epam.web.service.*;
 
 public class CommandFactory {
@@ -55,6 +56,9 @@ public class CommandFactory {
             case "changeUserRating":
                 UserService changeRatingService =new UserService(helperFactory);
                 return new ChangeUserRatingCommand(changeRatingService);
+            case "changeUserStatus":
+                UserService changeStatusService = new UserService(helperFactory);
+                return new ChangeUserStatusCommand(changeStatusService);
             default:
                 throw new CommandNotExistException("Unknown type = " + commandName);
         }

@@ -18,6 +18,10 @@
             <param-name>loginCommand</param-name>
             <param-value>/index.jsp</param-value>
         </init-param>
+        <init-param>
+            <param-name>errorPage</param-name>
+            <param-value>/error.jsp</param-value>
+        </init-param>
     </filter>
     <filter-mapping>
         <filter-name>loginfilter</filter-name>

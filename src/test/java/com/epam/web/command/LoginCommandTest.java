@@ -4,29 +4,21 @@ import com.epam.web.entity.Role;
 import com.epam.web.entity.User;
 import com.epam.web.service.ServiceException;
 import com.epam.web.service.UserService;
-import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.stubbing.Answer;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletRequestWrapper;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
 import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 
 public class LoginCommandTest extends  CommandTest{
     private static final String VALID_USERNAME = "admin";
     private static final String VALID_PASSWORD = "admin";
     private static final String PAGE_NAME = "WEB-INF/view/main.jsp";
-    private static final User VALID_USER = new User(0, VALID_USERNAME, 0, Role.ADMIN);
+    private static final User VALID_USER = User.unblocked(0, VALID_USERNAME, 0, Role.ADMIN);
     private static final String USERNAME = "username";
     private static final String PASSWORD = "password";
     private static final CommandResult SUCCESS = CommandResult.redirect("/controller?commandName=showFilmsPage&pageNumber=0");

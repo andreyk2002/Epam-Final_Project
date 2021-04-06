@@ -10,10 +10,12 @@ import java.io.IOException;
 
 public class CheckAccessFilter implements Filter {
 
+    private String errorPage;
     private String loginCommand;
 
     @Override
     public void init(FilterConfig filterConfig) {
+        errorPage = filterConfig.getInitParameter("errorPage");
         loginCommand = filterConfig.getInitParameter("loginCommand");
     }
 
@@ -25,6 +27,12 @@ public class CheckAccessFilter implements Filter {
         User user = (User) session.getAttribute("user");
         if (user == null) {
             RequestDispatcher requestDispatcher = request.getRequestDispatcher(loginCommand);
+            requestDispatcher.forward(request, response);
+        }
+
+        if (user.isBlocked()) {
+            request.setAttribute("errorMessage", "local.userBlocked");
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher(errorPage);
             requestDispatcher.forward(request, response);
         }
         filterChain.doFilter(servletRequest, servletResponse);
