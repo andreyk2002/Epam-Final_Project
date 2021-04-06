@@ -52,11 +52,13 @@ public class CommandFactory {
             case "manageUsers":
                 UserService userService = new UserService(helperFactory);
                 return new ManageUsersCommand(userService);
+            case "changeUserRating":
+                UserService changeRatingService =new UserService(helperFactory);
+                return new ChangeUserRatingCommand(changeRatingService);
             default:
                 throw new CommandNotExistException("Unknown type = " + commandName);
         }
     }
-
 
 
 }

@@ -37,8 +37,12 @@
                 </td>
                 <td>${user.login}</td>
                 <td>
-                    <input type="number" min="0" max="100" name="rating" value="${user.rating}"/>
-                    <button type="submit">OK</button>
+                    <form action="${pageContext.request.contextPath}/controller">
+                        <input type="hidden" name="commandName" value="changeUserRating">
+                        <input type="hidden" name="userId" value="${user.id}">
+                        <input type="number" min="0" max="100" name="rating" value="${user.rating}"/>
+                        <button type="submit">OK</button>
+                    </form>
                 </td>
                 <td>${user.role}</td>
                 <td>no field here</td>

@@ -45,4 +45,12 @@ public class UserService {
             throw new ServiceException(e.getMessage(), e);
         }
     }
+
+    public void changeRating(long userId, double newRating) throws ServiceException {
+        try {
+            userDao.changeRating(userId, newRating);
+        } catch (DaoException e) {
+            throw new ServiceException(e.getMessage(), e);
+        }
+    }
 }

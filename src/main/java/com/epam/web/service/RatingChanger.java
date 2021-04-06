@@ -41,9 +41,9 @@ class RatingChanger implements Callable<Boolean> {
             UserDao userDao = helper.createUserDao();
             long userID = ratingToCheck.getUserID();
             if (Math.abs(userRating - movieRating) < 0.5) {
-                userDao.increaseRating(userID);
+                userDao.changeRating(userID, userRating + 1);
             } else if (Math.abs(userRating - movieRating) < 1.5) {
-                userDao.decreaseRating(userID);
+                userDao.changeRating(userID, userRating - 1);
             }
             return true;
         } catch (DaoException e) {

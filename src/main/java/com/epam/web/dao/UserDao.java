@@ -8,7 +8,6 @@ public interface UserDao extends Dao<User> {
 
     Optional<User> getUserByLoginAndPassword(String login, String password) throws DaoException;
 
-    void increaseRating(long userID) throws DaoException;
 
-    void decreaseRating(long userID) throws DaoException;
+    void changeRating(long userId, double newRating) throws DaoException;
 }
