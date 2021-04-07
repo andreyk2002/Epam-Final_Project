@@ -28,4 +28,17 @@
         <url-pattern>/WEB-INF/*</url-pattern>
         <dispatcher>FORWARD</dispatcher>
     </filter-mapping>
+    <filter>
+        <filter-name>checkRoleFilter</filter-name>
+        <filter-class>com.epam.web.filter.CheckRoleFilter</filter-class>
+        <init-param>
+            <param-name>errorPage</param-name>
+            <param-value>/error.jsp</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>checkRoleFilter</filter-name>
+        <url-pattern>/WEB-INF/view/userManage.jsp</url-pattern>
+        <dispatcher>FORWARD</dispatcher>
+    </filter-mapping>
 </web-app>
