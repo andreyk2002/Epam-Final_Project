@@ -21,11 +21,37 @@
         </c:if>
     </div>
 </section>
+<c:if test="${user.role == 'ADMIN'}">
+    <div class="add-film">
+        <form class="add-film-form" action="${pageContext.request.contextPath}/controller">
+            <input type="hidden" name="commandName" value="addFilm">
+            <button class="add-film-btn" type="submit">Add new film</button>
+        </form>
+    </div>
+</c:if>
 <div class="container">
     <div class="wrapper-wide">
         <c:forEach items="${sessionScope.movies}" var="movie">
             <a class="film-view-link"
                href="${pageContext.request.contextPath}/controller?commandName=movie&id=${movie.id}">
+                <c:if test="${user.role == 'ADMIN'}">
+                    <div class="manage-film">
+                        <form class="manage-film-form" action="${pageContext.request.contextPath}/controller">
+                            <input type="hidden" name="commandName" value="deleteFilm">
+                            <input type="hidden" name="filmId" value="${movie.id}"/>
+                            <button class="film-edit" type="submit">
+                                <img class="film-edit-btn" src="static/img/bootstrap-icons-1.4.0/trash.svg"/>
+                            </button>
+                        </form>
+                        <form class="manage-film-form" action="${pageContext.request.contextPath}/controller">
+                            <input type="hidden" name="commandName" value="editFilm"/>
+                            <input type="hidden" name="filmId" value="${movie.id}"/>
+                            <button class="film-edit" type="submit">
+                                <img class="film-edit-btn" src="static/img/bootstrap-icons-1.4.0/pencil-fill.svg"/>
+                            </button>
+                        </form>
+                    </div>
+                </c:if>
                 <div class="card">
                     <div class="card-img">
                         <img class="movie-image" src="${movie.imagePath}" alt="movieImage"/>
