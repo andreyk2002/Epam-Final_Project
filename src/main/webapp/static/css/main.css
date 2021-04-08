@@ -407,7 +407,7 @@ img.type-image {
     background-color: black;
 }
 
-.film-edit{
+.film-edit {
     width: 40px;
     height: 40px;
 }
@@ -467,6 +467,11 @@ h2.film-link {
 }
 
 /*show film page styles*/
+
+.film-image {
+    height: 100%;
+    width: auto;
+}
 
 .film-wrapper-wide {
     background-color: black;
@@ -610,32 +615,32 @@ table, th, td {
 
 /*styles for add film page*/
 
-.add-film-form-admin{
+.add-film-form-admin {
     padding-left: 5%;
     margin-top: 300px;
     width: 100%;
 }
 
-.film-name{
+.film-name {
     padding-bottom: 10px;
     width: 90%;
 }
 
-.film-description-admin{
+.film-description-admin {
     padding-bottom: 10px;
     width: 90%;
 }
 
-.film-genres{
+.film-genres {
     padding-bottom: 10px;
     width: 90%;
 }
 
-.image-load{
+.image-load {
     color: white;
 }
 
-.film-input{
+.film-input {
     margin-top: 10px;
 }
 
@@ -747,7 +752,7 @@ footer {
 
 
 @media (max-width: 760px) {
-    .manage-film{
+    .manage-film {
         width: 98%;
     }
 

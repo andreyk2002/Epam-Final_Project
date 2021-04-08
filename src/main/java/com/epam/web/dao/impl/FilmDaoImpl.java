@@ -13,8 +13,8 @@ public class FilmDaoImpl extends AbstractDao<Film> implements FilmDao {
 
     private static final String TABLE_NAME = "films";
     private static final int MOVIES_PER_PAGE = 5;
-    private static final String ADD_MOVIE = "INSERT INTO films(ID, Name, ImagePath, Description, GenreId)" +
-            " VALUES (?, ?, ?, ?, ?)";
+    private static final String ADD_MOVIE = "INSERT INTO films(Name, ImagePath, Description, GenreId)" +
+            " VALUES (?, ?, ?, ?)";
     private static final String SELECT_MOVIES_IN_BOUNDS = "SELECT * FROM films LIMIT ? OFFSET ?";
 
     public FilmDaoImpl(ProxyConnection connection) {
@@ -24,7 +24,7 @@ public class FilmDaoImpl extends AbstractDao<Film> implements FilmDao {
 
     @Override
     public void save(Film item) throws DaoException {
-        throw new UnsupportedOperationException();
+        updateQuery(ADD_MOVIE, item.getName(), item.getImagePath(), item.getDescription(), item.getGenreId());
     }
 
     @Override

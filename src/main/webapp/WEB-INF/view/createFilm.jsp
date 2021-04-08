@@ -15,15 +15,14 @@
 <jsp:include page="fragments/header.jsp"/>
 <div class="dark-wrapper">
     <form class="add-film-form-admin" action="${pageContext.request.contextPath}/controller">
-        <input name="commandName" value="saveFilm"/>
-        <input class="film-name film-input" name="filmName" type="text" placeholder="enter film name"/>
+        <input type="hidden" name="commandName" value="saveFilm"/>
+        <input required class="film-name film-input" name="filmName" type="text" placeholder="enter film name"/>
         <textarea class="film-description-admin film-input" rows="5" name="filmDescription"></textarea>
-        <input name="filmGenre" class="film-genres film-input" list="genres"/>
-        <datalist id="genres">
-            <c:forEach var="genre" items="${genres}">
-                <option>${genre.name}</option>
+        <select required name="genreId">
+            <c:forEach items="${genres}" var="genre">
+                <option value="${genre.id}">${genre.name}</option>
             </c:forEach>
-        </datalist>
+        </select>
         <br/>
         <label class="image-load">Load image for film</label>
         <br/>

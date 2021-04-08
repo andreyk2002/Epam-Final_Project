@@ -9,6 +9,7 @@ import com.epam.web.service.ServiceException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Optional;
 
 public class SaveFilmCommand implements Command {
 
@@ -21,10 +22,12 @@ public class SaveFilmCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-        String name = request.getParameter("name");
-        String description = request.getParameter("description");
-        String imagePath = request.getParameter("imagePath");
+        String name = request.getParameter("filmName");
         String genreIdParam = request.getParameter("genreId");
+        Optional<String> optionalDescription = Optional.ofNullable(request.getParameter("filmDescription"));
+        Optional<String> optionalImagePath = Optional.ofNullable(request.getParameter("imagePath"));
+        String description = optionalDescription.orElse("");
+        String imagePath = optionalImagePath.orElse("");
         long genreId = Long.parseLong(genreIdParam);
         Film film = new Film.Builder(name, genreId)
                 .withImagePath(imagePath)

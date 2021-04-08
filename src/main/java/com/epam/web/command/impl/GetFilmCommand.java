@@ -28,7 +28,7 @@ public class GetFilmCommand implements Command {
         HttpSession session = request.getSession();
         try {
             Optional<MovieDTO> movieOptional = service.getMovieById(id);
-            movieOptional.ifPresentOrElse(movie -> session.setAttribute("movie", movie),
+            movieOptional.ifPresentOrElse(movie -> session.setAttribute("film", movie),
                     () -> request.setAttribute("errorMessage", "Movie not found"));
         } catch (DaoException e) {
             throw new ServiceException(e.getMessage(), e);
