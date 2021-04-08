@@ -580,7 +580,7 @@ textarea.review {
 
 /*start of user manage page styles*/
 
-.users-wrapper {
+.dark-wrapper {
     z-index: 0;
     position: absolute;
     height: 100vh;
@@ -607,6 +607,33 @@ table, th, td {
 }
 
 /*end of user manage page styles*/
+
+/*styles for add film page*/
+
+.add-film-form-admin{
+    padding-left: 5%;
+    margin-top: 300px;
+    width: 100%;
+}
+
+.film-name{
+    padding-bottom: 10px;
+    width: 90%;
+}
+
+.film-description-admin{
+    padding-bottom: 10px;
+    width: 90%;
+}
+
+.film-genres{
+    padding-bottom: 10px;
+    width: 90%;
+}
+
+.image-load{
+    color: white;
+}
 
 footer {
     background-color: black;

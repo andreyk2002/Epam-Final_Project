@@ -28,6 +28,7 @@ public class Controller extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         process(req, resp);
+
     }
 
     @Override
@@ -52,18 +53,10 @@ public class Controller extends HttpServlet {
             page = ERROR_PAGE;
         }
         if (!isRedirect) {
-            forward(request, response, page);
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
+            dispatcher.forward(request, response);
         } else {
-            redirect(response, page);
+            response.sendRedirect(page);
         }
-    }
-
-    private void redirect(HttpServletResponse response, String command) throws IOException {
-        response.sendRedirect(command);
-    }
-
-    private void forward(HttpServletRequest request, HttpServletResponse response, String page) throws ServletException, IOException {
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
-        dispatcher.forward(request, response);
     }
 }

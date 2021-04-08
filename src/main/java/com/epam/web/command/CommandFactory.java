@@ -1,64 +1,85 @@
 package com.epam.web.command;
 
 import com.epam.web.dao.factory.DaoHelperFactory;
-import com.epam.web.entity.User;
 import com.epam.web.service.*;
 
 public class CommandFactory {
 
+    private static final String PERSONAL = "personalPage";
     private static final String SHOW_FILM_PAGE = "/WEB-INF/view/showFilm.jsp";
     private static final String MAIN_PAGE = "/WEB-INF/view/main.jsp";
     private static final String USER_MANAGE_PAGE = "/WEB-INF/view/userManage.jsp";
     private static final String PERSONAL_PAGE = "/WEB-INF/view/personal.jsp";
-    private static final String FILM_MANAGE_PAGE = "/WEB-INF/view/filmManage.jsp";
     private static final String LOGIN_PAGE = "/index.jsp";
+    private static final String CREATE_FILM_PAGE = "/WEB-INF/view/createFilm.jsp";
+    
+    private static final String CHANGE_LANGUAGE = "changeLanguage";
+    private static final String LOGIN = "login";
+    private static final String LOGOUT = "logout";
+    private static final String LOGIN_PAGE_COMMAND = "loginPage";
+    private static final String MAIN_PAGE_COMMAND = "mainPage";
+    private static final String USER_MANAGE_PAGE_COMMAND = "userManagePage";
+    private static final String SHOW_FILM_PAGE_COMMAND = "showMoviePage";
+    private static final String PERSONAL_PAGE_COMMAND = "showPersonalPage";
+    private static final String CREATE_FILM = "showAddPage";
+    private static final String FILMS_PAGE = "showFilmsPage";
+    private static final String MOVIE = "movie";
+    private static final String RATE_FILM = "rateFilm";
+    private static final String REVIEW_FILM = "reviewFilm";
+    private static final String MANAGE_USERS = "manageUsers";
+    private static final String CHANGE_USER_RATING = "changeUserRating";
+    private static final String CHANGE_USER_STATUS = "changeUserStatus";
+    private static final String ADD_FILM = "addFilm";
 
 
     public Command create(String commandName) throws CommandNotExistException, ServiceException {
         DaoHelperFactory helperFactory = new DaoHelperFactory();
         switch (commandName) {
-            case "changeLanguage":
+            case CHANGE_LANGUAGE:
                 return new ChangeLanguageCommand();
-            case "login":
+            case LOGIN:
                 UserService service = new UserService(helperFactory);
                 return new LoginCommand(service);
-            case "logout":
+            case LOGOUT:
                 return new LogoutCommand();
-            case "loginPage":
+            case LOGIN_PAGE_COMMAND:
                 return new ShowPageCommand(LOGIN_PAGE);
-            case "mainPage":
+            case MAIN_PAGE_COMMAND:
                 return new ShowPageCommand(MAIN_PAGE);
-            case "userManagePage":
+            case USER_MANAGE_PAGE_COMMAND:
                 return new ShowPageCommand(USER_MANAGE_PAGE);
-            case "filmManagePage":
-                return new ShowPageCommand(FILM_MANAGE_PAGE);
-            case "showMoviePage":
+            case SHOW_FILM_PAGE_COMMAND:
                 return new ShowPageCommand(SHOW_FILM_PAGE);
-            case "showPersonalPage":
+            case PERSONAL_PAGE_COMMAND:
                 return new ShowPageCommand(PERSONAL_PAGE);
-            case "personalPage":
+            case CREATE_FILM:
+                return new ShowPageCommand(CREATE_FILM_PAGE);
+            case PERSONAL:
                 return new PersonalPageCommand();
-            case "showFilmsPage":
+            case FILMS_PAGE:
                 FilmService filmsService = new FilmService(helperFactory);
                 return new GetFilmsCommand(filmsService);
-            case "movie":
+            case MOVIE:
                 FilmService filmService = new FilmService(helperFactory);
                 return new GetFilmCommand(filmService);
-            case "rateFilm":
+            case RATE_FILM:
                 RatingService ratingService = new RatingService(helperFactory);
                 return new RateFilmCommand(ratingService);
-            case "reviewFilm":
+            case REVIEW_FILM:
                 ReviewService reviewService = new ReviewService(helperFactory);
                 return new ReviewFilmCommand(reviewService);
-            case "manageUsers":
+            case MANAGE_USERS:
                 UserService userService = new UserService(helperFactory);
                 return new ManageUsersCommand(userService);
-            case "changeUserRating":
+            case CHANGE_USER_RATING:
                 UserService changeRatingService =new UserService(helperFactory);
                 return new ChangeUserRatingCommand(changeRatingService);
-            case "changeUserStatus":
+            case CHANGE_USER_STATUS:
                 UserService changeStatusService = new UserService(helperFactory);
                 return new ChangeUserStatusCommand(changeStatusService);
+            case ADD_FILM:
+                GenreService genreService = new GenreService(helperFactory);
+                return new AddFilmCommand(genreService);
             default:
                 throw new CommandNotExistException("Unknown type = " + commandName);
         }

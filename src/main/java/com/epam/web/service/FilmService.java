@@ -4,6 +4,7 @@ import com.epam.web.dao.*;
 import com.epam.web.dao.factory.DaoHelperFactory;
 import com.epam.web.dao.impl.FilmDaoImpl;
 import com.epam.web.dto.MovieDTO;
+import com.epam.web.entity.Genre;
 import com.epam.web.entity.Movie;
 import com.epam.web.entity.Review;
 import org.decimal4j.util.DoubleRounder;
@@ -68,8 +69,8 @@ public class FilmService {
 
     private MovieDTO getMovieDTO(Movie movie) throws DaoException {
         long genreId = movie.getGenreId();
-        Optional<String> optionalGenre = genreDao.getById(genreId);
-        String genre = optionalGenre.orElse("");
+        Optional<Genre> optionalGenre = genreDao.getById(genreId);
+        String genre = optionalGenre.map(Genre::getName).orElse("");
 
         long movieId = movie.getId();
         double movieRating = ratingDao.getMovieRating(movieId);

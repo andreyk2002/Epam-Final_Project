@@ -13,7 +13,7 @@
 </head>
 <body>
 <jsp:include page="fragments/header.jsp"/>
-<div class="users-wrapper">
+<div class="dark-wrapper">
     <table class="users-table">
         <thead>
         <tr>

@@ -1,5 +1,7 @@
 package com.epam.web.dao;
 
-public interface GenreDao extends Dao<String> {
+import com.epam.web.entity.Genre;
+
+public interface GenreDao extends Dao<Genre> {
 
 }

@@ -1,6 +1,5 @@
 package com.epam.web.filter;
 
-import com.epam.web.entity.Role;
 import com.epam.web.entity.User;
 
 import javax.servlet.*;
@@ -9,25 +8,30 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-public class CheckRoleFilter implements Filter {
+public class AnonymousAccessFilter implements Filter {
 
     private String errorPage;
+    private String loginCommand;
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig) {
         errorPage = filterConfig.getInitParameter("errorPage");
+        loginCommand = filterConfig.getInitParameter("loginCommand");
     }
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
-
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
-        Role role = user.getRole();
-        if (role == Role.USER) {
-            request.setAttribute("errorMessage", "local.accessDenied");
+        if (user == null) {
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher(loginCommand);
+            requestDispatcher.forward(request, response);
+        }
+
+        if (user.isBlocked()) {
+            request.setAttribute("errorMessage", "local.userBlocked");
             RequestDispatcher requestDispatcher = request.getRequestDispatcher(errorPage);
             requestDispatcher.forward(request, response);
         }
@@ -38,4 +42,5 @@ public class CheckRoleFilter implements Filter {
     public void destroy() {
 
     }
+
 }

@@ -10,6 +10,8 @@ import java.util.ResourceBundle;
 
 public class ConnectionFactory {
 
+    //Avoid multiple reading properties (constructor)
+    //transaction on Join
     public ProxyConnection create(ConnectionPool pool) throws DaoException {
         try {
             ResourceBundle resource = ResourceBundle.getBundle("database");
