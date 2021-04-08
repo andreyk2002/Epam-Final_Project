@@ -37,7 +37,7 @@
                 <c:if test="${user.role == 'ADMIN'}">
                     <div class="manage-film">
                         <form class="manage-film-form" action="${pageContext.request.contextPath}/controller">
-                            <input type="hidden" name="commandName" value="deleteFilm">
+                            <input type="hidden" name="commandName" value="deleteFilm"/>
                             <input type="hidden" name="filmId" value="${film.id}"/>
                             <button class="film-edit" type="submit">
                                 <img class="film-edit-btn" src="static/img/bootstrap-icons-1.4.0/trash.svg"/>

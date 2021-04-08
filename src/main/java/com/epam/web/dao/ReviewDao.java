@@ -9,4 +9,6 @@ public interface ReviewDao extends Dao<Review> {
     void reviewFilm(long filmID, long userID, String review) throws DaoException;
 
     List<Review> getFilmReviews(long id) throws DaoException;
+
+    void removeFilmsReviews(long filmId) throws DaoException;
 }

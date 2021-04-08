@@ -98,7 +98,7 @@ public abstract class AbstractDao<T> implements Dao<T> {
     }
 
     @Override
-    public void removeById(long id) throws Exception {
+    public void removeById(long id) throws DaoException {
         updateQuery("DELETE FROM " + tableName + " WHERE id=?", id);
     }
 }

@@ -80,4 +80,10 @@ public class FilmService {
     public void saveFilm(Film film) throws DaoException {
         filmDao.save(film);
     }
+
+    public void removeById(long filmId) throws DaoException {
+        reviewDao.removeFilmsReviews(filmId);
+        ratingDao.removeFilmsRatings(filmId);
+        filmDao.removeById(filmId);
+    }
 }

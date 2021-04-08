@@ -6,6 +6,7 @@ import com.epam.web.service.*;
 
 public class CommandFactory {
 
+    public static final String DELETE_FILM = "deleteFilm";
     private static final String PERSONAL = "personalPage";
     private static final String SHOW_FILM_PAGE = "/WEB-INF/view/showFilm.jsp";
     private static final String MAIN_PAGE = "/WEB-INF/view/main.jsp";
@@ -85,6 +86,9 @@ public class CommandFactory {
             case SAVE_FILM:
                 FilmService saveFilmService = new FilmService(helperFactory);
                 return new SaveFilmCommand(saveFilmService);
+            case DELETE_FILM:
+                FilmService deleteFilmService = new FilmService(helperFactory);
+                return new DeleteFilmCommand(deleteFilmService);
             default:
                 throw new CommandNotExistException("Unknown type = " + commandName);
         }

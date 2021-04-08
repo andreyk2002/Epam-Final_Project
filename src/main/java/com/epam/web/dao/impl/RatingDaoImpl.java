@@ -19,6 +19,7 @@ public class RatingDaoImpl extends AbstractDao<Rating> implements RatingDao {
     private static final String RATING_COLUMN = "Rating";
     private static final Integer REVIEWS_BEFORE_CHECK = 5;
     public static final String SELECT_BY_FILM = "SELECT * FROM filmsratings WHERE FilmID = ?";
+    private static final String DELETE_BY_FILM_ID = "DELETE FROM filmsratings WHERE FilmID = ?";
 
     public RatingDaoImpl(Connection connection) {
         super(connection, new RatingMapper(), RATING_TABLE);
@@ -55,6 +56,11 @@ public class RatingDaoImpl extends AbstractDao<Rating> implements RatingDao {
             return Optional.of(rating);
         }
         return Optional.empty();
+    }
+
+    @Override
+    public void removeFilmsRatings(long filmId) throws DaoException {
+        updateQuery(DELETE_BY_FILM_ID, filmId);
     }
 
 

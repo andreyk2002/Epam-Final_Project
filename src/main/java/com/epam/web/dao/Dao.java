@@ -9,6 +9,6 @@ public interface Dao <T>{
 
     Optional<T> getById(long id) throws DaoException;
 
-    void removeById(long id) throws Exception;
+    void removeById(long id) throws DaoException;
 
 }

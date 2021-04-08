@@ -14,6 +14,7 @@ public class ReviewDaoImpl extends AbstractDao<Review> implements ReviewDao {
     private static final String INSERT_RATING = "INSERT INTO reviews(FilmID, UserID, Review) VALUES(?, ? ,?)";
     public static final String FIND_BY_FILM = "SELECT *, login AS username FROM reviews r JOIN users u ON r.userID = u.ID"
             + " WHERE r.FilmID = ?";
+    private static final String DELETE_BY_FILM_ID = "DELETE FROM reviews WHERE FilmID = ?";
 
     public ReviewDaoImpl(Connection connection) {
         super(connection, new ReviewMapper(), TABLE_NAME);
@@ -29,6 +30,10 @@ public class ReviewDaoImpl extends AbstractDao<Review> implements ReviewDao {
         return executeQuery(FIND_BY_FILM, id);
     }
 
+    @Override
+    public void removeFilmsReviews(long filmId) throws DaoException {
+        updateQuery(DELETE_BY_FILM_ID, filmId);
+    }
 
 
 }

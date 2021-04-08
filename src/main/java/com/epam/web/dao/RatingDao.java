@@ -14,4 +14,6 @@ public interface RatingDao extends Dao<Rating> {
     double getMovieRating(long filmId) throws DaoException;
 
     Optional<Rating> getRatingForCheck(long filmId) throws DaoException;
+
+    void removeFilmsRatings(long filmId) throws DaoException;
 }
