@@ -31,21 +31,21 @@
 </c:if>
 <div class="container">
     <div class="wrapper-wide">
-        <c:forEach items="${sessionScope.movies}" var="movie">
+        <c:forEach items="${sessionScope.movies}" var="film">
             <a class="film-view-link"
-               href="${pageContext.request.contextPath}/controller?commandName=movie&id=${movie.id}">
+               href="${pageContext.request.contextPath}/controller?commandName=film&id=${film.id}">
                 <c:if test="${user.role == 'ADMIN'}">
                     <div class="manage-film">
                         <form class="manage-film-form" action="${pageContext.request.contextPath}/controller">
                             <input type="hidden" name="commandName" value="deleteFilm">
-                            <input type="hidden" name="filmId" value="${movie.id}"/>
+                            <input type="hidden" name="filmId" value="${film.id}"/>
                             <button class="film-edit" type="submit">
                                 <img class="film-edit-btn" src="static/img/bootstrap-icons-1.4.0/trash.svg"/>
                             </button>
                         </form>
                         <form class="manage-film-form" action="${pageContext.request.contextPath}/controller">
                             <input type="hidden" name="commandName" value="editFilm"/>
-                            <input type="hidden" name="filmId" value="${movie.id}"/>
+                            <input type="hidden" name="filmId" value="${film.id}"/>
                             <button class="film-edit" type="submit">
                                 <img class="film-edit-btn" src="static/img/bootstrap-icons-1.4.0/pencil-fill.svg"/>
                             </button>
@@ -54,12 +54,12 @@
                 </c:if>
                 <div class="card">
                     <div class="card-img">
-                        <img class="movie-image" src="${movie.imagePath}" alt="movieImage"/>
+                        <img class="film-image" src="${film.imagePath}" alt="movieImage"/>
                     </div>
                     <div class="card-other">
-                        <h2 class="film-link">${movie.name}</h2>
-                        <h2 class="film-link">${movie.genre}</h2>
-                        <span class="film-rating"><fmt:message key="local.rating"/>: ${movie.rating}</span><br>
+                        <h2 class="film-link">${film.name}</h2>
+                        <h2 class="film-link">${film.genre}</h2>
+                        <span class="film-rating"><fmt:message key="local.rating"/>: ${film.rating}</span><br>
                     </div>
                 </div>
             </a>

@@ -1,14 +1,14 @@
 package com.epam.web.dao;
 
-import com.epam.web.entity.Movie;
+import com.epam.web.entity.Film;
 
 import java.util.List;
 
-public interface FilmDao extends Dao<Movie> {
+public interface FilmDao extends Dao<Film> {
 
-    void save(Movie item) throws DaoException;
+    void save(Film item) throws DaoException;
 
-    List<Movie> getMoviesForPage(int pageNumber) throws DaoException;
+    List<Film> getMoviesForPage(int pageNumber) throws DaoException;
 
     int getPagesCount() throws DaoException;
 }

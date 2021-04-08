@@ -2,15 +2,12 @@ package com.epam.web.service;
 
 import com.epam.web.dao.*;
 import com.epam.web.dao.factory.DaoHelperFactory;
-import com.epam.web.dao.impl.FilmDaoImpl;
 import com.epam.web.dto.MovieDTO;
+import com.epam.web.entity.Film;
 import com.epam.web.entity.Genre;
-import com.epam.web.entity.Movie;
 import com.epam.web.entity.Review;
 import org.decimal4j.util.DoubleRounder;
 
-import java.math.MathContext;
-import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -37,9 +34,9 @@ public class FilmService {
     public List<MovieDTO> getNextMovies(int pageNumb) throws ServiceException {
         try {
             List<MovieDTO> movieDTOs = new ArrayList<>();
-            List<Movie> moviesForPage = filmDao.getMoviesForPage(pageNumb);
-            for(Movie movie : moviesForPage){
-                MovieDTO movieDTO = getMovieDTO(movie);
+            List<Film> moviesForPage = filmDao.getMoviesForPage(pageNumb);
+            for(Film film : moviesForPage){
+                MovieDTO movieDTO = getMovieDTO(film);
                 movieDTOs.add(movieDTO);
             }
             return movieDTOs;
@@ -58,25 +55,29 @@ public class FilmService {
     }
 
     public Optional<MovieDTO> getMovieById(Long id) throws DaoException {
-        Optional<Movie> optionalMovie = filmDao.getById(id);
+        Optional<Film> optionalMovie = filmDao.getById(id);
         if(optionalMovie.isPresent()){
-            Movie movie = optionalMovie.get();
-            MovieDTO movieDTO = getMovieDTO(movie);
+            Film film = optionalMovie.get();
+            MovieDTO movieDTO = getMovieDTO(film);
             return Optional.of(movieDTO);
         }
         return Optional.empty();
     }
 
-    private MovieDTO getMovieDTO(Movie movie) throws DaoException {
-        long genreId = movie.getGenreId();
+    private MovieDTO getMovieDTO(Film film) throws DaoException {
+        long genreId = film.getGenreId();
         Optional<Genre> optionalGenre = genreDao.getById(genreId);
         String genre = optionalGenre.map(Genre::getName).orElse("");
 
-        long movieId = movie.getId();
+        long movieId = film.getId();
         double movieRating = ratingDao.getMovieRating(movieId);
         double ratingRounded = DoubleRounder.round(movieRating, ROUND_PRECISION);
 
         List<Review> filmReviews = reviewDao.getFilmReviews(movieId);
-        return new MovieDTO(movie, genre, ratingRounded, filmReviews);
+        return new MovieDTO(film, genre, ratingRounded, filmReviews);
+    }
+
+    public void saveFilm(Film film) throws DaoException {
+        filmDao.save(film);
     }
 }

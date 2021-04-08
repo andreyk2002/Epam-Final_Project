@@ -635,6 +635,12 @@ table, th, td {
     color: white;
 }
 
+.film-input{
+    margin-top: 10px;
+}
+
+/*end of film load page*/
+
 footer {
     background-color: black;
     padding-bottom: 60px;

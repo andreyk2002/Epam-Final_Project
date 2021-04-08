@@ -31,6 +31,7 @@ public class CommandFactory {
     private static final String CHANGE_USER_RATING = "changeUserRating";
     private static final String CHANGE_USER_STATUS = "changeUserStatus";
     private static final String ADD_FILM = "addFilm";
+    private static final String SAVE_FILM = "saveFilm";
 
 
     public Command create(String commandName) throws CommandNotExistException, ServiceException {
@@ -81,6 +82,9 @@ public class CommandFactory {
             case ADD_FILM:
                 GenreService genreService = new GenreService(helperFactory);
                 return new AddFilmCommand(genreService);
+            case SAVE_FILM:
+                FilmService saveFilmService = new FilmService(helperFactory);
+                return new SaveFilmCommand(saveFilmService);
             default:
                 throw new CommandNotExistException("Unknown type = " + commandName);
         }

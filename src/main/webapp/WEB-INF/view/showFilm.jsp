@@ -13,9 +13,9 @@
 </head>
 <body>
 <jsp:include page="fragments/header.jsp"/>
-<section class="intro" style="background: url(${movie.imagePath})">
+<section class="intro" style="background: url(${film.imagePath})">
     <div class="wrapper">
-        <h1 class="into-title">${movie.name}</h1>
+        <h1 class="into-title">${film.name}</h1>
         <c:if test="${param.errorMessage!=null}">
             <div class="error">
                 <h1><fmt:message key="${param.errorMessage}"/></h1>
@@ -27,21 +27,21 @@
     <div class="film-wrapper-wide">
         <div class="film-description">
             <p class="film-description-text">
-                ${movie.description}
+                ${film.description}
             </p>
         </div>
         <div class="film-rate">
-            <h2 class="film-current-rating"><fmt:message key="local.currentRating"/> : ${sessionScope.movie.rating} </h2>
+            <h2 class="film-current-rating"><fmt:message key="local.currentRating"/> : ${sessionScope.film.rating} </h2>
             <form action="${pageContext.request.contextPath}/controller">
                 <input type="hidden" name="commandName" value="rateFilm">
-                <input type="hidden" name="filmID" value="${movie.id}">
+                <input type="hidden" name="filmID" value="${film.id}">
                 <label><fmt:message key="local.yourMark"/> </label>
                 <input class="mark" name="rating" type="number" min="0" max="5">
                 <button class="rate-film-button" type="submit"><fmt:message key="local.rate"/></button>
             </form>
             <form class="film-review" action="${pageContext.request.contextPath}/controller">
                 <input type="hidden" name="commandName" value="reviewFilm">
-                <input type="hidden" name="filmID" value="${movie.id}">
+                <input type="hidden" name="filmID" value="${film.id}">
                 <textarea name="review" class="review" rows="20" placeholder="leave a review">
                 </textarea>
                 <button class="rate-film-button" type="submit">OK</button>
@@ -51,7 +51,7 @@
 </section>
 <section class="film-reviews">
     <div class="film-wrapper-wide">
-        <c:forEach items="${sessionScope.movie.filmsReviews}" var="review">
+        <c:forEach items="${sessionScope.film.filmsReviews}" var="review">
             <div class="user-review">
                 <b class="username">${review.username}</b>
                 <p class="review-content">

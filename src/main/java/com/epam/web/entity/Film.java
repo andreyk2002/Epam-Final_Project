@@ -2,7 +2,7 @@ package com.epam.web.entity;
 
 import java.util.*;
 
-public class Movie {
+public class Film {
 
     private final long id;
     private final String name;
@@ -10,7 +10,7 @@ public class Movie {
     private final String description;
     private final Long genreId;
 
-    public Movie(Builder builder) {
+    public Film(Builder builder) {
         this.id = builder.id;
         this.name = builder.name;
         this.description = builder.description;
@@ -40,16 +40,20 @@ public class Movie {
     }
 
     public static class Builder {
-        private final long id;
+        private long id = 0;
         private final String name;
         public long genreId;
         private String imagePath = "";
         private String description = "";
 
-        public Builder(long id, String name, long genreId) {
-            this.id = id;
+        public Builder( String name, long genreId) {
             this.name = name;
             this.genreId = genreId;
+        }
+
+        public  Builder withId(long id){
+            this.id = id;
+            return this;
         }
 
         public Builder withDescription(String description) {
@@ -63,8 +67,8 @@ public class Movie {
         }
 
 
-        public Movie build() {
-            return new Movie(this);
+        public Film build() {
+            return new Film(this);
         }
     }
 
@@ -73,25 +77,25 @@ public class Movie {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof Movie)){
+        if (!(o instanceof Film)){
             return false;
         }
 
-        Movie movie = (Movie) o;
+        Film film = (Film) o;
 
-        if (id != movie.id) {
+        if (id != film.id) {
             return false;
         }
-        if (!Objects.equals(name, movie.name)){
+        if (!Objects.equals(name, film.name)){
             return false;
         }
-        if (!Objects.equals(imagePath, movie.imagePath)) {
+        if (!Objects.equals(imagePath, film.imagePath)) {
             return false;
         }
-        if (!Objects.equals(description, movie.description)){
+        if (!Objects.equals(description, film.description)){
             return false;
         }
-        return Objects.equals(genreId, movie.genreId);
+        return Objects.equals(genreId, film.genreId);
     }
 
     @Override

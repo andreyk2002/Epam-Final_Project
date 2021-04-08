@@ -2,8 +2,8 @@ package com.epam.web.service;
 
 import com.epam.web.dao.*;
 import com.epam.web.dto.MovieDTO;
+import com.epam.web.entity.Film;
 import com.epam.web.entity.Genre;
-import com.epam.web.entity.Movie;
 import org.mockito.Mockito;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -11,7 +11,6 @@ import org.testng.annotations.Test;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Optional;
 
 import static org.mockito.Matchers.any;
@@ -26,9 +25,11 @@ public class FilmServiceTest extends ServiceTest{
     private static final long INVALID_ID = -1L;
     private static final int VALID_PAGE = 0;
     private static final int INVALID_PAGE = -1;
-    private static final Movie VALID_MOVIE = new Movie.Builder(VALID_ID, "", 0).build();
+    private static final Film VALID_FILM = new Film.Builder("", 0)
+            .withId(VALID_ID)
+            .build();
     private static final MovieDTO VALID_DTO =
-            new MovieDTO(VALID_MOVIE, VALID_GENRE.getName() , VALID_RATING, Collections.emptyList());
+            new MovieDTO(VALID_FILM, VALID_GENRE.getName() , VALID_RATING, Collections.emptyList());
 
     private FilmService service;
     @Override
@@ -42,9 +43,9 @@ public class FilmServiceTest extends ServiceTest{
 
         when(genreDaoMock.getById(anyLong())).thenReturn(Optional.of(VALID_GENRE));
         when(ratingDaoMock.getMovieRating(anyLong())).thenReturn(VALID_RATING);
-        when(filmDaoMock.getById(VALID_ID)).thenReturn(Optional.of(VALID_MOVIE));
+        when(filmDaoMock.getById(VALID_ID)).thenReturn(Optional.of(VALID_FILM));
         when(filmDaoMock.getById(INVALID_ID)).thenReturn((Optional.empty()));
-        when(filmDaoMock.getMoviesForPage(VALID_PAGE)).thenReturn(Collections.singletonList(VALID_MOVIE));
+        when(filmDaoMock.getMoviesForPage(VALID_PAGE)).thenReturn(Collections.singletonList(VALID_FILM));
         when(filmDaoMock.getMoviesForPage(INVALID_PAGE)).thenReturn(Collections.emptyList());
         when(reviewDaoMock.getFilmReviews(anyLong())).thenReturn(Collections.emptyList());
 

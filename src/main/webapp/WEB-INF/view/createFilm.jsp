@@ -13,20 +13,22 @@
 </head>
 <body>
 <jsp:include page="fragments/header.jsp"/>
-<h1>create new film here</h1>
 <div class="dark-wrapper">
-    <form class="add-film-form-admin" action="/controller?commandName=addFilm">
-        <input class="film-name" type="text" value="filmName" placeholder="enter film name"/>
-        <textarea class="film-description-admin" rows="5" name="filmDescription"></textarea>
-
-        <input class="film-genres" list="genres">
+    <form class="add-film-form-admin" action="${pageContext.request.contextPath}/controller">
+        <input name="commandName" value="saveFilm"/>
+        <input class="film-name film-input" name="filmName" type="text" placeholder="enter film name"/>
+        <textarea class="film-description-admin film-input" rows="5" name="filmDescription"></textarea>
+        <input name="filmGenre" class="film-genres film-input" list="genres"/>
         <datalist id="genres">
             <c:forEach var="genre" items="${genres}">
                 <option>${genre.name}</option>
             </c:forEach>
         </datalist>
+        <br/>
         <label class="image-load">Load image for film</label>
-        <input type="file" value="filmImage"/>
+        <br/>
+        <input name="filmImage" type="file"/>
+        <button type="submit" class="rate-film-button">Create</button>
     </form>
 </div>
 

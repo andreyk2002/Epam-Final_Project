@@ -1,6 +1,6 @@
 package com.epam.web.dto;
 
-import com.epam.web.entity.Movie;
+import com.epam.web.entity.Film;
 import com.epam.web.entity.Review;
 
 import java.io.Serializable;
@@ -17,13 +17,13 @@ public class MovieDTO implements Serializable {
     private final Double rating;
     private final List<Review> filmsReviews;
 
-    public MovieDTO(Movie movie, String genre, double movieRating, List<Review> filmReviews) {
-        this.id = movie.getId();
-        this.name = movie.getName();
+    public MovieDTO(Film film, String genre, double movieRating, List<Review> filmReviews) {
+        this.id = film.getId();
+        this.name = film.getName();
         this.rating = movieRating;
         this.genre = genre;
-        this.description = movie.getDescription();
-        this.imagePath = movie.getImagePath();
+        this.description = film.getDescription();
+        this.imagePath = film.getImagePath();
         this.filmsReviews = filmReviews;
     }
 

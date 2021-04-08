@@ -1,8 +1,7 @@
 package com.epam.web.mapper;
 
 import com.epam.web.dao.DaoException;
-import com.epam.web.entity.Movie;
-import com.epam.web.entity.Rating;
+import com.epam.web.entity.Film;
 import org.mockito.Mockito;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -11,9 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import static org.mockito.Mockito.when;
-import static org.testng.Assert.*;
 
-public class MovieRowMapperTest {
+public class FilmRowMapperTest {
     private static final String ID = "ID";
     private static final String NAME = "Name";
     private static final String IMAGE_PATH = "ImagePath";
@@ -35,9 +33,11 @@ public class MovieRowMapperTest {
         when(resultSet.getString(DESCRIPTION)).thenReturn("");
         when(resultSet.getLong(GENRE_ID)).thenReturn(TEST_GENRE_ID);
 
-        Movie expected = new Movie.Builder(TEST_ID, TEST_NAME, TEST_GENRE_ID).build();
+        Film expected = new Film.Builder(TEST_NAME, TEST_GENRE_ID)
+                .withId(TEST_ID)
+                .build();
 
-        Movie result = mapper.map(resultSet);
+        Film result = mapper.map(resultSet);
 
         Assert.assertEquals(expected, result);
     }
