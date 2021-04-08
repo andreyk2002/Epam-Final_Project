@@ -18,7 +18,7 @@ public class DaoHelper implements AutoCloseable {
         return new GenreDaoImpl(connection);
     }
 
-    public UserDaoImpl createUserDao() {
+    public UserDao createUserDao() {
         return new UserDaoImpl(connection);
     }
 
@@ -26,7 +26,7 @@ public class DaoHelper implements AutoCloseable {
         return new RatingDaoImpl(connection);
     }
 
-    public FilmDaoImpl createMovieDao() {
+    public FilmDao createMovieDao() {
         return new FilmDaoImpl(connection);
     }
 

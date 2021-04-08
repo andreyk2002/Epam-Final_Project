@@ -12,7 +12,7 @@ import java.util.Collections;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.when;
 
-public class GetFilmsCommandTest extends CommandTest{
+public class GetFilmsCommandTest extends CommandTest {
 
     private static final String FIRST_PAGE = "0";
     private static final CommandResult SUCCESS =
@@ -20,7 +20,6 @@ public class GetFilmsCommandTest extends CommandTest{
     private static final String PAGE = "pageNumber";
     private FilmService serviceMock;
     private GetFilmsCommand command;
-
 
 
     @BeforeMethod

@@ -14,7 +14,7 @@ import java.util.Optional;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;
 
-public class LoginCommandTest extends  CommandTest{
+public class LoginCommandTest extends CommandTest {
     private static final String VALID_USERNAME = "admin";
     private static final String VALID_PASSWORD = "admin";
     private static final String PAGE_NAME = "WEB-INF/view/main.jsp";
@@ -47,6 +47,7 @@ public class LoginCommandTest extends  CommandTest{
         Assert.assertEquals(result, SUCCESS);
 
     }
+
     @Test
     public void testExecuteShouldNotAllowLoginWhenDataWrong() throws ServiceException {
         when(requestMock.getParameter(USERNAME)).thenReturn("");

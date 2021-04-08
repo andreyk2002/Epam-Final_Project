@@ -84,6 +84,4 @@ public class CommandFactory {
                 throw new CommandNotExistException("Unknown type = " + commandName);
         }
     }
-
-
 }

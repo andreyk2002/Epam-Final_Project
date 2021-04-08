@@ -5,6 +5,7 @@ import com.epam.web.entity.Review;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 public class MovieDTO implements Serializable {
 
@@ -53,6 +54,51 @@ public class MovieDTO implements Serializable {
     public List<Review> getFilmsReviews() {
         return filmsReviews;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof MovieDTO)) {
+            return false;
+        }
+
+        MovieDTO movieDTO = (MovieDTO) o;
+
+        if (!Objects.equals(id, movieDTO.id)) {
+            return false;
+        }
+        if (!Objects.equals(name, movieDTO.name)) {
+            return false;
+        }
+        if (!Objects.equals(imagePath, movieDTO.imagePath)) {
+            return false;
+        }
+        if (!Objects.equals(description, movieDTO.description)) {
+            return false;
+        }
+        if (!Objects.equals(genre, movieDTO.genre)) {
+            return false;
+        }
+        if (!Objects.equals(rating, movieDTO.rating)) {
+            return false;
+        }
+        return Objects.equals(filmsReviews, movieDTO.filmsReviews);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (imagePath != null ? imagePath.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (genre != null ? genre.hashCode() : 0);
+        result = 31 * result + (rating != null ? rating.hashCode() : 0);
+        result = 31 * result + (filmsReviews != null ? filmsReviews.hashCode() : 0);
+        return result;
+    }
+
 }
 
 
