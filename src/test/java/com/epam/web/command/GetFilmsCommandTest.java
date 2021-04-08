@@ -1,5 +1,6 @@
 package com.epam.web.command;
 
+import com.epam.web.command.impl.GetFilmsCommand;
 import com.epam.web.service.FilmService;
 import com.epam.web.service.ServiceException;
 import org.mockito.Mockito;

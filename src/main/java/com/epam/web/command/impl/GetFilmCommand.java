@@ -1,5 +1,7 @@
-package com.epam.web.command;
+package com.epam.web.command.impl;
 
+import com.epam.web.command.Command;
+import com.epam.web.command.CommandResult;
 import com.epam.web.dao.DaoException;
 import com.epam.web.dto.MovieDTO;
 import com.epam.web.service.FilmService;

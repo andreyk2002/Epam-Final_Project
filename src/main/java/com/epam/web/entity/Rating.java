@@ -23,4 +23,31 @@ public class Rating {
     public long getFilmID() {
         return filmID;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Rating)) {
+            return false;
+        }
+        Rating rating1 = (Rating) o;
+
+        if (rating != rating1.rating) {
+            return false;
+        }
+        if (userID != rating1.userID) {
+            return false;
+        }
+        return filmID == rating1.filmID;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = rating;
+        result = 31 * result + (int) (userID ^ (userID >>> 32));
+        result = 31 * result + (int) (filmID ^ (filmID >>> 32));
+        return result;
+    }
 }

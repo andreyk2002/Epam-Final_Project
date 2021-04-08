@@ -6,9 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class RatingMapper implements RowMapper<Rating>{
-    private final String RATING = "Rating";
-    private final String USER_ID = "UserID";
-    private final String FILM_ID = "FilmID";
+    private static final String RATING = "Rating";
+    private static final String USER_ID = "UserID";
+    private static final String FILM_ID = "FilmID";
 
 
     @Override

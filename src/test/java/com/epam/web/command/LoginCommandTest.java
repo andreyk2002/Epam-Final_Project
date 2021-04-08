@@ -1,5 +1,6 @@
 package com.epam.web.command;
 
+import com.epam.web.command.impl.LoginCommand;
 import com.epam.web.entity.Role;
 import com.epam.web.entity.User;
 import com.epam.web.service.ServiceException;

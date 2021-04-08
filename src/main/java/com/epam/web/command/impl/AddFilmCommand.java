@@ -1,5 +1,7 @@
-package com.epam.web.command;
+package com.epam.web.command.impl;
 
+import com.epam.web.command.Command;
+import com.epam.web.command.CommandResult;
 import com.epam.web.entity.Genre;
 import com.epam.web.service.GenreService;
 import com.epam.web.service.ServiceException;
