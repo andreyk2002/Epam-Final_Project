@@ -18,6 +18,7 @@ import java.io.IOException;
 public class Controller extends HttpServlet {
     private static final Logger LOGGER = LogManager.getLogger(Controller.class);
     private static final String ERROR_PAGE = "/error.jsp";
+    public static final String COMMAND_NAME = "commandName";
 
     private final CommandFactory factory = new CommandFactory();
 
@@ -37,7 +38,7 @@ public class Controller extends HttpServlet {
     }
 
     private void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String commandType = request.getParameter("commandName");
+        String commandType = request.getParameter(COMMAND_NAME);
         Command command;
         String page;
 

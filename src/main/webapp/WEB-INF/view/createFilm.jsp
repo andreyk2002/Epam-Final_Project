@@ -14,13 +14,14 @@
 <body>
 <jsp:include page="fragments/header.jsp"/>
 <div class="dark-wrapper">
-    <form method="post" class="add-film-form-admin" action="${pageContext.request.contextPath}/controller">
-        <h2>Add film</h2>
-        <input type="hidden" name="commandName" value="saveFilm"/>
-        <input required class="film-name film-input" name="filmName" type="text" placeholder="enter film name"/>
-        <textarea class="film-description-admin film-input" rows="5" name="filmDescription"></textarea>
+    <form method="post" enctype="multipart/form-data" class="add-film-form-admin"
+          action="${pageContext.request.contextPath}/controller?commandName=saveFilm">
+        <h2 class="add-film-title">Add new film</h2>
+        <input required class="film-name film-input" name="name" type="text" placeholder="enter film name"/>
+        <textarea class="film-description-admin film-input" rows="5" name="description"
+                  placeholder="enter film description"></textarea>
         <br/>
-        <select required class="genres-select" name="genreId">
+        <select required class="genres-select" name="genre_id">
             <c:forEach items="${genres}" var="genre">
                 <option value="${genre.id}">${genre.name}</option>
             </c:forEach>
@@ -28,7 +29,8 @@
         <br/>
         <label class="image-load">Load image for film</label>
         <br/>
-        <input name="filmImage" type="file" style="color: white"/>
+        <input class="film-input" name="Image" type="file" style="color: white"/>
+        <br/>
         <button type="submit" class="rate-film-button">Create</button>
     </form>
 </div>

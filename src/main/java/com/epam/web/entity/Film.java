@@ -1,6 +1,6 @@
 package com.epam.web.entity;
 
-import java.util.*;
+import java.util.Objects;
 
 public class Film {
 
@@ -41,17 +41,26 @@ public class Film {
 
     public static class Builder {
         private long id = 0;
-        private final String name;
-        public long genreId;
+        private String name;
+        private long genreId;
         private String imagePath = "";
         private String description = "";
 
-        public Builder( String name, long genreId) {
-            this.name = name;
-            this.genreId = genreId;
+        public Builder() {
+
         }
 
-        public  Builder withId(long id){
+        public Builder withName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public Builder withGenreId(long genreId) {
+            this.genreId = genreId;
+            return this;
+        }
+
+        public Builder withId(long id) {
             this.id = id;
             return this;
         }
@@ -77,7 +86,7 @@ public class Film {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof Film)){
+        if (!(o instanceof Film)) {
             return false;
         }
 
@@ -86,13 +95,13 @@ public class Film {
         if (id != film.id) {
             return false;
         }
-        if (!Objects.equals(name, film.name)){
+        if (!Objects.equals(name, film.name)) {
             return false;
         }
         if (!Objects.equals(imagePath, film.imagePath)) {
             return false;
         }
-        if (!Objects.equals(description, film.description)){
+        if (!Objects.equals(description, film.description)) {
             return false;
         }
         return Objects.equals(genreId, film.genreId);

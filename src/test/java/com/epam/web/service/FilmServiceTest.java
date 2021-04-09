@@ -13,11 +13,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyLong;
 import static org.mockito.Mockito.when;
 
-public class FilmServiceTest extends ServiceTest{
+public class FilmServiceTest extends ServiceTest {
 
     public static final long VALID_ID = 0;
     private static final Genre VALID_GENRE = new Genre(VALID_ID, "");
@@ -25,13 +24,16 @@ public class FilmServiceTest extends ServiceTest{
     private static final long INVALID_ID = -1L;
     private static final int VALID_PAGE = 0;
     private static final int INVALID_PAGE = -1;
-    private static final Film VALID_FILM = new Film.Builder("", 0)
+    private static final Film VALID_FILM = new Film.Builder()
+            .withName("")
+            .withGenreId(0)
             .withId(VALID_ID)
             .build();
     private static final MovieDTO VALID_DTO =
-            new MovieDTO(VALID_FILM, VALID_GENRE.getName() , VALID_RATING, Collections.emptyList());
+            new MovieDTO(VALID_FILM, VALID_GENRE.getName(), VALID_RATING, Collections.emptyList());
 
     private FilmService service;
+
     @Override
     @BeforeMethod
     public void setUp() throws DaoException, ServiceException {
@@ -72,7 +74,7 @@ public class FilmServiceTest extends ServiceTest{
 
     @Test
     public void testGetFilmsPageShouldReturnFilmsForValidPage() throws ServiceException {
-        List<MovieDTO>expected = Collections.singletonList(VALID_DTO);
+        List<MovieDTO> expected = Collections.singletonList(VALID_DTO);
         List<MovieDTO> nextMovies = service.getNextMovies(VALID_PAGE);
         Assert.assertEquals(nextMovies, expected);
     }

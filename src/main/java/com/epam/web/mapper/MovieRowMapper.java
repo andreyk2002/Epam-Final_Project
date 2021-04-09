@@ -24,8 +24,11 @@ public class MovieRowMapper implements RowMapper<Film> {
         String imagePath = resultSet.getString(IMAGE_PATH);
         String description = resultSet.getString(DESCRIPTION);
         long genreId = resultSet.getLong(GENRE_ID);
-        Film.Builder builder = new Film.Builder(name, genreId);
-        return builder.withId(id)
+
+        return new Film.Builder()
+                .withName(name)
+                .withGenreId(genreId)
+                .withId(id)
                 .withImagePath(imagePath)
                 .withDescription(description)
                 .build();

@@ -621,6 +621,7 @@ table, th, td {
     padding-left: 5%;
     margin-top: 300px;
     width: 100%;
+    text-align: center;
 }
 
 .film-name {
@@ -651,7 +652,11 @@ table, th, td {
     margin-bottom: 10px;
 }
 
-/*end of film load page*/
+.add-film-title{
+    font-size: 40px;
+    color: white;
+}
+/*end of add film page*/
 
 footer {
     background-color: black;
