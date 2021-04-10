@@ -11,4 +11,6 @@ public interface FilmDao extends Dao<Film> {
     List<Film> getMoviesForPage(int pageNumber) throws DaoException;
 
     int getPagesCount() throws DaoException;
+
+    void updateFilm(Film updatedFilm) throws DaoException;
 }

@@ -16,18 +16,26 @@
 <div class="dark-wrapper">
     <form method="post" class="add-film-form-admin" action="${pageContext.request.contextPath}/controller">
         <h2 class="add-film-title">Change film ${movie.name}</h2>
-        <input type="hidden" name="commandName" value="editFilm">
+        <input type="hidden" name="commandName" value="updateFilm">
         <input type="hidden" name="filmId" value="${movie.id}"/>
+        <label class="edit-label">Change name:</label>
+        <input type="hidden" value="${movie.imagePath}" name="imagePath"/>
         <input class="film-name film-input" name="name" type="text" value="${movie.name}"/>
+        <br>
+        <label class="edit-label">Change film description</label>
+        <br>
         <textarea class="film-description-admin film-input" rows="5" name="description"
-                 value="${movie.description}"></textarea>
+                  value="${movie.description}">${movie.description}</textarea>
         <br/>
-        <select class="genres-select" value="${movie.genreId}" name="genre_id">
+        <label class="edit-label">Change genre to:</label>
+        <select class="genres-select" value="${movie.genreId}" name="genreId">
             <c:forEach items="${genres}" var="genre">
                 <option value="${genre.id}">${genre.name}</option>
             </c:forEach>
         </select>
         <br/>
+        <label class="edit-label">Change Film image</label>
+        <input class="film-input" name="Image" type="file" style="color: white"/>
         <button type="submit" class="rate-film-button">OK</button>
     </form>
 </div>

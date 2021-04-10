@@ -35,7 +35,7 @@ public class FilmService {
         try {
             List<FilmDTO> filmDTOS = new ArrayList<>();
             List<Film> moviesForPage = filmDao.getMoviesForPage(pageNumb);
-            for(Film film : moviesForPage){
+            for (Film film : moviesForPage) {
                 FilmDTO filmDTO = getMovieDTO(film);
                 filmDTOS.add(filmDTO);
             }
@@ -56,7 +56,7 @@ public class FilmService {
 
     public Optional<FilmDTO> getMovieDTOById(Long id) throws DaoException {
         Optional<Film> optionalMovie = filmDao.getById(id);
-        if(optionalMovie.isPresent()){
+        if (optionalMovie.isPresent()) {
             Film film = optionalMovie.get();
             FilmDTO filmDTO = getMovieDTO(film);
             return Optional.of(filmDTO);
@@ -89,5 +89,14 @@ public class FilmService {
 
     public Optional<Film> getFilmById(long filmId) throws DaoException {
         return filmDao.getById(filmId);
+    }
+
+    public void updateFilm(Film updatedFilm) throws DaoException {
+        long id = updatedFilm.getId();
+        Optional<Film> film = filmDao.getById(id);
+        if (film.isEmpty()) {
+            saveFilm(updatedFilm);
+        }
+        filmDao.updateFilm(updatedFilm);
     }
 }

@@ -16,6 +16,7 @@ public class FilmDaoImpl extends AbstractDao<Film> implements FilmDao {
     private static final String ADD_MOVIE = "INSERT INTO films(Name, ImagePath, Description, GenreId)" +
             " VALUES (?, ?, ?, ?)";
     private static final String SELECT_MOVIES_IN_BOUNDS = "SELECT * FROM films LIMIT ? OFFSET ?";
+    public static final String UPDATE_FILM = "UPDATE films SET Name = ?, Description = ?, ImagePath = ?, GenreId = ? WHERE ID = ?";
 
     public FilmDaoImpl(ProxyConnection connection) {
         super(connection, new MovieRowMapper(), TABLE_NAME);
@@ -37,5 +38,11 @@ public class FilmDaoImpl extends AbstractDao<Film> implements FilmDao {
     @Override
     public int getPagesCount() throws DaoException {
         return getRecordsCount() / MOVIES_PER_PAGE;
+    }
+
+    @Override
+    public void updateFilm(Film film) throws DaoException {
+        updateQuery(UPDATE_FILM, film.getName(), film.getDescription(),
+                film.getImagePath(), film.getGenreId(), film.getId());
     }
 }

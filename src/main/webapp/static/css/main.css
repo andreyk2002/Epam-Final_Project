@@ -656,6 +656,12 @@ table, th, td {
     font-size: 40px;
     color: white;
 }
+
+/*edit page styles*/
+.edit-label{
+    color: white;
+}
+
 /*end of add film page*/
 
 footer {
