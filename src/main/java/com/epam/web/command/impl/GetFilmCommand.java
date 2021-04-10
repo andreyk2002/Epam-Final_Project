@@ -3,7 +3,7 @@ package com.epam.web.command.impl;
 import com.epam.web.command.Command;
 import com.epam.web.command.CommandResult;
 import com.epam.web.dao.DaoException;
-import com.epam.web.dto.MovieDTO;
+import com.epam.web.dto.FilmDTO;
 import com.epam.web.service.FilmService;
 import com.epam.web.service.ServiceException;
 
@@ -27,7 +27,7 @@ public class GetFilmCommand implements Command {
         Long id = Long.parseLong(idString);
         HttpSession session = request.getSession();
         try {
-            Optional<MovieDTO> movieOptional = service.getMovieById(id);
+            Optional<FilmDTO> movieOptional = service.getMovieDTOById(id);
             movieOptional.ifPresentOrElse(movie -> session.setAttribute("film", movie),
                     () -> request.setAttribute("errorMessage", "Movie not found"));
         } catch (DaoException e) {

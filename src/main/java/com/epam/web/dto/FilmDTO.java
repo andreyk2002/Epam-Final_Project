@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
-public class MovieDTO implements Serializable {
+public class FilmDTO implements Serializable {
 
     private final Long id;
     private final String name;
@@ -17,7 +17,7 @@ public class MovieDTO implements Serializable {
     private final Double rating;
     private final List<Review> filmsReviews;
 
-    public MovieDTO(Film film, String genre, double movieRating, List<Review> filmReviews) {
+    public FilmDTO(Film film, String genre, double movieRating, List<Review> filmReviews) {
         this.id = film.getId();
         this.name = film.getName();
         this.rating = movieRating;
@@ -60,31 +60,31 @@ public class MovieDTO implements Serializable {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof MovieDTO)) {
+        if (!(o instanceof FilmDTO)) {
             return false;
         }
 
-        MovieDTO movieDTO = (MovieDTO) o;
+        FilmDTO filmDTO = (FilmDTO) o;
 
-        if (!Objects.equals(id, movieDTO.id)) {
+        if (!Objects.equals(id, filmDTO.id)) {
             return false;
         }
-        if (!Objects.equals(name, movieDTO.name)) {
+        if (!Objects.equals(name, filmDTO.name)) {
             return false;
         }
-        if (!Objects.equals(imagePath, movieDTO.imagePath)) {
+        if (!Objects.equals(imagePath, filmDTO.imagePath)) {
             return false;
         }
-        if (!Objects.equals(description, movieDTO.description)) {
+        if (!Objects.equals(description, filmDTO.description)) {
             return false;
         }
-        if (!Objects.equals(genre, movieDTO.genre)) {
+        if (!Objects.equals(genre, filmDTO.genre)) {
             return false;
         }
-        if (!Objects.equals(rating, movieDTO.rating)) {
+        if (!Objects.equals(rating, filmDTO.rating)) {
             return false;
         }
-        return Objects.equals(filmsReviews, movieDTO.filmsReviews);
+        return Objects.equals(filmsReviews, filmDTO.filmsReviews);
     }
 
     @Override

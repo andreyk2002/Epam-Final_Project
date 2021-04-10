@@ -6,7 +6,7 @@ import java.io.File;
 
 public class ImageFormParser implements FormParser {
     private static final String IMAGE_PATH =
-            "D:\\Java\\Projects\\epam-final_project\\src\\main\\webapp\\static\\img\\movies\\";
+            "D:/Java/Projects/epam-final_project/src/main/webapp/static/img/movies/";
     private static final String SAVE_PATH = "static/img/movies/";
 
     @Override

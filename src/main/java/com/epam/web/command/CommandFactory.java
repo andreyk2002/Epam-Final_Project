@@ -14,13 +14,16 @@ public class CommandFactory {
     private static final String PERSONAL_PAGE = "/WEB-INF/view/personal.jsp";
     private static final String LOGIN_PAGE = "/index.jsp";
     private static final String CREATE_FILM_PAGE = "/WEB-INF/view/createFilm.jsp";
-    
+    private static final String EDIT_FILM_PAGE = "/WEB-INF/view/editFilm.jsp";
+
     private static final String CHANGE_LANGUAGE = "changeLanguage";
     private static final String LOGIN = "login";
     private static final String LOGOUT = "logout";
     private static final String LOGIN_PAGE_COMMAND = "loginPage";
     private static final String MAIN_PAGE_COMMAND = "mainPage";
     private static final String USER_MANAGE_PAGE_COMMAND = "userManagePage";
+    private static final String EDIT_FILM = "editFilm";
+    private static final String EDIT_FILM_PAGE_COMMAND = "editFilmPage";
     private static final String SHOW_FILM_PAGE_COMMAND = "showMoviePage";
     private static final String PERSONAL_PAGE_COMMAND = "showPersonalPage";
     private static final String CREATE_FILM = "showAddPage";
@@ -38,13 +41,6 @@ public class CommandFactory {
     public Command create(String commandName) throws CommandNotExistException, ServiceException {
         DaoHelperFactory helperFactory = new DaoHelperFactory();
         switch (commandName) {
-            case CHANGE_LANGUAGE:
-                return new ChangeLanguageCommand();
-            case LOGIN:
-                UserService service = new UserService(helperFactory);
-                return new LoginCommand(service);
-            case LOGOUT:
-                return new LogoutCommand();
             case LOGIN_PAGE_COMMAND:
                 return new ShowPageCommand(LOGIN_PAGE);
             case MAIN_PAGE_COMMAND:
@@ -57,6 +53,15 @@ public class CommandFactory {
                 return new ShowPageCommand(PERSONAL_PAGE);
             case CREATE_FILM:
                 return new ShowPageCommand(CREATE_FILM_PAGE);
+            case EDIT_FILM_PAGE_COMMAND:
+                return new ShowPageCommand(EDIT_FILM_PAGE);
+            case LOGOUT:
+                return new LogoutCommand();
+            case CHANGE_LANGUAGE:
+                return new ChangeLanguageCommand();
+            case LOGIN:
+                UserService service = new UserService(helperFactory);
+                return new LoginCommand(service);
             case PERSONAL:
                 return new PersonalPageCommand();
             case FILMS_PAGE:
@@ -86,6 +91,10 @@ public class CommandFactory {
             case SAVE_FILM:
                 FilmService saveFilmService = new FilmService(helperFactory);
                 return new SaveFilmCommand(saveFilmService);
+            case EDIT_FILM:
+                FilmService editFilmService = new FilmService(helperFactory);
+                GenreService filmGenreService = new GenreService(helperFactory);
+                return new EditFilmCommand(editFilmService, filmGenreService);
             case DELETE_FILM:
                 FilmService deleteFilmService = new FilmService(helperFactory);
                 return new DeleteFilmCommand(deleteFilmService);

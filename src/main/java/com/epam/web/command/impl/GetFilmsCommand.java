@@ -2,7 +2,7 @@ package com.epam.web.command.impl;
 
 import com.epam.web.command.Command;
 import com.epam.web.command.CommandResult;
-import com.epam.web.dto.MovieDTO;
+import com.epam.web.dto.FilmDTO;
 import com.epam.web.service.FilmService;
 import com.epam.web.service.ServiceException;
 
@@ -25,7 +25,7 @@ public class GetFilmsCommand implements Command {
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
         String page = request.getParameter("pageNumber");
         int pageNumber = Integer.parseInt(page);
-        List<MovieDTO> movies = filmService.getNextMovies(pageNumber);
+        List<FilmDTO> movies = filmService.getNextMovies(pageNumber);
         int totalPages = filmService.getPagesCount();
         HttpSession session = request.getSession();
         session.setAttribute("movies", movies);

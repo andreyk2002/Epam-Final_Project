@@ -32,8 +32,7 @@ public class SaveFilmCommand implements Command {
         try {
             ServletFileUpload upload = new ServletFileUpload(new DiskFileItemFactory());
             List<FileItem> inputs = upload.parseRequest(request);
-            Film.Builder builder = parseFormData(inputs);
-            Film film = builder.build();
+            Film film = parseFormData(inputs);
             filmService.saveFilm(film);
         } catch (Exception e) {
             throw new ServiceException(e.getMessage(), e);
@@ -41,7 +40,7 @@ public class SaveFilmCommand implements Command {
         return CommandResult.redirect(request.getContextPath() + FILMS_PAGE);
     }
 
-    private Film.Builder parseFormData(List<FileItem> images) throws Exception {
+    private Film parseFormData(List<FileItem> images) throws Exception {
         Film.Builder builder = new Film.Builder();
         for (FileItem image : images) {
             boolean isFromField = image.isFormField();
@@ -50,7 +49,7 @@ public class SaveFilmCommand implements Command {
             ParseResult parseResult = parser.parse(image);
             setField(builder, parseResult);
         }
-        return builder;
+        return builder.build();
     }
 
     private void setField(Film.Builder builder, ParseResult parseResult) {
@@ -71,6 +70,4 @@ public class SaveFilmCommand implements Command {
                 builder.withDescription(fieldValue);
         }
     }
-
-
 }
