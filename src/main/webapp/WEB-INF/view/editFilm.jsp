@@ -14,15 +14,16 @@
 <body>
 <jsp:include page="fragments/header.jsp"/>
 <div class="dark-wrapper">
-    <form method="post" class="add-film-form-admin" action="${pageContext.request.contextPath}/controller">
+    <form method="post" enctype="multipart/form-data" class="add-film-form-admin"
+          action="${pageContext.request.contextPath}/controller?commandName=updateFilm">
         <h2 class="add-film-title">Change film ${movie.name}</h2>
-        <input type="hidden" name="commandName" value="updateFilm">
         <input type="hidden" name="filmId" value="${movie.id}"/>
+        <input type="hidden" name="image_path" value="${movie.imagePath}"/>
         <label class="edit-label">Change name:</label>
-        <input type="hidden" value="${movie.imagePath}" name="imagePath"/>
-        <input class="film-name film-input" name="name" type="text" value="${movie.name}"/>
+        <input  class="film-name film-input" name="name" type="text" value="${movie.name}"/>
+
         <br>
-        <label class="edit-label">Change film description</label>
+        <label  class="edit-label">Change film description</label>
         <br>
         <textarea class="film-description-admin film-input" rows="5" name="description"
                   value="${movie.description}">${movie.description}</textarea>

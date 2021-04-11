@@ -3,10 +3,7 @@ package com.epam.web.command.impl;
 import com.epam.web.command.Command;
 import com.epam.web.command.CommandResult;
 import com.epam.web.entity.Film;
-import com.epam.web.parser.FilmField;
-import com.epam.web.parser.FormParser;
-import com.epam.web.parser.FormParserFactory;
-import com.epam.web.parser.ParseResult;
+import com.epam.web.parser.*;
 import com.epam.web.service.FilmService;
 import com.epam.web.service.ServiceException;
 import org.apache.commons.fileupload.FileItem;
@@ -30,9 +27,8 @@ public class SaveFilmCommand implements Command {
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
         try {
-            ServletFileUpload upload = new ServletFileUpload(new DiskFileItemFactory());
-            List<FileItem> inputs = upload.parseRequest(request);
-            Film film = parseFormData(inputs);
+            FormParser processor = new FormParser();
+            Film film = processor.parseFormData(request);
             filmService.saveFilm(film);
         } catch (Exception e) {
             throw new ServiceException(e.getMessage(), e);
@@ -40,34 +36,4 @@ public class SaveFilmCommand implements Command {
         return CommandResult.redirect(request.getContextPath() + FILMS_PAGE);
     }
 
-    private Film parseFormData(List<FileItem> images) throws Exception {
-        Film.Builder builder = new Film.Builder();
-        for (FileItem image : images) {
-            boolean isFromField = image.isFormField();
-            FormParserFactory parserFactory = new FormParserFactory();
-            FormParser parser = parserFactory.createParser(isFromField);
-            ParseResult parseResult = parser.parse(image);
-            setField(builder, parseResult);
-        }
-        return builder.build();
-    }
-
-    private void setField(Film.Builder builder, ParseResult parseResult) {
-        FilmField fieldType = parseResult.getFieldType();
-        String fieldValue = parseResult.getFieldValue();
-        switch (fieldType) {
-            case NAME:
-                builder.withName(fieldValue);
-                break;
-            case GENRE_ID:
-                long genreId = Long.parseLong(fieldValue);
-                builder.withGenreId(genreId);
-                break;
-            case IMAGE_PATH:
-                builder.withImagePath(fieldValue);
-                break;
-            case DESCRIPTION:
-                builder.withDescription(fieldValue);
-        }
-    }
 }

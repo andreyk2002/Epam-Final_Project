@@ -21,7 +21,7 @@
         <textarea class="film-description-admin film-input" rows="5" name="description"
                   placeholder="enter film description"></textarea>
         <br/>
-        <select required class="genres-select" name="genre_id">
+        <select required class="genres-select" name="genreId">
             <c:forEach items="${genres}" var="genre">
                 <option value="${genre.id}">${genre.name}</option>
             </c:forEach>
@@ -29,7 +29,7 @@
         <br/>
         <label class="image-load">Load image for film</label>
         <br/>
-        <input class="film-input" name="Image" type="file" style="color: white"/>
+        <input required class="film-input" name="Image" type="file" style="color: white"/>
         <br/>
         <button type="submit" class="rate-film-button">Create</button>
     </form>

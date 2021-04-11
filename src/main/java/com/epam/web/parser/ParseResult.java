@@ -1,6 +1,6 @@
 package com.epam.web.parser;
 
-public class ParseResult {
+class ParseResult {
 
     private final FilmField fieldType;
     private final String fieldValue;
