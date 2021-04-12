@@ -16,29 +16,32 @@
 <div class="dark-wrapper">
     <form method="post" enctype="multipart/form-data" class="add-film-form-admin"
           action="${pageContext.request.contextPath}/controller?commandName=updateFilm">
-        <h2 class="add-film-title">Change film ${movie.name}</h2>
+        <h2 class="add-film-title">
+            <fmt:message key="local.changeFilm"/> ${movie.name}
+        </h2>
         <input type="hidden" name="filmId" value="${movie.id}"/>
         <input type="hidden" name="image_path" value="${movie.imagePath}"/>
-        <label class="edit-label">Change name:</label>
+        <label class="edit-label"><fmt:message key="local.changeName"/>:</label>
         <input  class="film-name film-input" name="name" type="text" value="${movie.name}"/>
 
         <br>
-        <label  class="edit-label">Change film description</label>
+        <label  class="edit-label"><fmt:message key="local.filmDescription"/></label>
         <br>
-        <textarea class="film-description-admin film-input" rows="5" name="description"
+        <textarea class="film-description-admin film-input" rows="15" name="description"
                   value="${movie.description}">${movie.description}</textarea>
         <br/>
-        <label class="edit-label">Change genre to:</label>
+        <label class="edit-label"><fmt:message key="local.changeGenre"/>:</label>
         <select class="genres-select" value="${movie.genreId}" name="genreId">
             <c:forEach items="${genres}" var="genre">
                 <option value="${genre.id}">${genre.name}</option>
             </c:forEach>
         </select>
         <br/>
-        <label class="edit-label">Change Film image</label>
+        <label class="edit-label"><fmt:message key="local.changeImage"/></label>
         <input class="film-input" name="Image" type="file" style="color: white"/>
         <button type="submit" class="rate-film-button">OK</button>
     </form>
 </div>
+<jsp:include page="fragments/footer.jsp"/>
 </body>
 </html>

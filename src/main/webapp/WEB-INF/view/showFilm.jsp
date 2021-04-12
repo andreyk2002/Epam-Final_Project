@@ -13,7 +13,7 @@
 </head>
 <body>
 <jsp:include page="fragments/header.jsp"/>
-<section class="intro" style="background: url(${film.imagePath})">
+<section class="intro" style="background: url(static/img/movies/Interstellar.jpg)">
     <div class="wrapper">
         <h1 class="into-title">${film.name}</h1>
         <c:if test="${param.errorMessage!=null}">
@@ -42,9 +42,9 @@
             <form class="film-review" action="${pageContext.request.contextPath}/controller">
                 <input type="hidden" name="commandName" value="reviewFilm">
                 <input type="hidden" name="filmID" value="${film.id}">
-                <textarea name="review" class="review" rows="20" placeholder="leave a review">
+                <textarea name="review" class="review" rows="20" placeholder="<fmt:message key="local.review"/>">
                 </textarea>
-                <button class="rate-film-button" type="submit">OK</button>
+                <button class="rate-film-button" type="submit"><fmt:message key="local.review"/></button>
             </form>
         </div>
     </div>

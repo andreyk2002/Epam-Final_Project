@@ -17,11 +17,11 @@
     <table class="users-table">
         <thead>
         <tr>
-            <td>Action</td>
-            <td>Username</td>
-            <td>Rating</td>
-            <td>Role</td>
-            <td>Status</td>
+            <td><fmt:message key="local.on_user_action"/></td>
+            <td><fmt:message key="local.username"/></td>
+            <td><fmt:message key="local.rating"/></td>
+            <td><fmt:message key="local.role"/></td>
+            <td><fmt:message key="local.user_status"/></td>
         </tr>
         </thead>
         <tbody>
@@ -34,10 +34,10 @@
                         <input type="hidden" name="userId" value="${user.id}">
                         <button type="submit">
                             <c:if test="${user.blocked}">
-                                unblock
+                                <fmt:message key="local.unblock"/>
                             </c:if>
                             <c:if test="${!user.blocked}">
-                                block
+                                <fmt:message key="local.block"/>
                             </c:if>
                         </button>
                     </form>
@@ -58,5 +58,6 @@
         </tbody>
     </table>
 </div>
+<jsp:include page="fragments/footer.jsp"/>
 </body>
 </html>

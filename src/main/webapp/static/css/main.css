@@ -617,11 +617,13 @@ table, th, td {
 
 /*styles for add film page*/
 
-.add-film-form-admin {
+.admin {
     padding-left: 5%;
     margin-top: 300px;
     width: 100%;
     text-align: center;
+    background-color: black;
+    margin-bottom: 50px;
 }
 
 .film-name {

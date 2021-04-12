@@ -25,7 +25,9 @@
     <div class="add-film">
         <form class="add-film-form" action="${pageContext.request.contextPath}/controller">
             <input type="hidden" name="commandName" value="addFilm">
-            <button class="add-film-btn" type="submit">Add new film</button>
+            <button class="add-film-btn" type="submit">
+                <fmt:message key="local.addFilm"/>
+            </button>
         </form>
     </div>
 </c:if>
@@ -63,6 +65,7 @@
                     </div>
                 </div>
             </a>
+
         </c:forEach>
         <div class="pages">
             <c:forEach var="i" begin="0" end="${sessionScope.pagesCount}">

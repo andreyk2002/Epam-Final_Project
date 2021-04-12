@@ -16,10 +16,11 @@
 <div class="dark-wrapper">
     <form method="post" enctype="multipart/form-data" class="add-film-form-admin"
           action="${pageContext.request.contextPath}/controller?commandName=saveFilm">
-        <h2 class="add-film-title">Add new film</h2>
-        <input required class="film-name film-input" name="name" type="text" placeholder="enter film name"/>
-        <textarea class="film-description-admin film-input" rows="5" name="description"
-                  placeholder="enter film description"></textarea>
+        <h2 class="add-film-title"><fmt:message key="local.addFilm"/></h2>
+        <input required class="film-name film-input" name="name" type="text"
+               placeholder="<fmt:message key="local.enterName"/>"/>
+        <textarea class="film-description-admin film-input" rows="15" name="description"
+                  placeholder="<fmt:message key="local.enterDescription"/>"></textarea>
         <br/>
         <select required class="genres-select" name="genreId">
             <c:forEach items="${genres}" var="genre">
@@ -27,13 +28,12 @@
             </c:forEach>
         </select>
         <br/>
-        <label class="image-load">Load image for film</label>
+        <label class="image-load"><fmt:message key="local.filmImageLoad"/></label>
         <br/>
         <input required class="film-input" name="Image" type="file" style="color: white"/>
         <br/>
-        <button type="submit" class="rate-film-button">Create</button>
+        <button type="submit" class="rate-film-button"><fmt:message key="local.filmCreate"/></button>
     </form>
 </div>
-
-
-
+<jsp:include page="fragments/footer.jsp"/>
+</body>
