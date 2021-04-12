@@ -1,6 +1,7 @@
 <%@page contentType="text/html; charset=utf-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib prefix="ctg" uri="customTags" %>
 <fmt:setLocale value="${sessionScope.local}"/>
 <fmt:setBundle basename="local"/>
 <html>
@@ -20,13 +21,7 @@
 </section>
 <section class="benefits">
     <div class="personal-wrapper">
-        <h2 class="personal-title">
-            <fmt:message key="local.username"/>: ${sessionScope.user.login}
-        </h2>
-        <div>
-            <h3 class="personal-info"><fmt:message key="local.rating"/>: ${sessionScope.user.rating}</h3>
-            <h3 class="personal-info"><fmt:message key="local.role"/>: ${sessionScope.user.role}</h3>
-        </div>
+       <ctg:userInfoTag user="${sessionScope.user}" locale="${sessionScope.local}"/>
     </div>
 </section>
 <jsp:include page="fragments/footer.jsp"/>
