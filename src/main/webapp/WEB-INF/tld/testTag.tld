@@ -11,14 +11,20 @@
         <body-content>empty</body-content>
         <attribute>
             <name>user</name>
+            <required>true</required>
             <rtexprvalue>true</rtexprvalue>
             <type>com.epam.web.entity.User</type>
-            <required>true</required>
         </attribute>
+    </tag>
+    <tag>
+        <name>pagingTag</name>
+        <tag-class>com.epam.web.tags.PagingTag</tag-class>
+        <body-content>empty</body-content>
         <attribute>
-            <name>locale</name>
-            <rtexprvalue>true</rtexprvalue>
+            <name>pagesCount</name>
             <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
         </attribute>
     </tag>
 </taglib>

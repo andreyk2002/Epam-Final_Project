@@ -8,17 +8,12 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.TagSupport;
 import java.io.IOException;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class UserInfoTag extends TagSupport {
 
     private User user;
-    private String locale;
 
-    public void setLocale(String locale) {
-        this.locale = locale;
-    }
 
     public void setUser(User user) {
         this.user = user;
@@ -34,18 +29,12 @@ public class UserInfoTag extends TagSupport {
         String ratingLabel = resource.getString("local.rating");
         String login = user.getLogin();
         Role role = user.getRole();
+
         double rating = user.getRating();
         StringBuilder content = new StringBuilder();
-        content.append("<h2 class=\"personal-title\">");
-        content.append(loginLabel).append(" : ");
-        content.append(login);
-        content.append("</h2>");
-        content.append("<div>");
-        content.append("<h2>").append(ratingLabel).append(" : ");
-        content.append(rating).append("</h2>");
-        content.append("<h2>").append(roleLabel).append(" : ");
-        content.append(role).append("</h2>");
-        content.append("</div>");
+        content.append(makeTitle(loginLabel, login));
+        content.append(makeInfo(ratingLabel, Double.toString(rating)));
+        content.append(makeInfo(roleLabel, role.toString()));
         try {
             JspWriter out = pageContext.getOut();
             out.write(content.toString());
@@ -55,14 +44,35 @@ public class UserInfoTag extends TagSupport {
         return SKIP_BODY;
     }
 
+    private StringBuilder makeInfo(String label, String content) {
+        StringBuilder info = new StringBuilder();
+        info.append("<h3 class=\"personal-info\">");
+        info.append(label);
+        info.append(" : ");
+        info.append(content);
+        info.append("</h3>");
+        return info;
+    }
+
+    private StringBuilder makeTitle(String loginLabel, String login) {
+        StringBuilder title = new StringBuilder();
+        title.append("<h2 class=\"personal-title\">");
+        title.append(loginLabel);
+        title.append(" : ");
+        title.append(login);
+        title.append(login);
+        title.append("</h2>");
+        return title;
+    }
+
     private String getLocale() {
         HttpSession session = pageContext.getSession();
         Object local = session.getAttribute("local");
-        return (String)local;
+        return (String) local;
     }
 
     @Override
-    public int doEndTag() throws JspException {
+    public int doEndTag() {
         return EVAL_PAGE;
     }
 }

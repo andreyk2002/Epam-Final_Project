@@ -21,7 +21,7 @@
 </section>
 <section class="benefits">
     <div class="personal-wrapper">
-       <ctg:userInfoTag user="${sessionScope.user}" locale="${sessionScope.local}"/>
+       <ctg:userInfoTag user="${sessionScope.user}"/>
     </div>
 </section>
 <jsp:include page="fragments/footer.jsp"/>

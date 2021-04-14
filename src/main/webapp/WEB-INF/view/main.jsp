@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <fmt:setLocale value="${sessionScope.local}"/>
+<%@taglib prefix="ctg" uri="customTags" %>
 <fmt:setBundle basename="local"/>
 <html>
 <head>
@@ -68,10 +69,7 @@
 
         </c:forEach>
         <div class="pages">
-            <c:forEach var="i" begin="0" end="${sessionScope.pagesCount}">
-                <a class="film-link"
-                   href="${pageContext.request.contextPath}/controller?commandName=showFilmsPage&pageNumber=${i}">${i}</a>
-            </c:forEach>
+            <ctg:pagingTag pagesCount="${pagesCount}"/>
         </div>
     </div>
     <jsp:include page="fragments/footer.jsp"/>
