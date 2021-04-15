@@ -389,6 +389,7 @@ img.type-image {
 }
 
 .add-film-form {
+
     margin-left: 40%;
     padding-bottom: 10px;
 }
@@ -609,6 +610,7 @@ table, th, td {
 }
 
 .table-link {
+    padding-left: 20px;
     text-decoration: none;
     font-size: 20px;
 }
@@ -616,6 +618,11 @@ table, th, td {
 /*end of user manage page styles*/
 
 /*styles for add film page*/
+
+.add-film-form-admin{
+    background-color: black;
+    margin-top: 100px;
+}
 
 .admin {
     padding-left: 5%;

@@ -8,6 +8,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.Future;
 
@@ -18,7 +19,6 @@ public class RatingService {
 
     public RatingService(DaoHelperFactory daoHelperFactory) throws ServiceException {
         this.daoHelperFactory = daoHelperFactory;
-
         try (DaoHelper helper = daoHelperFactory.create()) {
             this.ratingDao = helper.createRatingDao();
         } catch (DaoException e) {
@@ -32,7 +32,7 @@ public class RatingService {
             helper.startTransaction();
             boolean result = ratingDao.addRating(filmId, userId, rating);
             if (result) {
-                ExecutorService service = new ForkJoinPool(1);
+                ExecutorService service = Executors.newSingleThreadExecutor();
                 RatingChanger changer = new RatingChanger(filmId, daoHelperFactory);
                 Future<Boolean> future = service.submit(changer);
                 future.get();

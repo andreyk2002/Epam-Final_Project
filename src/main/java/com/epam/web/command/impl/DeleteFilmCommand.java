@@ -27,6 +27,6 @@ public class DeleteFilmCommand implements Command {
         } catch (DaoException e) {
             throw new ServiceException(e.getMessage(), e);
         }
-        return CommandResult.redirect(request.getContextPath() + FIRST_PAGE);
+        return CommandResult.redirect(FIRST_PAGE);
     }
 }

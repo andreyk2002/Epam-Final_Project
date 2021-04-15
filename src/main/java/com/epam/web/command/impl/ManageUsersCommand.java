@@ -13,7 +13,7 @@ import java.util.List;
 
 public class ManageUsersCommand implements Command {
 
-    private static final String PAGE = "/controller?commandName=userManagePage";
+    private static final String USER_MANAGE_PAGE = "/controller?commandName=userManagePage";
     private final UserService userService;
 
     public ManageUsersCommand(UserService userService) {
@@ -25,6 +25,6 @@ public class ManageUsersCommand implements Command {
         HttpSession session = request.getSession();
         List<User> allUsers = userService.getAllUsers();
         session.setAttribute("users", allUsers);
-        return CommandResult.redirect(request.getContextPath() + PAGE);
+        return CommandResult.redirect(USER_MANAGE_PAGE);
     }
 }

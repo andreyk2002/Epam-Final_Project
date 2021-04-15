@@ -60,7 +60,6 @@ public class UserInfoTag extends TagSupport {
         title.append(loginLabel);
         title.append(" : ");
         title.append(login);
-        title.append(login);
         title.append("</h2>");
         return title;
     }

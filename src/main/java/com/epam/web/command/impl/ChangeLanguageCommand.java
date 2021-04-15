@@ -21,7 +21,8 @@ public class ChangeLanguageCommand implements Command {
         HttpSession session = request.getSession();
         String local = request.getParameter(LOCAL);
         session.setAttribute(LOCAL, local);
-        String commandPath = request.getContextPath() + COMMAND;
+        String commandPath = COMMAND;
+
         String page = request.getParameter(CURRENT_PAGE);
         if (!"".equals(page)) {
             commandPath += page;

@@ -26,12 +26,14 @@ class RatingChanger implements Callable<Boolean> {
         this.daoHelperFactory = daoHelperFactory;
     }
 
+
+    //Fix userRating
     @Override
     public Boolean call() {
         try (DaoHelper helper = daoHelperFactory.create()) {
             RatingDao ratingDao = helper.createRatingDao();
             Optional<Rating> optionalRating = ratingDao.getRatingForCheck(filmId);
-            if (!optionalRating.isPresent()) {
+            if (optionalRating.isEmpty()) {
                 return false;
             }
             Rating ratingToCheck = optionalRating.get();

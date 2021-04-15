@@ -13,8 +13,7 @@ import javax.servlet.http.HttpSession;
 public class RateFilmCommand implements Command {
 
     private static final String SHOW_MOVIE = "/controller?commandName=movie&id=";
-    private static final String BACK_TO_MOVIE = "/controller?commandName=showMoviePage";
-    public static final String ALREADY_RATED = "&errorMessage=local.alreadyRatedError";
+    private static final String BACK_TO_MOVIE = "/controller?commandName=showMoviePage&errorMessage=local.alreadyRatedError";
     private final RatingService service;
 
     public RateFilmCommand(RatingService ratingService) {
@@ -33,11 +32,9 @@ public class RateFilmCommand implements Command {
         long userId = user.getId();
 
         if (!service.rateFilm(filmId, userId, rating)) {
-            String redirectError = request.getContextPath() + BACK_TO_MOVIE + ALREADY_RATED;
-            return CommandResult.redirect(redirectError);
+            return CommandResult.redirect(BACK_TO_MOVIE);
         }
-        String redirectString = request.getContextPath() + SHOW_MOVIE + filmId;
-        return CommandResult.redirect(redirectString);
+        return CommandResult.redirect(SHOW_MOVIE + filmId);
 
     }
 }

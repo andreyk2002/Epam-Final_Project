@@ -9,6 +9,7 @@ public class PagingTag extends TagSupport {
     public static final String PATH = "/controller?commandName=showFilmsPage&pageNumber=";
     private int pagesCount;
     private static final String LINK_START  = "<a class=\"film-link\" href=";
+
     public void setPagesCount(int pagesCount) {
         this.pagesCount = pagesCount;
     }

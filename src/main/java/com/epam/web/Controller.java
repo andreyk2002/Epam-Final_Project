@@ -57,7 +57,8 @@ public class Controller extends HttpServlet {
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
             dispatcher.forward(request, response);
         } else {
-            response.sendRedirect(page);
+            String contextPath = request.getContextPath();
+            response.sendRedirect(contextPath + page);
         }
     }
 }

@@ -28,6 +28,6 @@ public class ReviewFilmCommand implements Command {
         String review = request.getParameter("review");
         long filmID = Long.parseLong(filmIdString);
         reviewService.reviewFilm(filmID, userId, review);
-        return CommandResult.redirect(request.getContextPath() + SHOW_MOVIE + filmID);
+        return CommandResult.redirect(SHOW_MOVIE + filmID);
     }
 }

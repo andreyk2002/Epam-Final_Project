@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class ChangeUserStatusCommand implements Command {
-    private static final String PAGE = "/controller?commandName=manageUsers";
+    private static final String MANAGE_USERS = "/controller?commandName=manageUsers";
     private final UserService userService;
 
     public ChangeUserStatusCommand(UserService changeStatusService) {
@@ -24,6 +24,6 @@ public class ChangeUserStatusCommand implements Command {
         long userId = Long.parseLong(userIdParam);
 
         userService.changeStatus(userId, blocked);
-        return CommandResult.redirect(request.getContextPath() + PAGE);
+        return CommandResult.redirect(MANAGE_USERS);
     }
 }

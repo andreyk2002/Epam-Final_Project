@@ -2,11 +2,12 @@ package com.epam.web.command;
 
 import com.epam.web.command.impl.*;
 import com.epam.web.dao.factory.DaoHelperFactory;
+import com.epam.web.parser.FormParser;
 import com.epam.web.service.*;
 
 public class CommandFactory {
 
-    public static final String DELETE_FILM = "deleteFilm";
+    private static final String DELETE_FILM = "deleteFilm";
     private static final String PERSONAL = "personalPage";
     private static final String SHOW_FILM_PAGE = "/WEB-INF/view/showFilm.jsp";
     private static final String MAIN_PAGE = "/WEB-INF/view/main.jsp";
@@ -36,11 +37,10 @@ public class CommandFactory {
     private static final String CHANGE_USER_STATUS = "changeUserStatus";
     private static final String ADD_FILM = "addFilm";
     private static final String SAVE_FILM = "saveFilm";
-    public static final String UPDATE_FILM = "updateFilm";
-
+    private static final String UPDATE_FILM = "updateFilm";
+    private final DaoHelperFactory helperFactory = new DaoHelperFactory();
 
     public Command create(String commandName) throws CommandNotExistException, ServiceException {
-        DaoHelperFactory helperFactory = new DaoHelperFactory();
         switch (commandName) {
             case LOGIN_PAGE_COMMAND:
                 return new ShowPageCommand(LOGIN_PAGE);
@@ -81,27 +81,29 @@ public class CommandFactory {
                 UserService userService = new UserService(helperFactory);
                 return new ManageUsersCommand(userService);
             case CHANGE_USER_RATING:
-                UserService changeRatingService =new UserService(helperFactory);
+                UserService changeRatingService = new UserService(helperFactory);
                 return new ChangeUserRatingCommand(changeRatingService);
             case CHANGE_USER_STATUS:
                 UserService changeStatusService = new UserService(helperFactory);
                 return new ChangeUserStatusCommand(changeStatusService);
             case ADD_FILM:
                 GenreService genreService = new GenreService(helperFactory);
-                return new AddFilmCommand(genreService);
+                return new AddFilmPageCommand(genreService);
             case SAVE_FILM:
                 FilmService saveFilmService = new FilmService(helperFactory);
-                return new SaveFilmCommand(saveFilmService);
+                FormParser parser = new FormParser();
+                return new AddFilmCommand(saveFilmService, parser);
             case EDIT_FILM:
                 FilmService editFilmService = new FilmService(helperFactory);
                 GenreService filmGenreService = new GenreService(helperFactory);
-                return new EditFilmCommand(editFilmService, filmGenreService);
+                return new EditFilmPageCommand(editFilmService, filmGenreService);
             case DELETE_FILM:
                 FilmService deleteFilmService = new FilmService(helperFactory);
                 return new DeleteFilmCommand(deleteFilmService);
             case UPDATE_FILM:
+                FormParser formParser = new FormParser();
                 FilmService updateFilmService = new FilmService(helperFactory);
-                return new UpdateFilmCommand(updateFilmService);
+                return new EditFilmCommand(updateFilmService, formParser);
             default:
                 throw new CommandNotExistException("Unknown type = " + commandName);
         }

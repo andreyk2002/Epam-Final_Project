@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class ChangeUserRatingCommand implements Command {
-    private static final String PAGE = "/controller?commandName=manageUsers";
+    private static final String MANAGE_USERS = "/controller?commandName=manageUsers";
     private final UserService userService;
 
     public ChangeUserRatingCommand(UserService changeRatingService) {
@@ -24,6 +24,6 @@ public class ChangeUserRatingCommand implements Command {
         double newRating = Double.parseDouble(newRatingParam);
 
         userService.changeRating(userId, newRating);
-        return CommandResult.redirect(request.getContextPath() + PAGE);
+        return CommandResult.redirect(MANAGE_USERS);
     }
 }

@@ -3,6 +3,7 @@ package com.epam.web.connection;
 import com.epam.web.dao.DaoException;
 import com.mysql.cj.jdbc.Driver;
 
+import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayDeque;
@@ -54,8 +55,9 @@ public class ConnectionPool {
 
     private void addConnections() throws DaoException {
         for (int i = 0; i < CONNECTIONS_ALLOWED; i++) {
-            ProxyConnection connection = connectionFactory.create(this);
-            availableConnections.add(connection);
+            Connection connection = connectionFactory.create();
+            ProxyConnection proxyConnection = new ProxyConnection(connection, this);
+            availableConnections.add(proxyConnection);
         }
     }
 

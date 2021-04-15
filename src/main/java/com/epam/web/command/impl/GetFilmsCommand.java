@@ -13,7 +13,7 @@ import java.util.List;
 
 public class GetFilmsCommand implements Command {
 
-    public static final String COMMAND_URL = "/controller?commandName=mainPage&pageNumber=";
+    public static final String FILM_PAGE = "/controller?commandName=mainPage&pageNumber=";
     private final FilmService filmService;
 
     public GetFilmsCommand(FilmService filmService) {
@@ -30,6 +30,6 @@ public class GetFilmsCommand implements Command {
         HttpSession session = request.getSession();
         session.setAttribute("movies", movies);
         session.setAttribute("pagesCount", totalPages);
-        return CommandResult.redirect(request.getContextPath() + COMMAND_URL + pageNumber);
+        return CommandResult.redirect(FILM_PAGE + pageNumber);
     }
 }

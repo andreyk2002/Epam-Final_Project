@@ -9,23 +9,31 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class ConnectionFactory {
+    private final String url;
+    private final Properties properties;
 
-    //Avoid multiple reading properties (constructor)
-    //transaction on Join
-    public ProxyConnection create(ConnectionPool pool) throws DaoException {
+    public ConnectionFactory() {
+        ResourceBundle resource = ResourceBundle.getBundle("database");
+        url = resource.getString("url");
+        properties = getProperties(resource);
+    }
+
+    public Connection create() throws DaoException {
         try {
-            ResourceBundle resource = ResourceBundle.getBundle("database");
-            String url = resource.getString("url");
-            String user = resource.getString("user");
-            String password = resource.getString("password");
-            Properties properties = new Properties();
-            properties.put("user", user);
-            properties.put("password", password);
-            Connection connection = DriverManager.getConnection(url, properties);
-            return new ProxyConnection(connection, pool);
+            return DriverManager.getConnection(url, properties);
         } catch (SQLException e) {
             throw new DaoException(e.getMessage(), e);
         }
+    }
+
+    private Properties getProperties(ResourceBundle resource) {
+        String user = resource.getString("user");
+        String password = resource.getString("password");
+        Properties properties = new Properties();
+        properties.put("url", url);
+        properties.put("user", user);
+        properties.put("password", password);
+        return properties;
     }
 
 }

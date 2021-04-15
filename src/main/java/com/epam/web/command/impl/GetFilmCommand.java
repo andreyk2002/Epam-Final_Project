@@ -33,6 +33,6 @@ public class GetFilmCommand implements Command {
         } catch (DaoException e) {
             throw new ServiceException(e.getMessage(), e);
         }
-        return CommandResult.redirect(request.getContextPath() + SHOW_MOVIE);
+        return CommandResult.redirect(SHOW_MOVIE);
     }
 }

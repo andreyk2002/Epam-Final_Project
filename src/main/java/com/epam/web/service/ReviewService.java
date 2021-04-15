@@ -15,10 +15,8 @@ public class ReviewService {
 
     public void reviewFilm(long filmID, long userID, String review) throws ServiceException {
         try (DaoHelper daoHelper = daoHelperFactory.create()) {
-            daoHelper.startTransaction();
             ReviewDao dao = daoHelper.createReviewDao();
             dao.reviewFilm(filmID, userID, review);
-            daoHelper.endTransaction();
         } catch (DaoException e) {
             throw new ServiceException(e.getMessage(), e);
         }

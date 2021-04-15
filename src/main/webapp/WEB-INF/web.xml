@@ -16,7 +16,7 @@
         <filter-class>com.epam.web.filter.AnonymousAccessFilter</filter-class>
         <init-param>
             <param-name>loginCommand</param-name>
-            <param-value>/index.jsp</param-value>
+            <param-value>?commandName=loginPage</param-value>
         </init-param>
         <init-param>
             <param-name>errorPage</param-name>
@@ -25,8 +25,8 @@
     </filter>
     <filter-mapping>
         <filter-name>loginfilter</filter-name>
-        <url-pattern>/WEB-INF/*</url-pattern>
-        <dispatcher>FORWARD</dispatcher>
+        <url-pattern>/controller</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
     </filter-mapping>
     <filter>
         <filter-name>checkRoleFilter</filter-name>
