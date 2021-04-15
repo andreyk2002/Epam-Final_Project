@@ -1,6 +1,6 @@
 package com.epam.web.command;
 
-public class CommandNotExistException extends Exception {
+public class CommandNotExistException extends RuntimeException {
     public CommandNotExistException() {
     }
 

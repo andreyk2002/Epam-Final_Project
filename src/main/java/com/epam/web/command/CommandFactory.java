@@ -2,6 +2,7 @@ package com.epam.web.command;
 
 import com.epam.web.command.impl.*;
 import com.epam.web.dao.factory.DaoHelperFactory;
+import com.epam.web.entity.User;
 import com.epam.web.parser.FormParser;
 import com.epam.web.service.*;
 
@@ -38,9 +39,10 @@ public class CommandFactory {
     private static final String ADD_FILM = "addFilm";
     private static final String SAVE_FILM = "saveFilm";
     private static final String UPDATE_FILM = "updateFilm";
+    public static final String GET_USER = "getUser";
     private final DaoHelperFactory helperFactory = new DaoHelperFactory();
 
-    public Command create(String commandName) throws CommandNotExistException, ServiceException {
+    public Command create(String commandName) throws ServiceException {
         switch (commandName) {
             case LOGIN_PAGE_COMMAND:
                 return new ShowPageCommand(LOGIN_PAGE);
@@ -63,6 +65,9 @@ public class CommandFactory {
             case LOGIN:
                 UserService service = new UserService(helperFactory);
                 return new LoginCommand(service);
+            case GET_USER:
+                UserService getUserService = new UserService(helperFactory);
+                return new GetUserCommand(getUserService);
             case PERSONAL:
                 return new PersonalPageCommand();
             case FILMS_PAGE:

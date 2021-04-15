@@ -10,15 +10,16 @@ import java.io.IOException;
 import java.util.Set;
 
 public class AnonymousAccessFilter implements Filter {
-    private static final Set<String> excludedCommands = Set.of("login", "changeLanguage", "loginPage");
+    private static final Set<String> allowedCommands = Set.of("login", "changeLanguage");
     private String errorPage;
     private String loginCommand;
-    private String login = "/index.jsp";
+    private String loginPage;
 
     @Override
     public void init(FilterConfig filterConfig) {
         errorPage = filterConfig.getInitParameter("errorPage");
         loginCommand = filterConfig.getInitParameter("loginCommand");
+        loginPage = filterConfig.getInitParameter("loginPage");
     }
 
     @Override
@@ -26,15 +27,16 @@ public class AnonymousAccessFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         String commandName = request.getParameter("commandName");
         HttpServletResponse response = (HttpServletResponse) servletResponse;
-        if("loginPage".equals(commandName)){
-            request.getRequestDispatcher(login).forward(request, response);
+        if (loginPage.equals(commandName)) {
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher(loginPage);
+            requestDispatcher.forward(request, response);
             return;
         }
-        if(!excludedCommands.contains(commandName)) {
+        if (!allowedCommands.contains(commandName)) {
             HttpSession session = request.getSession();
             User user = (User) session.getAttribute("user");
             if (user == null) {
-                response.sendRedirect(loginCommand);
+                response.sendRedirect(request.getContextPath() + "?commandName=" + loginCommand);
                 return;
             }
 
