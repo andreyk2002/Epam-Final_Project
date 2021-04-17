@@ -32,11 +32,8 @@ public class RatingService {
             helper.startTransaction();
             boolean result = ratingDao.addRating(filmId, userId, rating);
             if (result) {
-                ExecutorService service = Executors.newSingleThreadExecutor();
                 RatingChanger changer = new RatingChanger(filmId, daoHelperFactory);
-                Future<Boolean> future = service.submit(changer);
-                future.get();
-                service.shutdown();
+                changer.changeRating();
             }
             helper.endTransaction();
             return result;

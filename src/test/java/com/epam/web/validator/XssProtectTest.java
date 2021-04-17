@@ -1,0 +1,27 @@
+package com.epam.web.validator;
+
+import org.apache.tools.ant.taskdefs.Javadoc;
+import org.junit.Assert;
+import org.testng.annotations.Test;
+
+public class XssProtectTest {
+
+    private static final String SAFE_STRING = "abc";
+    private static final String HACK_SCRIPT = "<script>you have been hacked!</script>";
+    private static final String SCRIPT_TEXT = "&lt;script&gt;you have been hacked!&lt;/script&gt;";
+
+
+    private final XssProtect protect = new XssProtect();
+
+    @Test
+    public void testReplaceMalformedShouldNotReplaceSafeString() {
+        String actual = protect.replaceMalformed(SAFE_STRING);
+        Assert.assertEquals(actual, SAFE_STRING);
+    }
+
+    @Test
+    public void testReplaceShouldReplaceSimpleScript(){
+        String actual = protect.replaceMalformed(HACK_SCRIPT);
+        Assert.assertEquals(actual, SCRIPT_TEXT);
+    }
+}

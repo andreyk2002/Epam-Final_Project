@@ -11,5 +11,9 @@ public interface UserDao extends Dao<User> {
 
     void changeRating(long userId, double newRating) throws DaoException;
 
+    void incrementRating(long userId) throws DaoException;
+
+    void decrementRating(long userId) throws DaoException;
+
     void changeStatus(long userId, boolean newStatus) throws DaoException;
 }

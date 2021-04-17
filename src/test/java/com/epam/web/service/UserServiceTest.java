@@ -20,7 +20,7 @@ import static org.testng.Assert.*;
 public class UserServiceTest extends ServiceTest{
 
     public static final int VALID_ID = 0;
-    public static final User VALID_USER = new User(VALID_ID, "admin", 50, Role.ADMIN, false);
+    public static final User VALID_USER = User.unblocked(VALID_ID, "admin", 50, Role.ADMIN);
     public static final String VALID_LOGIN = "admin";
     public static final String VALID_PASSWORD = "admin";
     public static final String INVALID_LOGIN = "";

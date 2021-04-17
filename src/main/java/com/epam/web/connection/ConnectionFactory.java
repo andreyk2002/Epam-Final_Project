@@ -30,7 +30,6 @@ public class ConnectionFactory {
         String user = resource.getString("user");
         String password = resource.getString("password");
         Properties properties = new Properties();
-        properties.put("url", url);
         properties.put("user", user);
         properties.put("password", password);
         return properties;

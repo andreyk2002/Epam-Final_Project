@@ -29,7 +29,7 @@ public class GetFilmCommand implements Command {
         try {
             Optional<FilmDTO> movieOptional = service.getMovieDTOById(id);
             movieOptional.ifPresentOrElse(movie -> session.setAttribute("film", movie),
-                    () -> request.setAttribute("errorMessage", "Movie not found"));
+                    () -> request.setAttribute("errorMessage", "local.movieNotFound"));
         } catch (DaoException e) {
             throw new ServiceException(e.getMessage(), e);
         }

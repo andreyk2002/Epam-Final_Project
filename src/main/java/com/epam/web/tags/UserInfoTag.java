@@ -12,6 +12,13 @@ import java.util.ResourceBundle;
 
 public class UserInfoTag extends TagSupport {
 
+    private static final String INFO_HEADER = "<h3 class=\"personal-info\">";
+    private static final String CLOSE_INFO = "</h3>";
+    private static final String TITLE_HEADER = "<h2 class=\"personal-title\">";
+    private static final String CLOSE_TITLE = "</h2>";
+    public static final String DEFAULT_LOCAL = "local";
+    public static final String LOCAL = "local_";
+
     private User user;
 
 
@@ -22,19 +29,20 @@ public class UserInfoTag extends TagSupport {
     @Override
     public int doStartTag() throws JspException {
         String loc = getLocale();
-        String bundleName = loc == null ? "local" : "local" + "_" + loc;
+        String bundleName = loc == null ? DEFAULT_LOCAL : LOCAL + loc;
         ResourceBundle resource = ResourceBundle.getBundle(bundleName);
         String loginLabel = resource.getString("local.username");
         String roleLabel = resource.getString("local.role");
         String ratingLabel = resource.getString("local.rating");
         String login = user.getLogin();
         Role role = user.getRole();
+        String localizedRole = resource.getString("local." + role);
 
         double rating = user.getRating();
         StringBuilder content = new StringBuilder();
         content.append(makeTitle(loginLabel, login));
         content.append(makeInfo(ratingLabel, Double.toString(rating)));
-        content.append(makeInfo(roleLabel, role.toString()));
+        content.append(makeInfo(roleLabel, localizedRole));
         try {
             JspWriter out = pageContext.getOut();
             out.write(content.toString());
@@ -46,21 +54,21 @@ public class UserInfoTag extends TagSupport {
 
     private StringBuilder makeInfo(String label, String content) {
         StringBuilder info = new StringBuilder();
-        info.append("<h3 class=\"personal-info\">");
+        info.append(INFO_HEADER);
         info.append(label);
         info.append(" : ");
         info.append(content);
-        info.append("</h3>");
+        info.append(CLOSE_INFO);
         return info;
     }
 
     private StringBuilder makeTitle(String loginLabel, String login) {
         StringBuilder title = new StringBuilder();
-        title.append("<h2 class=\"personal-title\">");
+        title.append(TITLE_HEADER);
         title.append(loginLabel);
         title.append(" : ");
         title.append(login);
-        title.append("</h2>");
+        title.append(CLOSE_TITLE);
         return title;
     }
 

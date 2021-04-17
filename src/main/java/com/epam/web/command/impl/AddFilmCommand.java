@@ -2,6 +2,7 @@ package com.epam.web.command.impl;
 
 import com.epam.web.command.Command;
 import com.epam.web.command.CommandResult;
+import com.epam.web.dao.DaoException;
 import com.epam.web.entity.Film;
 import com.epam.web.parser.*;
 import com.epam.web.service.FilmService;
@@ -32,7 +33,7 @@ public class AddFilmCommand implements Command {
         try {
             Film film = parser.parseFormData(request);
             filmService.saveFilm(film);
-        } catch (Exception e) {
+        } catch (DaoException e) {
             throw new ServiceException(e.getMessage(), e);
         }
         return CommandResult.redirect(FILMS_PAGE);

@@ -9,6 +9,7 @@ import java.nio.file.StandardCopyOption;
 
 class ImageFieldParser implements FieldParser {
     private static final String IMAGE_PATH = "../webapps/Epam_Final_Project_war/static/img/movies/";
+    //remove backup in release version`
     private static final String BACKUP_PATH = "D:/Java/Projects/epam-final_project/src/main/webapp/static/img/movies/";
     private static final String SAVE_PATH = "static/img/movies/";
 

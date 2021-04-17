@@ -8,6 +8,7 @@ window.onscroll = () => {
     }
 }
 
+
 let cross = document.getElementById("cross")
 let menu = document.querySelector("nav")
 let menuBtn = document.getElementById("open-menu")

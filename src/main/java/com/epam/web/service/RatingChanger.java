@@ -10,11 +10,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Optional;
-import java.util.concurrent.Callable;
 
-//Package access
-
-class RatingChanger implements Callable<Boolean> {
+class RatingChanger {
 
     private static final Logger LOGGER = LogManager.getLogger(RatingChanger.class);
 
@@ -26,10 +23,7 @@ class RatingChanger implements Callable<Boolean> {
         this.daoHelperFactory = daoHelperFactory;
     }
 
-
-    //Fix userRating
-    @Override
-    public Boolean call() {
+    public Boolean changeRating() {
         try (DaoHelper helper = daoHelperFactory.create()) {
             RatingDao ratingDao = helper.createRatingDao();
             Optional<Rating> optionalRating = ratingDao.getRatingForCheck(filmId);
@@ -43,9 +37,9 @@ class RatingChanger implements Callable<Boolean> {
             UserDao userDao = helper.createUserDao();
             long userID = ratingToCheck.getUserID();
             if (Math.abs(userRating - movieRating) < 0.5) {
-                userDao.changeRating(userID, userRating + 1);
+                userDao.incrementRating(userID);
             } else if (Math.abs(userRating - movieRating) < 1.5) {
-                userDao.changeRating(userID, userRating - 1);
+                userDao.decrementRating(userID);
             }
             return true;
         } catch (DaoException e) {

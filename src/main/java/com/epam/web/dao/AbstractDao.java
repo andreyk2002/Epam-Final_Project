@@ -52,7 +52,7 @@ public abstract class AbstractDao<T> implements Dao<T> {
         if (items.size() == 1) {
             T item = items.get(0);
             return Optional.of(item);
-        } else if (items.size() > 0) {
+        } else if (items.size() > 1) {
             throw new DaoException("More than one record was found");
         } else {
             return Optional.empty();

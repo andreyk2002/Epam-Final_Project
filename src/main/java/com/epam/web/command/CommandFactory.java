@@ -2,14 +2,11 @@ package com.epam.web.command;
 
 import com.epam.web.command.impl.*;
 import com.epam.web.dao.factory.DaoHelperFactory;
-import com.epam.web.entity.User;
 import com.epam.web.parser.FormParser;
 import com.epam.web.service.*;
 
 public class CommandFactory {
 
-    private static final String DELETE_FILM = "deleteFilm";
-    private static final String PERSONAL = "personalPage";
     private static final String SHOW_FILM_PAGE = "/WEB-INF/view/showFilm.jsp";
     private static final String MAIN_PAGE = "/WEB-INF/view/main.jsp";
     private static final String USER_MANAGE_PAGE = "/WEB-INF/view/userManage.jsp";
@@ -18,6 +15,8 @@ public class CommandFactory {
     private static final String CREATE_FILM_PAGE = "/WEB-INF/view/createFilm.jsp";
     private static final String EDIT_FILM_PAGE = "/WEB-INF/view/editFilm.jsp";
 
+    private static final String DELETE_FILM = "deleteFilm";
+    private static final String PERSONAL = "personalPage";
     private static final String CHANGE_LANGUAGE = "changeLanguage";
     private static final String LOGIN = "login";
     private static final String LOGOUT = "logout";
@@ -39,7 +38,8 @@ public class CommandFactory {
     private static final String ADD_FILM = "addFilm";
     private static final String SAVE_FILM = "saveFilm";
     private static final String UPDATE_FILM = "updateFilm";
-    public static final String GET_USER = "getUser";
+    private static final String GET_USER = "getUser";
+
     private final DaoHelperFactory helperFactory = new DaoHelperFactory();
 
     public Command create(String commandName) throws ServiceException {
@@ -71,10 +71,10 @@ public class CommandFactory {
             case PERSONAL:
                 return new PersonalPageCommand();
             case FILMS_PAGE:
-                FilmService filmsService = new FilmService(helperFactory);
+                FilmService filmsService = new FilmService(helperFactory, protect);
                 return new GetFilmsCommand(filmsService);
             case MOVIE:
-                FilmService filmService = new FilmService(helperFactory);
+                FilmService filmService = new FilmService(helperFactory, protect);
                 return new GetFilmCommand(filmService);
             case RATE_FILM:
                 RatingService ratingService = new RatingService(helperFactory);
@@ -95,19 +95,19 @@ public class CommandFactory {
                 GenreService genreService = new GenreService(helperFactory);
                 return new AddFilmPageCommand(genreService);
             case SAVE_FILM:
-                FilmService saveFilmService = new FilmService(helperFactory);
+                FilmService saveFilmService = new FilmService(helperFactory, protect);
                 FormParser parser = new FormParser();
                 return new AddFilmCommand(saveFilmService, parser);
             case EDIT_FILM:
-                FilmService editFilmService = new FilmService(helperFactory);
+                FilmService editFilmService = new FilmService(helperFactory, protect);
                 GenreService filmGenreService = new GenreService(helperFactory);
                 return new EditFilmPageCommand(editFilmService, filmGenreService);
             case DELETE_FILM:
-                FilmService deleteFilmService = new FilmService(helperFactory);
+                FilmService deleteFilmService = new FilmService(helperFactory, protect);
                 return new DeleteFilmCommand(deleteFilmService);
             case UPDATE_FILM:
                 FormParser formParser = new FormParser();
-                FilmService updateFilmService = new FilmService(helperFactory);
+                FilmService updateFilmService = new FilmService(helperFactory, protect);
                 return new EditFilmCommand(updateFilmService, formParser);
             default:
                 throw new CommandNotExistException("Unknown type = " + commandName);

@@ -36,7 +36,7 @@ public class ConnectionPool {
                     ConnectionPool pool = new ConnectionPool();
                     INSTANCE.getAndSet(pool);
                 }
-            } catch (SQLException | DaoException e) {
+            } catch (DaoException | SQLException e) {
                 throw new ConnectionPoolException(e.getMessage(), e);
             } finally {
                 LOCK.unlock();

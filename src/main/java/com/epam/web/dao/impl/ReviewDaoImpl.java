@@ -26,8 +26,8 @@ public class ReviewDaoImpl extends AbstractDao<Review> implements ReviewDao {
     }
 
     @Override
-    public List<Review> getFilmReviews(long id) throws DaoException {
-        return executeQuery(FIND_BY_FILM, id);
+    public List<Review> getFilmReviews(long filmId) throws DaoException {
+        return executeQuery(FIND_BY_FILM, filmId);
     }
 
     @Override
