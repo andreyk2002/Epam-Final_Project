@@ -10,9 +10,10 @@ import com.epam.web.service.ServiceException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class EditFilmCommand implements Command {
-    private static final String FILMS_PAGE = "/controller?commandName=showFilmsPage&pageNumber=0";
+    private static final String FILMS_PAGE = "/controller?commandName=showFilmsPage&pageNumber=";
     private final FilmService filmService;
     private final FormParser parser;
 
@@ -29,6 +30,8 @@ public class EditFilmCommand implements Command {
         } catch (DaoException e) {
             throw new ServiceException(e.getMessage(), e);
         }
-        return CommandResult.redirect(FILMS_PAGE);
+        HttpSession session = request.getSession();
+        Integer pageNumber = (Integer)session.getAttribute("pageNumber");
+        return CommandResult.redirect(FILMS_PAGE + pageNumber);
     }
 }

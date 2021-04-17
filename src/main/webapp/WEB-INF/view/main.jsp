@@ -68,9 +68,9 @@
             </a>
 
         </c:forEach>
-        <div class="pages">
-            <ctg:pagingTag pagesCount="${pagesCount}"/>
-        </div>
+
+        <ctg:pagingTag pagesCount="${pagesCount}" currentPage="${pageNumber}"/>
+
     </div>
     <jsp:include page="fragments/footer.jsp"/>
 </div>

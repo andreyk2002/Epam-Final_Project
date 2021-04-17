@@ -12,7 +12,7 @@ import java.util.List;
 public class FilmDaoImpl extends AbstractDao<Film> implements FilmDao {
 
     private static final String TABLE_NAME = "films";
-    private static final int MOVIES_PER_PAGE = 5;
+    private static final int MOVIES_PER_PAGE = 1;
     private static final String ADD_MOVIE = "INSERT INTO films(Name, ImagePath, Description, GenreId)" +
             " VALUES (?, ?, ?, ?)";
     private static final String SELECT_MOVIES_IN_BOUNDS = "SELECT * FROM films LIMIT ? OFFSET ?";

@@ -6,7 +6,7 @@ import com.epam.web.dto.FilmDTO;
 import com.epam.web.entity.Film;
 import com.epam.web.entity.Genre;
 import com.epam.web.entity.Review;
-import com.epam.web.validator.XssProtect;
+import com.epam.web.security.XssProtect;
 import org.decimal4j.util.DoubleRounder;
 
 import java.util.ArrayList;
@@ -16,14 +16,15 @@ import java.util.Optional;
 public class FilmService {
 
     public static final int ROUND_PRECISION = 2;
-    private XssProtect protect = new XssProtect();
+    private final XssProtect protect;
     private final FilmDao filmDao;
     private final GenreDao genreDao;
     private final RatingDao ratingDao;
     private final ReviewDao reviewDao;
 
-    public FilmService(DaoHelperFactory factory) throws ServiceException {
+    public FilmService(DaoHelperFactory factory, XssProtect protect) throws ServiceException {
         try (DaoHelper helper = factory.create()) {
+            this.protect = protect;
             this.genreDao = helper.createGenreDao();
             this.ratingDao = helper.createRatingDao();
             this.filmDao = helper.createMovieDao();
@@ -80,7 +81,8 @@ public class FilmService {
     }
 
     public void saveFilm(Film film) throws DaoException {
-        filmDao.save(film);
+        Film safeFilm = removeMalformedData(film);
+        filmDao.save(safeFilm);
     }
 
     public void removeById(long filmId) throws DaoException {
@@ -96,9 +98,24 @@ public class FilmService {
     public void updateFilm(Film updatedFilm) throws DaoException {
         long id = updatedFilm.getId();
         Optional<Film> film = filmDao.getById(id);
+        Film safeFilm = removeMalformedData(updatedFilm);
         if (film.isEmpty()) {
-            saveFilm(updatedFilm);
+            saveFilm(safeFilm);
         }
-        filmDao.updateFilm(updatedFilm);
+        filmDao.updateFilm(safeFilm);
+    }
+
+    private Film removeMalformedData(Film updatedFilm) {
+        String description = updatedFilm.getDescription();
+        String name = updatedFilm.getName();
+        String safeDescription = protect.replaceMalformed(description);
+        String safeName = protect.replaceMalformed(name);
+        return new Film.Builder()
+                .withId(updatedFilm.getId())
+                .withName(safeName)
+                .withDescription(safeDescription)
+                .withGenreId(updatedFilm.getGenreId())
+                .withImagePath(updatedFilm.getImagePath())
+                .build();
     }
 }

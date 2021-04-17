@@ -1,6 +1,5 @@
-package com.epam.web.validator;
+package com.epam.web.security;
 
-import org.apache.tools.ant.taskdefs.Javadoc;
 import org.junit.Assert;
 import org.testng.annotations.Test;
 

@@ -29,6 +29,7 @@ public class GetFilmsCommand implements Command {
         int totalPages = filmService.getPagesCount();
         HttpSession session = request.getSession();
         session.setAttribute("movies", movies);
+        session.setAttribute("pageNumber", pageNumber);
         session.setAttribute("pagesCount", totalPages);
         return CommandResult.redirect(FILM_PAGE + pageNumber);
     }

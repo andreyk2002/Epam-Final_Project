@@ -13,11 +13,12 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 public class AddFilmCommand implements Command {
 
-    private static final String FILMS_PAGE = "/controller?commandName=showFilmsPage&pageNumber=0";
+    private static final String FILMS_PAGE = "/controller?commandName=showFilmsPage&pageNumber=";
     private final FilmService filmService;
     private final FormParser parser;
 
@@ -36,7 +37,9 @@ public class AddFilmCommand implements Command {
         } catch (DaoException e) {
             throw new ServiceException(e.getMessage(), e);
         }
-        return CommandResult.redirect(FILMS_PAGE);
+        HttpSession session = request.getSession();
+        Integer pageNumber = (Integer)session.getAttribute("pageNumber");
+        return CommandResult.redirect(FILMS_PAGE + pageNumber);
     }
 
 }

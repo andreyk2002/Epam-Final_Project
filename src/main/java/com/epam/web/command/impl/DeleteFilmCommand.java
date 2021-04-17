@@ -8,10 +8,11 @@ import com.epam.web.service.ServiceException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class DeleteFilmCommand implements Command {
     public static final String FILM_ID = "filmId";
-    public static final String FIRST_PAGE = "/controller?commandName=showFilmsPage&pageNumber=0";
+    public static final String FILMS_PAGE = "/controller?commandName=showFilmsPage&pageNumber=";
     private final FilmService filmService;
 
     public DeleteFilmCommand(FilmService deleteFilmService) {
@@ -27,6 +28,8 @@ public class DeleteFilmCommand implements Command {
         } catch (DaoException e) {
             throw new ServiceException(e.getMessage(), e);
         }
-        return CommandResult.redirect(FIRST_PAGE);
+        HttpSession session = request.getSession();
+        Integer pageNumber = (Integer)session.getAttribute("pageNumber");
+        return CommandResult.redirect(FILMS_PAGE + pageNumber);
     }
 }

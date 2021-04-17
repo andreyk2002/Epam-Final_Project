@@ -26,5 +26,11 @@
             <rtexprvalue>true</rtexprvalue>
             <type>int</type>
         </attribute>
+        <attribute>
+            <name>currentPage</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>int</type>
+        </attribute>
     </tag>
 </taglib>
