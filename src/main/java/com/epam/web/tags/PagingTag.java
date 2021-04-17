@@ -12,7 +12,7 @@ public class PagingTag extends TagSupport {
     private static final String END = "</div>";
     private static final int MAX_PAGES = 5;
     public static final String LINK_END = "</a>";
-    private static final String CURRENT_PAGE_START = "<a class=\"film-link\" style=\"color:red\" href=";
+    private static final String CURRENT_PAGE_START = "<a class=\"film-link\" style=\"color:green\" href=";
     public static final String NEXT = "Next";
     public static final String PREVIOUS = "Previous";
 

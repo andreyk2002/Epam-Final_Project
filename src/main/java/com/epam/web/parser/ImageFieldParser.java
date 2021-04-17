@@ -6,12 +6,17 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+import java.util.ResourceBundle;
 
 class ImageFieldParser implements FieldParser {
     private static final String IMAGE_PATH = "../webapps/Epam_Final_Project_war/static/img/movies/";
-    //remove backup in release version`
-    private static final String BACKUP_PATH = "D:/Java/Projects/epam-final_project/src/main/webapp/static/img/movies/";
     private static final String SAVE_PATH = "static/img/movies/";
+    private static final String BACKUP_PATH;
+
+    static {
+        ResourceBundle resource = ResourceBundle.getBundle("config");
+        BACKUP_PATH = resource.getString("backup-path");
+    }
 
     @Override
     public ParseResult parse(FileItem item) throws Exception {
