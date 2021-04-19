@@ -10,7 +10,6 @@ import com.epam.web.service.ServiceException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -60,7 +59,7 @@ public class RatingManager {
     }
 
 
-    public void changeRating(Rating lastRating) {
+    public void changeRating(Rating lastRating) throws ServiceException {
         try (DaoHelper helper = daoHelperFactory.create()) {
             long filmID = lastRating.getFilmID();
             ConcurrentHashMap<Long, List<Rating>> ratings = NON_CHECKED_RATINGS.get();
@@ -82,7 +81,7 @@ public class RatingManager {
                 userDao.decrementRating(userID);
             }
         } catch (DaoException e) {
-            LOGGER.error(e.getMessage(), e);
+            throw new ServiceException(e.getMessage(), e);
         }
     }
 
@@ -91,8 +90,7 @@ public class RatingManager {
         ConcurrentHashMap<Long, List<Rating>> ratings = NON_CHECKED_RATINGS.get();
         List<Rating> filmRatings = ratings.get(filmID);
         if (filmRatings == null) {
-            List<Rating> firstFilmRating = new ArrayList<>();
-            firstFilmRating.add(rating);
+            List<Rating> firstFilmRating = List.of(rating);
             ratings.put(rating.getFilmID(), firstFilmRating);
             return true;
         }

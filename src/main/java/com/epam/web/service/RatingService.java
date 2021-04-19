@@ -34,11 +34,11 @@ public class RatingService {
         try (DaoHelper helper = daoHelperFactory.create()) {
             helper.startTransaction();
             Rating rating = new Rating(score, userID, filmID);
-            RatingManager changer = new RatingManager(daoHelperFactory);
-            boolean firstRated = changer.addRating(rating);
+            RatingManager ratingManager = new RatingManager(daoHelperFactory);
+            boolean firstRated = ratingManager.addRating(rating);
             RatingStatus status;
             if (firstRated) {
-                changer.changeRating(rating);
+                ratingManager.changeRating(rating);
                 ratingDao.addRating(rating);
                 status = RatingStatus.SUCCESS;
             } else {

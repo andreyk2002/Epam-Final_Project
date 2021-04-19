@@ -3,14 +3,14 @@ package com.epam.web.security;
 import org.junit.Assert;
 import org.testng.annotations.Test;
 
-public class XssProtectTest {
+public class XssProtectorTest {
 
     private static final String SAFE_STRING = "abc";
     private static final String HACK_SCRIPT = "<script>you have been hacked!</script>";
     private static final String SCRIPT_TEXT = "&lt;script&gt;you have been hacked!&lt;/script&gt;";
 
 
-    private final XssProtect protect = new XssProtect();
+    private final XssProtector protect = new XssProtector();
 
     @Test
     public void testReplaceMalformedShouldNotReplaceSafeString() {

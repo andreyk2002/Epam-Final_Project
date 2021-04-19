@@ -3,7 +3,7 @@ package com.epam.web.command;
 import com.epam.web.command.impl.*;
 import com.epam.web.dao.factory.DaoHelperFactory;
 import com.epam.web.parser.FormParser;
-import com.epam.web.security.XssProtect;
+import com.epam.web.security.XssProtector;
 import com.epam.web.service.*;
 import com.epam.web.validator.RatingValidator;
 
@@ -45,7 +45,7 @@ public class CommandFactory {
     private final DaoHelperFactory helperFactory = new DaoHelperFactory();
 
     public Command create(String commandName) throws ServiceException {
-        XssProtect protect = new XssProtect();
+        XssProtector protect = new XssProtector();
         switch (commandName) {
             case LOGIN_PAGE_COMMAND:
                 return new ShowPageCommand(LOGIN_PAGE);

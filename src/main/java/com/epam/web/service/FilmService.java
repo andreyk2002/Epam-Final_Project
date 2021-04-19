@@ -6,7 +6,7 @@ import com.epam.web.dto.FilmDTO;
 import com.epam.web.entity.Film;
 import com.epam.web.entity.Genre;
 import com.epam.web.entity.Review;
-import com.epam.web.security.XssProtect;
+import com.epam.web.security.XssProtector;
 import org.decimal4j.util.DoubleRounder;
 
 import java.util.ArrayList;
@@ -16,13 +16,13 @@ import java.util.Optional;
 public class FilmService {
 
     public static final int ROUND_PRECISION = 2;
-    private final XssProtect protect;
+    private final XssProtector protect;
     private final FilmDao filmDao;
     private final GenreDao genreDao;
     private final RatingDao ratingDao;
     private final ReviewDao reviewDao;
 
-    public FilmService(DaoHelperFactory factory, XssProtect protect) throws ServiceException {
+    public FilmService(DaoHelperFactory factory, XssProtector protect) throws ServiceException {
         try (DaoHelper helper = factory.create()) {
             this.protect = protect;
             this.genreDao = helper.createGenreDao();

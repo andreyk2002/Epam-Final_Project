@@ -4,7 +4,7 @@ import com.epam.web.dao.*;
 import com.epam.web.dto.FilmDTO;
 import com.epam.web.entity.Film;
 import com.epam.web.entity.Genre;
-import com.epam.web.security.XssProtect;
+import com.epam.web.security.XssProtector;
 import org.mockito.Mockito;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -39,7 +39,7 @@ public class FilmServiceTest extends ServiceTest {
     @BeforeMethod
     public void setUp() throws DaoException, ServiceException {
         super.setUp();
-        XssProtect protectMock = Mockito.mock(XssProtect.class);
+        XssProtector protectMock = Mockito.mock(XssProtector.class);
 
         FilmDao filmDaoMock = Mockito.mock(FilmDao.class);
         GenreDao genreDaoMock = Mockito.mock(GenreDao.class);
