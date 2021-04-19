@@ -4,13 +4,20 @@ import com.epam.web.dao.DaoException;
 import com.epam.web.dao.DaoHelper;
 import com.epam.web.dao.RatingDao;
 import com.epam.web.dao.factory.DaoHelperFactory;
+import com.epam.web.entity.Rating;
+import com.epam.web.service.rating.RatingManager;
+import com.epam.web.validator.RatingValidator;
 
 public class RatingService {
     private final DaoHelperFactory daoHelperFactory;
     private final RatingDao ratingDao;
+    private final RatingValidator validator;
 
 
-    public RatingService(DaoHelperFactory daoHelperFactory) throws ServiceException {
+
+
+    public RatingService(DaoHelperFactory daoHelperFactory, RatingValidator validator) throws ServiceException {
+        this.validator = validator;
         this.daoHelperFactory = daoHelperFactory;
         try (DaoHelper helper = daoHelperFactory.create()) {
             this.ratingDao = helper.createRatingDao();
@@ -20,17 +27,26 @@ public class RatingService {
     }
 
 
-    public boolean rateFilm(long filmId, long userId, int rating) throws ServiceException {
+    public RatingStatus rateFilm(long filmID, long userID, int score) throws ServiceException {
+        if(!validator.validateRating(score)){
+            return RatingStatus.WRONG_RATING;
+        }
         try (DaoHelper helper = daoHelperFactory.create()) {
             helper.startTransaction();
-            boolean result = ratingDao.addRating(filmId, userId, rating);
-            if (result) {
-                RatingChanger changer = new RatingChanger(filmId, daoHelperFactory);
-                changer.changeRating();
+            Rating rating = new Rating(score, userID, filmID);
+            RatingManager changer = new RatingManager(daoHelperFactory);
+            boolean firstRated = changer.addRating(rating);
+            RatingStatus status;
+            if (firstRated) {
+                changer.changeRating(rating);
+                ratingDao.addRating(rating);
+                status = RatingStatus.SUCCESS;
+            } else {
+                status = RatingStatus.ALREADY_RATED;
             }
             helper.endTransaction();
-            return result;
-        } catch (Exception e) {
+            return status;
+        } catch (DaoException e) {
             throw new ServiceException(e.getMessage(), e);
         }
     }

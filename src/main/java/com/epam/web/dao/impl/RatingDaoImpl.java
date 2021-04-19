@@ -17,8 +17,7 @@ public class RatingDaoImpl extends AbstractDao<Rating> implements RatingDao {
     private static final String FIND_RATING = "SELECT * FROM filmsratings WHERE userID = ? AND filmID = ?";
     private static final String GET_AVG_RATING = "SELECT AVG(Rating) AS Rating FROM filmsratings WHERE filmID = ?";
     private static final String RATING_COLUMN = "Rating";
-    private static final Integer REVIEWS_BEFORE_CHECK = 5;
-    public static final String SELECT_BY_FILM = "SELECT * FROM filmsratings WHERE FilmID = ?";
+    private static final String SELECT_BY_FILM = "SELECT * FROM filmsratings WHERE FilmID = ?";
     private static final String DELETE_BY_FILM_ID = "DELETE FROM filmsratings WHERE FilmID = ?";
 
     public RatingDaoImpl(Connection connection) {
@@ -27,12 +26,13 @@ public class RatingDaoImpl extends AbstractDao<Rating> implements RatingDao {
 
 
     @Override
-    public boolean addRating(long filmId, long userId, int rating) throws DaoException {
-        if (!hasRating(filmId, userId)) {
-            updateQuery(INSERT_QUERY, userId, filmId, rating);
-            return true;
+    public void addRating(Rating rating) throws DaoException {
+        long filmID = rating.getFilmID();
+        long userID = rating.getUserID();
+        int score = rating.getRating();
+        if (!hasRating(filmID, userID)) {
+            updateQuery(INSERT_QUERY, userID, filmID, score);
         }
-        return false;
     }
 
     @Override
@@ -47,26 +47,13 @@ public class RatingDaoImpl extends AbstractDao<Rating> implements RatingDao {
     }
 
     @Override
-    public Optional<Rating> getRatingForCheck(long filmId) throws DaoException {
-        List<Rating> ratings = executeQuery(SELECT_BY_FILM, filmId);
-        int size = ratings.size();
-        if (size >= REVIEWS_BEFORE_CHECK) {
-            int positionToCheck = size - REVIEWS_BEFORE_CHECK;
-            Rating rating = ratings.get(positionToCheck);
-            return Optional.of(rating);
-        }
-        return Optional.empty();
+    public List<Rating> getRatingsByFilm(long filmId) throws DaoException {
+        return executeQuery(SELECT_BY_FILM, filmId);
     }
 
     @Override
     public void removeFilmsRatings(long filmId) throws DaoException {
         updateQuery(DELETE_BY_FILM_ID, filmId);
-    }
-
-
-    @Override
-    public List<Rating> getAll() {
-        throw new UnsupportedOperationException("This is a table with complex primary key");
     }
 
 

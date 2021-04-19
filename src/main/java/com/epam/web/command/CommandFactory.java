@@ -5,6 +5,7 @@ import com.epam.web.dao.factory.DaoHelperFactory;
 import com.epam.web.parser.FormParser;
 import com.epam.web.security.XssProtect;
 import com.epam.web.service.*;
+import com.epam.web.validator.RatingValidator;
 
 public class CommandFactory {
 
@@ -79,7 +80,8 @@ public class CommandFactory {
                 FilmService filmService = new FilmService(helperFactory, protect);
                 return new GetFilmCommand(filmService);
             case RATE_FILM:
-                RatingService ratingService = new RatingService(helperFactory);
+                RatingValidator validator = new RatingValidator();
+                RatingService ratingService = new RatingService(helperFactory, validator);
                 return new RateFilmCommand(ratingService);
             case REVIEW_FILM:
                 ReviewService reviewService = new ReviewService(helperFactory, protect);

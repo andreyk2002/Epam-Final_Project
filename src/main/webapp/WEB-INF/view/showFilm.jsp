@@ -31,7 +31,9 @@
             </p>
         </div>
         <div class="film-rate">
-            <h2 class="film-current-rating"><fmt:message key="local.currentRating"/> : ${sessionScope.film.rating} </h2>
+            <h2 class="film-current-rating">
+                <fmt:message key="local.currentRating"/> : ${sessionScope.film.rating}
+            </h2>
             <form action="${pageContext.request.contextPath}/controller">
                 <input type="hidden" name="commandName" value="rateFilm">
                 <input type="hidden" name="filmID" value="${film.id}">
