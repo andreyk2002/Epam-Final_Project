@@ -3,11 +3,10 @@ package com.epam.web.dto;
 import com.epam.web.entity.Film;
 import com.epam.web.entity.Review;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
-public class FilmDTO implements Serializable {
+public class FilmDTO {
 
     private final Long id;
     private final String name;
@@ -98,7 +97,6 @@ public class FilmDTO implements Serializable {
         result = 31 * result + (filmsReviews != null ? filmsReviews.hashCode() : 0);
         return result;
     }
-
 }
 
 

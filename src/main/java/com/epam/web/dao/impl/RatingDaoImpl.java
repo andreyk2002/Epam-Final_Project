@@ -56,7 +56,6 @@ public class RatingDaoImpl extends AbstractDao<Rating> implements RatingDao {
         updateQuery(DELETE_BY_FILM_ID, filmId);
     }
 
-
     @Override
     public Optional<Rating> getById(long id) {
         throw new UnsupportedOperationException("This is a table with complex primary key");
@@ -66,7 +65,4 @@ public class RatingDaoImpl extends AbstractDao<Rating> implements RatingDao {
     public void removeById(long id) {
         throw new UnsupportedOperationException("This is a table with complex primary key");
     }
-
-
-    
 }

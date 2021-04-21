@@ -46,9 +46,13 @@ public class UserService {
         }
     }
 
-    public void changeRating(long userId, double newRating) throws ServiceException {
+    public boolean changeRating(long userId, double newRating) throws ServiceException {
         try {
+            if(newRating < 0 || newRating > 100){
+                return false;
+            }
             userDao.changeRating(userId, newRating);
+            return true;
         } catch (DaoException e) {
             throw new ServiceException(e.getMessage(), e);
         }

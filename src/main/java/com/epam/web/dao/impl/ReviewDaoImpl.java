@@ -34,6 +34,4 @@ public class ReviewDaoImpl extends AbstractDao<Review> implements ReviewDao {
     public void removeFilmsReviews(long filmId) throws DaoException {
         updateQuery(DELETE_BY_FILM_ID, filmId);
     }
-
-
 }

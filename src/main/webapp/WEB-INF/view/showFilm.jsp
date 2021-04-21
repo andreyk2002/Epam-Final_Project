@@ -34,20 +34,22 @@
             <h2 class="film-current-rating">
                 <fmt:message key="local.currentRating"/> : ${sessionScope.film.rating}
             </h2>
-            <form action="${pageContext.request.contextPath}/controller">
-                <input type="hidden" name="commandName" value="rateFilm">
-                <input type="hidden" name="filmID" value="${film.id}">
-                <label><fmt:message key="local.yourMark"/> </label>
-                <input class="mark" name="rating" type="number" min="0" max="5">
-                <button class="rate-film-button" type="submit"><fmt:message key="local.rate"/></button>
-            </form>
-            <form class="film-review" action="${pageContext.request.contextPath}/controller">
-                <input type="hidden" name="commandName" value="reviewFilm">
-                <input type="hidden" name="filmID" value="${film.id}">
-                <textarea name="review" class="review" rows="20" placeholder="<fmt:message key="local.review"/>">
+            <c:if test="${sessionScope.user.role == 'USER'}">
+                <form action="${pageContext.request.contextPath}/controller">
+                    <input type="hidden" name="commandName" value="rateFilm">
+                    <input type="hidden" name="filmID" value="${film.id}">
+                    <label><fmt:message key="local.yourMark"/> </label>
+                    <input class="mark" name="rating" type="number" min="0" max="5">
+                    <button class="rate-film-button" type="submit"><fmt:message key="local.rate"/></button>
+                </form>
+                <form class="film-review" action="${pageContext.request.contextPath}/controller">
+                    <input type="hidden" name="commandName" value="reviewFilm">
+                    <input type="hidden" name="filmID" value="${film.id}">
+                    <textarea name="review" class="review" rows="20" placeholder="<fmt:message key="local.review"/>">
                 </textarea>
-                <button class="rate-film-button" type="submit"><fmt:message key="local.review"/></button>
-            </form>
+                    <button class="rate-film-button" type="submit"><fmt:message key="local.review"/></button>
+                </form>
+            </c:if>
         </div>
     </div>
 </section>
@@ -57,7 +59,7 @@
             <div class="user-review">
                 <b class="username">${review.username}</b>
                 <p class="review-content">
-                   ${review.review}
+                        ${review.review}
                 </p>
             </div>
         </c:forEach>

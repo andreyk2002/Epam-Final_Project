@@ -16,7 +16,7 @@ public class RateFilmCommand implements Command {
     private static final String SHOW_MOVIE = "/controller?commandName=movie&id=";
     private static final String BACK_TO_MOVIE = "/controller?commandName=showMoviePage&errorMessage=";
     public static final String ALREADY_RATED_ERROR = "local.alreadyRatedError";
-    public static final String WRONG_RATING_ERROR = "errorMessage=local.wrongRating";
+    public static final String WRONG_RATING_ERROR = "local.wrongRating";
     private final RatingService service;
 
     public RateFilmCommand(RatingService ratingService) {

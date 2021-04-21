@@ -22,8 +22,7 @@ public class ChangeUserRatingCommand implements Command {
         long userId = Long.parseLong(userIdParam);
         String newRatingParam = request.getParameter("rating");
         double newRating = Double.parseDouble(newRatingParam);
-
-        userService.changeRating(userId, newRating);
+        boolean isRated = userService.changeRating(userId, newRating);
         return CommandResult.redirect(MANAGE_USERS);
     }
 }
