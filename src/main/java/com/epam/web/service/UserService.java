@@ -5,6 +5,7 @@ import com.epam.web.dao.DaoHelper;
 import com.epam.web.dao.UserDao;
 import com.epam.web.dao.factory.DaoHelperFactory;
 import com.epam.web.entity.User;
+import com.epam.web.validator.UserRatingValidator;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,8 +13,10 @@ import java.util.Optional;
 public class UserService {
 
     private final UserDao userDao;
+    private final UserRatingValidator validator;
 
-    public UserService(DaoHelperFactory daoHelperFactory) throws ServiceException {
+    public UserService(DaoHelperFactory daoHelperFactory, UserRatingValidator validator) throws ServiceException {
+        this.validator = validator;
 
         try (DaoHelper helper = daoHelperFactory.create()) {
             this.userDao = helper.createUserDao();
@@ -48,7 +51,7 @@ public class UserService {
 
     public boolean changeRating(long userId, double newRating) throws ServiceException {
         try {
-            if(newRating < 0 || newRating > 100){
+            if(!validator.validateRating(newRating)){
                 return false;
             }
             userDao.changeRating(userId, newRating);

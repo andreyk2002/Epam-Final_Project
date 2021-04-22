@@ -47,7 +47,7 @@ public class Controller extends HttpServlet {
             CommandResult result = command.execute(request, response);
             page = result.getPage();
             isRedirect = result.isRedirect();
-        } catch (ServiceException e) {
+        } catch (Exception e) {
             request.setAttribute("errorMessage", e.getMessage());
             LOGGER.error(e.getMessage(), e);
             page = ERROR_PAGE;

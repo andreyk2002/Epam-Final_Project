@@ -32,17 +32,13 @@ public class UserInfoTag extends TagSupport {
         String bundleName = loc == null ? DEFAULT_LOCAL : LOCAL + loc;
         ResourceBundle resource = ResourceBundle.getBundle(bundleName);
         String loginLabel = resource.getString("local.username");
-        String roleLabel = resource.getString("local.role");
         String ratingLabel = resource.getString("local.rating");
         String login = user.getLogin();
-        Role role = user.getRole();
-        String localizedRole = resource.getString("local." + role);
 
         double rating = user.getRating();
         StringBuilder content = new StringBuilder();
         content.append(makeTitle(loginLabel, login));
         content.append(makeInfo(ratingLabel, Double.toString(rating)));
-        content.append(makeInfo(roleLabel, localizedRole));
         try {
             JspWriter out = pageContext.getOut();
             out.write(content.toString());

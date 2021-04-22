@@ -1,10 +1,10 @@
 package com.epam.web.service;
 
-import com.epam.web.dao.DaoException;
 import com.epam.web.dao.UserDao;
 import com.epam.web.entity.Role;
 import com.epam.web.entity.User;
-import org.mockito.Mock;
+import com.epam.web.validator.RatingValidator;
+import com.epam.web.validator.UserRatingValidator;
 import org.mockito.Mockito;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -14,10 +14,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static org.testng.Assert.*;
 
-public class UserServiceTest extends ServiceTest{
+public class UserServiceTest extends ServiceTest {
 
     public static final int VALID_ID = 0;
     public static final User VALID_USER = User.unblocked(VALID_ID, "admin", 50, Role.ADMIN);
@@ -39,7 +39,8 @@ public class UserServiceTest extends ServiceTest{
         when(userDaoMock.getById(VALID_ID)).thenReturn(Optional.of(VALID_USER));
         when(userDaoMock.getById(INVALID_ID)).thenReturn(Optional.empty());
         when(daoHelper.createUserDao()).thenReturn(userDaoMock);
-        service = new UserService(factory);
+        UserRatingValidator validator = mock(UserRatingValidator.class);
+        service = new UserService(factory, validator);
     }
 
 
@@ -56,22 +57,22 @@ public class UserServiceTest extends ServiceTest{
     }
 
     @Test
-    public void testGetUserByLoginAndPasswordShouldReturnUserWhenDataValid() throws ServiceException{
+    public void testGetUserByLoginAndPasswordShouldReturnUserWhenDataValid() throws ServiceException {
         Optional<User> optionalUser = service.login(VALID_LOGIN, VALID_PASSWORD);
         Assert.assertEquals(VALID_USER, optionalUser.get());
     }
 
     @Test
-    public void testGetUserByLoginAndPasswordShouldReturnEmptyWhenDataInvalid() throws ServiceException{
+    public void testGetUserByLoginAndPasswordShouldReturnEmptyWhenDataInvalid() throws ServiceException {
         Optional<User> optionalUser = service.login(INVALID_LOGIN, INVALID_PASSWORD);
         Assert.assertEquals(Optional.empty(), optionalUser);
     }
 
     @Test
-    public void testGetAllUsersShouldReturnAllUsers() throws ServiceException{
+    public void testGetAllUsersShouldReturnAllUsers() throws ServiceException {
         List<User> allUsers = service.getAllUsers();
         Assert.assertEquals(allUsers, Collections.singletonList(VALID_USER));
     }
 
-    
+
 }

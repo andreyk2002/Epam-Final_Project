@@ -2,7 +2,10 @@ package com.epam.web.validator;
 
 public class RatingValidator {
 
-    public boolean validateRating(int rating) {
-        return rating >= 0 && rating <= 5;
+    public static final int MIN_RATING = 0;
+    public static final int RATING = 5;
+
+    public boolean validateRating(double rating) {
+        return rating >= MIN_RATING && rating <= RATING;
     }
 }

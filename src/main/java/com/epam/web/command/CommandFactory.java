@@ -6,6 +6,7 @@ import com.epam.web.parser.FormParser;
 import com.epam.web.security.XssProtector;
 import com.epam.web.service.*;
 import com.epam.web.validator.RatingValidator;
+import com.epam.web.validator.UserRatingValidator;
 
 public class CommandFactory {
 
@@ -43,6 +44,8 @@ public class CommandFactory {
     private static final String GET_USER = "getUser";
 
     private final DaoHelperFactory helperFactory = new DaoHelperFactory();
+    private final UserRatingValidator ratingValidator = new UserRatingValidator();
+
 
     public Command create(String commandName) throws ServiceException {
         XssProtector protect = new XssProtector();
@@ -66,10 +69,10 @@ public class CommandFactory {
             case CHANGE_LANGUAGE:
                 return new ChangeLanguageCommand();
             case LOGIN:
-                UserService service = new UserService(helperFactory);
+                UserService service = new UserService(helperFactory, ratingValidator);
                 return new LoginCommand(service);
             case GET_USER:
-                UserService getUserService = new UserService(helperFactory);
+                UserService getUserService = new UserService(helperFactory, ratingValidator);
                 return new GetUserCommand(getUserService);
             case PERSONAL:
                 return new PersonalPageCommand();
@@ -87,13 +90,13 @@ public class CommandFactory {
                 ReviewService reviewService = new ReviewService(helperFactory, protect);
                 return new ReviewFilmCommand(reviewService);
             case MANAGE_USERS:
-                UserService userService = new UserService(helperFactory);
+                UserService userService = new UserService(helperFactory, ratingValidator);
                 return new ManageUsersCommand(userService);
             case CHANGE_USER_RATING:
-                UserService changeRatingService = new UserService(helperFactory);
+                UserService changeRatingService = new UserService(helperFactory, ratingValidator);
                 return new ChangeUserRatingCommand(changeRatingService);
             case CHANGE_USER_STATUS:
-                UserService changeStatusService = new UserService(helperFactory);
+                UserService changeStatusService = new UserService(helperFactory, ratingValidator);
                 return new ChangeUserStatusCommand(changeStatusService);
             case ADD_FILM:
                 GenreService genreService = new GenreService(helperFactory);

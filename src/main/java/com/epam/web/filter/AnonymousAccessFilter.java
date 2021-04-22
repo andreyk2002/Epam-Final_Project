@@ -10,16 +10,14 @@ import java.io.IOException;
 import java.util.Set;
 
 public class AnonymousAccessFilter implements Filter {
-    private static final Set<String> allowedCommands = Set.of("login", "changeLanguage");
+    private static final Set<String> allowedCommands = Set.of("login", "changeLanguage", "loginPage");
     private String errorPage;
     private String loginCommand;
-    private String loginPage;
 
     @Override
     public void init(FilterConfig filterConfig) {
         errorPage = filterConfig.getInitParameter("errorPage");
         loginCommand = filterConfig.getInitParameter("loginCommand");
-        loginPage = filterConfig.getInitParameter("loginPage");
     }
 
     @Override
@@ -27,11 +25,6 @@ public class AnonymousAccessFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         String commandName = request.getParameter("commandName");
         HttpServletResponse response = (HttpServletResponse) servletResponse;
-        if (loginPage.equals(commandName)) {
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher(loginPage);
-            requestDispatcher.forward(request, response);
-            return;
-        }
         if (!allowedCommands.contains(commandName)) {
             HttpSession session = request.getSession();
             User user = (User) session.getAttribute("user");

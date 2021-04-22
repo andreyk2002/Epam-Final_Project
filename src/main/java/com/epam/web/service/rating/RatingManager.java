@@ -93,7 +93,9 @@ public class RatingManager {
             ratings.put(rating.getFilmID(), firstFilmRating);
             return true;
         }
-        if (filmRatings.contains(rating)) {
+        boolean containsRating = filmRatings.stream()
+                .anyMatch(rate -> rate.getUserID() == rating.getUserID());
+        if (containsRating) {
             return false;
         }
         filmRatings.add(rating);

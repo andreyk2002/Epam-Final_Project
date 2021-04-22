@@ -521,8 +521,6 @@ textarea.review {
 }
 
 
-
-
 /*end of show film page styles*/
 
 
@@ -591,8 +589,9 @@ textarea.review {
 .dark-wrapper {
     z-index: 0;
     position: absolute;
-    height: 100vh;
+    min-height: 100vh;
     background-color: black;
+    padding-left: 5%;
     width: 100%;
     margin: 0 auto;
 }
@@ -619,9 +618,10 @@ table, th, td {
 
 /*styles for add film page*/
 
-.add-film-form-admin{
+.add-film-form-admin {
     background-color: black;
     margin-top: 100px;
+    margin-bottom: 30px;
 }
 
 .admin {
@@ -657,17 +657,17 @@ table, th, td {
     margin-top: 10px;
 }
 
-.genres-select{
+.genres-select {
     margin-bottom: 10px;
 }
 
-.add-film-title{
+.add-film-title {
     font-size: 40px;
     color: white;
 }
 
 /*edit page styles*/
-.edit-label{
+.edit-label {
     color: white;
 }
 
@@ -777,8 +777,23 @@ footer {
 
 }
 
+.error-header {
+    font-size: 48px;
+    margin-top: 200px;
+}
+
+.error-wrapper {
+    max-width: 80%;
+    text-align: center;
+    margin: 0 auto;
+    justify-content: space-between;
+}
 
 @media (max-width: 760px) {
+    .intro {
+        min-height: 120vh;
+    }
+
     .manage-film {
         width: 98%;
     }
@@ -789,6 +804,10 @@ footer {
 
     img.type-image {
         height: 110px;
+    }
+
+    .film-wrapper-wide {
+        max-width: 100%;
     }
 }
 
@@ -845,12 +864,66 @@ footer {
 
     .login-submit {
         font-size: 16px;
-        padding: 0 15px;
+        padding: 5px 15px;
     }
 
     h2.film-link {
         margin-bottom: 0;
     }
 
+    .benefits-cards {
+        padding: 0 10px;
+    }
 
+    .benefits-cards {
+        display: block;
+    }
+
+    .benefit-card {
+        margin-bottom: 10px;
+        padding: 10px 0;
+    }
+
+    .benefit-card:first-child {
+        padding: 60px 0;
+    }
+
+    .benefit-title {
+        font-size: 28px;
+        line-height: 35px;
+        background-color: lightslategrey;
+        padding: 40px 20px 40px 20px;
+        position: absolute;
+    }
+
+    .types-img-title {
+        font-size: 22px;
+        bottom: 32%;
+    }
+
+    .add-film-form {
+        margin-left: 30%;
+        min-width: 400px;
+    }
 }
+
+@media (max-width: 500px) {
+
+    .intro {
+        min-height: 140vh;
+    }
+
+    .form-info {
+        margin-bottom: 10px;
+    }
+
+    .header-item{
+        margin-bottom: 60px;
+    }
+
+    .logo-link {
+        font-size: 35px;
+        line-height: 42px;
+    }
+}
+

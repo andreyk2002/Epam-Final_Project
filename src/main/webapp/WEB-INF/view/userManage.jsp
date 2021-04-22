@@ -21,7 +21,6 @@
             <td><fmt:message key="local.username"/></td>
             <td><fmt:message key="local.rating"/></td>
             <td><fmt:message key="local.role"/></td>
-            <td><fmt:message key="local.user_status"/></td>
         </tr>
         </thead>
         <tbody>
@@ -51,8 +50,7 @@
                         <button type="submit">OK</button>
                     </form>
                 </td>
-                <td>${user.role}</td>
-                <td>${user.blocked}</td>
+                <td><fmt:message key="local.${user.role}"/></td>
             </tr>
         </c:forEach>
         </tbody>

@@ -18,7 +18,8 @@
 <main>
     <section class="intro">
         <div class="wrapper">
-            <h1 class="into-title"><fmt:message key="local.header"/></h1>
+            <h1 class="into-title">
+                <fmt:message key="local.header"/></h1>
             <p class="into-subtitle">
                 <fmt:message key="local.subtitle"/>
             </p>

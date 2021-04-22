@@ -11,12 +11,10 @@
     <link href="static/css/reset.css" rel="stylesheet"/>
     <link href="static/css/main.css" rel="stylesheet"/>
 </head>
+<jsp:include page="WEB-INF/view/fragments/header.jsp"/>
 <body style="background-color: grey">
 <div class="error-wrapper">
-    <jsp:include page="WEB-INF/view/fragments/header.jsp"/>
-    <h1 class="error-header">
-        <fmt:message key="${requestScope.errorMessage}"/>
-    </h1>
+   <h1 class="error-header">404 : <fmt:message key="local.notFound"/> </h1>
 </div>
 </body>
 </html>

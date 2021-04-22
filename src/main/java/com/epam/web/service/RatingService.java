@@ -14,8 +14,6 @@ public class RatingService {
     private final RatingValidator validator;
 
 
-
-
     public RatingService(DaoHelperFactory daoHelperFactory, RatingValidator validator) throws ServiceException {
         this.validator = validator;
         this.daoHelperFactory = daoHelperFactory;
@@ -28,7 +26,7 @@ public class RatingService {
 
 
     public RatingStatus rateFilm(long filmID, long userID, int score) throws ServiceException {
-        if(!validator.validateRating(score)){
+        if (!validator.validateRating(score)) {
             return RatingStatus.WRONG_RATING;
         }
         try (DaoHelper helper = daoHelperFactory.create()) {
@@ -50,5 +48,4 @@ public class RatingService {
             throw new ServiceException(e.getMessage(), e);
         }
     }
-
 }
