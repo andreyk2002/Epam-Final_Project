@@ -42,7 +42,7 @@
                         <form class="manage-film-form" action="${pageContext.request.contextPath}/controller">
                             <input type="hidden" name="commandName" value="deleteFilm"/>
                             <input type="hidden" name="filmId" value="${film.id}"/>
-                            <button class="film-edit" type="submit">
+                            <button class="film-edit delete-button" type="submit">
                                 <img class="film-edit-btn" src="static/img/bootstrap-icons-1.4.0/trash.svg"/>
                             </button>
                         </form>
@@ -75,4 +75,7 @@
     <jsp:include page="fragments/footer.jsp"/>
 </div>
 </body>
+<script src="static/js/dialog.js">
+
+</script>
 </html>
