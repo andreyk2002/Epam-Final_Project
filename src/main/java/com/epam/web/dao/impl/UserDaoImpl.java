@@ -43,8 +43,8 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
     }
 
     @Override
-    public void changeStatus(long userId, boolean newStatus) throws DaoException {
-        updateQuery(CHANGE_STATUS, newStatus, userId);
+    public void changeStatus(long userId, boolean isBlocked) throws DaoException {
+        updateQuery(CHANGE_STATUS, isBlocked, userId);
     }
 
 }

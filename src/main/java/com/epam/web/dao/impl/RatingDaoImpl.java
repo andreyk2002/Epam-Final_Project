@@ -47,11 +47,6 @@ public class RatingDaoImpl extends AbstractDao<Rating> implements RatingDao {
     }
 
     @Override
-    public List<Rating> getRatingsByFilm(long filmId) throws DaoException {
-        return executeQuery(SELECT_BY_FILM, filmId);
-    }
-
-    @Override
     public void removeFilmsRatings(long filmId) throws DaoException {
         updateQuery(DELETE_BY_FILM_ID, filmId);
     }

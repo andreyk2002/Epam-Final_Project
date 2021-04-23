@@ -13,7 +13,7 @@ public class ReviewMapper implements RowMapper<Review> {
 
 
     @Override
-    public Review map(ResultSet resultSet) throws SQLException, DaoException {
+    public Review map(ResultSet resultSet) throws SQLException {
         String userReview = resultSet.getString(REVIEW);
         String username = resultSet.getString(USERNAME);
         long id = resultSet.getLong(ID);

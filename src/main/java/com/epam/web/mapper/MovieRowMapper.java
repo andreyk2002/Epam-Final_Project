@@ -18,7 +18,7 @@ public class MovieRowMapper implements RowMapper<Film> {
     }
 
     @Override
-    public Film map(ResultSet resultSet) throws SQLException, DaoException {
+    public Film map(ResultSet resultSet) throws SQLException {
         long id = resultSet.getLong(ID);
         String name = resultSet.getString(NAME);
         String imagePath = resultSet.getString(IMAGE_PATH);

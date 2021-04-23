@@ -1,27 +1,27 @@
 package com.epam.web.command;
 
 
-
 import com.epam.web.service.ServiceException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Executes an operation which is dynamically chosen dy CommandFactory class
+ * The Command interface created for handling client requests
  *
- *
+ * @author Andrey Kuksa
  */
 
 public interface Command {
 
     /**
      * Executes a specific command
-     * @param request servlet request from controller
+     *
+     * @param request  servlet request from controller
      * @param response servlet response from controller
-     * @return CommandResult class which contains the type of user redirect to next
+     * @return instance of {@link CommandResult} class which contains the type of redirection to next
      * resource (redirect or forward) and the name of next resource
-     * @throws ServiceException
+     * @throws ServiceException when client request is invalid
      */
     CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException;
 
