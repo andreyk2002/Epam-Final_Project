@@ -17,7 +17,6 @@ public class ConnectionFactory {
         url = resource.getString("url");
         properties = getProperties(resource);
     }
-
     public Connection create() throws DaoException {
         try {
             return DriverManager.getConnection(url, properties);

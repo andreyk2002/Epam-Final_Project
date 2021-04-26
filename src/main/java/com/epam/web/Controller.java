@@ -47,9 +47,12 @@ public class Controller extends HttpServlet {
             CommandResult result = command.execute(request, response);
             page = result.getPage();
             isRedirect = result.isRedirect();
+        } catch (ServiceException | RuntimeException e) {
+            request.setAttribute("errorMessage", "local.somethingWrong");
+            LOGGER.error(e.getMessage(), e);
+            page = ERROR_PAGE;
         } catch (Exception e) {
             request.setAttribute("errorMessage", e.getMessage());
-            LOGGER.error(e.getMessage(), e);
             page = ERROR_PAGE;
         }
         if (!isRedirect) {
