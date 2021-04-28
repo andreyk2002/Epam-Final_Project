@@ -57,11 +57,13 @@ public class FilmService {
         }
     }
 
-    public Optional<FilmDTO> getMovieDTOById(Long id) throws DaoException {
+    public Optional<FilmDTO> getMovieDTOById(long id, long userId) throws DaoException {
         Optional<Film> optionalMovie = filmDao.getById(id);
         if (optionalMovie.isPresent()) {
             Film film = optionalMovie.get();
             FilmDTO filmDTO = getMovieDTO(film);
+            boolean hasRating = ratingDao.hasRating(id, userId);
+            filmDTO.setRated(hasRating);
             return Optional.of(filmDTO);
         }
         return Optional.empty();
@@ -71,7 +73,6 @@ public class FilmService {
         long genreId = film.getGenreId();
         Optional<Genre> optionalGenre = genreDao.getById(genreId);
         String genre = optionalGenre.map(Genre::getName).orElse("");
-
         long movieId = film.getId();
         double movieRating = ratingDao.getMovieRating(movieId);
         double ratingRounded = DoubleRounder.round(movieRating, ROUND_PRECISION);

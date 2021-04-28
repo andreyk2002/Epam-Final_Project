@@ -41,6 +41,8 @@
                     <div class="manage-film">
                         <form class="manage-film-form" action="${pageContext.request.contextPath}/controller">
                             <input type="hidden" name="commandName" value="deleteFilm"/>
+                            <!-- storing locale to localize confirmation messaging in delete dialog-->
+                            <input type="hidden" name="locale" value="${sessionScope.local}"/>
                             <input type="hidden" name="filmId" value="${film.id}"/>
                             <button class="film-edit delete-button" type="submit">
                                 <img class="film-edit-btn" src="static/img/bootstrap-icons-1.4.0/trash.svg"/>
@@ -68,9 +70,7 @@
             </a>
 
         </c:forEach>
-
         <ctg:pagingTag pagesCount="${pagesCount}" currentPage="${pageNumber}"/>
-
     </div>
     <jsp:include page="fragments/footer.jsp"/>
 </div>

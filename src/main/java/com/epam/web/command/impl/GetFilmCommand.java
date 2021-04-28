@@ -4,6 +4,7 @@ import com.epam.web.command.Command;
 import com.epam.web.command.CommandResult;
 import com.epam.web.dao.DaoException;
 import com.epam.web.dto.FilmDTO;
+import com.epam.web.entity.User;
 import com.epam.web.service.FilmService;
 import com.epam.web.service.ServiceException;
 
@@ -24,10 +25,13 @@ public class GetFilmCommand implements Command {
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
         String idString = request.getParameter("id");
-        Long id = Long.parseLong(idString);
+        long id = Long.parseLong(idString);
+
         HttpSession session = request.getSession();
         try {
-            Optional<FilmDTO> movieOptional = service.getMovieDTOById(id);
+            User user = (User) session.getAttribute("user");
+            long userId = user.getId();
+            Optional<FilmDTO> movieOptional = service.getMovieDTOById(id, userId);
             movieOptional.ifPresentOrElse(movie -> session.setAttribute("film", movie),
                     () -> request.setAttribute("errorMessage", "local.movieNotFound"));
         } catch (DaoException e) {

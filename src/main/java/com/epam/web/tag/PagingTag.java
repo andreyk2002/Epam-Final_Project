@@ -1,4 +1,4 @@
-package com.epam.web.tags;
+package com.epam.web.tag;
 
 import javax.servlet.ServletContext;
 import javax.servlet.jsp.JspException;

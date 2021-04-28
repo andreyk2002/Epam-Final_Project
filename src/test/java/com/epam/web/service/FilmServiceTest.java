@@ -19,7 +19,7 @@ import static org.mockito.Mockito.when;
 
 public class FilmServiceTest extends ServiceTest {
 
-    public static final long VALID_ID = 0;
+    private static final long VALID_ID = 0;
     private static final Genre VALID_GENRE = new Genre(VALID_ID, "");
     private static final Double VALID_RATING = 5.;
     private static final long INVALID_ID = -1L;
@@ -31,7 +31,8 @@ public class FilmServiceTest extends ServiceTest {
             .withId(VALID_ID)
             .build();
     private static final FilmDTO VALID_DTO =
-            new FilmDTO(VALID_FILM, VALID_GENRE.getName(), VALID_RATING, Collections.emptyList());
+            new FilmDTO(VALID_FILM, VALID_GENRE.getName(), VALID_RATING, Collections.emptyList(), false);
+    public static final int USER_ID = 1;
 
     private FilmService service;
 
@@ -48,6 +49,7 @@ public class FilmServiceTest extends ServiceTest {
 
         when(genreDaoMock.getById(anyLong())).thenReturn(Optional.of(VALID_GENRE));
         when(ratingDaoMock.getMovieRating(anyLong())).thenReturn(VALID_RATING);
+        when(ratingDaoMock.hasRating(anyLong(), anyLong())).thenReturn(false);
         when(filmDaoMock.getById(VALID_ID)).thenReturn(Optional.of(VALID_FILM));
         when(filmDaoMock.getById(INVALID_ID)).thenReturn((Optional.empty()));
         when(filmDaoMock.getMoviesForPage(VALID_PAGE)).thenReturn(Collections.singletonList(VALID_FILM));
@@ -65,13 +67,13 @@ public class FilmServiceTest extends ServiceTest {
 
     @Test
     public void testGetMovieByIdShouldReturnMovieWhenMovieExist() throws DaoException {
-        Optional<FilmDTO> movieById = service.getMovieDTOById(VALID_ID);
+        Optional<FilmDTO> movieById = service.getMovieDTOById(VALID_ID, USER_ID);
         Assert.assertEquals(movieById.get(), VALID_DTO);
     }
 
     @Test
     public void testGetMovieByIdShouldReturnEmptyWhenMovieNotExist() throws DaoException {
-        Optional<FilmDTO> movieById = service.getMovieDTOById(INVALID_ID);
+        Optional<FilmDTO> movieById = service.getMovieDTOById(INVALID_ID, USER_ID);
         Assert.assertEquals(movieById, Optional.empty());
     }
 

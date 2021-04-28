@@ -7,7 +7,7 @@
     <uri>customTags</uri>
     <tag>
         <name>userInfoTag</name>
-        <tag-class>com.epam.web.tags.UserInfoTag</tag-class>
+        <tag-class>com.epam.web.tag.UserInfoTag</tag-class>
         <body-content>empty</body-content>
         <attribute>
             <name>user</name>
@@ -18,7 +18,7 @@
     </tag>
     <tag>
         <name>pagingTag</name>
-        <tag-class>com.epam.web.tags.PagingTag</tag-class>
+        <tag-class>com.epam.web.tag.PagingTag</tag-class>
         <body-content>empty</body-content>
         <attribute>
             <name>pagesCount</name>

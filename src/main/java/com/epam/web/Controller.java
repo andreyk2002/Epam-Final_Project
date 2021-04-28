@@ -17,7 +17,7 @@ import java.io.IOException;
 public class Controller extends HttpServlet {
     private static final Logger LOGGER = LogManager.getLogger(Controller.class);
     private static final String ERROR_PAGE = "/error.jsp";
-    public static final String COMMAND_NAME = "commandName";
+    private static final String COMMAND_NAME = "commandName";
 
     private final CommandFactory factory = new CommandFactory();
 

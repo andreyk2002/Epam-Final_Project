@@ -1,6 +1,5 @@
-package com.epam.web.tags;
+package com.epam.web.tag;
 
-import com.epam.web.entity.Role;
 import com.epam.web.entity.User;
 
 import javax.servlet.http.HttpSession;
