@@ -2,6 +2,7 @@ package com.epam.web.command;
 
 import com.epam.web.command.impl.GetFilmsCommand;
 import com.epam.web.service.FilmService;
+import com.epam.web.service.GenreService;
 import com.epam.web.service.ServiceException;
 import org.mockito.Mockito;
 import org.testng.Assert;
@@ -31,7 +32,9 @@ public class GetFilmsCommandTest extends CommandTest {
         serviceMock = Mockito.mock(FilmService.class);
         when(serviceMock.getPagesCount()).thenReturn(1);
         when(serviceMock.getNextMovies(anyInt())).thenReturn(Collections.emptyList());
-        command = new GetFilmsCommand(serviceMock);
+
+        GenreService genreServiceMock = Mockito.mock(GenreService.class);
+        command = new GetFilmsCommand(serviceMock, genreServiceMock);
     }
 
     @Test

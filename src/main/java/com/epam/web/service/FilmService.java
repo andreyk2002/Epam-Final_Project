@@ -36,13 +36,8 @@ public class FilmService {
 
     public List<FilmDTO> getNextMovies(int pageNumb) throws ServiceException {
         try {
-            List<FilmDTO> filmDTOS = new ArrayList<>();
             List<Film> moviesForPage = filmDao.getMoviesForPage(pageNumb);
-            for (Film film : moviesForPage) {
-                FilmDTO filmDTO = getMovieDTO(film);
-                filmDTOS.add(filmDTO);
-            }
-            return filmDTOS;
+            return getFilmDTOS(moviesForPage);
         } catch (DaoException e) {
             throw new ServiceException(e.getMessage(), e);
         }
@@ -50,16 +45,29 @@ public class FilmService {
 
     public List<FilmDTO> getMoviesByName(String filmName) throws ServiceException {
         try {
-            List<FilmDTO> filmDTOS = new ArrayList<>();
-            List<Film> moviesForPage = filmDao.getMoviesByName(filmName);
-            for (Film film : moviesForPage) {
-                FilmDTO filmDTO = getMovieDTO(film);
-                filmDTOS.add(filmDTO);
-            }
-            return filmDTOS;
+            List<Film> moviesByName = filmDao.getMoviesByName(filmName);
+            return getFilmDTOS(moviesByName);
         } catch (DaoException e) {
             throw new ServiceException(e.getMessage(), e);
         }
+    }
+
+    public List<FilmDTO> getByGenreId(long genreId) throws ServiceException {
+        try {
+            List<Film> moviesByGenre = filmDao.getMoviesByGenreId(genreId);
+            return getFilmDTOS(moviesByGenre);
+        } catch (DaoException e) {
+            throw new ServiceException(e.getMessage(), e);
+        }
+    }
+
+    private List<FilmDTO> getFilmDTOS(List<Film> moviesForPage) throws DaoException {
+        List<FilmDTO> filmDTOS = new ArrayList<>();
+        for (Film film : moviesForPage) {
+            FilmDTO filmDTO = getMovieDTO(film);
+            filmDTOS.add(filmDTO);
+        }
+        return filmDTOS;
     }
 
     public int getPagesCount() throws ServiceException {
@@ -140,6 +148,5 @@ public class FilmService {
                 .withImagePath(updatedFilm.getImagePath())
                 .build();
     }
-
 
 }

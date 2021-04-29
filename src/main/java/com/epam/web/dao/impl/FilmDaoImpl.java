@@ -18,6 +18,7 @@ public class FilmDaoImpl extends AbstractDao<Film> implements FilmDao {
     private static final String SELECT_MOVIES_IN_BOUNDS = "SELECT * FROM films LIMIT ? OFFSET ?";
     public static final String UPDATE_FILM = "UPDATE films SET Name = ?, Description = ?, ImagePath = ?, GenreId = ? WHERE ID = ?";
     public static final String FIND_BY_NAME = "SELECT * FROM films WHERE match(Name) against(?)";
+    private static final String FIND_BY_GENRE_ID = "SELECT * FROM films WHERE GenreID = (?)";
 
     public FilmDaoImpl(ProxyConnection connection) {
         super(connection, new MovieRowMapper(), TABLE_NAME);
@@ -50,5 +51,10 @@ public class FilmDaoImpl extends AbstractDao<Film> implements FilmDao {
     @Override
     public List<Film> getMoviesByName(String filmName) throws DaoException {
         return executeQuery(FIND_BY_NAME, filmName);
+    }
+
+    @Override
+    public List<Film> getMoviesByGenreId(long genreId) throws DaoException {
+        return executeQuery(FIND_BY_GENRE_ID, genreId);
     }
 }

@@ -61,3 +61,6 @@ alter table reviews
     add constraint FK_UserID
         foreign key (UserID) references users(ID);
 
+ALTER TABLE films
+    ADD FULLTEXT(Name)
+

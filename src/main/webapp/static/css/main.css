@@ -393,18 +393,18 @@ img.type-image {
     display: inline-block;
 }
 
-.search-films{
+.search-films {
     width: 50%;
     margin-left: 20px;
     display: inline-block;
 }
 
-#searchInput{
+#searchInput {
     height: 30px;
     max-width: 220px
 }
 
-.search{
+.search {
     height: 36px;
     background-color: yellowgreen;
 }
@@ -432,6 +432,19 @@ img.type-image {
 .film-edit-btn {
     width: 20px;
     margin-right: 7px;
+}
+
+.genre-search{
+    display: inline-block;
+}
+
+.name-search{
+    display: inline-block;
+}
+
+.genres-options {
+    height: 36px;
+    width: 220px;
 }
 
 /*admin films styles*/
@@ -512,11 +525,11 @@ h2.film-link {
     padding: 20px;
 }
 
-.film-rate-form{
+.film-rate-form {
     margin-bottom: 60px;
 }
 
-.review-header{
+.review-header {
     color: white;
     margin-bottom: 30px;
     font-size: 32px;
@@ -943,7 +956,7 @@ footer {
         margin-bottom: 10px;
     }
 
-    .header-item{
+    .header-item {
         margin-bottom: 60px;
     }
 

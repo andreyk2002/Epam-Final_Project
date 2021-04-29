@@ -43,6 +43,7 @@ public class CommandFactory {
     private static final String UPDATE_FILM = "updateFilm";
     private static final String GET_USER = "getUser";
     private static final String SEARCH_FILM = "searchFilm";
+    private static final String SEARCH_BY_GENRES = "searchByGenre";
 
     private final DaoHelperFactory helperFactory = new DaoHelperFactory();
     private final UserRatingValidator ratingValidator = new UserRatingValidator();
@@ -70,6 +71,9 @@ public class CommandFactory {
             case SEARCH_FILM:
                 FilmService searchFilmService = new FilmService(helperFactory, protect);
                 return new SearchFilmCommand(searchFilmService);
+            case SEARCH_BY_GENRES:
+                FilmService genreSearchFilmService = new FilmService(helperFactory, protect);
+                return new SearchByGenreCommand(genreSearchFilmService);
             case CHANGE_LANGUAGE:
                 return new ChangeLanguageCommand();
             case LOGIN:
@@ -81,8 +85,9 @@ public class CommandFactory {
             case PERSONAL:
                 return new PersonalPageCommand();
             case FILMS_PAGE:
+                GenreService genreService = new GenreService(helperFactory);
                 FilmService filmsService = new FilmService(helperFactory, protect);
-                return new GetFilmsCommand(filmsService);
+                return new GetFilmsCommand(filmsService, genreService);
             case GET_MOVIE:
                 FilmService filmService = new FilmService(helperFactory, protect);
                 return new GetFilmCommand(filmService);
@@ -103,8 +108,8 @@ public class CommandFactory {
                 UserService changeStatusService = new UserService(helperFactory, ratingValidator);
                 return new ChangeUserStatusCommand(changeStatusService);
             case ADD_FILM:
-                GenreService genreService = new GenreService(helperFactory);
-                return new AddFilmPageCommand(genreService);
+                GenreService addGenreService = new GenreService(helperFactory);
+                return new AddFilmPageCommand(addGenreService);
             case SAVE_FILM:
                 FilmService saveFilmService = new FilmService(helperFactory, protect);
                 FormParser parser = new FormParser();
