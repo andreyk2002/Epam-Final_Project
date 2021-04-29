@@ -48,4 +48,6 @@ public interface FilmDao extends Dao<Film> {
      */
 
     void updateFilm(Film updatedFilm) throws DaoException;
+
+    List<Film> getMoviesByName(String filmName) throws DaoException;
 }

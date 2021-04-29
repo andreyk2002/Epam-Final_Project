@@ -48,6 +48,19 @@ public class FilmService {
         }
     }
 
+    public List<FilmDTO> getMoviesByName(String filmName) throws ServiceException {
+        try {
+            List<FilmDTO> filmDTOS = new ArrayList<>();
+            List<Film> moviesForPage = filmDao.getMoviesByName(filmName);
+            for (Film film : moviesForPage) {
+                FilmDTO filmDTO = getMovieDTO(film);
+                filmDTOS.add(filmDTO);
+            }
+            return filmDTOS;
+        } catch (DaoException e) {
+            throw new ServiceException(e.getMessage(), e);
+        }
+    }
 
     public int getPagesCount() throws ServiceException {
         try {
@@ -127,4 +140,6 @@ public class FilmService {
                 .withImagePath(updatedFilm.getImagePath())
                 .build();
     }
+
+
 }

@@ -22,16 +22,24 @@
         </c:if>
     </div>
 </section>
-<c:if test="${user.role == 'ADMIN'}">
-    <div class="add-film">
+
+<div class="add-film">
+    <form class="search-films">
+        <input type="hidden" name="commandName" value="searchFilm"/>
+        <input id="searchInput" name="searchString" type="search" placeholder="<fmt:message key="local.search"/>">
+        <button class="search" type="submit">
+            <img src="static/img/bootstrap-icons-1.4.0/search.svg">
+        </button>
+    </form>
+    <c:if test="${user.role == 'ADMIN'}">
         <form class="add-film-form" action="${pageContext.request.contextPath}/controller">
             <input type="hidden" name="commandName" value="addFilm">
             <button class="add-film-btn" type="submit">
                 <fmt:message key="local.addFilm"/>
             </button>
         </form>
-    </div>
-</c:if>
+    </c:if>
+</div>
 <div class="container">
     <div class="wrapper-wide">
         <c:forEach items="${sessionScope.movies}" var="film">

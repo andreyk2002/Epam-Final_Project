@@ -11,23 +11,26 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class EditFilmCommand implements Command {
+public class SaveFilmCommand implements Command {
+
     private static final String FILMS_PAGE = "/controller?commandName=showFilmsPage&pageNumber=";
-    private static final String PAGE_NUMBER = "pageNumber";
     private final FilmService filmService;
     private final FormParser parser;
 
-    public EditFilmCommand(FilmService updateFilmService, FormParser parser) {
-        this.filmService = updateFilmService;
+
+    public SaveFilmCommand(FilmService saveFilmService, FormParser parser) {
+        this.filmService = saveFilmService;
         this.parser = parser;
     }
+
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
         Film film = parser.parseFormData(request);
-        filmService.updateFilm(film);
+        filmService.saveFilm(film);
         HttpSession session = request.getSession();
-        Integer pageNumber = (Integer) session.getAttribute(PAGE_NUMBER);
+        Integer pageNumber = (Integer) session.getAttribute("pageNumber");
         return CommandResult.redirect(FILMS_PAGE + pageNumber);
     }
+
 }

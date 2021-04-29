@@ -32,7 +32,7 @@ public class CommandFactory {
     private static final String PERSONAL_PAGE_COMMAND = "showPersonalPage";
     private static final String CREATE_FILM = "showAddPage";
     private static final String FILMS_PAGE = "showFilmsPage";
-    private static final String MOVIE = "movie";
+    private static final String GET_MOVIE = "movie";
     private static final String RATE_FILM = "rateFilm";
     private static final String REVIEW_FILM = "reviewFilm";
     private static final String MANAGE_USERS = "manageUsers";
@@ -42,6 +42,7 @@ public class CommandFactory {
     private static final String SAVE_FILM = "saveFilm";
     private static final String UPDATE_FILM = "updateFilm";
     private static final String GET_USER = "getUser";
+    private static final String SEARCH_FILM = "searchFilm";
 
     private final DaoHelperFactory helperFactory = new DaoHelperFactory();
     private final UserRatingValidator ratingValidator = new UserRatingValidator();
@@ -66,6 +67,9 @@ public class CommandFactory {
                 return new ShowPageCommand(EDIT_FILM_PAGE);
             case LOGOUT:
                 return new LogoutCommand();
+            case SEARCH_FILM:
+                FilmService searchFilmService = new FilmService(helperFactory, protect);
+                return new SearchFilmCommand(searchFilmService);
             case CHANGE_LANGUAGE:
                 return new ChangeLanguageCommand();
             case LOGIN:
@@ -79,7 +83,7 @@ public class CommandFactory {
             case FILMS_PAGE:
                 FilmService filmsService = new FilmService(helperFactory, protect);
                 return new GetFilmsCommand(filmsService);
-            case MOVIE:
+            case GET_MOVIE:
                 FilmService filmService = new FilmService(helperFactory, protect);
                 return new GetFilmCommand(filmService);
             case RATE_FILM:
@@ -104,7 +108,7 @@ public class CommandFactory {
             case SAVE_FILM:
                 FilmService saveFilmService = new FilmService(helperFactory, protect);
                 FormParser parser = new FormParser();
-                return new AddFilmCommand(saveFilmService, parser);
+                return new SaveFilmCommand(saveFilmService, parser);
             case EDIT_FILM:
                 FilmService editFilmService = new FilmService(helperFactory, protect);
                 GenreService filmGenreService = new GenreService(helperFactory);
@@ -115,7 +119,7 @@ public class CommandFactory {
             case UPDATE_FILM:
                 FormParser formParser = new FormParser();
                 FilmService updateFilmService = new FilmService(helperFactory, protect);
-                return new EditFilmCommand(updateFilmService, formParser);
+                return new UpdateFilmCommand(updateFilmService, formParser);
             default:
                 throw new CommandNotExistException("Unknown type = " + commandName);
         }

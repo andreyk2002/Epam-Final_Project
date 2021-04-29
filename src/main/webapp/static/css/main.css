@@ -389,17 +389,33 @@ img.type-image {
 }
 
 .add-film-form {
+    margin-left: 10px;
+    display: inline-block;
+}
 
-    margin-left: 40%;
-    padding-bottom: 10px;
+.search-films{
+    width: 50%;
+    margin-left: 20px;
+    display: inline-block;
+}
+
+#searchInput{
+    height: 30px;
+    max-width: 220px
+}
+
+.search{
+    height: 36px;
+    background-color: yellowgreen;
 }
 
 .add-film-btn {
-    width: 40%;
+    min-width: 150px;
     background-color: #1f1fa7;
     color: white;
     padding: 10px;
     font-size: 18px;
+    margin-bottom: 15px;
 }
 
 .manage-film {
@@ -934,6 +950,11 @@ footer {
     .logo-link {
         font-size: 35px;
         line-height: 42px;
+    }
+
+    .search-films {
+        width: 100%;
+        margin-bottom: 20px;
     }
 }
 

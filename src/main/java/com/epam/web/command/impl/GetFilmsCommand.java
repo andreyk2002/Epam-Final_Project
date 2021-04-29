@@ -13,7 +13,7 @@ import java.util.List;
 
 public class GetFilmsCommand implements Command {
 
-    public static final String FILM_PAGE = "/controller?commandName=mainPage&pageNumber=";
+    private static final String FILM_PAGE = "/controller?commandName=mainPage&pageNumber=";
     private final FilmService filmService;
 
     public GetFilmsCommand(FilmService filmService) {
