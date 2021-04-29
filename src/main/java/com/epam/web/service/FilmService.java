@@ -81,9 +81,13 @@ public class FilmService {
         return new FilmDTO(film, genre, ratingRounded, filmReviews);
     }
 
-    public void saveFilm(Film film) throws DaoException {
+    public void saveFilm(Film film) throws ServiceException {
         Film safeFilm = removeMalformedData(film);
-        filmDao.save(safeFilm);
+        try {
+            filmDao.save(safeFilm);
+        } catch (DaoException e) {
+            throw new ServiceException(e.getMessage(), e);
+        }
     }
 
     public void removeById(long filmId) throws DaoException {
@@ -96,14 +100,18 @@ public class FilmService {
         return filmDao.getById(filmId);
     }
 
-    public void updateFilm(Film updatedFilm) throws DaoException {
+    public void updateFilm(Film updatedFilm) throws ServiceException {
         long id = updatedFilm.getId();
-        Optional<Film> film = filmDao.getById(id);
-        Film safeFilm = removeMalformedData(updatedFilm);
-        if (film.isEmpty()) {
-            saveFilm(safeFilm);
+        try {
+            Optional<Film> film = filmDao.getById(id);
+            Film safeFilm = removeMalformedData(updatedFilm);
+            if (film.isEmpty()) {
+                saveFilm(safeFilm);
+            }
+            filmDao.updateFilm(safeFilm);
+        } catch (DaoException e) {
+            throw new ServiceException(e.getMessage(), e);
         }
-        filmDao.updateFilm(safeFilm);
     }
 
     private Film removeMalformedData(Film updatedFilm) {

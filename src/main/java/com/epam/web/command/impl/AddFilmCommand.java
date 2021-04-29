@@ -2,7 +2,6 @@ package com.epam.web.command.impl;
 
 import com.epam.web.command.Command;
 import com.epam.web.command.CommandResult;
-import com.epam.web.dao.DaoException;
 import com.epam.web.entity.Film;
 import com.epam.web.parser.FormParser;
 import com.epam.web.service.FilmService;
@@ -27,12 +26,8 @@ public class AddFilmCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-        try {
-            Film film = parser.parseFormData(request);
-            filmService.saveFilm(film);
-        } catch (DaoException e) {
-            throw new ServiceException(e.getMessage(), e);
-        }
+        Film film = parser.parseFormData(request);
+        filmService.saveFilm(film);
         HttpSession session = request.getSession();
         Integer pageNumber = (Integer) session.getAttribute("pageNumber");
         return CommandResult.redirect(FILMS_PAGE + pageNumber);

@@ -1,22 +1,23 @@
 package com.epam.web.tag;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.TagSupport;
 import java.io.IOException;
 
 public class PagingTag extends TagSupport {
-    public static final String PATH = "/controller?commandName=showFilmsPage&pageNumber=";
+    private static final String PATH = "/controller?commandName=showFilmsPage&pageNumber=";
     private static final String START = "<div class=\"pages\">";
     private static final String END = "</div>";
     private static final int MAX_PAGES = 5;
-    public static final String LINK_END = "</a>";
+    private static final String LINK_END = "</a>";
     private static final String CURRENT_PAGE_START = "<a class=\"film-link\" style=\"color:green\" href=";
-    public static final String NEXT = "Next";
-    public static final String PREVIOUS = "Previous";
 
     private static final String LINK_START = "<a class=\"film-link\" href=";
+    private static final String PREVIOUS_PROPERTY = "local.previous";
+    private static final String NEXT_PROPERTY = "local.next";
 
     private int pagesCount;
     private int currentPage;
@@ -32,6 +33,8 @@ public class PagingTag extends TagSupport {
     @Override
     public int doStartTag() throws JspException {
         ServletContext context = pageContext.getServletContext();
+        HttpSession session = pageContext.getSession();
+        TagLocalizer tagLocalizer = new TagLocalizer(session);
         String contextPath = context.getContextPath();
         try {
             JspWriter out = pageContext.getOut();
@@ -49,10 +52,12 @@ public class PagingTag extends TagSupport {
                 writePageLink(contextPath, out, i, page);
             }
             if (currentPage > 0) {
-                writePageLink(contextPath, out, currentPage - 1, PREVIOUS);
+                String previous = tagLocalizer.localize(PREVIOUS_PROPERTY);
+                writePageLink(contextPath, out, currentPage - 1, previous);
             }
             if (currentPage < pagesCount) {
-                writePageLink(contextPath, out, currentPage + 1, NEXT);
+                String next = tagLocalizer.localize(NEXT_PROPERTY);
+                writePageLink(contextPath, out, currentPage + 1, next);
             }
             out.write(LINK_START);
 

@@ -22,10 +22,10 @@
         <input type="hidden" name="filmId" value="${movie.id}"/>
         <input type="hidden" name="image_path" value="${movie.imagePath}"/>
         <label class="edit-label"><fmt:message key="local.changeName"/>:</label>
-        <input  class="film-name film-input" name="name" type="text" value="${movie.name}"/>
+        <input class="film-name film-input" name="name" type="text" value="${movie.name}"/>
 
         <br>
-        <label  class="edit-label"><fmt:message key="local.filmDescription"/></label>
+        <label class="edit-label"><fmt:message key="local.filmDescription"/></label>
         <br>
         <textarea class="film-description-admin film-input" rows="15" name="description"
                   value="${movie.description}">${movie.description}</textarea>
@@ -38,7 +38,8 @@
         </select>
         <br/>
         <label class="edit-label"><fmt:message key="local.changeImage"/></label>
-        <input class="film-input" name="Image" type="file" style="color: white"/>
+        <input id="imageUpload" class="film-input" name="Image" type="file" accept="image/*"
+               style="color: white" />
         <button type="submit" class="rate-film-button">OK</button>
     </form>
 </div>

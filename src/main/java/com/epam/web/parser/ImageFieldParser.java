@@ -20,13 +20,14 @@ class ImageFieldParser implements FieldParser {
 
     @Override
     public ParseResult parse(FileItem item) throws Exception {
-        String imagePath = IMAGE_PATH + item.getName();
+        String itemName = item.getName();
+        String imagePath = IMAGE_PATH + itemName;
         File imageSaveFile = new File(imagePath);
         item.write(imageSaveFile);
         Path originalPath = Path.of(imagePath);
-        Path copied = Path.of(BACKUP_PATH + item.getName());
+        Path copied = Path.of(BACKUP_PATH + itemName);
         Files.copy(originalPath, copied, StandardCopyOption.REPLACE_EXISTING);
-        String savePath = SAVE_PATH + item.getName();
+        String savePath = SAVE_PATH + itemName;
         return ParseResult.imagePath(savePath);
     }
 }

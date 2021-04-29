@@ -2,7 +2,6 @@ package com.epam.web.command.impl;
 
 import com.epam.web.command.Command;
 import com.epam.web.command.CommandResult;
-import com.epam.web.dao.DaoException;
 import com.epam.web.entity.Film;
 import com.epam.web.parser.FormParser;
 import com.epam.web.service.FilmService;
@@ -14,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 public class EditFilmCommand implements Command {
     private static final String FILMS_PAGE = "/controller?commandName=showFilmsPage&pageNumber=";
+    private static final String PAGE_NUMBER = "pageNumber";
     private final FilmService filmService;
     private final FormParser parser;
 
@@ -24,14 +24,10 @@ public class EditFilmCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-        try {
-            Film film = parser.parseFormData(request);
-            filmService.updateFilm(film);
-        } catch (DaoException e) {
-            throw new ServiceException(e.getMessage(), e);
-        }
+        Film film = parser.parseFormData(request);
+        filmService.updateFilm(film);
         HttpSession session = request.getSession();
-        Integer pageNumber = (Integer)session.getAttribute("pageNumber");
+        Integer pageNumber = (Integer) session.getAttribute(PAGE_NUMBER);
         return CommandResult.redirect(FILMS_PAGE + pageNumber);
     }
 }

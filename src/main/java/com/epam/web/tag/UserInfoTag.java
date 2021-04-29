@@ -7,7 +7,6 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.TagSupport;
 import java.io.IOException;
-import java.util.ResourceBundle;
 
 public class UserInfoTag extends TagSupport {
 
@@ -15,8 +14,8 @@ public class UserInfoTag extends TagSupport {
     private static final String CLOSE_INFO = "</h3>";
     private static final String TITLE_HEADER = "<h2 class=\"personal-title\">";
     private static final String CLOSE_TITLE = "</h2>";
-    public static final String DEFAULT_LOCAL = "local";
-    public static final String LOCAL = "local_";
+    private static final String NAME_PROPERTY = "local.username";
+    private static final String RATING_PROPERTY = "local.rating";
 
     private User user;
 
@@ -27,11 +26,10 @@ public class UserInfoTag extends TagSupport {
 
     @Override
     public int doStartTag() throws JspException {
-        String loc = getLocale();
-        String bundleName = loc == null ? DEFAULT_LOCAL : LOCAL + loc;
-        ResourceBundle resource = ResourceBundle.getBundle(bundleName);
-        String loginLabel = resource.getString("local.username");
-        String ratingLabel = resource.getString("local.rating");
+        HttpSession session = pageContext.getSession();
+        TagLocalizer tagLocalizer = new TagLocalizer(session);
+        String loginLabel = tagLocalizer.localize(NAME_PROPERTY);
+        String ratingLabel = tagLocalizer.localize(RATING_PROPERTY);
         String login = user.getLogin();
 
         double rating = user.getRating();
@@ -67,11 +65,6 @@ public class UserInfoTag extends TagSupport {
         return title;
     }
 
-    private String getLocale() {
-        HttpSession session = pageContext.getSession();
-        Object local = session.getAttribute("local");
-        return (String) local;
-    }
 
     @Override
     public int doEndTag() {
