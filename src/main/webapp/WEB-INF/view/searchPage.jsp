@@ -14,12 +14,9 @@
 </head>
 <body>
 <jsp:include page="fragments/header.jsp"/>
-<section class="intro">
+<section class="intro" style="background: black; min-height: 100px; padding-bottom: 50px">
     <div class="wrapper">
-        <h1 class="into-title"><fmt:message key="local.results_for"/>  </h1>
-        <c:if test="${sessionScope.user.login != null}">
-            <h2 class="greeting"><fmt:message key="local.hello"/>, ${sessionScope.user.login}</h2>
-        </c:if>
+        <h1 class="into-title"><fmt:message key="local.results_for"/></h1>
     </div>
 </section>
 
@@ -91,7 +88,6 @@
             </a>
 
         </c:forEach>
-        <ctg:pagingTag pagesCount="${pagesCount}" currentPage="${pageNumber}"/>
     </div>
     <jsp:include page="fragments/footer.jsp"/>
 </div>

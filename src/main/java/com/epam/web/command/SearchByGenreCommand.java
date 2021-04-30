@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class SearchByGenreCommand implements Command {
-    private static final String FILM_PAGE = "/controller?commandName=mainPage&pageNumber=0";
+    private static final String FILM_PAGE = "/controller?commandName=searchPage";
     private final FilmService filmService;
 
     public SearchByGenreCommand(FilmService genreSearchFilmService) {

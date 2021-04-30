@@ -17,6 +17,7 @@ public class CommandFactory {
     private static final String LOGIN_PAGE = "/index.jsp";
     private static final String CREATE_FILM_PAGE = "/WEB-INF/view/createFilm.jsp";
     private static final String EDIT_FILM_PAGE = "/WEB-INF/view/editFilm.jsp";
+    private static final String SEARCH_PAGE = "/WEB-INF/view/searchPage.jsp";
 
     private static final String DELETE_FILM = "deleteFilm";
     private static final String PERSONAL = "personalPage";
@@ -42,8 +43,8 @@ public class CommandFactory {
     private static final String SAVE_FILM = "saveFilm";
     private static final String UPDATE_FILM = "updateFilm";
     private static final String GET_USER = "getUser";
-
     private static final String SEARCH_FILM = "searchFilm";
+    private static  final String SEARCH_PAGE_COMMAND = "searchPage";
     private static final String SEARCH_BY_GENRES = "searchByGenre";
 
     private final DaoHelperFactory helperFactory = new DaoHelperFactory();
@@ -67,6 +68,8 @@ public class CommandFactory {
                 return new ShowPageCommand(CREATE_FILM_PAGE);
             case EDIT_FILM_PAGE_COMMAND:
                 return new ShowPageCommand(EDIT_FILM_PAGE);
+            case SEARCH_PAGE_COMMAND:
+                return new ShowPageCommand(SEARCH_PAGE);
             case LOGOUT:
                 return new LogoutCommand();
             case SEARCH_FILM:
