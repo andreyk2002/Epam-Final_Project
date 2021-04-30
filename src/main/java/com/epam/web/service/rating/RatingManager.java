@@ -8,6 +8,7 @@ import com.epam.web.dao.factory.DaoHelperFactory;
 import com.epam.web.entity.Rating;
 import com.epam.web.service.ServiceException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicReference;
@@ -15,6 +16,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 import static java.util.stream.Collectors.groupingByConcurrent;
+import static java.util.stream.Collectors.summarizingInt;
 
 public class RatingManager {
 
@@ -69,11 +71,14 @@ public class RatingManager {
 
             int positionToCheck = currentIndex - REVIEWS_BEFORE_CHECK;
             Rating ratingToCheck = filmRatings.get(positionToCheck);
-            double movieRating = ratingDao.getMovieRating(filmID);
+            double averateRating = filmRatings.stream()
+                    .mapToInt(Rating::getRating)
+                    .summaryStatistics()
+                    .getAverage();
             double userRating = ratingToCheck.getRating();
             UserDao userDao = helper.createUserDao();
             long userID = ratingToCheck.getUserID();
-            double delta = Math.abs(userRating - movieRating);
+            double delta = Math.abs(userRating - averateRating);
             if (delta < CLOSE_TO_AVG) {
                 userDao.incrementRating(userID);
             } else if (delta > FAR_FROM_AVG) {
@@ -89,8 +94,9 @@ public class RatingManager {
         ConcurrentMap<Long, List<Rating>> ratings = RATINGS.get();
         List<Rating> filmRatings = ratings.get(filmID);
         if (filmRatings == null) {
-            List<Rating> firstFilmRating = List.of(rating);
-            ratings.put(rating.getFilmID(), firstFilmRating);
+            List<Rating> addNotSupport = List.of(rating);
+            List<Rating> newRatings = new ArrayList<>(addNotSupport);
+            ratings.put(rating.getFilmID(), newRatings);
             return true;
         }
         boolean containsRating = filmRatings.stream()

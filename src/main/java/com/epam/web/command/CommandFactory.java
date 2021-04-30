@@ -42,6 +42,7 @@ public class CommandFactory {
     private static final String SAVE_FILM = "saveFilm";
     private static final String UPDATE_FILM = "updateFilm";
     private static final String GET_USER = "getUser";
+
     private static final String SEARCH_FILM = "searchFilm";
     private static final String SEARCH_BY_GENRES = "searchByGenre";
 

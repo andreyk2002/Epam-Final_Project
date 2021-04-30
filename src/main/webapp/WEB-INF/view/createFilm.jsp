@@ -30,7 +30,7 @@
         <br/>
         <label class="image-load"><fmt:message key="local.filmImageLoad"/></label>
         <br/>
-        <input required class="film-input" name="Image" type="file" style="color: white"/>
+        <input required class="film-input" name="Image" type="file" accept="image/*" style="color: white"/>
         <br/>
         <button type="submit" class="rate-film-button"><fmt:message key="local.filmCreate"/></button>
     </form>
