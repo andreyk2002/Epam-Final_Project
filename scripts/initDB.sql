@@ -35,6 +35,7 @@ CREATE TABLE users
 
 CREATE TABLE filmsratings
 (
+    ID bigint PRIMARY KEY AUTO_INCREMENT,
     UserID bigint NOT NULL,
     FilmID bigint NOT NULL,
     Rating double DEFAULT NULL,
@@ -42,6 +43,7 @@ CREATE TABLE filmsratings
     KEY      FK_FILMSRATINGS_FILMS (FilmID),
     CONSTRAINT FK_FILMSRATINGS_FILMS FOREIGN KEY (FilmID) REFERENCES films (ID),
     CONSTRAINT FK_FILMSRATINGS_Users FOREIGN KEY (UserID) REFERENCES users (ID),
+    CONSTRAINT FilmID_UserID UNIQUE (FilmID, UserID),
     CONSTRAINT filmsratings_chk_1 CHECK (((rating >= 0) and (rating <= 5.0)))
 ) DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 

@@ -44,12 +44,26 @@ public interface FilmDao extends Dao<Film> {
      * Update record for specified film.
      * If there is not record for specified film, nothing happens
      * @param updatedFilm instance of film, needed to be updated
-     * @throws DaoException is request to storage is corrupted
+     * @throws DaoException if request to storage is corrupted
      */
 
     void updateFilm(Film updatedFilm) throws DaoException;
 
-    List<Film> getMoviesByName(String filmName) throws DaoException;
+
+    /**
+     * Searches films which name contains specified string
+     * @param searchString string to be contained in film name
+     * @return List of films which name contained specified string
+     * @throws DaoException if request to storage is corrupted
+     */
+    List<Film> getMoviesByName(String searchString) throws DaoException;
+
+    /**
+     * Searches films for specified genre
+     * @param genreId id of needed film genre
+     * @return List of films which genre id is equal to specified genreId
+     * @throws DaoException if request to storage is corrupted
+     */
 
     List<Film> getMoviesByGenreId(long genreId) throws DaoException;
 }
