@@ -467,6 +467,19 @@ h2.film-link {
     color: white;
 }
 
+.film-link:hover{
+    color: #1f1fa7;
+    animation: 0.3s ease-in;
+}
+
+.film-info {
+    text-decoration: none;
+    font-size: 26px;
+    color: white;
+    margin-bottom: 25px;
+}
+
+
 .film-view-link {
     text-decoration: none;
 }
@@ -482,12 +495,16 @@ h2.film-link {
     background-color: grey;
 }
 
+
 .film-rating {
     font-size: 20px;
     font-style: italic;
     color: green;
     padding-top: 20px;
+    display: block;
+    margin-top: 20px;
 }
+
 
 .movie-image {
     object-fit: scale-down;
@@ -956,6 +973,15 @@ footer {
     .types-img-title {
         font-size: 22px;
         bottom: 32%;
+    }
+
+    .film-info {
+        margin-bottom: 0;
+    }
+
+    .film-rating {
+        display: inline;
+        margin-top: 0;
     }
 
 }

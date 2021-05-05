@@ -52,9 +52,9 @@ public class FilmService {
         }
     }
 
-    public List<FilmDTO> getByGenreId(long genreId) throws ServiceException {
-        try {
-            List<Film> moviesByGenre = filmDao.getMoviesByGenreId(genreId);
+    public List<FilmDTO> getByGenreName(String genreName) throws ServiceException {
+        try{
+            List<Film> moviesByGenre = filmDao.getMoviesByGenreName(genreName);
             return getFilmDTOS(moviesByGenre);
         } catch (DaoException e) {
             throw new ServiceException(e.getMessage(), e);

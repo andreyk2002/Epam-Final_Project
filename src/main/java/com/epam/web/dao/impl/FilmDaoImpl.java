@@ -5,7 +5,7 @@ import com.epam.web.dao.AbstractDao;
 import com.epam.web.dao.DaoException;
 import com.epam.web.dao.FilmDao;
 import com.epam.web.entity.Film;
-import com.epam.web.mapper.MovieRowMapper;
+import com.epam.web.mapper.FilmRowMapper;
 
 import java.util.List;
 
@@ -18,10 +18,10 @@ public class FilmDaoImpl extends AbstractDao<Film> implements FilmDao {
     private static final String SELECT_MOVIES_IN_BOUNDS = "SELECT * FROM films LIMIT ? OFFSET ?";
     public static final String UPDATE_FILM = "UPDATE films SET Name = ?, Description = ?, ImagePath = ?, GenreId = ? WHERE ID = ?";
     public static final String FIND_BY_NAME = "SELECT * FROM films WHERE match(Name) against(?)";
-    private static final String FIND_BY_GENRE_ID = "SELECT * FROM films WHERE GenreID = (?)";
+    private static final String FIND_BY_GENRE_NAME = "SELECT * FROM films f JOIN Genres g ON f.GenreId = g.ID   WHERE g.Name = ?";
 
     public FilmDaoImpl(ProxyConnection connection) {
-        super(connection, new MovieRowMapper(), TABLE_NAME);
+        super(connection, new FilmRowMapper(), TABLE_NAME);
     }
 
 
@@ -55,7 +55,7 @@ public class FilmDaoImpl extends AbstractDao<Film> implements FilmDao {
     }
 
     @Override
-    public List<Film> getMoviesByGenreId(long genreId) throws DaoException {
-        return executeQuery(FIND_BY_GENRE_ID, genreId);
+    public List<Film> getMoviesByGenreName(String genreName) throws DaoException {
+        return executeQuery(FIND_BY_GENRE_NAME, genreName);
     }
 }

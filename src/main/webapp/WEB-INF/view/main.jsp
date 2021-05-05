@@ -22,77 +22,10 @@
         </c:if>
     </div>
 </section>
-
-<div class="add-film">
-    <div class="search-films">
-        <form class="name-search">
-            <input type="hidden" name="commandName" value="searchFilm"/>
-            <input id="searchInput" name="searchString" type="search" placeholder="<fmt:message key="local.search"/>">
-            <button class="search" type="submit">
-                <img src="static/img/bootstrap-icons-1.4.0/search.svg">
-            </button>
-        </form>
-        <form class="genre-search">
-            <input type="hidden" name="commandName" value="searchByGenre"/>
-            <select class="genres-options" name="genreId">
-                <c:forEach items="${genres}" var="genre">
-                    <option value="${genre.id}">${genre.name}</option>
-                </c:forEach>
-            </select>
-            <button class="search" type="submit">
-                <img src="static/img/bootstrap-icons-1.4.0/search.svg">
-            </button>
-        </form>
-    </div>
-    <c:if test="${user.role == 'ADMIN'}">
-        <form class="add-film-form" action="${pageContext.request.contextPath}/controller">
-            <input type="hidden" name="commandName" value="addFilm">
-            <button class="add-film-btn" type="submit">
-                <fmt:message key="local.addFilm"/>
-            </button>
-        </form>
-    </c:if>
-</div>
+<jsp:include page="fragments/search.jsp"/>
 <div class="container">
-    <div class="wrapper-wide">
-        <c:forEach items="${sessionScope.movies}" var="film">
-            <a class="film-view-link"
-               href="${pageContext.request.contextPath}/controller?commandName=movie&id=${film.id}">
-                <c:if test="${user.role == 'ADMIN'}">
-                    <div class="manage-film">
-                        <form class="manage-film-form" action="${pageContext.request.contextPath}/controller">
-                            <input type="hidden" name="commandName" value="deleteFilm"/>
-                            <!-- storing locale to localize confirmation messaging in delete dialog-->
-                            <input type="hidden" name="locale" value="${sessionScope.local}"/>
-                            <input type="hidden" name="filmId" value="${film.id}"/>
-                            <button class="film-edit delete-button" type="submit">
-                                <img class="film-edit-btn" src="static/img/bootstrap-icons-1.4.0/trash.svg"/>
-                            </button>
-                        </form>
-                        <form class="manage-film-form" action="${pageContext.request.contextPath}/controller">
-                            <input type="hidden" name="commandName" value="editFilm"/>
-                            <input type="hidden" name="filmId" value="${film.id}"/>
-                            <button class="film-edit" type="submit">
-                                <img class="film-edit-btn" src="static/img/bootstrap-icons-1.4.0/pencil-fill.svg"/>
-                            </button>
-                        </form>
-                    </div>
-                </c:if>
-                <div class="card">
-                    <div class="card-img">
-                        <img class="film-image" src="${film.imagePath}" alt="movieImage"/>
-                    </div>
-                    <div class="card-other">
-                        <h2 class="film-link">${film.name}</h2>
-                        <h2 class="film-link">${film.genre}</h2>
-                        <span class="film-rating"><fmt:message key="local.rating"/>: ${film.rating}</span><br>
-                    </div>
-                </div>
-            </a>
-
-        </c:forEach>
-        <ctg:pagingTag pagesCount="${pagesCount}" currentPage="${pageNumber}"/>
-    </div>
+    <jsp:include page="fragments/filmList.jsp"/>
+    <ctg:pagingTag pagesCount="${pagesCount}" currentPage="${pageNumber}"/>
     <jsp:include page="fragments/footer.jsp"/>
 </div>
 </body>

@@ -19,9 +19,8 @@ public class SearchByGenreCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-        String genreIdParam = request.getParameter("genreId");
-        long genreId = Long.parseLong(genreIdParam);
-        List<FilmDTO> filmsByGenre =  filmService.getByGenreId(genreId);
+        String genreName = request.getParameter("genreName");
+        List<FilmDTO> filmsByGenre =  filmService.getByGenreName(genreName);
         HttpSession session = request.getSession();
         session.setAttribute("movies", filmsByGenre);
         return CommandResult.redirect(FILM_PAGE);

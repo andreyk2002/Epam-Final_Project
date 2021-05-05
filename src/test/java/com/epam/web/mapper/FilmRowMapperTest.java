@@ -22,7 +22,7 @@ public class FilmRowMapperTest {
     private static final long TEST_ID = 1;
     private static final String TEST_NAME = "admin";
     private static final long TEST_GENRE_ID = 1;
-    private final MovieRowMapper mapper = new MovieRowMapper();
+    private final FilmRowMapper mapper = new FilmRowMapper();
 
     @Test
     public void testMapShouldMapValidUser() throws SQLException, DaoException {

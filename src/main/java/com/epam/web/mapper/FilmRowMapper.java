@@ -2,11 +2,13 @@ package com.epam.web.mapper;
 
 import com.epam.web.dao.DaoException;
 import com.epam.web.entity.Film;
+import com.epam.web.entity.Review;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
-public class MovieRowMapper implements RowMapper<Film> {
+public class FilmRowMapper implements RowMapper<Film> {
     private static final String ID = "ID";
     private static final String NAME = "Name";
     private static final String IMAGE_PATH = "ImagePath";
@@ -14,7 +16,7 @@ public class MovieRowMapper implements RowMapper<Film> {
     private static final String GENRE_ID = "GenreID";
 
 
-    public MovieRowMapper() {
+    public FilmRowMapper() {
     }
 
     @Override
