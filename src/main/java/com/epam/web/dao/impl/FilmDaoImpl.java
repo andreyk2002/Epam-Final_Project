@@ -39,7 +39,8 @@ public class FilmDaoImpl extends AbstractDao<Film> implements FilmDao {
 
     @Override
     public int getPagesCount() throws DaoException {
-        return getRecordsCount() / MOVIES_PER_PAGE;
+        int recordsCount = getRecordsCount();
+        return (recordsCount - 1) / MOVIES_PER_PAGE;
     }
 
     @Override

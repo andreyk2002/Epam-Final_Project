@@ -41,7 +41,7 @@ public class PagingTag extends TagSupport {
             out.write(START);
             int remainsLinks = MAX_PAGES;
             for (int i = currentPage - 2; i < currentPage; i++) {
-                if (i > 0) {
+                if (i >= 0) {
                     String page = Integer.toString(i);
                     writePageLink(contextPath, out, i, page);
                     remainsLinks--;

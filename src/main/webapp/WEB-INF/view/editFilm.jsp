@@ -31,15 +31,20 @@
                   value="${movie.description}">${movie.description}</textarea>
         <br/>
         <label class="edit-label"><fmt:message key="local.changeGenre"/>:</label>
-        <select class="genres-select" value="${movie.genreId}" name="genreId">
+        <select class="genres-select" name="genreId">
             <c:forEach items="${genres}" var="genre">
-                <option value="${genre.id}">${genre.name}</option>
+                <c:if test="${genre.id == movie.genreId}">
+                    <option value="${genre.id}" selected>${genre.name}</option>
+                </c:if>
+                <c:if test="${genre.id != movie.genreId}">
+                    <option value="${genre.id}">${genre.name}</option>
+                </c:if>
             </c:forEach>
         </select>
         <br/>
         <label class="edit-label"><fmt:message key="local.changeImage"/></label>
         <input id="imageUpload" class="film-input" name="Image" type="file" accept="image/*"
-               style="color: white" />
+               style="color: white"/>
         <button type="submit" class="rate-film-button">OK</button>
     </form>
 </div>

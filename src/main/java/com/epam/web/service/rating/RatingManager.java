@@ -71,14 +71,14 @@ public class RatingManager {
 
             int positionToCheck = currentIndex - REVIEWS_BEFORE_CHECK;
             Rating ratingToCheck = filmRatings.get(positionToCheck);
-            double averateRating = filmRatings.stream()
+            double averageRating = filmRatings.stream()
                     .mapToInt(Rating::getRating)
                     .summaryStatistics()
                     .getAverage();
             double userRating = ratingToCheck.getRating();
             UserDao userDao = helper.createUserDao();
             long userID = ratingToCheck.getUserID();
-            double delta = Math.abs(userRating - averateRating);
+            double delta = Math.abs(userRating - averageRating);
             if (delta < CLOSE_TO_AVG) {
                 userDao.incrementRating(userID);
             } else if (delta > FAR_FROM_AVG) {

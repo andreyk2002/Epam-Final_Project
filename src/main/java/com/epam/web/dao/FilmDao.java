@@ -34,9 +34,9 @@ public interface FilmDao extends Dao<Film> {
 
     /**
      *  Defines the films pages count
-     * @return count pages with film, where page is range of films, decrypted
-     *  in {@link FilmDao#getPagesCount()} method
-     * @throws DaoException
+     * @return count pages with film, where page is range of films, described
+     *  in {@link FilmDao#getMoviesForPage(int)} method
+     * @throws DaoException is request to storage is corrupted
      */
     int getPagesCount() throws DaoException;
 
