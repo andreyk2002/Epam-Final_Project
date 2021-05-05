@@ -22,11 +22,15 @@
         <textarea class="film-description-admin film-input" rows="15" name="description"
                   placeholder="<fmt:message key="local.enterDescription"/>"></textarea>
         <br/>
-        <select required class="genres-select" name="genreId">
-            <c:forEach items="${genres}" var="genre">
-                <option value="${genre.id}">${genre.name}</option>
-            </c:forEach>
-        </select>
+
+        <c:forEach items="${genres}" var="genre">
+            <label style="color: white">
+                ${genre.name}
+                <input type="checkbox" name="genre" value="${genre.id}">
+            </label>
+            <br>
+        </c:forEach>
+
         <br/>
         <label class="image-load"><fmt:message key="local.filmImageLoad"/></label>
         <br/>

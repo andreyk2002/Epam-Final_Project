@@ -34,6 +34,10 @@ public class DaoHelper implements AutoCloseable {
         return new ReviewDaoImpl(connection);
     }
 
+    public FilmGenreDao createFilmGenreDao() {
+        return new FilmGenreDaoImpl(connection);
+    }
+
     @Override
     public void close() {
         connection.close();
@@ -55,6 +59,5 @@ public class DaoHelper implements AutoCloseable {
             throw new DaoException();
         }
     }
-
 
 }

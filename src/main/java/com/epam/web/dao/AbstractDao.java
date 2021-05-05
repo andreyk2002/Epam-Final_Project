@@ -2,10 +2,7 @@ package com.epam.web.dao;
 
 import com.epam.web.mapper.RowMapper;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -32,6 +29,7 @@ public abstract class AbstractDao<T> implements Dao<T> {
             throw new DaoException(e.getMessage(), e);
         }
     }
+
 
     protected List<T> executeQuery(String query, Object... params) throws DaoException {
         try (PreparedStatement statement = createStatement(query, params);
@@ -69,8 +67,8 @@ public abstract class AbstractDao<T> implements Dao<T> {
         }
     }
 
-    private PreparedStatement createStatement(String query, Object... params) throws SQLException {
-        PreparedStatement statement = connection.prepareStatement(query);
+    protected PreparedStatement createStatement(String query, Object... params) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
         for (int i = 1; i <= params.length; i++) {
             statement.setObject(i, params[i - 1]);
         }

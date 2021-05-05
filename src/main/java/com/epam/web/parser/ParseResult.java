@@ -1,24 +1,25 @@
 package com.epam.web.parser;
 
-class ParseResult {
+import com.epam.web.entity.Film;
 
-    private final FilmField fieldType;
-    private final String fieldValue;
+import java.util.List;
 
-    public static ParseResult imagePath(String fieldValue){
-        return new ParseResult(FilmField.IMAGE_PATH, fieldValue);
+public class ParseResult {
+
+    private final List<Long> genresId;
+
+    public ParseResult(Film film, List<Long> genresId){
+        this.film = film;
+        this.genresId = genresId;
     }
 
-    public ParseResult(FilmField fieldType, String fieldValue) {
-        this.fieldType = fieldType;
-        this.fieldValue = fieldValue;
+    public List<Long> getGenresId() {
+        return genresId;
     }
 
-    public FilmField getFieldType() {
-        return fieldType;
+    public Film getFilm() {
+        return film;
     }
 
-    public String getFieldValue() {
-        return fieldValue;
-    }
+    private final Film film;
 }

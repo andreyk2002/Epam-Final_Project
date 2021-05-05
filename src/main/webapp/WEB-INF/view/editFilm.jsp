@@ -31,16 +31,18 @@
                   value="${movie.description}">${movie.description}</textarea>
         <br/>
         <label class="edit-label"><fmt:message key="local.changeGenre"/>:</label>
-        <select class="genres-select" name="genreId">
-            <c:forEach items="${genres}" var="genre">
-                <c:if test="${genre.id == movie.genreId}">
-                    <option value="${genre.id}" selected>${genre.name}</option>
+        <c:forEach items="${genres}" var="genre">
+            <label style="color: white">
+                    ${genre.name}
+                <c:if test="${sessionScope.film.genres.contains(genre)}">
+                    <input checked type="checkbox" name="genre" value="${genre.id}">
                 </c:if>
-                <c:if test="${genre.id != movie.genreId}">
-                    <option value="${genre.id}">${genre.name}</option>
+                <c:if test="${!sessionScope.film.genres.contains(genre)}">
+                    <input type="checkbox" name="genre" value="${genre.id}">
                 </c:if>
-            </c:forEach>
-        </select>
+            </label>
+            <br>
+        </c:forEach>
         <br/>
         <label class="edit-label"><fmt:message key="local.changeImage"/></label>
         <input id="imageUpload" class="film-input" name="Image" type="file" accept="image/*"

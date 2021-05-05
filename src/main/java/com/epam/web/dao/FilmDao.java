@@ -23,6 +23,14 @@ public interface FilmDao extends Dao<Film> {
     void save(Film item) throws DaoException;
 
     /**
+     * Save an instance of film into the storage
+     * @param film instance of film, needed to be saved
+     * @throws DaoException is request to storage is corrupted or record for
+     * specified item is already in the storage
+     * @return ID of inserted film
+     */
+    long saveAndGetID(Film film) throws DaoException;
+    /**
      * Loads films for specified page number
      * @param pageNumber number of page, on which received films will be displayed
      * @return List instances of films in range N * (pageNumber - 1) .. N * pageNumber,

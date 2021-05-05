@@ -19,7 +19,7 @@ class ImageFieldParser implements FieldParser {
     }
 
     @Override
-    public ParseResult parse(FileItem item) throws Exception {
+    public FieldParseResult parse(FileItem item) throws Exception {
         String itemName = item.getName();
         String imagePath = IMAGE_PATH + itemName;
         File imageSaveFile = new File(imagePath);
@@ -28,6 +28,6 @@ class ImageFieldParser implements FieldParser {
         Path copied = Path.of(BACKUP_PATH + itemName);
         Files.copy(originalPath, copied, StandardCopyOption.REPLACE_EXISTING);
         String savePath = SAVE_PATH + itemName;
-        return ParseResult.imagePath(savePath);
+        return FieldParseResult.imagePath(savePath);
     }
 }
