@@ -27,11 +27,10 @@ public class FilmServiceTest extends ServiceTest {
     private static final int INVALID_PAGE = -1;
     private static final Film VALID_FILM = new Film.Builder()
             .withName("")
-            .withGenreId(0)
             .withId(VALID_ID)
             .build();
     private static final FilmDTO VALID_DTO =
-            new FilmDTO(VALID_FILM, VALID_GENRE.getName(), VALID_RATING, Collections.emptyList(), false);
+            new FilmDTO(VALID_FILM, Collections.singletonList(VALID_GENRE), VALID_RATING, Collections.emptyList());
     public static final int USER_ID = 1;
 
     private FilmService service;

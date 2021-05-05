@@ -9,11 +9,12 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class ConnectionFactory {
+    public static final String BUNDLE_NAME = "test_database";
     private final String url;
     private final Properties properties;
 
     public ConnectionFactory() {
-        ResourceBundle resource = ResourceBundle.getBundle("database");
+        ResourceBundle resource = ResourceBundle.getBundle(BUNDLE_NAME);
         url = resource.getString("url");
         properties = getProperties(resource);
     }

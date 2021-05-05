@@ -27,7 +27,7 @@ public class FilmDaoImpl extends AbstractDao<Film> implements FilmDao {
 
     @Override
     public void save(Film item) throws DaoException {
-        updateQuery(ADD_MOVIE, item.getName(), item.getImagePath(), item.getDescription(), item.getGenreId());
+        updateQuery(ADD_MOVIE, item.getName(), item.getImagePath(), item.getDescription());
     }
 
     @Override
@@ -46,7 +46,7 @@ public class FilmDaoImpl extends AbstractDao<Film> implements FilmDao {
     @Override
     public void updateFilm(Film film) throws DaoException {
         updateQuery(UPDATE_FILM, film.getName(), film.getDescription(),
-                film.getImagePath(), film.getGenreId(), film.getId());
+                film.getImagePath(), film.getId());
     }
 
     @Override

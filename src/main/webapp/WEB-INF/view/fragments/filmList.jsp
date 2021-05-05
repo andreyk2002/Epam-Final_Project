@@ -34,10 +34,12 @@
                 </div>
                 <div class="card-other">
                     <h2 class="film-info">${film.name}</h2>
-                    <a class="film-link"
-                       href="${pageContext.request.contextPath}/controller?commandName=searchByGenre&genreName=${film.genre}">
-                            ${film.genre}
-                    </a>
+                    <c:forEach items="${film.genres}" var="filmGenre">
+                        <a class="film-link"
+                           href="${pageContext.request.contextPath}/controller?commandName=searchByGenre&genreId=${filmGenre.id}">
+                                ${filmGenre.name}
+                        </a>
+                    </c:forEach>
                     <br/>
                     <span class="film-rating"><fmt:message key="local.rating"/>: ${film.rating}</span><br>
                 </div>

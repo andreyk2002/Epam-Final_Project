@@ -39,10 +39,6 @@ public class FormParser {
             case NAME:
                 builder.withName(fieldValue);
                 break;
-            case GENREID:
-                long genreId = Long.parseLong(fieldValue);
-                builder.withGenreId(genreId);
-                break;
             case IMAGE_PATH:
                 builder.withImagePath(fieldValue);
                 break;

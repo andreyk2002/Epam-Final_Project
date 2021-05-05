@@ -35,7 +35,6 @@ public class FilmRowMapperTest {
 
         Film expected = new Film.Builder()
                 .withName(TEST_NAME)
-                .withGenreId(TEST_GENRE_ID)
                 .withId(TEST_ID)
                 .build();
 

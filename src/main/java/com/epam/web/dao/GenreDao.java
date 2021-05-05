@@ -2,6 +2,7 @@ package com.epam.web.dao;
 
 import com.epam.web.entity.Film;
 import com.epam.web.entity.Genre;
+import java.util.List;
 
 /**
  * GenreDao is marker-interface, for interaction with storage,
@@ -13,4 +14,5 @@ import com.epam.web.entity.Genre;
 
 public interface GenreDao extends Dao<Genre> {
 
+    List<Genre>getByFilm(long filmId) throws DaoException;
 }

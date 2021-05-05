@@ -91,15 +91,13 @@ public class FilmService {
     }
 
     private FilmDTO getMovieDTO(Film film) throws DaoException {
-        long genreId = film.getGenreId();
-        Optional<Genre> optionalGenre = genreDao.getById(genreId);
-        String genre = optionalGenre.map(Genre::getName).orElse("");
+        List<Genre> filmsGenres = genreDao.getByFilm(film.getId());
         long movieId = film.getId();
         double movieRating = ratingDao.getMovieRating(movieId);
         double ratingRounded = DoubleRounder.round(movieRating, ROUND_PRECISION);
 
         List<Review> filmReviews = reviewDao.getFilmReviews(movieId);
-        return new FilmDTO(film, genre, ratingRounded, filmReviews);
+        return new FilmDTO(film, filmsGenres, ratingRounded, filmReviews);
     }
 
     public void saveFilm(Film film) throws ServiceException {
@@ -144,7 +142,6 @@ public class FilmService {
                 .withId(updatedFilm.getId())
                 .withName(safeName)
                 .withDescription(safeDescription)
-                .withGenreId(updatedFilm.getGenreId())
                 .withImagePath(updatedFilm.getImagePath())
                 .build();
     }

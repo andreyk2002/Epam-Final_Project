@@ -13,7 +13,6 @@ public class FilmRowMapper implements RowMapper<Film> {
     private static final String NAME = "Name";
     private static final String IMAGE_PATH = "ImagePath";
     private static final String DESCRIPTION = "Description";
-    private static final String GENRE_ID = "GenreID";
 
 
     public FilmRowMapper() {
@@ -25,11 +24,10 @@ public class FilmRowMapper implements RowMapper<Film> {
         String name = resultSet.getString(NAME);
         String imagePath = resultSet.getString(IMAGE_PATH);
         String description = resultSet.getString(DESCRIPTION);
-        long genreId = resultSet.getLong(GENRE_ID);
+
 
         return new Film.Builder()
                 .withName(name)
-                .withGenreId(genreId)
                 .withId(id)
                 .withImagePath(imagePath)
                 .withDescription(description)
