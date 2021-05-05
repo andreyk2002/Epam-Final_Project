@@ -16,30 +16,16 @@ import java.util.List;
 import java.util.Optional;
 
 public class EditFilmPageCommand implements Command {
-    public static final String EDIT_PAGE_COMMAND = "/controller?commandName=editFilmPage";
-    private final FilmService filmService;
-    private final GenreService genreService;
+    private static final String EDIT_PAGE_COMMAND = "/controller?commandName=editFilmPage";
 
-    public EditFilmPageCommand(FilmService editFilmService, GenreService genreService) {
-        this.genreService = genreService;
-        this.filmService = editFilmService;
+    public EditFilmPageCommand() {
+
     }
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
         String filmIdParam = request.getParameter("filmId");
         long filmId = Long.parseLong(filmIdParam);
-        try {
-            Optional<Film> optionalMovie = filmService.getFilmById(filmId);
-            optionalMovie.orElseThrow(() -> new ServiceException("local.movieNotFound"));
-            HttpSession session = request.getSession();
-            Film movie = optionalMovie.get();
-            List<Genre> allGenres = genreService.getAllGenres();
-            session.setAttribute("genres", allGenres);
-            session.setAttribute("movie", movie);
-        } catch (DaoException e) {
-            e.printStackTrace();
-        }
-        return CommandResult.redirect(EDIT_PAGE_COMMAND);
+        return CommandResult.redirect(EDIT_PAGE_COMMAND + "&filmId=" + filmId);
     }
 }

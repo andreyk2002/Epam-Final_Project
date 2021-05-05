@@ -2,23 +2,21 @@ package com.epam.web.command.impl;
 
 import com.epam.web.command.Command;
 import com.epam.web.command.CommandResult;
-import com.epam.web.service.FilmService;
 import com.epam.web.service.ServiceException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class GetFilmCommand implements Command {
-    private static final String SHOW_MOVIE = "/controller?commandName=showMoviePage";
+public class RedirectToPageCommand implements Command {
 
-    public GetFilmCommand() {
+    private final String redirectCommand;
 
+    public RedirectToPageCommand(String redirectCommand) {
+        this.redirectCommand = redirectCommand;
     }
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-        String idString = request.getParameter("filmId");
-        long id = Long.parseLong(idString);
-        return CommandResult.redirect(SHOW_MOVIE + "&filmId=" + id);
+        return CommandResult.redirect("/controller?commandName=" + redirectCommand);
     }
 }
