@@ -15,7 +15,7 @@ import java.util.List;
 
 public class GetFilmsCommand implements Command {
 
-    private static final String FILM_PAGE = "/controller?commandName=mainPage&pageNumber=";
+    private static final String FILM_PAGE = Commands.MAIN_PAGE_COMMAND.getName() + "&pageNumber=";
     private final FilmService filmService;
     private final GenreService genreService;
 

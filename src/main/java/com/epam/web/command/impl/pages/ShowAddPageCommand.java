@@ -2,6 +2,7 @@ package com.epam.web.command.impl.pages;
 
 import com.epam.web.command.Command;
 import com.epam.web.command.CommandResult;
+import com.epam.web.command.impl.Commands;
 import com.epam.web.entity.Genre;
 import com.epam.web.service.GenreService;
 import com.epam.web.service.ServiceException;
@@ -13,7 +14,7 @@ import java.util.List;
 
 public class ShowAddPageCommand implements Command {
 
-    private static final String CREATE_FILM_PAGE = "/WEB-INF/view/createFilm.jsp";
+    private static final String CREATE_FILM_PAGE = Commands.CREATE_FILM_PATH.getName();
     private final GenreService genreService;
 
     public ShowAddPageCommand(GenreService service) {

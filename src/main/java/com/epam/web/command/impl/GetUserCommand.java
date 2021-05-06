@@ -13,7 +13,7 @@ import java.util.Optional;
 
 public class GetUserCommand implements Command {
     public static final String USER = "user";
-    public static final String PERSONAL_PAGE = "personalPage";
+    public static final String PERSONAL_PAGE = Commands.PERSONAL_PAGE_COMMAND.getName();
     private  final UserService service;
 
     public GetUserCommand(UserService service) {

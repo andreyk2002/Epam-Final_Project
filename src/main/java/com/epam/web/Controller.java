@@ -18,6 +18,7 @@ public class Controller extends HttpServlet {
     private static final Logger LOGGER = LogManager.getLogger(Controller.class);
     private static final String ERROR_PAGE = "/error.jsp";
     private static final String COMMAND_NAME = "commandName";
+    public static final String COMMAND = "/controller?commandName=";
 
     private final CommandFactory factory = new CommandFactory();
 
@@ -60,7 +61,7 @@ public class Controller extends HttpServlet {
             dispatcher.forward(request, response);
         } else {
             String contextPath = request.getContextPath();
-            response.sendRedirect(contextPath + page);
+            response.sendRedirect(contextPath + COMMAND + page);
         }
     }
 }

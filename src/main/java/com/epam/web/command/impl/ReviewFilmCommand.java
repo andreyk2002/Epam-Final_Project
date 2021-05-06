@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class ReviewFilmCommand implements Command {
-    private static final String SHOW_MOVIE = "/controller?commandName=movie&id=";
+    private static final String SHOW_MOVIE = Commands.GET_MOVIE.getName() + "&id=";
     private final ReviewService reviewService;
 
     public ReviewFilmCommand(ReviewService reviewService) {

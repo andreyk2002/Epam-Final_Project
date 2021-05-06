@@ -2,6 +2,7 @@ package com.epam.web.command.impl.pages;
 
 import com.epam.web.command.Command;
 import com.epam.web.command.CommandResult;
+import com.epam.web.command.impl.Commands;
 import com.epam.web.dao.DaoException;
 import com.epam.web.dto.FilmDTO;
 import com.epam.web.entity.User;
@@ -14,7 +15,7 @@ import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
 public class GetFilmPageCommand implements Command {
-    private static final String SHOW_FILM_PAGE = "/WEB-INF/view/showFilm.jsp";
+    private static final String SHOW_FILM_PAGE = Commands.SHOW_FILM_PATH.getName();
 
     private final FilmService service;
 

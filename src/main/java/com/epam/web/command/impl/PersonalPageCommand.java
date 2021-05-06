@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class PersonalPageCommand implements Command {
-    private static final String PERSONAL_PAGE = "/controller?commandName=showPersonalPage";
+    private static final String PERSONAL_PAGE = Commands.PERSONAL_PAGE_COMMAND.getName();
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {

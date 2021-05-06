@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class EditFilmPageCommand implements Command {
-    private static final String EDIT_PAGE_COMMAND = "/controller?commandName=editFilmPage";
+    private static final String EDIT_PAGE_COMMAND = Commands.EDIT_FILM_PAGE_COMMAND.getName();
 
     public EditFilmPageCommand() {
 

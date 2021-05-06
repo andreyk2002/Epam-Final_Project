@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 
 public class DeleteFilmCommand implements Command {
     public static final String FILM_ID = "filmId";
-    public static final String FILMS_PAGE = "/controller?commandName=showFilmsPage&pageNumber=";
+    public static final String FILMS_PAGE = Commands.SHOW_FILM_PAGE_COMMAND.getName() + "&pageNumber=";
     private final FilmService filmService;
 
     public DeleteFilmCommand(FilmService deleteFilmService) {

@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class ChangeUserStatusCommand implements Command {
-    private static final String MANAGE_USERS = "/controller?commandName=manageUsers";
+    private static final String MANAGE_USERS = Commands.MANAGE_USERS.getName();
     private final UserService userService;
 
     public ChangeUserStatusCommand(UserService changeStatusService) {

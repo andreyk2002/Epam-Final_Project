@@ -14,8 +14,8 @@ import java.util.Optional;
 
 public class LoginCommand implements Command {
 
-    public static final String MAIN_PAGE = "/controller?commandName=showFilmsPage&pageNumber=0";
-    public static final String LOGIN_ERROR = "/controller?commandName=loginPage&errorMessage=local.loginError";
+    private static final String MAIN_PAGE = Commands.FILMS_PAGE.getName() + "&pageNumber=0";
+    private static final String LOGIN_ERROR = "/controller?commandName=loginPage&errorMessage=local.loginError";
     private final UserService userService;
 
     public LoginCommand(UserService userService) {

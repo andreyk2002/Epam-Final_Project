@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 
 public class SaveFilmCommand implements Command {
 
-    private static final String FILMS_PAGE = "/controller?commandName=showFilmsPage&pageNumber=";
+    private static final String FILMS_PAGE = Commands.FILMS_PAGE.getName() + "&pageNumber=";
     private final FilmService filmService;
     private final FormParser parser;
 

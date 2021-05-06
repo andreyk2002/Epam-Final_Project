@@ -13,7 +13,7 @@ import java.util.List;
 
 public class ManageUsersCommand implements Command {
 
-    private static final String USER_MANAGE_PAGE = "/controller?commandName=userManagePage";
+    private static final String USER_MANAGE_PAGE = Commands.USER_MANAGE_PAGE_COMMAND.getName();
     private final UserService userService;
 
     public ManageUsersCommand(UserService userService) {

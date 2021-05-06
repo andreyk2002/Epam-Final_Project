@@ -1,5 +1,6 @@
 package com.epam.web.command;
 
+import com.epam.web.command.impl.Commands;
 import com.epam.web.dto.FilmDTO;
 import com.epam.web.service.FilmService;
 import com.epam.web.service.ServiceException;
@@ -10,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class SearchByGenreCommand implements Command {
-    private static final String FILM_PAGE = "/controller?commandName=searchPage";
+    private static final String FILM_PAGE = Commands.SEARCH_PAGE_COMMAND.getName();
     private final FilmService filmService;
 
     public SearchByGenreCommand(FilmService genreSearchFilmService) {

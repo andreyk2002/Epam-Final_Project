@@ -17,6 +17,6 @@ public class RedirectToPageCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-        return CommandResult.redirect("/controller?commandName=" + redirectCommand);
+        return CommandResult.redirect(redirectCommand);
     }
 }
