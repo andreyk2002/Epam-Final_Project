@@ -28,14 +28,13 @@ public class MainPageCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-        String page = request.getParameter("pageNumber");
-        int pageNumber = Integer.parseInt(page);
+        HttpSession session = request.getSession();
+        int pageNumber = (Integer)session.getAttribute("pageNumber");
         List<FilmDTO> movies = filmService.getNextMovies(pageNumber);
         int totalPages = filmService.getPagesCount();
         List<Genre> allGenres = genreService.getAllGenres();
         request.setAttribute("genres", allGenres);
         request.setAttribute("movies", movies);
-        request.setAttribute("pageNumber", pageNumber);
         request.setAttribute("pagesCount", totalPages);
         return CommandResult.forward(MAIN_PAGE);
     }

@@ -74,6 +74,8 @@ public enum Commands {
 
    SEARCH_BY_GENRES("searchByGenre"),
 
+   CHANGE_PAGE("changePageNumber"),
+
    GENRE_SEARCH_PAGE("genreSearchPage");
 
     private String name;

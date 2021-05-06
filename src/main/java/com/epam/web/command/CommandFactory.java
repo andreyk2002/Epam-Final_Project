@@ -58,8 +58,6 @@ public class CommandFactory {
                 return new SearchFilmCommand();
             case SEARCH_BY_GENRES:
                 return new SearchByGenreCommand();
-            case CHANGE_LANGUAGE:
-                return new ChangeLanguageCommand();
             case LOGIN:
                 UserService service = new UserService(helperFactory, userRatingValidator);
                 return new LoginCommand(service);
@@ -70,7 +68,8 @@ public class CommandFactory {
                 String personalPage = Commands.PERSONAL_PAGE_COMMAND.getName();
                 return new RedirectToPageCommand(personalPage);
             case FILMS_PAGE:
-                return new GetFilmsCommand();
+                String page = Commands.MAIN_PAGE_COMMAND.getName();
+                return new RedirectToPageCommand(page);
             case GET_MOVIE:
                 return new GetFilmCommand();
             case RATE_FILM:
@@ -95,6 +94,8 @@ public class CommandFactory {
                 FilmService saveFilmService = new FilmService(helperFactory, protect);
                 FormParser parser = new FormParser();
                 return new SaveFilmCommand(saveFilmService, parser);
+            case CHANGE_PAGE:
+                return new ChangePageCommand();
             case EDIT_FILM:
                 return new EditFilmPageCommand();
             case DELETE_FILM:

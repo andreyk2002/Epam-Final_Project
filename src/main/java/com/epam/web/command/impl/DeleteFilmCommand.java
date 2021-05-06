@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 
 public class DeleteFilmCommand implements Command {
     public static final String FILM_ID = "filmId";
-    public static final String FILMS_PAGE = Commands.SHOW_FILM_PAGE_COMMAND.getName() + "&pageNumber=";
+    public static final String FILMS_PAGE = Commands.FILMS_PAGE.getName();
     private final FilmService filmService;
 
     public DeleteFilmCommand(FilmService deleteFilmService) {
@@ -28,8 +28,6 @@ public class DeleteFilmCommand implements Command {
         } catch (DaoException e) {
             throw new ServiceException(e.getMessage(), e);
         }
-        HttpSession session = request.getSession();
-        Integer pageNumber = (Integer)session.getAttribute("pageNumber");
-        return CommandResult.redirect(FILMS_PAGE + pageNumber);
+        return CommandResult.redirect(FILMS_PAGE);
     }
 }

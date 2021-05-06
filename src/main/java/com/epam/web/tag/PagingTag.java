@@ -8,7 +8,7 @@ import javax.servlet.jsp.tagext.TagSupport;
 import java.io.IOException;
 
 public class PagingTag extends TagSupport {
-    private static final String PATH = "/controller?commandName=showFilmsPage&pageNumber=";
+    private static final String PATH = "/controller?commandName=changePageNumber&pageNumber=";
     private static final String START = "<div class=\"pages\">";
     private static final String END = "</div>";
     private static final int MAX_PAGES = 5;

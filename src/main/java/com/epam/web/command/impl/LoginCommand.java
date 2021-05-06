@@ -32,6 +32,7 @@ public class LoginCommand implements Command {
             User user = optionalUser.get();
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
+            session.setAttribute("pageNumber", 0);
             return CommandResult.redirect(MAIN_PAGE);
         }
         return CommandResult.redirect(LOGIN_ERROR);
