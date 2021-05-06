@@ -15,10 +15,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class Controller extends HttpServlet {
+
     private static final Logger LOGGER = LogManager.getLogger(Controller.class);
     private static final String ERROR_PAGE = "/error.jsp";
     private static final String COMMAND_NAME = "commandName";
     public static final String COMMAND = "/controller?commandName=";
+    public static final String EXCEPTION_BUNDLE_KEY = "local.somethingWrong";
 
     private final CommandFactory factory = new CommandFactory();
 
@@ -48,12 +50,9 @@ public class Controller extends HttpServlet {
             CommandResult result = command.execute(request, response);
             page = result.getPage();
             isRedirect = result.isRedirect();
-        } catch (ServiceException | RuntimeException e) {
-            request.setAttribute("errorMessage", "local.somethingWrong");
+        }  catch (Exception e) {
+            request.setAttribute("errorMessage", EXCEPTION_BUNDLE_KEY);
             LOGGER.error(e.getMessage(), e);
-            page = ERROR_PAGE;
-        } catch (Exception e) {
-            request.setAttribute("errorMessage", e.getMessage());
             page = ERROR_PAGE;
         }
         if (!isRedirect) {

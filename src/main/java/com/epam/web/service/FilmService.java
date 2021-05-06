@@ -17,25 +17,17 @@ public class FilmService {
 
     public static final int ROUND_PRECISION = 2;
     private final XssProtector protect;
-    private final FilmDao filmDao;
-    private final GenreDao genreDao;
-    private final RatingDao ratingDao;
-    private final ReviewDao reviewDao;
+    private final DaoHelperFactory factory;
 
     public FilmService(DaoHelperFactory factory, XssProtector protect) throws ServiceException {
-        try (DaoHelper helper = factory.create()) {
-            this.protect = protect;
-            this.genreDao = helper.createGenreDao();
-            this.ratingDao = helper.createRatingDao();
-            this.filmDao = helper.createMovieDao();
-            this.reviewDao = helper.createReviewDao();
-        } catch (Exception e) {
-            throw new ServiceException(e.getMessage(), e);
-        }
+        this.factory = factory;
+        this.protect = protect;
+
     }
 
     public List<FilmDTO> getNextMovies(int pageNumb) throws ServiceException {
-        try {
+        try(DaoHelper helper =  factory.create()) {
+            FilmDao filmDao = helper.createFilmDao();
             List<Film> moviesForPage = filmDao.getMoviesForPage(pageNumb);
             return getFilmDTOS(moviesForPage);
         } catch (DaoException e) {
@@ -44,7 +36,8 @@ public class FilmService {
     }
 
     public List<FilmDTO> getMoviesByName(String filmName) throws ServiceException {
-        try {
+        try(DaoHelper helper =  factory.create()) {
+            FilmDao filmDao = helper.createFilmDao();
             List<Film> moviesByName = filmDao.getMoviesByName(filmName);
             return getFilmDTOS(moviesByName);
         } catch (DaoException e) {
@@ -53,7 +46,8 @@ public class FilmService {
     }
 
     public List<FilmDTO> getByGenreName(String genreName) throws ServiceException {
-        try{
+        try(DaoHelper helper =  factory.create()) {
+            FilmDao filmDao = helper.createFilmDao();
             List<Film> moviesByGenre = filmDao.getMoviesByGenreName(genreName);
             return getFilmDTOS(moviesByGenre);
         } catch (DaoException e) {
@@ -71,7 +65,8 @@ public class FilmService {
     }
 
     public int getPagesCount() throws ServiceException {
-        try {
+        try(DaoHelper helper =  factory.create()) {
+            FilmDao filmDao = helper.createFilmDao();
             return filmDao.getPagesCount();
         } catch (DaoException e) {
             throw new ServiceException(e.getMessage(), e);
@@ -79,32 +74,42 @@ public class FilmService {
     }
 
     public Optional<FilmDTO> getMovieDTOById(long id, long userId) throws DaoException {
-        Optional<Film> optionalMovie = filmDao.getById(id);
-        if (optionalMovie.isPresent()) {
-            Film film = optionalMovie.get();
-            FilmDTO filmDTO = getMovieDTO(film);
-            boolean hasRating = ratingDao.hasRating(id, userId);
-            filmDTO.setRated(hasRating);
-            return Optional.of(filmDTO);
+        try(DaoHelper helper =  factory.create()) {
+            FilmDao filmDao = helper.createFilmDao();
+            RatingDao ratingDao = helper.createRatingDao();
+            Optional<Film> optionalMovie = filmDao.getById(id);
+            if (optionalMovie.isPresent()) {
+                Film film = optionalMovie.get();
+                FilmDTO filmDTO = getMovieDTO(film);
+                boolean hasRating = ratingDao.hasRating(id, userId);
+                filmDTO.setRated(hasRating);
+                return Optional.of(filmDTO);
+            }
         }
         return Optional.empty();
     }
 
     private FilmDTO getMovieDTO(Film film) throws DaoException {
-        long genreId = film.getGenreId();
-        Optional<Genre> optionalGenre = genreDao.getById(genreId);
-        String genre = optionalGenre.map(Genre::getName).orElse("");
-        long movieId = film.getId();
-        double movieRating = ratingDao.getMovieRating(movieId);
-        double ratingRounded = DoubleRounder.round(movieRating, ROUND_PRECISION);
-
-        List<Review> filmReviews = reviewDao.getFilmReviews(movieId);
-        return new FilmDTO(film, genre, ratingRounded, filmReviews);
+        try(DaoHelper helper =  factory.create()) {
+            RatingDao ratingDao = helper.createRatingDao();
+            ReviewDao reviewDao = helper.createReviewDao();
+            GenreDao genreDao = helper.createGenreDao();
+            FilmDao filmDao = helper.createFilmDao();
+            long genreId = film.getGenreId();
+            Optional<Genre> optionalGenre = genreDao.getById(genreId);
+            String genre = optionalGenre.map(Genre::getName).orElse("");
+            long movieId = film.getId();
+            double movieRating = ratingDao.getMovieRating(movieId);
+            double ratingRounded = DoubleRounder.round(movieRating, ROUND_PRECISION);
+            List<Review> filmReviews = reviewDao.getFilmReviews(movieId);
+            return new FilmDTO(film, genre, ratingRounded, filmReviews);
+        }
     }
 
     public void saveFilm(Film film) throws ServiceException {
         Film safeFilm = removeMalformedData(film);
-        try {
+        try(DaoHelper helper =  factory.create()) {
+            FilmDao filmDao = helper.createFilmDao();
             filmDao.save(safeFilm);
         } catch (DaoException e) {
             throw new ServiceException(e.getMessage(), e);
@@ -112,18 +117,27 @@ public class FilmService {
     }
 
     public void removeById(long filmId) throws DaoException {
-        reviewDao.removeFilmsReviews(filmId);
-        ratingDao.removeFilmsRatings(filmId);
-        filmDao.removeById(filmId);
+        try(DaoHelper helper =  factory.create()) {
+            FilmDao filmDao = helper.createFilmDao();
+            ReviewDao reviewDao = helper.createReviewDao();
+            RatingDao ratingDao = helper.createRatingDao();
+            reviewDao.removeFilmsReviews(filmId);
+            ratingDao.removeFilmsRatings(filmId);
+            filmDao.removeById(filmId);
+        }
     }
 
     public Optional<Film> getFilmById(long filmId) throws DaoException {
-        return filmDao.getById(filmId);
+        try(DaoHelper helper =  factory.create()) {
+            FilmDao filmDao = helper.createFilmDao();
+            return filmDao.getById(filmId);
+        }
     }
 
     public void updateFilm(Film updatedFilm) throws ServiceException {
         long id = updatedFilm.getId();
-        try {
+        try(DaoHelper helper =  factory.create()) {
+            FilmDao filmDao = helper.createFilmDao();
             Optional<Film> film = filmDao.getById(id);
             Film safeFilm = removeMalformedData(updatedFilm);
             if (film.isEmpty()) {
@@ -148,5 +162,4 @@ public class FilmService {
                 .withImagePath(updatedFilm.getImagePath())
                 .build();
     }
-
 }

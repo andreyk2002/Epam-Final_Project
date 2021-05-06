@@ -26,7 +26,7 @@ public class DaoHelper implements AutoCloseable {
         return new RatingDaoImpl(connection);
     }
 
-    public FilmDao createMovieDao() {
+    public FilmDao createFilmDao() {
         return new FilmDaoImpl(connection);
     }
 

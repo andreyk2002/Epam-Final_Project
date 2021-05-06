@@ -57,7 +57,7 @@ public class FilmServiceTest extends ServiceTest {
         when(reviewDaoMock.getFilmReviews(anyLong())).thenReturn(Collections.emptyList());
 
 
-        when(daoHelper.createMovieDao()).thenReturn(filmDaoMock);
+        when(daoHelper.createFilmDao()).thenReturn(filmDaoMock);
         when(daoHelper.createGenreDao()).thenReturn(genreDaoMock);
         when(daoHelper.createRatingDao()).thenReturn(ratingDaoMock);
         when(daoHelper.createReviewDao()).thenReturn(reviewDaoMock);

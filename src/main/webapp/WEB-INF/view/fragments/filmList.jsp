@@ -34,7 +34,7 @@
                 </div>
                 <div class="card-other">
                     <h2 class="film-info">${film.name}</h2>
-                    <a class="film-link"
+                    <a class="film-search-link"
                        href="${pageContext.request.contextPath}/controller?commandName=searchByGenre&genreName=${film.genre}">
                             ${film.genre}
                     </a>

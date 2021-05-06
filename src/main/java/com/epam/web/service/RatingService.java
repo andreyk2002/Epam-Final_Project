@@ -10,18 +10,12 @@ import com.epam.web.validator.RatingValidator;
 
 public class RatingService {
     private final DaoHelperFactory daoHelperFactory;
-    private final RatingDao ratingDao;
     private final RatingValidator validator;
 
 
     public RatingService(DaoHelperFactory daoHelperFactory, RatingValidator validator) throws ServiceException {
         this.validator = validator;
         this.daoHelperFactory = daoHelperFactory;
-        try (DaoHelper helper = daoHelperFactory.create()) {
-            this.ratingDao = helper.createRatingDao();
-        } catch (DaoException e) {
-            throw new ServiceException(e.getMessage(), e);
-        }
     }
 
 
@@ -37,7 +31,6 @@ public class RatingService {
             RatingStatus status;
             if (firstRated) {
                 ratingManager.changeRating(rating);
-                ratingDao.addRating(rating);
                 status = RatingStatus.SUCCESS;
             } else {
                 status = RatingStatus.ALREADY_RATED;
