@@ -22,7 +22,6 @@ public class ChangeUserStatusCommand implements Command {
         boolean blocked = Boolean.parseBoolean(userStatusParam);
         String userIdParam = request.getParameter("userId");
         long userId = Long.parseLong(userIdParam);
-
         userService.changeStatus(userId, blocked);
         return CommandResult.redirect(MANAGE_USERS);
     }

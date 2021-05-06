@@ -15,12 +15,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Optional;
 
-public class ShowEditPageCommand implements Command {
+public class EditPageCommand implements Command {
     private static final String EDIT_FILM_PAGE = Commands.EDIT_FILM_PATH.getName();
     private final FilmService filmService;
     private final GenreService genreService;
 
-    public ShowEditPageCommand(FilmService editFilmService, GenreService genreService) {
+    public EditPageCommand(FilmService editFilmService, GenreService genreService) {
         this.genreService = genreService;
         this.filmService = editFilmService;
     }

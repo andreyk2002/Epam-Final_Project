@@ -14,12 +14,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
-public class GetFilmPageCommand implements Command {
+public class FilmPageCommand implements Command {
     private static final String SHOW_FILM_PAGE = Commands.SHOW_FILM_PATH.getName();
 
     private final FilmService service;
 
-    public GetFilmPageCommand(FilmService service) {
+    public FilmPageCommand(FilmService service) {
         this.service = service;
     }
 

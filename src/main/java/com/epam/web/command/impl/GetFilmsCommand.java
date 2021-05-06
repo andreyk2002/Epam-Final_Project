@@ -16,28 +16,15 @@ import java.util.List;
 public class GetFilmsCommand implements Command {
 
     private static final String FILM_PAGE = Commands.MAIN_PAGE_COMMAND.getName() + "&pageNumber=";
-    private final FilmService filmService;
-    private final GenreService genreService;
 
-    public GetFilmsCommand(FilmService filmService, GenreService genreService) {
-        this.filmService = filmService;
-        this.genreService = genreService;
+    public GetFilmsCommand() {
+
     }
 
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
         String page = request.getParameter("pageNumber");
-        int pageNumber = Integer.parseInt(page);
-
-        List<FilmDTO> movies = filmService.getNextMovies(pageNumber);
-        int totalPages = filmService.getPagesCount();
-        List<Genre> allGenres = genreService.getAllGenres();
-        HttpSession session = request.getSession();
-        session.setAttribute("genres", allGenres);
-        session.setAttribute("movies", movies);
-        session.setAttribute("pageNumber", pageNumber);
-        session.setAttribute("pagesCount", totalPages);
-        return CommandResult.redirect(FILM_PAGE + pageNumber);
+        return CommandResult.redirect(FILM_PAGE + page);
     }
 }

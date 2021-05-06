@@ -72,7 +72,9 @@ public enum Commands {
 
    SEARCH_PAGE_COMMAND("searchPage"),
 
-   SEARCH_BY_GENRES("searchByGenre");
+   SEARCH_BY_GENRES("searchByGenre"),
+
+   GENRE_SEARCH_PAGE("genreSearchPage");
 
     private String name;
 

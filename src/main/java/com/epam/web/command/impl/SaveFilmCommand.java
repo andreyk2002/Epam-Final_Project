@@ -29,6 +29,7 @@ public class SaveFilmCommand implements Command {
         Film film = parser.parseFormData(request);
         filmService.saveFilm(film);
         HttpSession session = request.getSession();
+        String pageNumber1 = request.getParameter("pageNumber");
         Integer pageNumber = (Integer) session.getAttribute("pageNumber");
         return CommandResult.redirect(FILMS_PAGE + pageNumber);
     }

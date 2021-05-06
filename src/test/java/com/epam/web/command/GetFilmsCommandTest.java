@@ -34,7 +34,7 @@ public class GetFilmsCommandTest extends CommandTest {
         when(serviceMock.getNextMovies(anyInt())).thenReturn(Collections.emptyList());
 
         GenreService genreServiceMock = Mockito.mock(GenreService.class);
-        command = new GetFilmsCommand(serviceMock, genreServiceMock);
+        command = new GetFilmsCommand();
     }
 
     @Test
