@@ -48,10 +48,12 @@ public class CommandFactory {
                 return new EditPageCommand(editFilmService, loadGenreService);
             case SEARCH_PAGE_COMMAND:
                 FilmService searchFilmService = new FilmService(helperFactory, protect);
-                return new FilmSearchPageCommand(searchFilmService);
+                GenreService genresService = new GenreService(helperFactory);
+                return new FilmSearchPageCommand(searchFilmService, genresService);
             case GENRE_SEARCH_PAGE:
                 FilmService genreSearchFilmService = new FilmService(helperFactory, protect);
-                return new GenreSearchPageCommand(genreSearchFilmService);
+                GenreService allGenreService = new GenreService(helperFactory);
+                return new GenreSearchPageCommand(genreSearchFilmService, allGenreService);
             case LOGOUT:
                 return new LogoutCommand();
             case SEARCH_FILM:
