@@ -25,7 +25,7 @@ public class ReviewMapperTest {
     private final ReviewMapper mapper = new ReviewMapper();
 
     @Test
-    public void testMapShouldMapValidUser() throws SQLException, DaoException {
+    public void testMapShouldMapValidUser() throws SQLException {
         ResultSet resultSet = Mockito.mock(ResultSet.class);
         when(resultSet.getLong(ID)).thenReturn(TEST_ID);
         when(resultSet.getString(USERNAME)).thenReturn(TEST_USERNAME);

@@ -8,7 +8,7 @@ import org.testng.annotations.BeforeMethod;
 
 import static org.mockito.Mockito.when;
 
-public abstract class ServiceTest {
+public abstract class ServiceTest  {
     protected DaoHelperFactory factory;
     protected DaoHelper daoHelper;
 

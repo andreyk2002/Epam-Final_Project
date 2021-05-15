@@ -1,4 +1,4 @@
-package com.epam.web.command.impl.pages;
+package com.epam.web.command.impl.forward;
 
 import com.epam.web.command.Command;
 import com.epam.web.command.CommandResult;
@@ -31,7 +31,7 @@ public class EditPageCommand implements Command {
         long filmId = Long.parseLong(filmIdParam);
         try {
             Optional<Film> optionalMovie = filmService.getFilmById(filmId);
-            optionalMovie.orElseThrow(() -> new ServiceException("local.movieNotFound"));
+            optionalMovie.orElseThrow(() -> new ServiceException("Film with id = " + filmId + " not found"));
             Film movie = optionalMovie.get();
             List<Genre> allGenres = genreService.getAllGenres();
             request.setAttribute("genres", allGenres);

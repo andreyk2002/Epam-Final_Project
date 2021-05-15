@@ -47,19 +47,6 @@
         <dispatcher>REQUEST</dispatcher>
     </filter-mapping>
     <filter>
-        <filter-name>updateUserFilter</filter-name>
-        <filter-class>com.epam.web.filter.UpdateUserFilter</filter-class>
-        <init-param>
-            <param-name>getUserCommand</param-name>
-            <param-value>getUser</param-value>
-        </init-param>
-    </filter>
-    <filter-mapping>
-        <filter-name>updateUserFilter</filter-name>
-        <url-pattern>/WEB-INF/view/personal.jsp</url-pattern>
-        <dispatcher>FORWARD</dispatcher>
-    </filter-mapping>
-    <filter>
         <filter-name>changeLocalFilter</filter-name>
         <filter-class>com.epam.web.filter.SessionLocalizeFilter</filter-class>
     </filter>

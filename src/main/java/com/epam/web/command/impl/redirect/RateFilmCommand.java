@@ -1,11 +1,13 @@
-package com.epam.web.command.impl;
+package com.epam.web.command.impl.redirect;
 
 import com.epam.web.command.Command;
 import com.epam.web.command.CommandResult;
+import com.epam.web.command.impl.Commands;
 import com.epam.web.entity.User;
 import com.epam.web.service.RatingService;
 import com.epam.web.service.RatingStatus;
 import com.epam.web.service.ServiceException;
+import com.epam.web.service.rating.RatingManager;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -33,9 +35,8 @@ public class RateFilmCommand implements Command {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         long userId = user.getId();
-
-
-        RatingStatus status = service.rateFilm(filmId, userId, rating);
+        RatingManager ratingManager = RatingManager.getInstance();
+        RatingStatus status = service.rateFilm(ratingManager, filmId, userId, rating);
         String backToCurrent = BACK_TO_MOVIE + filmId;
         switch (status) {
             case SUCCESS:

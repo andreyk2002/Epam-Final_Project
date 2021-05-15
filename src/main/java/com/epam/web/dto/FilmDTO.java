@@ -15,18 +15,7 @@ public class FilmDTO {
     private final String genre;
     private final Double rating;
     private final List<Review> filmsReviews;
-    private boolean isAlreadyRated;
 
-    public FilmDTO(Film film, String genre, double movieRating, List<Review> filmReviews, boolean isAlreadyRated) {
-        this.id = film.getId();
-        this.name = film.getName();
-        this.rating = movieRating;
-        this.genre = genre;
-        this.description = film.getDescription();
-        this.imagePath = film.getImagePath();
-        this.filmsReviews = filmReviews;
-        this.isAlreadyRated = isAlreadyRated;
-    }
 
     public FilmDTO(Film film, String genre, double movieRating, List<Review> filmReviews) {
         this.id = film.getId();
@@ -67,28 +56,35 @@ public class FilmDTO {
         return filmsReviews;
     }
 
-    public boolean isAlreadyRated() {
-        return isAlreadyRated;
-    }
-
-    public void setRated(boolean hasRating) {
-        this.isAlreadyRated = hasRating;
-    }
-
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof FilmDTO)) return false;
+        if (this == o){
+            return true;
+        }
+        if (!(o instanceof FilmDTO)){
+            return false;
+        }
 
         FilmDTO filmDTO = (FilmDTO) o;
 
-        if (isAlreadyRated != filmDTO.isAlreadyRated) return false;
-        if (!Objects.equals(id, filmDTO.id)) return false;
-        if (!Objects.equals(name, filmDTO.name)) return false;
-        if (!Objects.equals(imagePath, filmDTO.imagePath)) return false;
-        if (!Objects.equals(description, filmDTO.description)) return false;
-        if (!Objects.equals(genre, filmDTO.genre)) return false;
-        if (!Objects.equals(rating, filmDTO.rating)) return false;
+        if (!Objects.equals(id, filmDTO.id)){
+            return false;
+        }
+        if (!Objects.equals(name, filmDTO.name)){
+            return false;
+        }
+        if (!Objects.equals(imagePath, filmDTO.imagePath)){
+            return false;
+        }
+        if (!Objects.equals(description, filmDTO.description)){
+            return false;
+        }
+        if (!Objects.equals(genre, filmDTO.genre)) {
+            return false;
+        }
+        if (!Objects.equals(rating, filmDTO.rating)) {
+            return false;
+        }
         return Objects.equals(filmsReviews, filmDTO.filmsReviews);
     }
 
@@ -101,7 +97,6 @@ public class FilmDTO {
         result = 31 * result + (genre != null ? genre.hashCode() : 0);
         result = 31 * result + (rating != null ? rating.hashCode() : 0);
         result = 31 * result + (filmsReviews != null ? filmsReviews.hashCode() : 0);
-        result = 31 * result + (isAlreadyRated ? 1 : 0);
         return result;
     }
 }

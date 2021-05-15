@@ -1,7 +1,8 @@
-package com.epam.web.command.impl;
+package com.epam.web.command.impl.redirect;
 
 import com.epam.web.command.Command;
 import com.epam.web.command.CommandResult;
+import com.epam.web.command.impl.Commands;
 import com.epam.web.entity.User;
 import com.epam.web.service.ServiceException;
 import com.epam.web.service.UserService;
@@ -26,7 +27,6 @@ public class LoginCommand implements Command {
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-
         Optional<User> optionalUser = userService.login(username, password);
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();

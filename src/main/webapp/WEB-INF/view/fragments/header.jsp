@@ -56,7 +56,7 @@
                         </a>
                     </li>
                     <li class="header-item">
-                        <a href="${pageContext.request.contextPath}/controller?commandName=personalPage"
+                        <a href="${pageContext.request.contextPath}/controller?commandName=updateUser"
                            class="logo-link">
                             <fmt:message key="local.personal"/>
                         </a>

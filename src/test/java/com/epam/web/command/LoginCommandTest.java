@@ -1,6 +1,7 @@
 package com.epam.web.command;
 
-import com.epam.web.command.impl.LoginCommand;
+import com.epam.web.command.impl.Commands;
+import com.epam.web.command.impl.redirect.LoginCommand;
 import com.epam.web.entity.Role;
 import com.epam.web.entity.User;
 import com.epam.web.service.ServiceException;
@@ -18,13 +19,13 @@ import static org.mockito.Mockito.when;
 public class LoginCommandTest extends CommandTest {
     private static final String VALID_USERNAME = "admin";
     private static final String VALID_PASSWORD = "admin";
-    private static final String PAGE_NAME = "WEB-INF/view/main.jsp";
     private static final User VALID_USER = User.unblocked(0, VALID_USERNAME, 0, Role.ADMIN);
     private static final String USERNAME = "username";
     private static final String PASSWORD = "password";
-    private static final CommandResult SUCCESS = CommandResult.redirect("/controller?commandName=showFilmsPage&pageNumber=0");
+    private static final CommandResult SUCCESS =
+            CommandResult.redirect(Commands.FILMS_PAGE.getName() + "&pageNumber=0");
     private static final CommandResult FAIL = CommandResult
-            .redirect("/controller?commandName=loginPage&errorMessage=local.loginError");
+            .redirect(Commands.LOGIN_PAGE_COMMAND.getName() + "&errorMessage=local.loginError");
     private LoginCommand command;
 
 

@@ -1,4 +1,4 @@
-package com.epam.web.command.impl.pages;
+package com.epam.web.command.impl.forward;
 
 import com.epam.web.command.Command;
 import com.epam.web.command.CommandResult;
@@ -29,11 +29,9 @@ public class FilmPageCommand implements Command {
         long id = Long.parseLong(idString);
         HttpSession session = request.getSession();
         try {
-            User user = (User) session.getAttribute("user");
-            long userId = user.getId();
-            Optional<FilmDTO> movieOptional = service.getMovieDTOById(id, userId);
+            Optional<FilmDTO> movieOptional = service.getFilmDtoById(id);
             movieOptional.ifPresentOrElse(movie -> request.setAttribute("film", movie),
-                    () -> request.setAttribute("errorMessage", "local.movieNotFound"));
+                    () -> request.setAttribute("errorMessage", "Film with id " + id + " not found"));
         } catch (DaoException e) {
             throw new ServiceException(e.getMessage(), e);
         }

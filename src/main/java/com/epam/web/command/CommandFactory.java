@@ -1,7 +1,8 @@
 package com.epam.web.command;
 
-import com.epam.web.command.impl.*;
-import com.epam.web.command.impl.pages.*;
+import com.epam.web.command.impl.Commands;
+import com.epam.web.command.impl.forward.*;
+import com.epam.web.command.impl.redirect.*;
 import com.epam.web.dao.factory.DaoHelperFactory;
 import com.epam.web.parser.FormParser;
 import com.epam.web.security.XssProtector;
@@ -14,7 +15,6 @@ public class CommandFactory {
 
     private static final String PERSONAL_PAGE = "/WEB-INF/view/personal.jsp";
     private static final String LOGIN_PAGE = "/index.jsp";
-    private static final String SEARCH_PAGE = "/WEB-INF/view/searchPage.jsp";
 
     private final DaoHelperFactory helperFactory = new DaoHelperFactory();
     private final UserRatingValidator userRatingValidator = new UserRatingValidator();
@@ -66,9 +66,6 @@ public class CommandFactory {
             case GET_USER:
                 UserService getUserService = new UserService(helperFactory, userRatingValidator);
                 return new GetUserCommand(getUserService);
-            case PERSONAL:
-                String personalPage = Commands.PERSONAL_PAGE_COMMAND.getName();
-                return new RedirectToPageCommand(personalPage);
             case FILMS_PAGE:
                 String page = Commands.MAIN_PAGE_COMMAND.getName();
                 return new RedirectToPageCommand(page);

@@ -37,9 +37,7 @@ public class CommandResult {
         if (!(o instanceof CommandResult)){
             return false;
         }
-
         CommandResult result = (CommandResult) o;
-
         if (isRedirect != result.isRedirect){
             return false;
         }

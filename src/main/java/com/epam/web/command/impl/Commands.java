@@ -22,8 +22,6 @@ public enum Commands {
 
    DELETE_FILM("deleteFilm"),
 
-   PERSONAL("personalPage"),
-
    CHANGE_LANGUAGE("changeLanguage"),
 
    LOGIN("login"),
@@ -50,7 +48,7 @@ public enum Commands {
 
    UPDATE_FILM("updateFilm"),
 
-   GET_USER("getUser"),
+   GET_USER("updateUser"),
 
    SEARCH_FILM("searchFilm"),
 
@@ -78,7 +76,7 @@ public enum Commands {
 
    GENRE_SEARCH_PAGE("genreSearchPage");
 
-    private String name;
+    private final String name;
 
     Commands(String name) {
         this.name = name;

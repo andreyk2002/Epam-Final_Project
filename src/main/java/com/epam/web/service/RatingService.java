@@ -3,6 +3,7 @@ package com.epam.web.service;
 import com.epam.web.dao.DaoException;
 import com.epam.web.dao.DaoHelper;
 import com.epam.web.dao.RatingDao;
+import com.epam.web.dao.UserDao;
 import com.epam.web.dao.factory.DaoHelperFactory;
 import com.epam.web.entity.Rating;
 import com.epam.web.service.rating.RatingManager;
@@ -19,18 +20,20 @@ public class RatingService {
     }
 
 
-    public RatingStatus rateFilm(long filmID, long userID, int score) throws ServiceException {
+    public RatingStatus rateFilm(RatingManager ratingManager ,long filmID, long userID, int score) throws ServiceException {
         if (!validator.validateRating(score)) {
             return RatingStatus.WRONG_RATING;
         }
         try (DaoHelper helper = daoHelperFactory.create()) {
             helper.startTransaction();
+            UserDao userDao = helper.createUserDao();
+            RatingDao ratingDao = helper.createRatingDao();
             Rating rating = new Rating(score, userID, filmID);
-            RatingManager ratingManager = new RatingManager(daoHelperFactory);
             boolean firstRated = ratingManager.addRating(rating);
             RatingStatus status;
             if (firstRated) {
-                ratingManager.changeRating(rating);
+                ratingDao.addRating(rating);
+                ratingManager.changeUserRating(userDao, rating);
                 status = RatingStatus.SUCCESS;
             } else {
                 status = RatingStatus.ALREADY_RATED;

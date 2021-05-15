@@ -1,4 +1,4 @@
-package com.epam.web.command.impl;
+package com.epam.web.command.impl.redirect;
 
 import com.epam.web.command.Command;
 import com.epam.web.command.CommandResult;

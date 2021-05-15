@@ -31,7 +31,7 @@ public class FilmServiceTest extends ServiceTest {
             .withId(VALID_ID)
             .build();
     private static final FilmDTO VALID_DTO =
-            new FilmDTO(VALID_FILM, VALID_GENRE.getName(), VALID_RATING, Collections.emptyList(), false);
+            new FilmDTO(VALID_FILM, VALID_GENRE.getName(), VALID_RATING, Collections.emptyList());
     public static final int USER_ID = 1;
 
     private FilmService service;
@@ -67,26 +67,26 @@ public class FilmServiceTest extends ServiceTest {
 
     @Test
     public void testGetMovieByIdShouldReturnMovieWhenMovieExist() throws DaoException {
-        Optional<FilmDTO> movieById = service.getMovieDTOById(VALID_ID, USER_ID);
+        Optional<FilmDTO> movieById = service.getFilmDtoById(VALID_ID);
         Assert.assertEquals(movieById.get(), VALID_DTO);
     }
 
     @Test
     public void testGetMovieByIdShouldReturnEmptyWhenMovieNotExist() throws DaoException {
-        Optional<FilmDTO> movieById = service.getMovieDTOById(INVALID_ID, USER_ID);
+        Optional<FilmDTO> movieById = service.getFilmDtoById(INVALID_ID);
         Assert.assertEquals(movieById, Optional.empty());
     }
 
     @Test
     public void testGetFilmsPageShouldReturnFilmsForValidPage() throws ServiceException {
         List<FilmDTO> expected = Collections.singletonList(VALID_DTO);
-        List<FilmDTO> nextMovies = service.getNextMovies(VALID_PAGE);
+        List<FilmDTO> nextMovies = service.getPage(VALID_PAGE);
         Assert.assertEquals(nextMovies, expected);
     }
 
     @Test
     public void testGetFilmsPageShouldReturnEmptyListForInvalidPage() throws ServiceException {
-        List<FilmDTO> nextMovies = service.getNextMovies(INVALID_PAGE);
+        List<FilmDTO> nextMovies = service.getPage(INVALID_PAGE);
         Assert.assertEquals(nextMovies, Collections.emptyList());
     }
 }
