@@ -16,9 +16,9 @@
 <jsp:include page="fragments/header.jsp"/>
 <section class="intro" style="background: black; min-height: 100px; padding-bottom: 50px">
     <div class="wrapper">
-        <h1 class="into-title">Results for search</h1>
+        <h1 class="into-title"><fmt:message key="local.results_for"/></h1>
         <a class="film-link" href="${pageContext.request.contextPath}/controller?commandName=showFilmsPage&pageNumber=0">
-            Back to main
+            <fmt:message key="local.back_main"/>
         </a>
     </div>
 </section>

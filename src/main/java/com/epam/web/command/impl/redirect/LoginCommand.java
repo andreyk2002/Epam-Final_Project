@@ -1,7 +1,8 @@
-package com.epam.web.command.impl;
+package com.epam.web.command.impl.redirect;
 
 import com.epam.web.command.Command;
 import com.epam.web.command.CommandResult;
+import com.epam.web.command.impl.Commands;
 import com.epam.web.entity.User;
 import com.epam.web.service.ServiceException;
 import com.epam.web.service.UserService;
@@ -14,8 +15,8 @@ import java.util.Optional;
 
 public class LoginCommand implements Command {
 
-    public static final String MAIN_PAGE = "/controller?commandName=showFilmsPage&pageNumber=0";
-    public static final String LOGIN_ERROR = "/controller?commandName=loginPage&errorMessage=local.loginError";
+    private static final String MAIN_PAGE = Commands.FILMS_PAGE.getName() + "&pageNumber=0";
+    private static final String LOGIN_ERROR = Commands.LOGIN_PAGE_COMMAND.getName() + "&errorMessage=local.loginError";
     private final UserService userService;
 
     public LoginCommand(UserService userService) {
@@ -26,12 +27,12 @@ public class LoginCommand implements Command {
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-
         Optional<User> optionalUser = userService.login(username, password);
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
+            session.setAttribute("pageNumber", 0);
             return CommandResult.redirect(MAIN_PAGE);
         }
         return CommandResult.redirect(LOGIN_ERROR);

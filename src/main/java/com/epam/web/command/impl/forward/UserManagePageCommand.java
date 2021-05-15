@@ -1,4 +1,4 @@
-package com.epam.web.command.impl;
+package com.epam.web.command.impl.forward;
 
 import com.epam.web.command.Command;
 import com.epam.web.command.CommandResult;
@@ -8,23 +8,22 @@ import com.epam.web.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
-public class ManageUsersCommand implements Command {
+public class UserManagePageCommand implements Command {
 
-    private static final String USER_MANAGE_PAGE = "/controller?commandName=userManagePage";
+
+    private static final String USER_MANAGE_PAGE = "/WEB-INF/view/userManage.jsp";
     private final UserService userService;
 
-    public ManageUsersCommand(UserService userService) {
+    public UserManagePageCommand(UserService userService) {
         this.userService = userService;
     }
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-        HttpSession session = request.getSession();
         List<User> allUsers = userService.getAllUsers();
-        session.setAttribute("users", allUsers);
-        return CommandResult.redirect(USER_MANAGE_PAGE);
+        request.setAttribute("users", allUsers);
+        return CommandResult.forward(USER_MANAGE_PAGE);
     }
 }

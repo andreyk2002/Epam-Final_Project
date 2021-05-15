@@ -31,7 +31,7 @@
                         <input type="hidden" name="commandName"  value="changeUserStatus">
                         <input type="hidden" name="userStatus" value="${user.blocked}">
                         <input type="hidden" name="userId" value="${user.id}">
-                        <button type="submit">
+                        <button class="change-user-button" type="submit">
                             <c:if test="${user.blocked}">
                                 <fmt:message key="local.unblock"/>
                             </c:if>
@@ -47,7 +47,7 @@
                         <input type="hidden" name="commandName" value="changeUserRating">
                         <input type="hidden" name="userId" value="${user.id}">
                         <input type="number" min="0" max="100" name="rating" value="${user.rating}"/>
-                        <button type="submit">OK</button>
+                        <button class="change-user-button" type="submit">OK</button>
                     </form>
                 </td>
                 <td><fmt:message key="local.${user.role}"/></td>

@@ -24,8 +24,10 @@ public class FilmRowMapperTest {
     private static final long TEST_GENRE_ID = 1;
     private final FilmRowMapper mapper = new FilmRowMapper();
 
+
+
     @Test
-    public void testMapShouldMapValidUser() throws SQLException, DaoException {
+    public void testMapShouldMapValidUser() throws SQLException {
         ResultSet resultSet = Mockito.mock(ResultSet.class);
         when(resultSet.getLong(ID)).thenReturn(TEST_ID);
         when(resultSet.getString(NAME)).thenReturn(TEST_NAME);

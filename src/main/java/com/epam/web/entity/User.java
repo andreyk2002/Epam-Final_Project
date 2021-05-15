@@ -80,4 +80,15 @@ public class User {
         result = 31 * result + (isBlocked ? 1 : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "login='" + login + '\'' +
+                ", id=" + id +
+                ", rating=" + rating +
+                ", role=" + role +
+                ", isBlocked=" + isBlocked +
+                '}';
+    }
 }

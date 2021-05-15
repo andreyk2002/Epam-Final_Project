@@ -1,11 +1,8 @@
 package com.epam.web.connection;
 
 import com.epam.web.dao.DaoException;
-import com.mysql.cj.jdbc.Driver;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.ArrayDeque;
 import java.util.Queue;
 import java.util.concurrent.Semaphore;
@@ -36,7 +33,7 @@ public class ConnectionPool {
                     ConnectionPool pool = new ConnectionPool();
                     INSTANCE.getAndSet(pool);
                 }
-            } catch (DaoException | SQLException e) {
+            } catch (DaoException e) {
                 throw new ConnectionPoolException(e.getMessage(), e);
             } finally {
                 LOCK.unlock();
@@ -45,11 +42,10 @@ public class ConnectionPool {
         return INSTANCE.get();
     }
 
-    private ConnectionPool() throws SQLException, DaoException {
+    private ConnectionPool() throws DaoException {
         connectionFactory = new ConnectionFactory();
         connectionsInUse = new ArrayDeque<>();
         availableConnections = new ArrayDeque<>();
-        DriverManager.registerDriver(new Driver());
         addConnections();
     }
 

@@ -1,7 +1,8 @@
-package com.epam.web.command.impl;
+package com.epam.web.command.impl.redirect;
 
 import com.epam.web.command.Command;
 import com.epam.web.command.CommandResult;
+import com.epam.web.command.impl.Commands;
 import com.epam.web.entity.Film;
 import com.epam.web.parser.FormParser;
 import com.epam.web.parser.ParseResult;
@@ -14,7 +15,7 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 public class UpdateFilmCommand implements Command {
-    private static final String FILMS_PAGE = "/controller?commandName=showFilmsPage&pageNumber=";
+    private static final String FILMS_PAGE = Commands.FILMS_PAGE.getName() + "&pageNumber=";
     private static final String PAGE_NUMBER = "pageNumber";
     private final FilmService filmService;
     private final FormParser parser;

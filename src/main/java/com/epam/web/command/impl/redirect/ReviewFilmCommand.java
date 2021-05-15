@@ -1,7 +1,8 @@
-package com.epam.web.command.impl;
+package com.epam.web.command.impl.redirect;
 
 import com.epam.web.command.Command;
 import com.epam.web.command.CommandResult;
+import com.epam.web.command.impl.Commands;
 import com.epam.web.entity.User;
 import com.epam.web.service.ReviewService;
 import com.epam.web.service.ServiceException;
@@ -11,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class ReviewFilmCommand implements Command {
-    private static final String SHOW_MOVIE = "/controller?commandName=movie&id=";
+    private static final String SHOW_MOVIE = Commands.GET_MOVIE.getName() + "&filmId=";
     private final ReviewService reviewService;
 
     public ReviewFilmCommand(ReviewService reviewService) {

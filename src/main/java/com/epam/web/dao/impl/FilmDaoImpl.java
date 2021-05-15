@@ -79,7 +79,7 @@ public class FilmDaoImpl extends AbstractDao<Film> implements FilmDao {
     }
 
     @Override
-    public List<Film> getMoviesByGenreName(String genreName) throws DaoException {
+    public List<Film> getByGenreName(String genreName) throws DaoException {
         return executeQuery(FIND_BY_GENRE_NAME, genreName);
     }
 }

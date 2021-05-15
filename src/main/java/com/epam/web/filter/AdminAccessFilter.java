@@ -22,7 +22,6 @@ public class AdminAccessFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
-        HttpServletResponse response = (HttpServletResponse) servletResponse;
         String commandName = request.getParameter("commandName");
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");

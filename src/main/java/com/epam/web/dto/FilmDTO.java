@@ -16,7 +16,6 @@ public class FilmDTO {
     private final List<Genre> genres;
     private final Double rating;
     private final List<Review> filmsReviews;
-    private boolean isAlreadyRated;
 
     public FilmDTO(Film film, List<Genre> genres, double movieRating, List<Review> filmReviews) {
         this.id = film.getId();
@@ -57,18 +56,14 @@ public class FilmDTO {
         return filmsReviews;
     }
 
-    public boolean isAlreadyRated() {
-        return isAlreadyRated;
-    }
-
-    public void setRated(boolean hasRating) {
-        this.isAlreadyRated = hasRating;
-    }
-
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof FilmDTO)) return false;
+        if (this == o){
+            return true;
+        }
+        if (!(o instanceof FilmDTO)){
+            return false;
+        }
 
         FilmDTO filmDTO = (FilmDTO) o;
 
@@ -91,7 +86,6 @@ public class FilmDTO {
         result = 31 * result + (genres != null ? genres.hashCode() : 0);
         result = 31 * result + (rating != null ? rating.hashCode() : 0);
         result = 31 * result + (filmsReviews != null ? filmsReviews.hashCode() : 0);
-        result = 31 * result + (isAlreadyRated ? 1 : 0);
         return result;
     }
 }

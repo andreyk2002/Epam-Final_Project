@@ -6,6 +6,7 @@ import org.testng.annotations.BeforeMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpServletResponseWrapper;
 import javax.servlet.http.HttpSession;
 
 import static org.mockito.Matchers.anyString;
@@ -19,7 +20,7 @@ abstract class CommandTest {
 
     @BeforeMethod
     public void setUp() throws ServiceException {
-        responseMock = Mockito.mock(HttpServletResponse.class);
+        responseMock = Mockito.mock(HttpServletResponseWrapper.class);
         requestMock = Mockito.mock(HttpServletRequest.class);
         HttpSession sessionMock = Mockito.mock(HttpSession.class);
         doNothing().when(sessionMock).setAttribute(anyString(), anyString());

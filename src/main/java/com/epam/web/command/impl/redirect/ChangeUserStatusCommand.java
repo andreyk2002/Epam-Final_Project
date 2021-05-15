@@ -1,28 +1,29 @@
-package com.epam.web.command.impl;
+package com.epam.web.command.impl.redirect;
 
 import com.epam.web.command.Command;
 import com.epam.web.command.CommandResult;
+import com.epam.web.command.impl.Commands;
 import com.epam.web.service.ServiceException;
 import com.epam.web.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class ChangeUserRatingCommand implements Command {
-    private static final String MANAGE_USERS = "/controller?commandName=manageUsers";
+public class ChangeUserStatusCommand implements Command {
+    private static final String MANAGE_USERS = Commands.MANAGE_USERS.getName();
     private final UserService userService;
 
-    public ChangeUserRatingCommand(UserService changeRatingService) {
-        this.userService = changeRatingService;
+    public ChangeUserStatusCommand(UserService changeStatusService) {
+        this.userService = changeStatusService;
     }
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
+        String userStatusParam = request.getParameter("userStatus");
+        boolean blocked = Boolean.parseBoolean(userStatusParam);
         String userIdParam = request.getParameter("userId");
         long userId = Long.parseLong(userIdParam);
-        String newRatingParam = request.getParameter("rating");
-        double newRating = Double.parseDouble(newRatingParam);
-        boolean isRated = userService.changeRating(userId, newRating);
+        userService.changeStatus(userId, blocked);
         return CommandResult.redirect(MANAGE_USERS);
     }
 }

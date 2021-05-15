@@ -15,15 +15,12 @@ import java.util.Set;
 public class UserAccessFilter implements Filter {
 
     private static final String ACCESS_DENIED = "local.accessDenied";
-    private static final String ERROR_PAGE_COMMAND = "/controller?commandName=showError";
-    private static final Logger LOGGER = LogManager.getLogger(UserAccessFilter.class);
     private final Set<String> deniedCommands = Set.of("rateFilm", "reviewFilm");
 
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
             throws IOException, ServletException {
-        HttpServletResponse response = (HttpServletResponse) servletResponse;
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpSession session = request.getSession();
         checkAccess(request, session);

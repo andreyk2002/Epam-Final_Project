@@ -1,29 +1,29 @@
-package com.epam.web.command.impl;
+package com.epam.web.command.impl.forward;
 
 import com.epam.web.command.Command;
 import com.epam.web.command.CommandResult;
+import com.epam.web.command.impl.Commands;
 import com.epam.web.entity.Genre;
 import com.epam.web.service.GenreService;
 import com.epam.web.service.ServiceException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
-public class AddFilmPageCommand implements Command {
-    private static final String ADD_FILM_PAGE = "/controller?commandName=showAddPage";
+public class AddPageCommand implements Command {
+
+    private static final String CREATE_FILM_PAGE = Commands.CREATE_FILM_PATH.getName();
     private final GenreService genreService;
 
-    public AddFilmPageCommand(GenreService genreService) {
-        this.genreService = genreService;
+    public AddPageCommand(GenreService service) {
+        this.genreService = service;
     }
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
         List<Genre> genres = genreService.getAllGenres();
-        HttpSession session = request.getSession();
-        session.setAttribute("genres", genres);
-        return CommandResult.redirect(ADD_FILM_PAGE);
+        request.setAttribute("genres", genres);
+        return CommandResult.forward(CREATE_FILM_PAGE);
     }
 }

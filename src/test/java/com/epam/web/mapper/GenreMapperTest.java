@@ -22,7 +22,7 @@ public class GenreMapperTest {
     private final GenreMapper mapper = new GenreMapper();
 
     @Test
-    public void testMapShouldMapValidGenre() throws SQLException, DaoException {
+    public void testMapShouldMapValidGenre() throws SQLException {
         ResultSet resultSet = Mockito.mock(ResultSet.class);
         when(resultSet.getLong(ID)).thenReturn(TEST_ID);
         when(resultSet.getString(GENRE_NAME)).thenReturn(TEST_NAME);

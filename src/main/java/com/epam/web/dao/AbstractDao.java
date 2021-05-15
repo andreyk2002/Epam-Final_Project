@@ -57,6 +57,7 @@ public abstract class AbstractDao<T> implements Dao<T> {
         }
     }
 
+    //TODO: is it good enough
     protected double executeAvg(String query, String columnName, Object... params) throws DaoException {
         try (PreparedStatement statement = createStatement(query, params);
              ResultSet resultSet = statement.executeQuery()) {

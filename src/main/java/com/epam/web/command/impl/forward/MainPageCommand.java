@@ -1,7 +1,8 @@
-package com.epam.web.command.impl;
+package com.epam.web.command.impl.forward;
 
 import com.epam.web.command.Command;
 import com.epam.web.command.CommandResult;
+import com.epam.web.command.impl.Commands;
 import com.epam.web.dto.FilmDTO;
 import com.epam.web.entity.Genre;
 import com.epam.web.service.FilmService;
@@ -13,13 +14,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
-public class GetFilmsCommand implements Command {
+public class MainPageCommand implements Command {
 
-    private static final String FILM_PAGE = "/controller?commandName=mainPage&pageNumber=";
+    private final String MAIN_PAGE = Commands.MAIN_PAGE_PATH.getName();
     private final FilmService filmService;
     private final GenreService genreService;
 
-    public GetFilmsCommand(FilmService filmService, GenreService genreService) {
+    public MainPageCommand(FilmService filmService, GenreService genreService) {
         this.filmService = filmService;
         this.genreService = genreService;
     }
@@ -27,17 +28,14 @@ public class GetFilmsCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-        String page = request.getParameter("pageNumber");
-        int pageNumber = Integer.parseInt(page);
-
-        List<FilmDTO> movies = filmService.getNextMovies(pageNumber);
+        HttpSession session = request.getSession();
+        int pageNumber = (Integer)session.getAttribute("pageNumber");
+        List<FilmDTO> movies = filmService.getPage(pageNumber);
         int totalPages = filmService.getPagesCount();
         List<Genre> allGenres = genreService.getAllGenres();
-        HttpSession session = request.getSession();
-        session.setAttribute("genres", allGenres);
-        session.setAttribute("movies", movies);
-        session.setAttribute("pageNumber", pageNumber);
-        session.setAttribute("pagesCount", totalPages);
-        return CommandResult.redirect(FILM_PAGE + pageNumber);
+        request.setAttribute("genres", allGenres);
+        request.setAttribute("movies", movies);
+        request.setAttribute("pagesCount", totalPages);
+        return CommandResult.forward(MAIN_PAGE);
     }
 }

@@ -12,7 +12,7 @@ public class UserRowMapper implements RowMapper<User> {
     private static final String LOGIN = "login";
     private static final String ROLE = "role";
     private static final String RATING = "rating";
-    public static final String IS_BLOCKED = "Blocked";
+    private static final String IS_BLOCKED = "Blocked";
 
     @Override
     public User map(ResultSet resultSet) throws SQLException {

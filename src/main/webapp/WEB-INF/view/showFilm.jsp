@@ -32,7 +32,7 @@
         </div>
         <div class="film-rate">
             <h2 class="film-current-rating">
-                <fmt:message key="local.currentRating"/> : ${sessionScope.film.rating}
+                <fmt:message key="local.currentRating"/> : ${film.rating}
             </h2>
             <c:if test="${sessionScope.user.role == 'USER'}">
                 <form class="film-rate-form" action="${pageContext.request.contextPath}/controller">
@@ -56,7 +56,7 @@
 </section>
 <section class="film-reviews">
     <div class="film-wrapper-wide">
-        <c:forEach items="${sessionScope.film.filmsReviews}" var="review">
+        <c:forEach items="${film.filmsReviews}" var="review">
             <div class="user-review">
                 <b class="username">${review.username}</b>
                 <p class="review-content">

@@ -426,6 +426,7 @@ img.type-image {
 }
 
 .film-edit {
+    background-color: wheat;
     width: 40px;
     height: 40px;
 }
@@ -470,9 +471,21 @@ h2.film-link {
 
 
 .film-link:hover{
-    color: #1f1fa7;
+    color: #4D7A97;
     animation: 0.3s ease-in;
 }
+
+a.film-search-link {
+    font-size: 23px;
+    text-decoration: none;
+    color: white;
+}
+
+a.film-search-link:hover {
+    color: sandybrown;
+}
+
+
 
 .film-info {
     text-decoration: none;
@@ -501,7 +514,7 @@ h2.film-link {
 .film-rating {
     font-size: 20px;
     font-style: italic;
-    color: green;
+    color: sandybrown;
     padding-top: 20px;
     display: block;
     margin-top: 20px;
@@ -569,15 +582,22 @@ textarea.review {
     margin-bottom: 20px;
 }
 
+p.review-content {
+    font-size: 17px;
+}
+
 .user-review {
-    width: 90%;
-    background-color: grey;
-    margin: 15px;
+    width: 99.5%;
+    background-color: whitesmoke;
+    margin-bottom: 0;
+    border: 1px solid;
     padding: 10px;
 }
 
 .username {
     font-weight: bolder;
+    color: #1f1fa7;
+    font-size: 17px;
 }
 
 
@@ -612,7 +632,7 @@ textarea.review {
 .film-current-rating {
     margin-bottom: 50px;
     font-size: 30px;
-    color: green;
+    color: sandybrown;
 }
 
 /*personal page styles*/
@@ -646,6 +666,21 @@ textarea.review {
 
 /*start of user manage page styles*/
 
+.change-user-button {
+    background-color: darkblue;
+    color: white;
+}
+
+thead{
+    font-size: 22px;
+}
+
+td {
+    background-color: black;
+    color: white;
+    padding: 10px 15px;
+}
+
 .dark-wrapper {
     z-index: 0;
     position: absolute;
@@ -662,6 +697,7 @@ table, th, td {
 }
 
 .users-table {
+    font-size: 19px;
     background-color: white;
     width: 94%;
     margin-top: 30vh;

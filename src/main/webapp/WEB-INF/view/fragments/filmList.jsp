@@ -5,9 +5,9 @@
 <fmt:setLocale value="${sessionScope.local}"/>
 <fmt:setBundle basename="local"/>
 <div class="wrapper-wide">
-    <c:forEach items="${sessionScope.movies}" var="film">
+    <c:forEach items="${movies}" var="film">
         <a class="film-view-link"
-           href="${pageContext.request.contextPath}/controller?commandName=movie&id=${film.id}">
+           href="${pageContext.request.contextPath}/controller?commandName=movie&filmId=${film.id}">
             <c:if test="${user.role == 'ADMIN'}">
                 <div class="manage-film">
                     <form class="manage-film-form" action="${pageContext.request.contextPath}/controller">

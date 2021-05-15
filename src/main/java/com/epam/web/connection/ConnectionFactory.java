@@ -1,6 +1,7 @@
 package com.epam.web.connection;
 
 import com.epam.web.dao.DaoException;
+import com.mysql.cj.jdbc.Driver;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -13,11 +14,17 @@ public class ConnectionFactory {
     private final String url;
     private final Properties properties;
 
-    public ConnectionFactory() {
-        ResourceBundle resource = ResourceBundle.getBundle(BUNDLE_NAME);
+    public ConnectionFactory() throws DaoException {
+        try {
+            DriverManager.registerDriver(new Driver());
+        } catch (SQLException e) {
+            throw new DaoException(e.getMessage(), e);
+        }
+        ResourceBundle resource = ResourceBundle.getBundle("database");
         url = resource.getString("url");
         properties = getProperties(resource);
     }
+
     public Connection create() throws DaoException {
         try {
             return DriverManager.getConnection(url, properties);
