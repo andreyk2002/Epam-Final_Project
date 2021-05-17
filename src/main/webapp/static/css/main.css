@@ -465,10 +465,10 @@ h2.film-link {
 .film-link {
     text-decoration: none;
     font-size: 26px;
+    font-family: cursive;
     color: white;
     margin-right: 20px;
 }
-
 
 .film-link:hover{
     color: #4D7A97;

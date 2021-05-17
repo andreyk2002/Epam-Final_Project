@@ -3,8 +3,7 @@ package com.epam.web.command.impl.forward;
 import com.epam.web.command.Command;
 import com.epam.web.command.CommandResult;
 import com.epam.web.command.impl.Commands;
-import com.epam.web.dao.DaoException;
-import com.epam.web.entity.Film;
+import com.epam.web.dto.FilmDto;
 import com.epam.web.entity.Genre;
 import com.epam.web.service.FilmService;
 import com.epam.web.service.GenreService;
@@ -29,16 +28,12 @@ public class EditPageCommand implements Command {
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
         String filmIdParam = request.getParameter("filmId");
         long filmId = Long.parseLong(filmIdParam);
-        try {
-            Optional<Film> optionalMovie = filmService.getFilmById(filmId);
-            optionalMovie.orElseThrow(() -> new ServiceException("Film with id = " + filmId + " not found"));
-            Film movie = optionalMovie.get();
-            List<Genre> allGenres = genreService.getAllGenres();
-            request.setAttribute("genres", allGenres);
-            request.setAttribute("movie", movie);
-        } catch (DaoException e) {
-            e.printStackTrace();
-        }
+        Optional<FilmDto> optionalMovie = filmService.getFilmDtoById(filmId);
+        optionalMovie.orElseThrow(() -> new ServiceException("Film with id = " + filmId + " not found"));
+        FilmDto movie = optionalMovie.get();
+        List<Genre> allGenres = genreService.getAllGenres();
+        request.setAttribute("genres", allGenres);
+        request.setAttribute("movie", movie);
         return CommandResult.forward(EDIT_FILM_PAGE);
     }
 }

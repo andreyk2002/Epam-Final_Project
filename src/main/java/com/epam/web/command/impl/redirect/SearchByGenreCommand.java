@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class SearchByGenreCommand implements Command {
-    private static final String SEARCH_PAGE = Commands.GENRE_SEARCH_PAGE.getName() + "&genreName=";
+    private static final String SEARCH_PAGE = Commands.GENRE_SEARCH_PAGE.getName() + "&genreId=";
 
     public SearchByGenreCommand() {
 
@@ -17,7 +17,7 @@ public class SearchByGenreCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-        String genreName = request.getParameter("genreName");
+        String genreName = request.getParameter("genreId");
         return CommandResult.redirect(SEARCH_PAGE + genreName);
     }
 }

@@ -3,7 +3,7 @@ package com.epam.web.command.impl.forward;
 import com.epam.web.command.Command;
 import com.epam.web.command.CommandResult;
 import com.epam.web.command.impl.Commands;
-import com.epam.web.dto.FilmDTO;
+import com.epam.web.dto.FilmDto;
 import com.epam.web.entity.Genre;
 import com.epam.web.service.FilmService;
 import com.epam.web.service.GenreService;
@@ -27,7 +27,7 @@ public class FilmSearchPageCommand implements Command {
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
         String filmName = request.getParameter(SEARCH_STRING);
-        List<FilmDTO> movies = filmService.getByName(filmName);
+        List<FilmDto> movies = filmService.getByName(filmName);
         request.setAttribute("movies", movies);
         List<Genre> allGenres = genreService.getAllGenres();
         request.setAttribute("genres", allGenres);

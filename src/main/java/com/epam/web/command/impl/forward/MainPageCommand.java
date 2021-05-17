@@ -3,7 +3,7 @@ package com.epam.web.command.impl.forward;
 import com.epam.web.command.Command;
 import com.epam.web.command.CommandResult;
 import com.epam.web.command.impl.Commands;
-import com.epam.web.dto.FilmDTO;
+import com.epam.web.dto.FilmDto;
 import com.epam.web.entity.Genre;
 import com.epam.web.service.FilmService;
 import com.epam.web.service.GenreService;
@@ -30,7 +30,7 @@ public class MainPageCommand implements Command {
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
         HttpSession session = request.getSession();
         int pageNumber = (Integer)session.getAttribute("pageNumber");
-        List<FilmDTO> movies = filmService.getPage(pageNumber);
+        List<FilmDto> movies = filmService.getPage(pageNumber);
         int totalPages = filmService.getPagesCount();
         List<Genre> allGenres = genreService.getAllGenres();
         request.setAttribute("genres", allGenres);

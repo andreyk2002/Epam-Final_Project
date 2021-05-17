@@ -1,7 +1,7 @@
 package com.epam.web.service;
 
 import com.epam.web.dao.*;
-import com.epam.web.dto.FilmDTO;
+import com.epam.web.dto.FilmDto;
 import com.epam.web.entity.Film;
 import com.epam.web.entity.Genre;
 import com.epam.web.security.XssProtector;
@@ -29,8 +29,8 @@ public class FilmServiceTest extends ServiceTest {
             .withName("")
             .withId(VALID_ID)
             .build();
-    private static final FilmDTO VALID_DTO =
-            new FilmDTO(VALID_FILM, Collections.singletonList(VALID_GENRE), VALID_RATING, Collections.emptyList());
+    private static final FilmDto VALID_DTO =
+            new FilmDto(VALID_FILM, Collections.singletonList(VALID_GENRE), VALID_RATING, Collections.emptyList());
     public static final int USER_ID = 1;
 
     private FilmService service;
@@ -65,27 +65,27 @@ public class FilmServiceTest extends ServiceTest {
     }
 
     @Test
-    public void testGetMovieByIdShouldReturnMovieWhenMovieExist() throws DaoException {
-        Optional<FilmDTO> movieById = service.getFilmDtoById(VALID_ID);
+    public void testGetMovieByIdShouldReturnMovieWhenMovieExist() throws ServiceException {
+        Optional<FilmDto> movieById = service.getFilmDtoById(VALID_ID);
         Assert.assertEquals(movieById.get(), VALID_DTO);
     }
 
     @Test
-    public void testGetMovieByIdShouldReturnEmptyWhenMovieNotExist() throws DaoException {
-        Optional<FilmDTO> movieById = service.getFilmDtoById(INVALID_ID);
+    public void testGetMovieByIdShouldReturnEmptyWhenMovieNotExist() throws ServiceException {
+        Optional<FilmDto> movieById = service.getFilmDtoById(INVALID_ID);
         Assert.assertEquals(movieById, Optional.empty());
     }
 
     @Test
     public void testGetFilmsPageShouldReturnFilmsForValidPage() throws ServiceException {
-        List<FilmDTO> expected = Collections.singletonList(VALID_DTO);
-        List<FilmDTO> nextMovies = service.getPage(VALID_PAGE);
+        List<FilmDto> expected = Collections.singletonList(VALID_DTO);
+        List<FilmDto> nextMovies = service.getPage(VALID_PAGE);
         Assert.assertEquals(nextMovies, expected);
     }
 
     @Test
     public void testGetFilmsPageShouldReturnEmptyListForInvalidPage() throws ServiceException {
-        List<FilmDTO> nextMovies = service.getPage(INVALID_PAGE);
+        List<FilmDto> nextMovies = service.getPage(INVALID_PAGE);
         Assert.assertEquals(nextMovies, Collections.emptyList());
     }
 }

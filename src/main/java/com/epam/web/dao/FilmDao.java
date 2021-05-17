@@ -73,5 +73,5 @@ public interface FilmDao extends Dao<Film> {
      * @throws DaoException if request to storage is corrupted
      */
 
-    List<Film> getByGenreName(String genreId) throws DaoException;
+    List<Film> getByGenreId(long genreId) throws DaoException;
 }

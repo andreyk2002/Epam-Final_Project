@@ -14,9 +14,9 @@
         </form>
         <form class="genre-search">
             <input type="hidden" name="commandName" value="searchByGenre"/>
-            <select class="genres-options" name="genreName">
-                <c:forEach items="${genres}" var="genreId">
-                    <option value="${genre.name}">${genre.id}</option>
+            <select class="genres-options" name="genreId">
+                <c:forEach items="${genres}" var="genre">
+                    <option value="${genre.id}">${genre.name}</option>
                 </c:forEach>
             </select>
             <button class="search" type="submit">

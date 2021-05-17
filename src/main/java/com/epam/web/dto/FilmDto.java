@@ -7,7 +7,7 @@ import com.epam.web.entity.Review;
 import java.util.List;
 import java.util.Objects;
 
-public class FilmDTO {
+public class FilmDto {
 
     private final Long id;
     private final String name;
@@ -17,7 +17,7 @@ public class FilmDTO {
     private final Double rating;
     private final List<Review> filmsReviews;
 
-    public FilmDTO(Film film, List<Genre> genres, double movieRating, List<Review> filmReviews) {
+    public FilmDto(Film film, List<Genre> genres, double movieRating, List<Review> filmReviews) {
         this.id = film.getId();
         this.name = film.getName();
         this.rating = movieRating;
@@ -61,13 +61,12 @@ public class FilmDTO {
         if (this == o){
             return true;
         }
-        if (!(o instanceof FilmDTO)){
+        if (!(o instanceof FilmDto)){
             return false;
         }
 
-        FilmDTO filmDTO = (FilmDTO) o;
+        FilmDto filmDTO = (FilmDto) o;
 
-        if (isAlreadyRated != filmDTO.isAlreadyRated) return false;
         if (!Objects.equals(id, filmDTO.id)) return false;
         if (!Objects.equals(name, filmDTO.name)) return false;
         if (!Objects.equals(imagePath, filmDTO.imagePath)) return false;

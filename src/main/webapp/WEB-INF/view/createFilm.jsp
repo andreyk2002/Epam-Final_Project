@@ -26,7 +26,7 @@
         <c:forEach items="${genres}" var="genre">
             <label style="color: white">
                 ${genre.name}
-                <input type="checkbox" name="genre" value="${genre.id}">
+                <input class="film-checkbox" type="checkbox" name="genre" value="${genre.id}">
             </label>
             <br>
         </c:forEach>

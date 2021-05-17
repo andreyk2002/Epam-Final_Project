@@ -31,13 +31,14 @@
                   value="${movie.description}">${movie.description}</textarea>
         <br/>
         <label class="edit-label"><fmt:message key="local.changeGenre"/>:</label>
+        <br/>
         <c:forEach items="${genres}" var="genre">
             <label style="color: white">
                     ${genre.name}
-                <c:if test="${sessionScope.film.genres.contains(genre)}">
+                <c:if test="${movie.genres.contains(genre)}">
                     <input checked type="checkbox" name="genre" value="${genre.id}">
                 </c:if>
-                <c:if test="${!sessionScope.film.genres.contains(genre)}">
+                <c:if test="${!movie.genres.contains(genre)}">
                     <input type="checkbox" name="genre" value="${genre.id}">
                 </c:if>
             </label>

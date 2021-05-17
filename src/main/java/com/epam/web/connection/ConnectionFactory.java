@@ -20,7 +20,7 @@ public class ConnectionFactory {
         } catch (SQLException e) {
             throw new DaoException(e.getMessage(), e);
         }
-        ResourceBundle resource = ResourceBundle.getBundle("database");
+        ResourceBundle resource = ResourceBundle.getBundle(BUNDLE_NAME);
         url = resource.getString("url");
         properties = getProperties(resource);
     }
