@@ -67,12 +67,24 @@ public class FilmDto {
 
         FilmDto filmDTO = (FilmDto) o;
 
-        if (!Objects.equals(id, filmDTO.id)) return false;
-        if (!Objects.equals(name, filmDTO.name)) return false;
-        if (!Objects.equals(imagePath, filmDTO.imagePath)) return false;
-        if (!Objects.equals(description, filmDTO.description)) return false;
-        if (!Objects.equals(genres, filmDTO.genres)) return false;
-        if (!Objects.equals(rating, filmDTO.rating)) return false;
+        if (!Objects.equals(id, filmDTO.id)) {
+            return false;
+        }
+        if (!Objects.equals(name, filmDTO.name)) {
+            return false;
+        }
+        if (!Objects.equals(imagePath, filmDTO.imagePath)) {
+            return false;
+        }
+        if (!Objects.equals(description, filmDTO.description)){
+            return false;
+        }
+        if (!Objects.equals(genres, filmDTO.genres)) {
+            return false;
+        }
+        if (!Objects.equals(rating, filmDTO.rating)) {
+            return false;
+        }
         return Objects.equals(filmsReviews, filmDTO.filmsReviews);
     }
 

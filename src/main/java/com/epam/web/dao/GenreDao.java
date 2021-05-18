@@ -14,5 +14,11 @@ import java.util.List;
 
 public interface GenreDao extends Dao<Genre> {
 
+    /**
+     * returns all genres for specified film
+     * @param filmId id of the specified film
+     * @return list of all genres, related to specified film
+     * @throws DaoException if request to the storage is invalid
+     */
     List<Genre>getByFilm(long filmId) throws DaoException;
 }

@@ -35,7 +35,7 @@
                 <div class="card-other">
                     <h2 class="film-info">${film.name}</h2>
                     <c:forEach items="${film.genres}" var="filmGenre">
-                        <a class="film-link"
+                        <a class="genre-link"
                            href="${pageContext.request.contextPath}/controller?commandName=searchByGenre&genreId=${filmGenre.id}">
                                 ${filmGenre.name}
                         </a>

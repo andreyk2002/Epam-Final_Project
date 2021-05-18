@@ -37,7 +37,7 @@ public class FilmService {
     public List<FilmDto> getByName(String filmName) throws ServiceException {
         try (DaoHelper helper = factory.create()) {
             FilmDao filmDao = helper.createFilmDao();
-            List<Film> moviesByName = filmDao.getMoviesByName(filmName);
+            List<Film> moviesByName = filmDao.getFilmsByName(filmName);
             return getFilmsDto(moviesByName);
         } catch (DaoException e) {
             throw new ServiceException(e.getMessage(), e);

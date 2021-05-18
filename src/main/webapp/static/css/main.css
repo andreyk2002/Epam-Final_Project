@@ -465,13 +465,25 @@ h2.film-link {
 .film-link {
     text-decoration: none;
     font-size: 26px;
+    color: white;
+    margin-right: 20px;
+}
+
+.genre-link {
+    text-decoration: none;
+    font-size: 26px;
     font-family: cursive;
     color: white;
     margin-right: 20px;
 }
 
 .film-link:hover{
-    color: #4D7A97;
+    color: sandybrown;
+    animation: 0.3s ease-in;
+}
+
+.genre-link:hover{
+    color: sandybrown;
     animation: 0.3s ease-in;
 }
 

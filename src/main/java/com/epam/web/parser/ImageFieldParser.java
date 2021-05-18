@@ -13,6 +13,7 @@ class ImageFieldParser implements FieldParser {
     private static final String SAVE_PATH = "static/img/movies/";
     private static final String BACKUP_PATH;
 
+
     static {
         ResourceBundle resource = ResourceBundle.getBundle("config");
         BACKUP_PATH = resource.getString("backup-path");

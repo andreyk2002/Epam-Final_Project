@@ -60,11 +60,11 @@ public interface FilmDao extends Dao<Film> {
 
     /**
      * Searches films which name contains specified string
-     * @param searchString string to be contained in film name
+     * @param searchString - string which name of the film should contain
      * @return List of films which name contained specified string
      * @throws DaoException if request to storage is corrupted
      */
-    List<Film> getMoviesByName(String searchString) throws DaoException;
+    List<Film> getFilmsByName(String searchString) throws DaoException;
 
     /**
      * Searches films for specified genre
