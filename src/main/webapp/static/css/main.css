@@ -412,8 +412,7 @@ img.type-image {
 
 .add-film-btn {
     min-width: 150px;
-    background-color: #1f1fa7;
-    color: white;
+    background-color: yellowgreen;
     padding: 10px;
     font-size: 18px;
     margin-bottom: 15px;
@@ -426,7 +425,6 @@ img.type-image {
 }
 
 .film-edit {
-    background-color: wheat;
     width: 40px;
     height: 40px;
 }
@@ -436,12 +434,12 @@ img.type-image {
     margin-right: 7px;
 }
 
-.genre-search{
+.genre-search {
     margin-left: 30px;
     display: inline-block;
 }
 
-.name-search{
+.name-search {
     display: inline-block;
 }
 
@@ -477,12 +475,12 @@ h2.film-link {
     margin-right: 20px;
 }
 
-.film-link:hover{
+.film-link:hover {
     color: sandybrown;
     animation: 0.3s ease-in;
 }
 
-.genre-link:hover{
+.genre-link:hover {
     color: sandybrown;
     animation: 0.3s ease-in;
 }
@@ -496,7 +494,6 @@ a.film-search-link {
 a.film-search-link:hover {
     color: sandybrown;
 }
-
 
 
 .film-info {
@@ -554,7 +551,16 @@ a.film-search-link:hover {
     padding: 20px;
     display: block;
     max-width: 87%;
-    margin: 10px auto;
+    /*margin: 10px auto;*/
+}
+
+.film-reviews {
+    background-color: black
+}
+.film-reviews-header {
+    color: white;
+    font-size: 30px;
+    padding: 30px;
 }
 
 .film-description {
@@ -683,7 +689,7 @@ p.review-content {
     color: white;
 }
 
-thead{
+thead {
     font-size: 22px;
 }
 
@@ -749,6 +755,10 @@ table, th, td {
 .film-description-admin {
     padding-bottom: 10px;
     width: 90%;
+}
+
+.about-film {
+    background-color: black;
 }
 
 .film-genres {
@@ -1083,6 +1093,7 @@ footer {
         font-size: 35px;
         line-height: 42px;
     }
+
     .users-table {
         background-color: white;
         width: 98%;

@@ -13,7 +13,7 @@
 </head>
 <body>
 <jsp:include page="fragments/header.jsp"/>
-<section class="intro" style="background: url(static/img/movies/Interstellar.jpg)">
+<section class="intro" style="background: url(static/img/movies/imagebackg.jpg)">
     <div class="wrapper">
         <h1 class="into-title">${film.name}</h1>
         <c:if test="${param.errorMessage!=null}">
@@ -54,18 +54,23 @@
         </div>
     </div>
 </section>
-<section class="film-reviews">
-    <div class="film-wrapper-wide">
-        <c:forEach items="${film.filmsReviews}" var="review">
-            <div class="user-review">
-                <b class="username">${review.username}</b>
-                <p class="review-content">
-                        ${review.review}
-                </p>
-            </div>
-        </c:forEach>
-    </div>
-</section>
+<c:if test="${not empty film.filmsReviews}">
+    <section class="film-reviews">
+        <div class="film-wrapper-wide">
+            <h2 class="film-reviews-header">
+                <fmt:message key="local.filmReviews"/>
+            </h2>
+            <c:forEach items="${film.filmsReviews}" var="review">
+                <div class="user-review">
+                    <b class="username">${review.username}</b>
+                    <p class="review-content">
+                            ${review.review}
+                    </p>
+                </div>
+            </c:forEach>
+        </div>
+    </section>
+</c:if>
 <jsp:include page="fragments/footer.jsp"/>
 </body>
 </html>
