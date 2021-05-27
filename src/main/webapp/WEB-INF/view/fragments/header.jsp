@@ -19,8 +19,13 @@
 
                             <form class="change-lang" action="${pageContext.request.contextPath}/controller"
                                   method="post">
-                                <input type="hidden" name="commandName" value="${param.get("commandName")}"/>
                                 <input class="change-lang-btn" type="submit" value="ru"/>
+                                <c:if test="${empty param.get('commandName')}">
+                                    <input type="hidden" name="commandName" value="loginPage"/>
+                                </c:if>
+                                <c:if test="${not empty param.get('commandName')}">
+                                    <input type="hidden" name="commandName" value="${param.get("commandName")}"/>
+                                </c:if>
                                 <input type="hidden" name="local" value="ru_RU"/>
                                 <c:forEach var="input" items="${param.entrySet()}">
                                     <input type="hidden" name="${input.getKey()}" value="${input.getValue()}"/>
@@ -31,7 +36,12 @@
                                   method="post">
                                 <input class="change-lang-btn" type="submit" value="by"/>
                                 <input type="hidden" name="local" value="be_BY"/>
-                                <input type="hidden" name="commandName" value="${param.get("commandName")}"/>
+                                <c:if test="${empty param.get('commandName')}">
+                                    <input type="hidden" name="commandName" value="loginPage"/>
+                                </c:if>
+                                <c:if test="${not empty param.get('commandName')}">
+                                    <input type="hidden" name="commandName" value="${param.get("commandName")}"/>
+                                </c:if>
                                 <c:forEach var="input" items="${param.entrySet()}">
                                     <input type="hidden" name="${input.getKey()}" value="${input.getValue()}"/>
                                 </c:forEach>
@@ -41,7 +51,12 @@
                                   method="post">
                                 <input class="change-lang-btn" type="submit" value="en"/>
                                 <input type="hidden" name="local" value="en_US"/>
-                                <input type="hidden" name="commandName" value="${param.get("commandName")}"/>
+                                <c:if test="${empty param.get('commandName')}">
+                                    <input type="hidden" name="commandName" value="loginPage"/>
+                                </c:if>
+                                <c:if test="${not empty param.get('commandName')}">
+                                    <input type="hidden" name="commandName" value="${param.get("commandName")}"/>
+                                </c:if>
                                 <c:forEach var="input" items="${param.entrySet()}">
                                     <input type="hidden" name="${input.getKey()}" value="${input.getValue()}"/>
                                 </c:forEach>

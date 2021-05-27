@@ -36,10 +36,10 @@
             <label style="color: white">
                     ${genre.name}
                 <c:if test="${movie.genres.contains(genre)}">
-                    <input checked type="checkbox" name="genre" value="${genre.id}">
+                    <input class="film-checkbox" checked type="checkbox" name="genre" value="${genre.id}">
                 </c:if>
                 <c:if test="${!movie.genres.contains(genre)}">
-                    <input type="checkbox" name="genre" value="${genre.id}">
+                    <input class="film-checkbox" type="checkbox" name="genre" value="${genre.id}">
                 </c:if>
             </label>
             <br>
@@ -53,4 +53,6 @@
 </div>
 <jsp:include page="fragments/footer.jsp"/>
 </body>
+<script src="static/js/checkboxes.js">
+</script>
 </html>

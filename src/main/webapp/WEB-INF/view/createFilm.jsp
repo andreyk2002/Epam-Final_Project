@@ -25,8 +25,8 @@
 
         <c:forEach items="${genres}" var="genre">
             <label style="color: white">
-                ${genre.name}
-                <input class="film-checkbox" type="checkbox" name="genre" value="${genre.id}">
+                    ${genre.name}
+                <input required class="film-checkbox" type="checkbox" name="genre" value="${genre.id}">
             </label>
             <br>
         </c:forEach>
@@ -41,3 +41,5 @@
 </div>
 <jsp:include page="fragments/footer.jsp"/>
 </body>
+<script src="static/js/checkboxes.js">
+</script>
