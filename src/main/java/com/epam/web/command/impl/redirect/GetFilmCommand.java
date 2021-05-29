@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class GetFilmCommand implements Command {
-    private static final String SHOW_MOVIE = Commands.SHOW_FILM_PAGE_COMMAND.getName();
+    private static final String SHOW_MOVIE = Commands.SHOW_FILM_PAGE_COMMAND;
 
     public GetFilmCommand() {
 

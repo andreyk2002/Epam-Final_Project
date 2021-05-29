@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class SearchFilmCommand implements Command {
-    private static final String FILM_PAGE = Commands.SEARCH_PAGE_COMMAND.getName() + "&searchString=";
+    private static final String FILM_PAGE = Commands.SEARCH_PAGE_COMMAND + "&searchString=";
     private static final String SEARCH_STRING = "searchString";
 
     public SearchFilmCommand() {

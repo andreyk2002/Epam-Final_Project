@@ -17,7 +17,7 @@ import java.util.List;
 
 public class SaveFilmCommand implements Command {
 
-    private static final String FILMS_PAGE = Commands.FILMS_PAGE.getName() + "&pageNumber=";
+    private static final String FILMS_PAGE = Commands.FILMS_PAGE + "&pageNumber=";
     private final FilmService filmService;
     private final FormParser parser;
 

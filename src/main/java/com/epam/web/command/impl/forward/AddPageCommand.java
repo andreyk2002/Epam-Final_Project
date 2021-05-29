@@ -2,7 +2,7 @@ package com.epam.web.command.impl.forward;
 
 import com.epam.web.command.Command;
 import com.epam.web.command.CommandResult;
-import com.epam.web.command.impl.Commands;
+import com.epam.web.command.impl.Pages;
 import com.epam.web.entity.Genre;
 import com.epam.web.service.GenreService;
 import com.epam.web.service.ServiceException;
@@ -13,7 +13,6 @@ import java.util.List;
 
 public class AddPageCommand implements Command {
 
-    private static final String CREATE_FILM_PAGE = Commands.CREATE_FILM_PATH.getName();
     private final GenreService genreService;
 
     public AddPageCommand(GenreService service) {
@@ -24,6 +23,6 @@ public class AddPageCommand implements Command {
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
         List<Genre> genres = genreService.getAllGenres();
         request.setAttribute("genres", genres);
-        return CommandResult.forward(CREATE_FILM_PAGE);
+        return CommandResult.forward(Pages.CREATE_FILM);
     }
 }

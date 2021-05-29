@@ -15,8 +15,8 @@ import javax.servlet.http.HttpSession;
 
 public class RateFilmCommand implements Command {
 
-    private static final String SHOW_MOVIE = Commands.GET_MOVIE.getName() + "&filmId=";
-    private static final String BACK_TO_MOVIE = Commands.SHOW_FILM_PAGE_COMMAND.getName() + "&filmId=";
+    private static final String SHOW_MOVIE = Commands.GET_MOVIE + "&filmId=";
+    private static final String BACK_TO_MOVIE = Commands.SHOW_FILM_PAGE_COMMAND + "&filmId=";
     private static final String ALREADY_RATED_ERROR = "&errorMessage=local.alreadyRatedError";
     private static final String WRONG_RATING_ERROR = "&errorMessage=local.wrongRating";
     private final RatingService service;

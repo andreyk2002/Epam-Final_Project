@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class EditFilmPageCommand implements Command {
-    private static final String EDIT_PAGE_COMMAND = Commands.EDIT_FILM_PAGE_COMMAND.getName() + "&filmId=";
+    private static final String EDIT_PAGE_COMMAND = Commands.EDIT_FILM_PAGE_COMMAND+ "&filmId=";
 
     public EditFilmPageCommand() {
 

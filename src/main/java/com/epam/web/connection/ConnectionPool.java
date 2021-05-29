@@ -3,6 +3,7 @@ package com.epam.web.connection;
 import com.epam.web.dao.DaoException;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayDeque;
 import java.util.Queue;
 import java.util.concurrent.Semaphore;
@@ -65,26 +66,33 @@ public class ConnectionPool {
                 connectionsInUse.remove(connection);
                 connectionSemaphore.release();
             }
-
         } finally {
             LOCK.unlock();
         }
     }
 
     public ProxyConnection getConnection() {
-
         try {
             connectionSemaphore.acquire();
             LOCK.lock();
-
             ProxyConnection connection = availableConnections.poll();
             connectionsInUse.add(connection);
-
             return connection;
         } catch (InterruptedException e) {
             throw new RuntimeException(e.getMessage(), e);
         } finally {
             LOCK.unlock();
+        }
+    }
+
+    public void closeAll()  {
+        for(ProxyConnection proxyConnection : connectionsInUse){
+            Connection connection = proxyConnection.getConnection();
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                throw new ConnectionPoolException(e.getMessage(), e);
+            }
         }
     }
 }

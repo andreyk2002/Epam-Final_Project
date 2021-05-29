@@ -3,9 +3,9 @@ package com.epam.web.dto;
 import com.epam.web.entity.Film;
 import com.epam.web.entity.Genre;
 import com.epam.web.entity.Review;
+import com.google.common.base.Objects;
 
 import java.util.List;
-import java.util.Objects;
 
 public class FilmDto {
 
@@ -14,17 +14,67 @@ public class FilmDto {
     private final String imagePath;
     private final String description;
     private final List<Genre> genres;
-    private final Double rating;
+    private final double rating;
     private final List<Review> filmsReviews;
+    private final boolean alreadyRated;
 
-    public FilmDto(Film film, List<Genre> genres, double movieRating, List<Review> filmReviews) {
-        this.id = film.getId();
-        this.name = film.getName();
-        this.rating = movieRating;
-        this.genres = genres;
-        this.description = film.getDescription();
-        this.imagePath = film.getImagePath();
-        this.filmsReviews = filmReviews;
+    public FilmDto(Builder builder) {
+        this.id = builder.id;
+        this.name = builder.name;
+        this.rating = builder.rating;
+        this.genres = builder.genres;
+        this.description = builder.description;
+        this.imagePath = builder.imagePath;
+        this.filmsReviews = builder.filmsReviews;
+        this.alreadyRated = builder.alreadyRated;
+    }
+
+    public static class Builder {
+        private long id;
+        private String name;
+        private String imagePath;
+        private String description;
+        private List<Genre> genres;
+        private double rating;
+        private List<Review> filmsReviews;
+        private boolean alreadyRated;
+
+        public Builder() {
+
+        }
+
+        public Builder withFilm(Film film) {
+            this.id = film.getId();
+            this.name = film.getName();
+            this.description = film.getDescription();
+            this.imagePath = film.getImagePath();
+            return this;
+        }
+
+
+        public Builder withGenres(List<Genre> genres) {
+            this.genres = genres;
+            return this;
+        }
+
+        public Builder withRating(double rating) {
+            this.rating = rating;
+            return this;
+        }
+
+        public Builder withReviews(List<Review> reviews) {
+            this.filmsReviews = reviews;
+            return this;
+        }
+
+        public Builder withUserRated(boolean isRated) {
+            this.alreadyRated = isRated;
+            return this;
+        }
+
+        public FilmDto build() {
+            return new FilmDto(this);
+        }
     }
 
 
@@ -48,7 +98,11 @@ public class FilmDto {
         return genres;
     }
 
-    public Double getRating() {
+    public boolean isAlreadyRated() {
+        return alreadyRated;
+    }
+
+    public double getRating() {
         return rating;
     }
 
@@ -58,46 +112,26 @@ public class FilmDto {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o){
+        if (this == o) {
             return true;
         }
-        if (!(o instanceof FilmDto)){
+        if (!(o instanceof FilmDto)) {
             return false;
         }
-
-        FilmDto filmDTO = (FilmDto) o;
-
-        if (!Objects.equals(id, filmDTO.id)) {
-            return false;
-        }
-        if (!Objects.equals(name, filmDTO.name)) {
-            return false;
-        }
-        if (!Objects.equals(imagePath, filmDTO.imagePath)) {
-            return false;
-        }
-        if (!Objects.equals(description, filmDTO.description)){
-            return false;
-        }
-        if (!Objects.equals(genres, filmDTO.genres)) {
-            return false;
-        }
-        if (!Objects.equals(rating, filmDTO.rating)) {
-            return false;
-        }
-        return Objects.equals(filmsReviews, filmDTO.filmsReviews);
+        FilmDto filmDto = (FilmDto) o;
+        return Double.compare(filmDto.rating, rating) == 0
+                && alreadyRated == filmDto.alreadyRated
+                && Objects.equal(id, filmDto.id)
+                && Objects.equal(name, filmDto.name)
+                && Objects.equal(imagePath, filmDto.imagePath)
+                && Objects.equal(description, filmDto.description)
+                && Objects.equal(genres, filmDto.genres)
+                && Objects.equal(filmsReviews, filmDto.filmsReviews);
     }
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (imagePath != null ? imagePath.hashCode() : 0);
-        result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + (genres != null ? genres.hashCode() : 0);
-        result = 31 * result + (rating != null ? rating.hashCode() : 0);
-        result = 31 * result + (filmsReviews != null ? filmsReviews.hashCode() : 0);
-        return result;
+        return Objects.hashCode(id, name, imagePath, description, genres, rating, filmsReviews, alreadyRated);
     }
 }
 

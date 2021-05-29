@@ -2,9 +2,10 @@ package com.epam.web.command.impl.forward;
 
 import com.epam.web.command.Command;
 import com.epam.web.command.CommandResult;
-import com.epam.web.command.impl.Commands;
+import com.epam.web.command.impl.Pages;
 import com.epam.web.dto.FilmDto;
 import com.epam.web.entity.Genre;
+import com.epam.web.entity.User;
 import com.epam.web.service.FilmService;
 import com.epam.web.service.GenreService;
 import com.epam.web.service.ServiceException;
@@ -16,7 +17,6 @@ import java.util.List;
 
 public class MainPageCommand implements Command {
 
-    private final String MAIN_PAGE = Commands.MAIN_PAGE_PATH.getName();
     private final FilmService filmService;
     private final GenreService genreService;
 
@@ -29,13 +29,14 @@ public class MainPageCommand implements Command {
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
         HttpSession session = request.getSession();
-        int pageNumber = (Integer)session.getAttribute("pageNumber");
-        List<FilmDto> movies = filmService.getPage(pageNumber);
+        User user = (User) session.getAttribute("user");
+        int pageNumber = (Integer) session.getAttribute("pageNumber");
+        List<FilmDto> movies = filmService.getPage(pageNumber, user.getId());
         int totalPages = filmService.getPagesCount();
         List<Genre> allGenres = genreService.getAllGenres();
         request.setAttribute("genres", allGenres);
         request.setAttribute("movies", movies);
         request.setAttribute("pagesCount", totalPages);
-        return CommandResult.forward(MAIN_PAGE);
+        return CommandResult.forward(Pages.MAIN_PAGE);
     }
 }

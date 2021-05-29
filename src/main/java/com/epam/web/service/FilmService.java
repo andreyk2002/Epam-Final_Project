@@ -24,40 +24,40 @@ public class FilmService {
         this.protect = protect;
     }
 
-    public List<FilmDto> getPage(int pageNumb) throws ServiceException {
+    public List<FilmDto> getPage(int pageNumb, long userId) throws ServiceException {
         try (DaoHelper helper = factory.create()) {
             FilmDao filmDao = helper.createFilmDao();
             List<Film> moviesForPage = filmDao.getMoviesForPage(pageNumb);
-            return getFilmsDto(moviesForPage);
+            return getFilmsDto(moviesForPage, userId);
         } catch (DaoException e) {
             throw new ServiceException(e.getMessage(), e);
         }
     }
 
-    public List<FilmDto> getByName(String filmName) throws ServiceException {
+    public List<FilmDto> getByName(String filmName, long userId) throws ServiceException {
         try (DaoHelper helper = factory.create()) {
             FilmDao filmDao = helper.createFilmDao();
             List<Film> moviesByName = filmDao.getFilmsByName(filmName);
-            return getFilmsDto(moviesByName);
+            return getFilmsDto(moviesByName, userId);
         } catch (DaoException e) {
             throw new ServiceException(e.getMessage(), e);
         }
     }
 
-    public List<FilmDto> getByGenreId(long genreId) throws ServiceException {
+    public List<FilmDto> getByGenreId(long genreId, long userId) throws ServiceException {
         try (DaoHelper helper = factory.create()) {
             FilmDao filmDao = helper.createFilmDao();
             List<Film> filmsByGenre = filmDao.getByGenreId(genreId);
-            return getFilmsDto(filmsByGenre);
+            return getFilmsDto(filmsByGenre, userId);
         } catch (DaoException e) {
             throw new ServiceException(e.getMessage(), e);
         }
     }
 
-    private List<FilmDto> getFilmsDto(List<Film> moviesForPage) throws ServiceException {
+    private List<FilmDto> getFilmsDto(List<Film> moviesForPage, long userId) throws ServiceException {
         List<FilmDto> filmsDto = new ArrayList<>();
         for (Film film : moviesForPage) {
-            FilmDto filmDTO = getMovieDTO(film);
+            FilmDto filmDTO = getMovieDTO(film, userId);
             filmsDto.add(filmDTO);
         }
         return filmsDto;
@@ -72,13 +72,13 @@ public class FilmService {
         }
     }
 
-    public Optional<FilmDto> getFilmDtoById(long id) throws ServiceException {
+    public Optional<FilmDto> getFilmDtoById(long id, long userId) throws ServiceException {
         try (DaoHelper helper = factory.create()) {
             FilmDao filmDao = helper.createFilmDao();
             Optional<Film> optionalMovie = filmDao.getById(id);
             if (optionalMovie.isPresent()) {
                 Film film = optionalMovie.get();
-                FilmDto filmDTO = getMovieDTO(film);
+                FilmDto filmDTO = getMovieDTO(film, userId);
                 return Optional.of(filmDTO);
             }
         } catch (DaoException e) {
@@ -88,7 +88,7 @@ public class FilmService {
     }
 
 
-    private FilmDto getMovieDTO(Film film) throws ServiceException {
+    private FilmDto getMovieDTO(Film film, long userId) throws ServiceException {
         try (DaoHelper helper = factory.create()) {
             GenreDao genreDao = helper.createGenreDao();
             RatingDao ratingDao = helper.createRatingDao();
@@ -98,7 +98,14 @@ public class FilmService {
             double movieRating = ratingDao.getMovieRating(movieId);
             double ratingRounded = DoubleRounder.round(movieRating, ROUND_PRECISION);
             List<Review> filmReviews = reviewDao.getFilmReviews(movieId);
-            return new FilmDto(film, filmsGenres, ratingRounded, filmReviews);
+            boolean isRatedByUser = ratingDao.hasRating(movieId, userId);
+            return new FilmDto.Builder()
+                    .withFilm(film)
+                    .withGenres(filmsGenres)
+                    .withRating(ratingRounded)
+                    .withReviews(filmReviews)
+                    .withUserRated(isRatedByUser)
+                    .build();
         } catch (DaoException e) {
             throw new ServiceException(e.getMessage(), e);
         }

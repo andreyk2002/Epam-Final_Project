@@ -18,7 +18,7 @@ import static org.mockito.Matchers.anyLong;
 import static org.mockito.Mockito.when;
 
 public class FilmServiceTest extends ServiceTest {
-
+    private static final long USER_ID = 1;
     private static final long VALID_ID = 0;
     private static final Genre VALID_GENRE = new Genre(VALID_ID, "");
     private static final Double VALID_RATING = 5.;
@@ -30,8 +30,15 @@ public class FilmServiceTest extends ServiceTest {
             .withId(VALID_ID)
             .build();
     private static final FilmDto VALID_DTO =
-            new FilmDto(VALID_FILM, Collections.singletonList(VALID_GENRE), VALID_RATING, Collections.emptyList());
-    public static final int USER_ID = 1;
+            new FilmDto.Builder()
+                    .withFilm(VALID_FILM)
+                    .withGenres(Collections.singletonList(VALID_GENRE))
+                    .withRating(VALID_RATING)
+                    .withReviews(Collections.emptyList())
+                    .withUserRated(false)
+                    .build();
+
+
 
     private FilmService service;
 
@@ -66,26 +73,26 @@ public class FilmServiceTest extends ServiceTest {
 
     @Test
     public void testGetMovieByIdShouldReturnMovieWhenMovieExist() throws ServiceException {
-        Optional<FilmDto> movieById = service.getFilmDtoById(VALID_ID);
+        Optional<FilmDto> movieById = service.getFilmDtoById(VALID_ID, USER_ID);
         Assert.assertEquals(movieById.get(), VALID_DTO);
     }
 
     @Test
     public void testGetMovieByIdShouldReturnEmptyWhenMovieNotExist() throws ServiceException {
-        Optional<FilmDto> movieById = service.getFilmDtoById(INVALID_ID);
+        Optional<FilmDto> movieById = service.getFilmDtoById(INVALID_ID, USER_ID);
         Assert.assertEquals(movieById, Optional.empty());
     }
 
     @Test
     public void testGetFilmsPageShouldReturnFilmsForValidPage() throws ServiceException {
         List<FilmDto> expected = Collections.singletonList(VALID_DTO);
-        List<FilmDto> nextMovies = service.getPage(VALID_PAGE);
+        List<FilmDto> nextMovies = service.getPage(VALID_PAGE, USER_ID);
         Assert.assertEquals(nextMovies, expected);
     }
 
     @Test
     public void testGetFilmsPageShouldReturnEmptyListForInvalidPage() throws ServiceException {
-        List<FilmDto> nextMovies = service.getPage(INVALID_PAGE);
+        List<FilmDto> nextMovies = service.getPage(INVALID_PAGE, USER_ID);
         Assert.assertEquals(nextMovies, Collections.emptyList());
     }
 }

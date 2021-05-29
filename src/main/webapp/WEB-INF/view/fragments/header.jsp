@@ -16,7 +16,6 @@
                 <ul class="header-list">
                     <li class="header-item">
                         <div class="languages">
-
                             <form class="change-lang" action="${pageContext.request.contextPath}/controller"
                                   method="post">
                                 <input class="change-lang-btn" type="submit" value="ru"/>
@@ -63,32 +62,34 @@
                             </form>
                         </div>
                     </li>
-
-                    <li class="header-item">
-                        <a href="${pageContext.request.contextPath}/controller?commandName=showFilmsPage&pageNumber=0"
-                           class="logo-link">
-                            <fmt:message key="local.main"/>
-                        </a>
-                    </li>
-                    <li class="header-item">
-                        <a href="${pageContext.request.contextPath}/controller?commandName=updateUser"
-                           class="logo-link">
-                            <fmt:message key="local.personal"/>
-                        </a>
-                    </li>
-                    <c:if test="${sessionScope.user.role == 'ADMIN'}">
+                    <c:if test="${not empty sessionScope.user}">
                         <li class="header-item">
-                            <a href="${pageContext.request.contextPath}/controller?commandName=manageUsers"
+                            <a href="${pageContext.request.contextPath}/controller?commandName=showFilmsPage&pageNumber=0"
                                class="logo-link">
-                                <fmt:message key="local.manageUsers"/>
+                                <fmt:message key="local.main"/>
+                            </a>
+                        </li>
+                        <li class="header-item">
+                            <a href="${pageContext.request.contextPath}/controller?commandName=updateUser"
+                               class="logo-link">
+                                <fmt:message key="local.personal"/>
+                            </a>
+                        </li>
+                        <c:if test="${sessionScope.user.role == 'ADMIN'}">
+                            <li class="header-item">
+                                <a href="${pageContext.request.contextPath}/controller?commandName=manageUsers"
+                                   class="logo-link">
+                                    <fmt:message key="local.manageUsers"/>
+                                </a>
+                            </li>
+                        </c:if>
+                        <li class="header-item">
+                            <a href="${pageContext.request.contextPath}/controller?commandName=logout"
+                               class="logo-link">
+                                <fmt:message key="local.logout"/>
                             </a>
                         </li>
                     </c:if>
-                    <li class="header-item">
-                        <a href="${pageContext.request.contextPath}/controller?commandName=logout" class="logo-link">
-                            <fmt:message key="local.logout"/>
-                        </a>
-                    </li>
                 </ul>
                 <div id="cross" class="header-nav-close">
                     <span class="header-nav-close-line">

@@ -1,97 +1,59 @@
 package com.epam.web.command.impl;
 
-import com.epam.web.service.ServiceException;
+public class Commands {
 
-public enum Commands {
+    public static final String DELETE_FILM = "deleteFilm";
 
-   MAIN_PAGE_PATH("/WEB-INF/view/main.jsp"),
+    public static final String LOGIN = "login";
 
-   USER_MANAGE_PAGE_PATH("/WEB-INF/view/userManage.jsp"),
+    public static final String LOGOUT = "logout";
 
-   PERSONAL_PAGE_PATH("/WEB-INF/view/personal.jsp"),
+    public static final String EDIT_FILM = "editFilm";
 
-   LOGIN_PAGE_PATH("/index.jsp"),
+    public static final String GET_MOVIE = "movie";
 
-   SEARCH_PAGE_PATH("/WEB-INF/view/searchPage.jsp"),
+    public static final String RATE_FILM = "rateFilm";
 
-   SHOW_FILM_PATH("/WEB-INF/view/showFilm.jsp"),
+    public static final String REVIEW_FILM = "reviewFilm";
 
-   CREATE_FILM_PATH("/WEB-INF/view/createFilm.jsp"),
+    public static final String MANAGE_USERS = "manageUsers";
 
-   EDIT_FILM_PATH("/WEB-INF/view/editFilm.jsp"),
+    public static final String CHANGE_USER_RATING = "changeUserRating";
 
-   DELETE_FILM("deleteFilm"),
+    public static final String CHANGE_USER_STATUS = "changeUserStatus";
 
-   CHANGE_LANGUAGE("changeLanguage"),
+    public static final String ADD_FILM = "addFilm";
 
-   LOGIN("login"),
+    public static final String SAVE_FILM = "saveFilm";
 
-   LOGOUT("logout"),
+    public static final String UPDATE_FILM = "updateFilm";
 
-   EDIT_FILM("editFilm"),
+    public static final String GET_USER = "updateUser";
 
-   GET_MOVIE("movie"),
+    public static final String SEARCH_FILM = "searchFilm";
 
-   RATE_FILM("rateFilm"),
+    public static final String LOGIN_PAGE = "loginPage";
 
-   REVIEW_FILM("reviewFilm"),
+    public static final String MAIN_PAGE_COMMAND = "mainPage";
 
-   MANAGE_USERS("manageUsers"),
+    public static final String USER_MANAGE_PAGE_COMMAND = "userManagePage";
 
-   CHANGE_USER_RATING("changeUserRating"),
+    public static final String EDIT_FILM_PAGE_COMMAND = "editFilmPage";
 
-   CHANGE_USER_STATUS("changeUserStatus"),
+    public static final String SHOW_FILM_PAGE_COMMAND = "showFilmPage";
 
-   ADD_FILM("addFilm"),
+    public static final String PERSONAL_PAGE_COMMAND = "showPersonalPage";
 
-   SAVE_FILM("saveFilm"),
+    public static final String ADD_FILM_PAGE = "showAddPage";
 
-   UPDATE_FILM("updateFilm"),
+    public static final String FILMS_PAGE = "showFilmsPage";
 
-   GET_USER("updateUser"),
+    public static final String SEARCH_PAGE_COMMAND = "searchPage";
 
-   SEARCH_FILM("searchFilm"),
+    public static final String SEARCH_BY_GENRES = "searchByGenre";
 
-   LOGIN_PAGE_COMMAND("loginPage"),
+    public static final String CHANGE_PAGE = "changePageNumber";
 
-   MAIN_PAGE_COMMAND("mainPage"),
+    public static final String GENRE_SEARCH_PAGE = "genreSearchPage";
 
-   USER_MANAGE_PAGE_COMMAND("userManagePage"),
-
-   EDIT_FILM_PAGE_COMMAND("editFilmPage"),
-
-   SHOW_FILM_PAGE_COMMAND("showFilmPage"),
-
-   PERSONAL_PAGE_COMMAND("showPersonalPage"),
-
-   ADD_FILM_PAGE("showAddPage"),
-
-   FILMS_PAGE("showFilmsPage"),
-
-   SEARCH_PAGE_COMMAND("searchPage"),
-
-   SEARCH_BY_GENRES("searchByGenre"),
-
-   CHANGE_PAGE("changePageNumber"),
-
-   GENRE_SEARCH_PAGE("genreSearchPage");
-
-    private final String name;
-
-    Commands(String name) {
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-   public static Commands parse(String type) throws ServiceException {
-      for (Commands paymentType : Commands.values()) {
-         if (paymentType.getName().equals(type)) {
-            return paymentType;
-         }
-      }
-     throw new ServiceException("No such command");
-   }
 }

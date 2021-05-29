@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 public class DeleteFilmCommand implements Command {
     private static final String FILM_ID = "filmId";
-    private static final String FILMS_PAGE = Commands.FILMS_PAGE.getName();
     private final FilmService filmService;
 
     public DeleteFilmCommand(FilmService deleteFilmService) {
@@ -23,6 +22,6 @@ public class DeleteFilmCommand implements Command {
         String idParam = request.getParameter(FILM_ID);
         long filmId = Long.parseLong(idParam);
         filmService.removeById(filmId);
-        return CommandResult.redirect(FILMS_PAGE);
+        return CommandResult.redirect(Commands.FILMS_PAGE);
     }
 }

@@ -23,9 +23,9 @@ public class LoginCommandTest extends CommandTest {
     private static final String USERNAME = "username";
     private static final String PASSWORD = "password";
     private static final CommandResult SUCCESS =
-            CommandResult.redirect(Commands.FILMS_PAGE.getName() + "&pageNumber=0");
+            CommandResult.redirect(Commands.FILMS_PAGE + "&pageNumber=0");
     private static final CommandResult FAIL = CommandResult
-            .redirect(Commands.LOGIN_PAGE_COMMAND.getName() + "&errorMessage=local.loginError");
+            .redirect(Commands.LOGIN_PAGE + "&errorMessage=local.loginError");
     private LoginCommand command;
 
 

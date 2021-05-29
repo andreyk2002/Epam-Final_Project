@@ -1,6 +1,7 @@
 package com.epam.web.command;
 
 import com.epam.web.command.impl.Commands;
+import com.epam.web.command.impl.Pages;
 import com.epam.web.command.impl.forward.*;
 import com.epam.web.command.impl.redirect.*;
 import com.epam.web.dao.factory.DaoHelperFactory;
@@ -13,8 +14,7 @@ import com.epam.web.validator.UserRatingValidator;
 public class CommandFactory {
 
 
-    private static final String PERSONAL_PAGE = "/WEB-INF/view/personal.jsp";
-    private static final String LOGIN_PAGE = "/index.jsp";
+
 
     private final DaoHelperFactory helperFactory = new DaoHelperFactory();
     private final UserRatingValidator userRatingValidator = new UserRatingValidator();
@@ -22,85 +22,84 @@ public class CommandFactory {
 
     public Command create(String commandName) throws ServiceException {
         XssProtector protect = new XssProtector();
-        Commands currentCommand = Commands.parse(commandName);
-        switch (currentCommand) {
-            case LOGIN_PAGE_COMMAND:
-                return new ShowPageCommand(LOGIN_PAGE);
-            case MAIN_PAGE_COMMAND:
+        switch (commandName) {
+            case Commands.LOGIN_PAGE:
+                return new ShowPageCommand(Pages.LOGIN_PAGE);
+            case Commands.MAIN_PAGE_COMMAND:
                 GenreService genreService = new GenreService(helperFactory);
                 FilmService filmsService = new FilmService(helperFactory, protect);
                 return new MainPageCommand(filmsService, genreService);
-            case USER_MANAGE_PAGE_COMMAND:
+            case Commands.USER_MANAGE_PAGE_COMMAND:
                 UserRatingValidator validator = new UserRatingValidator();
                 UserService showUsersService = new UserService(helperFactory, validator);
                 return new UserManagePageCommand(showUsersService);
-            case SHOW_FILM_PAGE_COMMAND:
+            case Commands.SHOW_FILM_PAGE_COMMAND:
                 FilmService getFilmService = new FilmService(helperFactory, protect);
                 return new FilmPageCommand(getFilmService);
-            case PERSONAL_PAGE_COMMAND:
-                return new ShowPageCommand(PERSONAL_PAGE);
-            case ADD_FILM_PAGE:
+            case Commands.PERSONAL_PAGE_COMMAND:
+                return new ShowPageCommand(Pages.PERSONAL_PAGE);
+            case Commands.ADD_FILM_PAGE:
                 GenreService addGenreService = new GenreService(helperFactory);
                 return new AddPageCommand(addGenreService);
-            case EDIT_FILM_PAGE_COMMAND:
+            case Commands.EDIT_FILM_PAGE_COMMAND:
                 FilmService editFilmService = new FilmService(helperFactory, protect);
                 GenreService loadGenreService = new GenreService(helperFactory);
                 return new EditPageCommand(editFilmService, loadGenreService);
-            case SEARCH_PAGE_COMMAND:
+            case Commands.SEARCH_PAGE_COMMAND:
                 FilmService searchFilmService = new FilmService(helperFactory, protect);
                 GenreService genresService = new GenreService(helperFactory);
                 return new FilmSearchPageCommand(searchFilmService, genresService);
-            case GENRE_SEARCH_PAGE:
+            case Commands.GENRE_SEARCH_PAGE:
                 FilmService genreSearchFilmService = new FilmService(helperFactory, protect);
                 GenreService allGenreService = new GenreService(helperFactory);
                 return new GenreSearchPageCommand(genreSearchFilmService, allGenreService);
-            case LOGOUT:
+            case Commands.LOGOUT:
                 return new LogoutCommand();
-            case SEARCH_FILM:
+            case Commands.SEARCH_FILM:
                 return new SearchFilmCommand();
-            case SEARCH_BY_GENRES:
+            case Commands.SEARCH_BY_GENRES:
                 return new SearchByGenreCommand();
-            case LOGIN:
+            case Commands.LOGIN:
                 UserService service = new UserService(helperFactory, userRatingValidator);
                 return new LoginCommand(service);
-            case GET_USER:
+            case Commands.GET_USER:
                 UserService getUserService = new UserService(helperFactory, userRatingValidator);
                 return new GetUserCommand(getUserService);
-            case FILMS_PAGE:
-                String page = Commands.MAIN_PAGE_COMMAND.getName();
+            case Commands.FILMS_PAGE:
+                String page = Commands.MAIN_PAGE_COMMAND;
                 return new RedirectToPageCommand(page);
-            case GET_MOVIE:
+            case Commands.GET_MOVIE:
                 return new GetFilmCommand();
-            case RATE_FILM:
+            case Commands.RATE_FILM:
                 RatingService ratingService = new RatingService(helperFactory, ratingValidator);
                 return new RateFilmCommand(ratingService);
-            case REVIEW_FILM:
+            case Commands.REVIEW_FILM:
                 ReviewService reviewService = new ReviewService(helperFactory, protect);
                 return new ReviewFilmCommand(reviewService);
-            case MANAGE_USERS:
-                String redirectPage = Commands.USER_MANAGE_PAGE_COMMAND.getName();
+            case Commands.MANAGE_USERS:
+                String redirectPage = Commands.USER_MANAGE_PAGE_COMMAND;
                 return new RedirectToPageCommand(redirectPage);
-            case CHANGE_USER_RATING:
+            case Commands.CHANGE_USER_RATING:
                 UserService changeRatingService = new UserService(helperFactory, userRatingValidator);
                 return new ChangeUserRatingCommand(changeRatingService);
-            case CHANGE_USER_STATUS:
+            case Commands.CHANGE_USER_STATUS:
                 UserService changeStatusService = new UserService(helperFactory, userRatingValidator);
                 return new ChangeUserStatusCommand(changeStatusService);
-            case ADD_FILM:
-                String pageName = Commands.ADD_FILM_PAGE.getName();
+            case Commands.ADD_FILM:
+                String pageName = Commands.ADD_FILM_PAGE;
                 return new RedirectToPageCommand(pageName);
-            case SAVE_FILM:
+            case Commands.SAVE_FILM:
                 FilmService saveFilmService = new FilmService(helperFactory, protect);
                 FormParser parser = new FormParser();
                 return new SaveFilmCommand(saveFilmService, parser);
-            case CHANGE_PAGE:
+            case Commands.CHANGE_PAGE:
                 return new ChangePageCommand();
-            case EDIT_FILM:
+            case Commands.EDIT_FILM:
                 return new EditFilmPageCommand();
-            case DELETE_FILM:
+            case Commands.DELETE_FILM:
                 FilmService deleteFilmService = new FilmService(helperFactory, protect);
                 return new DeleteFilmCommand(deleteFilmService);
-            case UPDATE_FILM:
+            case Commands.UPDATE_FILM:
                 FormParser formParser = new FormParser();
                 FilmService updateFilmService = new FilmService(helperFactory, protect);
                 return new UpdateFilmCommand(updateFilmService, formParser);

@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class SearchByGenreCommand implements Command {
-    private static final String SEARCH_PAGE = Commands.GENRE_SEARCH_PAGE.getName() + "&genreId=";
+    private static final String SEARCH_PAGE = Commands.GENRE_SEARCH_PAGE + "&genreId=";
 
     public SearchByGenreCommand() {
 

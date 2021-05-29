@@ -3,7 +3,7 @@ package com.epam.web;
 import com.epam.web.command.Command;
 import com.epam.web.command.CommandFactory;
 import com.epam.web.command.CommandResult;
-import com.epam.web.service.ServiceException;
+import com.epam.web.connection.ConnectionPool;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -50,7 +50,7 @@ public class Controller extends HttpServlet {
             CommandResult result = command.execute(request, response);
             page = result.getPage();
             isRedirect = result.isRedirect();
-        }  catch (Exception e) {
+        } catch (Exception e) {
             request.setAttribute("errorMessage", EXCEPTION_BUNDLE_KEY);
             LOGGER.error(e.getMessage(), e);
             page = ERROR_PAGE;
@@ -62,5 +62,11 @@ public class Controller extends HttpServlet {
             String contextPath = request.getContextPath();
             response.sendRedirect(contextPath + COMMAND + page);
         }
+    }
+
+    @Override
+    public void destroy() {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        pool.closeAll();
     }
 }

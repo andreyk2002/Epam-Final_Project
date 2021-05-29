@@ -35,13 +35,15 @@
                 <fmt:message key="local.currentRating"/> : ${film.rating}
             </h2>
             <c:if test="${sessionScope.user.role == 'USER'}">
-                <form class="film-rate-form" action="${pageContext.request.contextPath}/controller">
-                    <input type="hidden" name="commandName" value="rateFilm">
-                    <input type="hidden" name="filmID" value="${film.id}">
-                    <label><fmt:message key="local.yourMark"/> </label>
-                    <input class="mark" name="rating" type="number" min="0" max="5">
-                    <button class="rate-film-button" type="submit"><fmt:message key="local.rate"/></button>
-                </form>
+                <c:if test="${not requestScope.film.alreadyRated}">
+                    <form class="film-rate-form" action="${pageContext.request.contextPath}/controller">
+                        <input type="hidden" name="commandName" value="rateFilm">
+                        <input type="hidden" name="filmID" value="${film.id}">
+                        <label><fmt:message key="local.yourMark"/> </label>
+                        <input class="mark" name="rating" type="number" min="0" max="5">
+                        <button class="rate-film-button" type="submit"><fmt:message key="local.rate"/></button>
+                    </form>
+                </c:if>
                 <h2 class="review-header"><fmt:message key="local.review"/></h2>
                 <form class="film-review" action="${pageContext.request.contextPath}/controller">
                     <input type="hidden" name="commandName" value="reviewFilm">

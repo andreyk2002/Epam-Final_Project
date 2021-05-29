@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class ReviewFilmCommand implements Command {
-    private static final String SHOW_MOVIE = Commands.GET_MOVIE.getName() + "&filmId=";
+    private static final String SHOW_MOVIE = Commands.GET_MOVIE + "&filmId=";
     private final ReviewService reviewService;
 
     public ReviewFilmCommand(ReviewService reviewService) {
