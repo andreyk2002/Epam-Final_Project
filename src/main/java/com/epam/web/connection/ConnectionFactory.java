@@ -10,7 +10,7 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class ConnectionFactory {
-    public static final String BUNDLE_NAME = "test_database";
+    public static final String BUNDLE_NAME = "databas";
     private final String url;
     private final Properties properties;
 
