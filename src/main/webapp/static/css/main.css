@@ -699,11 +699,13 @@ td {
     padding: 10px 15px;
 }
 
+.dark-body{
+    background-color: black;
+}
+
 .dark-wrapper {
     z-index: 0;
-    position: absolute;
     min-height: 100vh;
-    background-color: black;
     padding-left: 5%;
     width: 100%;
     margin: 0 auto;

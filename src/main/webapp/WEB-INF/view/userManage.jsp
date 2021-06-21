@@ -11,7 +11,7 @@
     <link href="static/css/reset.css" rel="stylesheet"/>
     <link href="static/css/main.css" rel="stylesheet"/>
 </head>
-<body>
+<body class="dark-body">
 <jsp:include page="fragments/header.jsp"/>
 <div class="dark-wrapper">
     <table class="users-table">
