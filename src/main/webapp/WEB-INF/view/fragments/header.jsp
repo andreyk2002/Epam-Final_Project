@@ -63,18 +63,20 @@
                         </div>
                     </li>
                     <c:if test="${not empty sessionScope.user}">
-                        <li class="header-item">
-                            <a href="${pageContext.request.contextPath}/controller?commandName=showFilmsPage&pageNumber=0"
-                               class="logo-link">
-                                <fmt:message key="local.main"/>
-                            </a>
-                        </li>
-                        <li class="header-item">
-                            <a href="${pageContext.request.contextPath}/controller?commandName=updateUser"
-                               class="logo-link">
-                                <fmt:message key="local.personal"/>
-                            </a>
-                        </li>
+                        <c:if test="${not sessionScope.user.blocked}">
+                            <li class="header-item">
+                                <a href="${pageContext.request.contextPath}/controller?commandName=showFilmsPage&pageNumber=0"
+                                   class="logo-link">
+                                    <fmt:message key="local.main"/>
+                                </a>
+                            </li>
+                            <li class="header-item">
+                                <a href="${pageContext.request.contextPath}/controller?commandName=updateUser"
+                                   class="logo-link">
+                                    <fmt:message key="local.personal"/>
+                                </a>
+                            </li>
+                        </c:if>
                         <c:if test="${sessionScope.user.role == 'ADMIN'}">
                             <li class="header-item">
                                 <a href="${pageContext.request.contextPath}/controller?commandName=manageUsers"

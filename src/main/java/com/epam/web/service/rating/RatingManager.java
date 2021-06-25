@@ -9,6 +9,7 @@ import com.epam.web.entity.Rating;
 import com.epam.web.service.ServiceException;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicReference;
@@ -17,7 +18,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import static java.util.stream.Collectors.groupingByConcurrent;
 
-public class RatingManager {
+public class RatingManager implements FilmObserver {
 
     private static final Lock LOCK = new ReentrantLock();
     private static final Integer REVIEWS_BEFORE_CHECK = 5;
@@ -101,5 +102,16 @@ public class RatingManager {
         }
         filmRatings.add(rating);
         return true;
+    }
+
+    @Override
+    public void notifyFilmAdded(long id) {
+        List<Rating>empty = new ArrayList<>(Collections.emptyList());
+        ratings.put(id, empty);
+    }
+
+    @Override
+    public void notifyFilmDeleted(long id) {
+        ratings.remove(id);
     }
 }

@@ -46,6 +46,7 @@
         </c:forEach>
         <br/>
         <label class="edit-label"><fmt:message key="local.changeImage"/></label>
+        <br/>
         <input id="imageUpload" class="film-input" name="Image" type="file" accept="image/*"
                style="color: white"/>
         <button type="submit" class="rate-film-button">OK</button>

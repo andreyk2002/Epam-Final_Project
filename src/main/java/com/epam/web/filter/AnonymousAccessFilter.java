@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.Set;
 
 public class AnonymousAccessFilter implements Filter {
-    private static final Set<String> allowedCommands = Set.of("login", "changeLanguage", "loginPage");
+    private static final Set<String> allowedCommands = Set.of("login", "changeLanguage", "loginPage", "logout");
     private String errorPage;
     private String loginCommand;
 
