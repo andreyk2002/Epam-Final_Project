@@ -7,7 +7,6 @@ import com.epam.web.entity.Film;
 import com.epam.web.entity.Genre;
 import com.epam.web.entity.Review;
 import com.epam.web.security.XssProtector;
-import com.epam.web.service.rating.RatingManager;
 import com.epam.web.service.rating.FilmObserver;
 import org.decimal4j.util.DoubleRounder;
 
@@ -22,10 +21,10 @@ public class FilmService {
     private final DaoHelperFactory factory;
     private final FilmObserver filmObserver;
 
-    public FilmService(DaoHelperFactory factory, XssProtector protect) throws ServiceException {
+    public FilmService(DaoHelperFactory factory, XssProtector protect, FilmObserver filmObserver) throws ServiceException {
         this.factory = factory;
         this.protect = protect;
-        filmObserver = RatingManager.getInstance();
+        this.filmObserver = filmObserver;
     }
 
     public List<FilmDto> getPage(int pageNumb, long userId) throws ServiceException {
@@ -140,7 +139,7 @@ public class FilmService {
             reviewDao.removeFilmsReviews(filmId);
             ratingDao.removeFilmsRatings(filmId);
             filmDao.removeById(filmId);
-            filmObserver.notifyFilmAdded(filmId);
+            filmObserver.notifyFilmDeleted(filmId);
         } catch (DaoException e) {
             throw new ServiceException(e.getMessage(), e);
         }

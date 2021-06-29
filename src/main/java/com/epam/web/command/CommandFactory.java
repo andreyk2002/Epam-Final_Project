@@ -8,6 +8,8 @@ import com.epam.web.dao.factory.DaoHelperFactory;
 import com.epam.web.parser.FormParser;
 import com.epam.web.security.XssProtector;
 import com.epam.web.service.*;
+import com.epam.web.service.rating.FilmObserver;
+import com.epam.web.service.rating.RatingManager;
 import com.epam.web.validator.RatingValidator;
 import com.epam.web.validator.UserRatingValidator;
 
@@ -22,19 +24,20 @@ public class CommandFactory {
 
     public Command create(String commandName) throws ServiceException {
         XssProtector protect = new XssProtector();
+        FilmObserver filmObserver = RatingManager.getInstance();
         switch (commandName) {
             case Commands.LOGIN_PAGE:
                 return new ShowPageCommand(Pages.LOGIN_PAGE);
             case Commands.MAIN_PAGE_COMMAND:
                 GenreService genreService = new GenreService(helperFactory);
-                FilmService filmsService = new FilmService(helperFactory, protect);
+                FilmService filmsService = new FilmService(helperFactory, protect, filmObserver);
                 return new MainPageCommand(filmsService, genreService);
             case Commands.USER_MANAGE_PAGE_COMMAND:
                 UserRatingValidator validator = new UserRatingValidator();
                 UserService showUsersService = new UserService(helperFactory, validator);
                 return new UserManagePageCommand(showUsersService);
             case Commands.SHOW_FILM_PAGE_COMMAND:
-                FilmService getFilmService = new FilmService(helperFactory, protect);
+                FilmService getFilmService = new FilmService(helperFactory, protect, filmObserver);
                 return new FilmPageCommand(getFilmService);
             case Commands.PERSONAL_PAGE_COMMAND:
                 return new ShowPageCommand(Pages.PERSONAL_PAGE);
@@ -42,15 +45,15 @@ public class CommandFactory {
                 GenreService addGenreService = new GenreService(helperFactory);
                 return new AddPageCommand(addGenreService);
             case Commands.EDIT_FILM_PAGE_COMMAND:
-                FilmService editFilmService = new FilmService(helperFactory, protect);
+                FilmService editFilmService = new FilmService(helperFactory, protect, filmObserver);
                 GenreService loadGenreService = new GenreService(helperFactory);
                 return new EditPageCommand(editFilmService, loadGenreService);
             case Commands.SEARCH_PAGE_COMMAND:
-                FilmService searchFilmService = new FilmService(helperFactory, protect);
+                FilmService searchFilmService = new FilmService(helperFactory, protect, filmObserver);
                 GenreService genresService = new GenreService(helperFactory);
                 return new FilmSearchPageCommand(searchFilmService, genresService);
             case Commands.GENRE_SEARCH_PAGE:
-                FilmService genreSearchFilmService = new FilmService(helperFactory, protect);
+                FilmService genreSearchFilmService = new FilmService(helperFactory, protect, filmObserver);
                 GenreService allGenreService = new GenreService(helperFactory);
                 return new GenreSearchPageCommand(genreSearchFilmService, allGenreService);
             case Commands.LOGOUT:
@@ -89,7 +92,7 @@ public class CommandFactory {
                 String pageName = Commands.ADD_FILM_PAGE;
                 return new RedirectToPageCommand(pageName);
             case Commands.SAVE_FILM:
-                FilmService saveFilmService = new FilmService(helperFactory, protect);
+                FilmService saveFilmService = new FilmService(helperFactory, protect, filmObserver);
                 FormParser parser = new FormParser();
                 return new SaveFilmCommand(saveFilmService, parser);
             case Commands.CHANGE_PAGE:
@@ -97,11 +100,11 @@ public class CommandFactory {
             case Commands.EDIT_FILM:
                 return new EditFilmPageCommand();
             case Commands.DELETE_FILM:
-                FilmService deleteFilmService = new FilmService(helperFactory, protect);
+                FilmService deleteFilmService = new FilmService(helperFactory, protect, filmObserver);
                 return new DeleteFilmCommand(deleteFilmService);
             case Commands.UPDATE_FILM:
                 FormParser formParser = new FormParser();
-                FilmService updateFilmService = new FilmService(helperFactory, protect);
+                FilmService updateFilmService = new FilmService(helperFactory, protect, filmObserver);
                 return new UpdateFilmCommand(updateFilmService, formParser);
             default:
                 throw new CommandNotExistException("Unknown type = " + commandName);

@@ -5,6 +5,7 @@ import com.epam.web.dto.FilmDto;
 import com.epam.web.entity.Film;
 import com.epam.web.entity.Genre;
 import com.epam.web.security.XssProtector;
+import com.epam.web.service.rating.FilmObserver;
 import org.mockito.Mockito;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.Matchers.anyLong;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class FilmServiceTest extends ServiceTest {
@@ -52,6 +54,7 @@ public class FilmServiceTest extends ServiceTest {
         GenreDao genreDaoMock = Mockito.mock(GenreDao.class);
         RatingDao ratingDaoMock = Mockito.mock(RatingDao.class);
         ReviewDao reviewDaoMock = Mockito.mock(ReviewDao.class);
+        FilmObserver filmObserverMock = Mockito.mock(FilmObserver.class);
 
         when(genreDaoMock.getById(anyLong())).thenReturn(Optional.of(VALID_GENRE));
         when(ratingDaoMock.getMovieRating(anyLong())).thenReturn(VALID_RATING);
@@ -68,7 +71,9 @@ public class FilmServiceTest extends ServiceTest {
         when(daoHelper.createRatingDao()).thenReturn(ratingDaoMock);
         when(daoHelper.createReviewDao()).thenReturn(reviewDaoMock);
 
-        service = new FilmService(factory, protectMock);
+
+
+        service = new FilmService(factory, protectMock, filmObserverMock);
     }
 
     @Test
